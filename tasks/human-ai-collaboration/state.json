@@ -5,13 +5,14 @@
   "status": "active",
   "phase": "implementation",
   "current_actor": "human",
-  "next_action": "在 GitHub 上开 Issue（优先：共同航标呈现不直观）",
+  "next_action": "实战使用草稿 Skill 并往 feedback/ 记反馈；按需提升为 GitHub Issue",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
     "overview": "../../docs/overview.md",
     "docs_index": "../../docs/README.md",
     "norm": "../../docs/norm/README.md",
+    "feedback": "../../feedback/2026.md",
     "reference_study": "../../docs/human-ai-collaboration-reference-study.md",
     "implementation": "../../docs/human-ai-collaboration-v1-implementation.md",
     "workflow_snapshot": "../../docs/archive/workflow-v0.15.md",
@@ -21,7 +22,10 @@
   "notes": {
     "batch1": "可读雏形已验收",
     "batch2": "reference-study 与 v1-implementation 已规范化导航与试点/现状分层",
-    "deferred": "常驻底线候选与「可用形式」设计仍挂起",
-    "candidate_issue": "共同航标「目标→阶段→下一步」意图对、呈现不直观/略丑"
+    "deferred": "A 层常驻底线终表挂起；须先用建构路径，避免清单勾选（Issue #2）",
+    "open_issues": [
+      "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/1",
+      "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/2"
+    ]
   }
 }
