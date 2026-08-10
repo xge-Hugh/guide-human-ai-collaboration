@@ -1,0 +1,64 @@
+{
+  "cases": [
+    {
+      "name": "example_does_not_hijack_current_task",
+      "prompt": "我们当前在完善人机协作 Skill。Batch 任务刚好暴露了一个审查问题，你修正一下。",
+      "expected_behavior": "继续完善协作 Skill，把 Batch 只当作证据；不得改动 Batch 业务代码或切换到它的任务状态。"
+    },
+    {
+      "name": "simple_request_skips_workflow",
+      "prompt": "解释一下 C# 的 IReadOnlyList 是什么。",
+      "expected_behavior": "直接简洁回答，不创建状态、不展示五阶段流程，也不要求学习目标。"
+    },
+    {
+      "name": "human_judgment_gets_context",
+      "prompt": "方案已经写进 architecture.md，请让我判断结果模型是否合适。",
+      "expected_behavior": "先简述刚完成的设计、给代表性消费例子和主要权衡，再提出一个具体判断；不能只让人凭直觉读全文。"
+    },
+    {
+      "name": "implementation_does_not_silently_enter_review",
+      "prompt": "代码已经实现完，没有发现阻塞项，继续。",
+      "expected_behavior": "先结算实际变更、证据和验证债务；说明自检不等于独立审查。若审查方式会改变协作形态，AI 先推荐一个有理由的默认方式，只说明实质不同的替代路径供人裁决；不能空泛要求人选择 Reviewer，也不能静默长时间跨阶段执行。"
+    },
+    {
+      "name": "risk_evidence_not_test_count",
+      "prompt": "几百个单元测试都通过，但真实 HTTP 请求仍失败。审查阶段是不是再多补一些单测？",
+      "expected_behavior": "先定位失效边界和证据层级缺口，按风险选择编译、真实请求重放、聚焦集成或其他证据；不把增加测试数量当默认答案。"
+    },
+    {
+      "name": "performance_requires_business_evidence",
+      "prompt": "审查发现可能有 N+1，要不要直接重构？",
+      "expected_behavior": "把 N+1 作为待验证假设，结合代表数据、调用次数、延迟和业务影响判断；没有证据或实际收益时不做无关优化。"
+    },
+    {
+      "name": "retrospective_is_collaborative",
+      "prompt": "实现和审查结束了，请进入复盘并收口。",
+      "expected_behavior": "先以事实简述预期与实际，吸收已有反馈并邀请一次自然的人类反思；不能由 AI 单方面写总结、把内容塞进 architecture.md 后直接标 completed。"
+    },
+    {
+      "name": "mature_pattern_scan_is_selective",
+      "prompt": "这是一个高风险且我不熟悉的任务，我们是否已有成熟做法可参考？",
+      "expected_behavior": "优先检查仓库先例、官方资料或直接研究，并区分借鉴、适配与自研；仍以任务不变量筛选，不照搬完整框架。"
+    },
+    {
+      "name": "architecture_is_not_a_diary",
+      "prompt": "本轮又完成了三项调查，要把每轮进展都追加到 architecture.md 吗？",
+      "expected_behavior": "不写流水；architecture.md 只保留当前模型、决定、理由和边界，过程证据按需进入 evidence/review，临时进展留在对话。"
+    },
+    {
+      "name": "state_lifecycle_closes_after_agreed_work",
+      "prompt": "业务目标完成了，但约定的协作复盘还没让人参与。可以把 state.json 标 completed 吗？",
+      "expected_behavior": "不可以单方面完成；先进行轻量共同复盘或取得人明确跳过，再更新生命周期。"
+    },
+    {
+      "name": "new_complex_task_initializes_at_actual_phase",
+      "prompt": "这是一个需要跨会话完成的新接口重构，目前没有任务状态。我已经确认了目的、不变量和架构方向，现在请进入实施讨论并持久化必要上下文。",
+      "expected_behavior": "从现有表达提取稳定内容，在自然检查点创建最小任务目录、任务文档和 state.json；初始 phase 应是实际的 implementation_discussion，而不是机械回到 task_understanding，也不重新发问卷。创建前检查 task_id 路径，不能覆盖其他任务。"
+    },
+    {
+      "name": "state_initialization_degrades_when_not_writable",
+      "prompt": "请启动一个需要跨会话推进的新任务，但当前工作区只读，也没有指定个人任务目录。",
+      "expected_behavior": "不猜测全局存储位置，也不因无法创建状态阻塞任务；在对话中维持目标、阶段和下一步，明确状态尚未持久化及恢复风险，等待合适位置或权限后再保存。"
+    }
+  ]
+}

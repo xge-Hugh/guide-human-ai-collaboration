@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "task_id": "human-ai-collaboration",
+  "title": "轻量人机协作规范与保障系统",
+  "status": "active",
+  "phase": "implementation",
+  "current_actor": "human",
+  "next_action": "将本仓库推送到 GitHub；随后以 Issue 跟踪「共同航标呈现」等反馈",
+  "pressure_mode": "standard",
+  "learning_mode": "guided",
+  "documents": {
+    "overview": "../../docs/overview.md",
+    "docs_index": "../../docs/README.md",
+    "norm": "../../docs/norm/README.md",
+    "reference_study": "../../docs/human-ai-collaboration-reference-study.md",
+    "implementation": "../../docs/human-ai-collaboration-v1-implementation.md",
+    "workflow_snapshot": "../../docs/archive/workflow-v0.15.md",
+    "assurance_notes": "../../docs/archive/assurance-and-pilot-notes-from-workflow-v0.15.md"
+  },
+  "validation_debt_refs": [],
+  "notes": {
+    "batch1": "可读雏形已验收",
+    "batch2": "reference-study 与 v1-implementation 已规范化导航与试点/现状分层",
+    "deferred": "常驻底线候选与「可用形式」设计仍挂起",
+    "candidate_issue": "共同航标「目标→阶段→下一步」意图对、呈现不直观/略丑"
+  }
+}

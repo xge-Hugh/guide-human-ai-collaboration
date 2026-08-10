@@ -1,0 +1,4 @@
+interface:
+  display_name: "Human-AI Collaboration Guide"
+  short_description: "Guide lightweight, auditable human-AI development collaboration"
+  default_prompt: "Use $guide-human-ai-collaboration to advance this task while preserving human judgment and keeping the process lightweight."
