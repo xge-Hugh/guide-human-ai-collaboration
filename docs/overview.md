@@ -32,7 +32,10 @@
 | 实施讨论 | 为何该方案足够、主要取舍与反例 | 同上 §5.2 |
 | 代码实施 | 最小变更、偏差与未验证项 | 同上 §5.3 |
 | 独立审查 | 从实施之外重新建立预期；证据匹配风险 | 同上 §5.4 |
-| 复盘沉淀 | 共同结算结果、贡献与债务；人须参与或明确跳过 | 同上 §5.5 |
+| 复盘沉淀 | 共同结算；债务与改进的下次路由 | [02-five-phases](norm/02-five-phases.md#55-阶段五复盘沉淀) |
+
+各阶段**主战场**分流（架构/优雅 vs 业务风险 vs 下次改进）见 [§5.6](norm/02-five-phases.md#56-阶段关注点分流)。
+
 
 角色与抽象层见 [01-roles-and-abstraction](norm/01-roles-and-abstraction.md)。横切机制（压力模式、最小认知包、审查面、冲突处理等）见 [03-cognitive-mechanisms](norm/03-cognitive-mechanisms.md)。
 
