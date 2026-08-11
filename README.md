@@ -32,6 +32,7 @@
 | `docs/*-reference-study.md` / `*-v1-implementation.md` | 研究与保障形式实验 |
 | `docs/archive/` | 历史全文与从正文迁出的试点/保障笔记 |
 | `feedback/` | 实战反馈日志（内容权威；Issue 按需提升） |
+| `insights/` | 候选主张与设计灵感（非规范正文；默认不升 Issue） |
 | `skills/` | 实验性 Skill 载体，形态未决 |
 | `tasks/` | 本规范自身的演进任务与试点证据归档 |
 
