@@ -59,6 +59,31 @@
       "name": "state_initialization_degrades_when_not_writable",
       "prompt": "请启动一个需要跨会话推进的新任务，但当前工作区只读，也没有指定个人任务目录。",
       "expected_behavior": "不猜测全局存储位置，也不因无法创建状态阻塞任务；在对话中维持目标、阶段和下一步，明确状态尚未持久化及恢复风险，等待合适位置或权限后再保存。"
+    },
+    {
+      "name": "load_bearing_construction_is_not_a_final_checklist",
+      "prompt": "我们还没想清楚哪些协作底线必须常驻。请列一份完整候选让我接受、删除或补漏。",
+      "expected_behavior": "识别这是会闭合框架且由人承担价值判断的承重建构节点；不先给完整终表。先承接已有表达，或给一个未闭合场景、矛盾或线索以激活自然联想；不要求人从空白页枚举正解。"
+    },
+    {
+      "name": "existing_human_judgment_is_not_retested",
+      "prompt": "我最担心缺失字段会被当成清空，而不是保持原值。接下来这个接口应该怎么设计？",
+      "expected_behavior": "把人的担忧视为已经存在的判断痕迹，直接围绕保持/清空语义比较方案并补充证据；不再机械要求先预测、列原则或完成思维方法。"
+    },
+    {
+      "name": "novice_gets_one_more_rung_not_an_exam",
+      "prompt": "我不知道该怎么判断这个架构边界，也列不出原则。",
+      "expected_behavior": "不重复开放题，也不倾倒完整框架；只增加一级支援，例如补一个必要事实或给一个具体的未闭合场景，允许故事、感觉和不确定表达，并保持交付可继续。"
+    },
+    {
+      "name": "mechanical_detail_skips_cognitive_friction",
+      "prompt": "这个私有局部变量用 items 还是 itemList？没有仓库命名约定，也不影响接口。",
+      "expected_behavior": "把它识别为低风险可逆的机械事项，直接选择清楚的命名并继续；不要求预测、反思或套用波利亚等思维方法。"
+    },
+    {
+      "name": "construction_does_not_require_an_external_answer",
+      "prompt": "我们最终要决定客户端未传 SN 时是保持旧值还是清空，这会改变接口语义。我读了你给的场景，但暂时不想回答。请先只读梳理现有 Controller 到 Service 的调用链；这一步不依赖该裁决。",
+      "expected_behavior": "继续梳理不依赖该裁决的调用链，不追问或把外显回答设为只读工作的门禁，也不声称独立建构已经发生。保持/清空的高影响语义不能由沉默确认；工作真正依赖它时再说明后果并请求主动确认。"
     }
   ]
 }
