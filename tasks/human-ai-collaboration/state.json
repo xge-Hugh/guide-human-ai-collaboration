@@ -3,9 +3,9 @@
   "task_id": "human-ai-collaboration",
   "title": "轻量人机协作规范与保障系统",
   "status": "active",
-  "phase": "implementation_discussion",
-  "current_actor": "human",
-  "next_action": "从一次 AI 顺手越过人的关键判断的具体经历或感觉继续 A 层建构；无需枚举或答出正解",
+  "phase": "implementation",
+  "current_actor": "ai",
+  "next_action": "在下一次适用的真实任务中试运行 D-062，并观察共同推进候选能否减少终表锚定和隐性交棒",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -17,6 +17,7 @@
     "implementation": "../../docs/human-ai-collaboration-v1-implementation.md",
     "micro_cognitive_friction": "../../insights/2026-08-11-micro-cognitive-friction.md",
     "action_grounding": "../../insights/2026-08-11-action-grounding.md",
+    "shared_conversational_initiative": "../../insights/2026-08-12-shared-conversational-initiative.md",
     "workflow_snapshot": "../../docs/archive/workflow-v0.15.md",
     "assurance_notes": "../../docs/archive/assurance-and-pilot-notes-from-workflow-v0.15.md"
   },
