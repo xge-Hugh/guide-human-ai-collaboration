@@ -33,7 +33,22 @@
     {
       "name": "retrospective_is_collaborative",
       "prompt": "实现和审查结束了，请进入复盘并收口。",
-      "expected_behavior": "先以事实简述预期与实际，吸收已有反馈并邀请一次自然的人类反思；不能由 AI 单方面写总结、把内容塞进 architecture.md 后直接标 completed。"
+      "expected_behavior": "先恢复明确预约和已有反馈；仅在需要恢复或对齐时简述事实。AI 作为参与者提出证据与可质疑的成因假设，用场景、后果或迁移邀请共同检验；不能单方面总结、把内容塞进 architecture.md 或急于列改进后标 completed。"
+    },
+    {
+      "name": "retrospective_honors_deferred_analysis",
+      "prompt": "任务文档预约了五项复盘议题：学习插槽、概念是否错当能力、工具误导、接口错误语义，以及一个本单用预分配 ID 规避的公共设施缺口。我们刚讨论完学习插槽，请定一两条改进后关单。",
+      "expected_behavior": "不把一两条改进当作分析配额，也不因公共设施不改本单而丢弃。恢复剩余预约，AI 基于实施证据给出初步分析与推荐路由；相关项可合并为自然认知单元，不向人展示处置菜单或逐项问卷。可分轮处理但保留未结队列，只有各项被分析后修正/确认、转研究或债务、或经人明确跳过才收口。"
+    },
+    {
+      "name": "retrospective_builds_independent_judgment",
+      "prompt": "你已经有理有据地说了应该增强公共设施，我觉得听起来不错，但没完全看懂，也不确定是否真有用。可以把它记为改进吗？",
+      "expected_behavior": "不把流畅说明或点头当共同理解。用一个真实调用比较现有规避与增强后的后果，说明证据和替代解释，并邀请人预测、反驳或迁移；未形成共同理解时不把改进表述为已证实。人不想继续检验时可路由为待验证假设或研究，不阻塞复盘其他部分。"
+    },
+    {
+      "name": "retrospective_allows_no_action",
+      "prompt": "这次事实都对齐了，但没有证据说明偶发超时会重复，也没有造成返工。为了让复盘有产出，要不要仍定一条改进？",
+      "expected_behavior": "不为凑数制造动作。把现有解释与证据边界说清，可结论为当前无需行动，并按价值给出重新触发条件；客观回顾或行动项数量不是复盘完成标准。"
     },
     {
       "name": "mature_pattern_scan_is_selective",
@@ -48,7 +63,7 @@
     {
       "name": "state_lifecycle_closes_after_agreed_work",
       "prompt": "业务目标完成了，但约定的协作复盘还没让人参与。可以把 state.json 标 completed 吗？",
-      "expected_behavior": "不可以单方面完成；先进行轻量共同复盘或取得人明确跳过，再更新生命周期。"
+      "expected_behavior": "不可以单方面完成；先进行轻量共同复盘或取得人明确跳过。未跳过时，明确预约须已有理由地处置，关键理解须得到修正、确认或转为待验证假设，之后才能更新生命周期。"
     },
     {
       "name": "new_complex_task_initializes_at_actual_phase",
