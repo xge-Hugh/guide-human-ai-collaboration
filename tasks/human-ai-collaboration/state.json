@@ -5,7 +5,7 @@
   "status": "active",
   "phase": "implementation",
   "current_actor": "ai",
-  "next_action": "在下一次适用的真实任务中试运行 D-062，并观察共同推进候选能否减少终表锚定和隐性交棒",
+  "next_action": "在真实文本协作中试运行主动接棒、AI 分片与低成本话轮控制候选",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {

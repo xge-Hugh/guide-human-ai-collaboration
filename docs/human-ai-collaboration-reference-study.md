@@ -6,7 +6,7 @@
 > 保障需求草稿：[archive/assurance-and-pilot-notes-from-workflow-v0.15.md](archive/assurance-and-pilot-notes-from-workflow-v0.15.md)
 >
 > 状态：探索结论（已支撑过一次试点；仍可作为以后选型的筛子）  
-> 日期：2026-08-09；导航修订 2026-08-10
+> 日期：2026-08-09；导航修订 2026-08-10；定向研究补充 2026-08-12
 
 **一句话**：社区方案已证明若干**机制形态**可复用；人的独立判断与轻量性仍须自研。不整套引入任何框架。
 
@@ -15,7 +15,7 @@
 1. 先读 §1 结论与 §2 筛选标准  
 2. 需要比对来源时再读 §3 机制卡（M1–M7）  
 3. 关心「现有框架缺什么」读 §4  
-4. 试点后补强的审查/复盘/先例依据读 §7  
+4. 试点后补强的审查/复盘/先例/共同理解依据读 §7
 5. 具体实验栈与结果读 [v1 实施笔记](human-ai-collaboration-v1-implementation.md)，不要把本文当成安装说明
 
 ## 1. 结论
@@ -179,3 +179,19 @@ Batch 试点中「数百个单元测试通过，真实请求仍失败」并不�
 由此采用「变化 → 失效模式 → 业务后果 → 证据缺口」模型，再选成本最低但相关性、保真度和判别力足够的证据。编译、静态审查、针对性单测、集成/功能测试、真实请求重放、人工验收和运行观测分别回答不同问题。N+1 等性能怀疑先测量代表数据和业务影响；没有证据或收益时不做优化。真实缺陷也不强制补单测，而是先定位逃逸原因，再决定自动回归、人工验证、发布 smoke 或监控中哪种最耐久。
 
 规范对应：[风险、验证与回退](norm/03-cognitive-mechanisms.md#612-风险验证与回退)；Skill：`review-and-retrospective.md`。
+
+### 7.4 自然语言协作需要目的充分的共同理解
+
+本项目把“AI 说完一段话”与“双方已形成足以继续的共同理解”分开。这个区分不是为了把自然对话协议化，而是为了识别自然语言同时承载内容、确定程度、话轮、行动请求和议程状态时的真实协调成本。
+
+- Clark 与 Schaefer 把一次会话贡献分为内容表达与双方共同建立理解的过程，并提出理解只需达到“对当前目的足够”的标准。由此适配为：低风险推进可由相关下一步自然显示理解，高风险决定需要更强的主动确认；任何一次流畅输出都不自动证明理解、同意或掌握。[Contributing to Discourse](https://doi.org/10.1207/s15516709cog1302_7)
+- Sacks、Schegloff 与 Jefferson 对自然口语的分析表明，话轮由参与者局部、共同且面向接收者地管理；Schegloff、Jefferson 与 Sacks 对 repair 的研究又显示，会话会系统性地给原说话者自我修复机会。工程上据此采用“候选理解或局部问题优先于替人重写意图”，但不把口语的时序与非语言信号直接外推到异步文本。[Turn-taking](https://doi.org/10.2307/412243)；[Repair](https://doi.org/10.2307/413107)
+- Horvitz 的 mixed-initiative 原则要求系统考虑用户目标与注意力的不确定性、行动和打扰成本，允许用户直接调用或终止，并在不确定时降低动作精度。这支持“含混时少做但可修正”，不支持 AI 自信猜完整意图。[Principles of Mixed-Initiative User Interfaces](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/11/chi99horvitz.pdf)
+- 在协作搜索实验中，对话层发起（澄清当前需要）与任务层发起（改变目标或方法）产生不同收益和干扰；后者会引入未预期工作和能动性担忧。现有共同推进候选因此拆成两层：当前议题内可低门槛试探，改变议程须提高价值门槛并提供拒绝出口。[The Effects of System Initiative during Conversational Collaborative Search](https://arxiv.org/abs/2202.09728)
+- 2024 年一项研究在既有人际对话数据的上下文中比较人类下一话轮与 LLM 生成，发现模型产生的 clarification、acknowledgment 等 grounding 行为更少，更常直接假定已有共同理解；作者同时指出实际人机 grounding 仍需更多研究。这与本项目观察方向一致，但只支持设置候选行为和场景验证，不证明某套固定话术有效。[Grounding Gaps in Language Model Generations](https://doi.org/10.18653/v1/2024.naacl-long.348)
+- attentive-listening 原型实现了连续 backchannel 预测，并在话轮含混时使用 backchannel 或 filler；小型试验支持前者的主观评价，尚未单独验证灵活话轮策略的收益。它说明机制可实现，不证明异步聊天中的 `嗯嗯` 能可靠区分理解、同意和继续意愿。[Lala 等，2017](https://doi.org/10.18653/v1/W17-5516)
+- Ainsworth 的多重表示框架指出，不同表示可以互补、约束解释或支持建构，也会要求学习者选择、翻译和整合；研究结果并不支持“表示越多越好”。据此只在新视图回答新问题时切换，并保留源语义、压缩边界和证据回链。[DeFT](https://doi.org/10.1016/j.learninstruc.2006.03.001)
+
+以上研究共同为“共同理解由双方逐步建立”“含混时应控制猜错成本”“表示转换既有收益也有协调成本”提供理论或经验依据，但不直接验证本规范的整套工程行为。把 `继续/暂停/插话` 做成快捷控制、让 AI 自动判断停滞，以及跨多种协作模式的接棒阈值，仍是本项目的工程化候选，需要真实文本任务比较打断、返工、阅读负担、错误接受和恢复成本。
+
+规范对应：[自然对话、共同理解与表示路由](norm/03-cognitive-mechanisms.md#67-自然对话输出预算与理解修复)；候选动态：[共同推进](../insights/2026-08-12-shared-conversational-initiative.md)；Skill：`interaction-and-learning.md`。
