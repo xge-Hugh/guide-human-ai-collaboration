@@ -157,10 +157,11 @@
 - 46 个样本的 Meta 分析显示，正确实施的 debrief 与约 20%～25% 的绩效改善相关；结构、目标对齐和促进方式会影响效果，不能把「写了一份复盘」当作机制已发生。[Tannenbaum 与 Cerasoli，2013](https://pubmed.ncbi.nlm.nih.gov/23516804/)
 - 更大规模的后续 Meta 分析同样支持 AAR/debrief 的总体效果，并指出团队对齐、客观回顾材料和促进方式之间存在交互。[Keiser 与 Arthur，2021](https://pubmed.ncbi.nlm.nih.gov/32852990/)
 - AHRQ 的 TeamSTEPPS 将有效 debrief 描述为及时、简短、基于具体事件的团队讨论，既回顾发生了什么，也分析原因、强化做得好的地方并形成下一次改变；它甚至可以短至约三分钟。[AHRQ TeamSTEPPS](https://www.ahrq.gov/teamstepps-program/curriculum/team/tools/debrief.html)
+- 在该研究的连续导航训练情境中，同时分析成功与失败比只分析失败更能改善后续表现；这为复盘同时检查有效与失效路径提供了依据，但不直接证明所有任务都具有相同效果。[Ellis 与 Davidi，2005](https://doi.org/10.1037/0021-9010.90.5.857)
 - “Debriefing with Good Judgment”主张促进者公开自己的观察和判断，同时探询参与者当时的假设，而不是假装没有判断或单向给结论。这适合转化为 AI 的「观察—担心—询问」表达。[Rudolph 等，2006](https://pubmed.ncbi.nlm.nih.gov/19088574/)
 - Google SRE 的无责复盘强调事实、影响、促成因素以及具有责任人和完成信号的行动项；也明确指出复盘有成本，应按事件重要性触发并从小做起。[Google SRE Postmortem Culture](https://sre.google/workbook/postmortem-culture/)
 
-因此实验不采用固定长问卷或 AI 自动结算，而采用：AI 先恢复预期与事实；吸收人已经表达的故事和感受；只对关键缺口提出一个开放问题；共同观察任务、人和 AI、工作流、制约与杠杆；最后选择极少数可观察改进。若复盘属于约定范围，人未参与或明确跳过前不得单方面关单。
+据此并结合本项目的实战失效，作出以下工程化适配（不是论文直接验证的通用定律）：不采用固定长问卷或 AI 自动结算，而以基于真实经历的共同模型修正为核心；事实只在恢复或对齐需要时简述；AI 公开自己的观察与可质疑解释，人通过真实场景、后果比较、反例和迁移参与检验；前序预约作为延迟分析承诺逐项处置；最后才收敛极少数真正执行的重点行动。一个开放问题用于避免开场问卷，不是追问上限；若复盘属于约定范围，人未参与或明确跳过前不得单方面关单。
 
 规范对应：[复盘阶段](norm/02-five-phases.md)；Skill：`review-and-retrospective.md`。
 
