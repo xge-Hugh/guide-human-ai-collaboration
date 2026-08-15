@@ -3,9 +3,9 @@
   "task_id": "human-ai-collaboration",
   "title": "轻量人机协作规范与保障系统",
   "status": "active",
-  "phase": "implementation",
-  "current_actor": "ai",
-  "next_action": "在真实多阶段任务中试运行伴随式导师候选，观察主动机会识别、最低有效介入、在线校准与交付负担",
+  "phase": "retrospective",
+  "current_actor": "human",
+  "next_action": "本轮 IF-073 试点证据已沉淀；执行保障系统需另立任务后再定义目标、失效模型与验收边界",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -19,6 +19,7 @@
     "action_grounding": "../../insights/2026-08-11-action-grounding.md",
     "shared_conversational_initiative": "../../insights/2026-08-12-shared-conversational-initiative.md",
     "cross_conversation_learning": "../../insights/2026-08-13-cross-conversation-learning-layer.md",
+    "if073_assurance_gap": "../../insights/2026-08-15-expert-supervised-pilot-and-assurance-gap.md",
     "workflow_snapshot": "../../docs/archive/workflow-v0.15.md",
     "assurance_notes": "../../docs/archive/assurance-and-pilot-notes-from-workflow-v0.15.md"
   },
