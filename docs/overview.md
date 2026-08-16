@@ -18,8 +18,10 @@
 
 - **通用规范**：[`spec/norms.md`](spec/norms.md) —— 必须保护的权威、认识论边界与通用机制；
 - **概念模型**：[`spec/model.md`](spec/model.md) —— 用什么维度描述协作；
+- **自适应模型**：[`spec/adaptation.md`](spec/adaptation.md) —— 风险、压力、熟悉程度、目标与协作状态如何调节投入；
 - **评估模型**：[`spec/evaluation.md`](spec/evaluation.md) —— 任务结果、人的能力、协作能力和载体运行表现如何分开解释；
 - **工作流模型**：[`spec/workflows.md`](spec/workflows.md) —— 问题框定、思考/计划、行动/产出、保障/评估、反思/学习等可复用关注点；
+- **失效模型**：[`spec/failure-models.md`](spec/failure-models.md) —— 在什么条件和机制下协作会失去规范保护或预期价值；
 - **软件开发专项**：[`spec/domains/software-development.md`](spec/domains/software-development.md) —— 软件研发角色、L0–L4、五阶段和具体证据实践。
 
 ## 软件开发五阶段的当前地位
@@ -41,9 +43,10 @@
 - [`feedback/`](../feedback/)：实战观察与摩擦入口；
 - [`insights/`](../insights/)：候选主张和设计解释；
 - [`skills/`](../skills/)：实验性 Skill 载体与行为 eval；
-- [`human-ai-collaboration-reference-study.md`](human-ai-collaboration-reference-study.md)：保障机制研究与取舍；
-- [`human-ai-collaboration-v1-implementation.md`](human-ai-collaboration-v1-implementation.md)：早期保障形式实验；
-- [`governance/project-evolution.md`](governance/project-evolution.md)：项目如何从观察形成、验证、重分类和维护当前知识。
+- [`guidance/`](guidance/README.md)：可替换的交互、表示与模板方法；
+- [`research/`](research/README.md)：保障机制研究与外部依据；
+- [`experiments/`](experiments/README.md)：历史保障形式实验与试点；
+- [`governance/`](governance/README.md)：项目演进、证据政策与历史决策。
 
 ## 常见误解
 
@@ -64,4 +67,5 @@
 - 需要能力/协作评价时读 [`spec/evaluation.md`](spec/evaluation.md)；
 - 需要任务推进结构时读 [`spec/workflows.md`](spec/workflows.md)，软件开发再读 [`spec/domains/software-development.md`](spec/domains/software-development.md)；
 - 需要维护项目或理解反馈如何进入规格时读 [`governance/project-evolution.md`](governance/project-evolution.md)；
-- 需要尚未拆分的横切机制、模板、反模式或决策历史时，再进入 [`norm/README.md`](norm/README.md)。
+- 需要研究依据或历史保障实验时读 [`research/`](research/README.md) 与 [`experiments/`](experiments/README.md)；
+- 需要核对尚未完全迁出的历史细节时，再进入 [`norm/README.md`](norm/README.md)。
