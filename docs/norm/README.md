@@ -1,30 +1,29 @@
-# 旧规范目录：迁移中
+# 旧规范路径兼容与历史路由
 
-> 本目录正在迁往 [`../spec/`](../spec/README.md)、[`../guidance/`](../guidance/README.md) 与 [`../governance/`](../governance/README.md)。不要把本目录整体继续理解成一个同层级的“规范正文”。
+> 本目录不再承载当前人机协作正文。它只用于兼容旧链接、说明旧章节的当前去向，并提供历史追溯入口。
 >
-> 重组前快照：[../archive/workflow-v0.15.md](../archive/workflow-v0.15.md)
+> 当前规格见 [`../spec/`](../spec/README.md)；可替换指导见 [`../guidance/`](../guidance/README.md)；项目治理见 [`../governance/`](../governance/README.md)。
 
 ## 权威边界
 
-迁移期间不维护两份并列权威：
+- 本目录中的 Chapter 00–05 与 `decisions.md` 都是**兼容路由**，不是第二份事实源；
+- 当前主张以 `spec/`、`guidance/`、`governance/`、`research/` 等对应现行文件为准；
+- 旧章节原文已保存在 `archive/` 或治理历史中，用于核对来源与演化；
+- 历史上“已采纳”的做法不因保存在旧文档中自动恢复为当前通用规范。
 
-- 原 Chapter 00 已完成全文迁移到 [`../spec/norms.md`](../spec/norms.md)，旧路径只保留兼容跳转；
-- Chapter 01/02 的通用语义与领域定位已提炼到 `spec/model.md`、`spec/evaluation.md`、`spec/workflows.md` 与软件开发专项；旧文件仍暂时保留更细操作文本；
-- Chapter 03 的通用自适应语义已进入 `spec/adaptation.md`，交互/表示配方已进入 `guidance/`，评估语义已由 `spec/evaluation.md` 承接；旧章仍保留尚未逐项迁完的详细展开；
-- Chapter 04 的模板已重述为 [`../guidance/templates.md`](../guidance/templates.md) 的可裁剪操作载体；旧文件暂保留历史模板原貌；
-- Chapter 05 的反模式已按条件与机制提炼到 [`../spec/failure-models.md`](../spec/failure-models.md)，项目自身的科学/经验主张边界已进入 [`../governance/evidence-policy.md`](../governance/evidence-policy.md)，其外部研究材料已有独立 [`../research/`](../research/README.md) 入口；
-- 历史决策已迁入 [`../governance/decisions.md`](../governance/decisions.md)，本目录的 [`decisions.md`](decisions.md) 只保留兼容跳转。
+## 旧路径映射
 
-## 旧文件的当前作用
+| 旧路径 | 当前去向 | 历史原文 |
+| --- | --- | --- |
+| [`00-purpose-and-principles.md`](00-purpose-and-principles.md) | [`../spec/norms.md`](../spec/norms.md)；相关概念见 [`../spec/model.md`](../spec/model.md) | [`../archive/workflow-v0.15.md`](../archive/workflow-v0.15.md) |
+| [`01-roles-and-abstraction.md`](01-roles-and-abstraction.md) | `spec/model.md`、`spec/evaluation.md`、`spec/domains/software-development.md`、通用规范 | [`../archive/norm-01-roles-and-abstraction-v0.16.md`](../archive/norm-01-roles-and-abstraction-v0.16.md) |
+| [`02-five-phases.md`](02-five-phases.md) | [`../spec/workflows.md`](../spec/workflows.md) 与 [`../spec/domains/software-development.md`](../spec/domains/software-development.md) | [`../archive/norm-02-five-phases-v0.16.md`](../archive/norm-02-five-phases-v0.16.md) |
+| [`03-cognitive-mechanisms.md`](03-cognitive-mechanisms.md) | `spec/adaptation.md`、`spec/evaluation.md`、`spec/failure-models.md`、`guidance/` 与软件专项 | [`../archive/norm-03-cognitive-mechanisms-v0.16.md`](../archive/norm-03-cognitive-mechanisms-v0.16.md) |
+| [`04-templates.md`](04-templates.md) | [`../guidance/templates.md`](../guidance/templates.md) | [`../archive/norm-04-templates-v0.16.md`](../archive/norm-04-templates-v0.16.md) |
+| [`05-antipatterns-and-boundaries.md`](05-antipatterns-and-boundaries.md) | `spec/failure-models.md`、`governance/evidence-policy.md`、`research/scientific-basis.md` 及相关指导/专项 | [`../archive/norm-05-antipatterns-and-boundaries-v0.16.md`](../archive/norm-05-antipatterns-and-boundaries-v0.16.md) |
+| [`decisions.md`](decisions.md) | [`../governance/decisions.md`](../governance/decisions.md) | [`../governance/decision-log-v0.16.md`](../governance/decision-log-v0.16.md) |
 
-| 文件 | 当前解释 |
-| --- | --- |
-| [01-roles-and-abstraction.md](01-roles-and-abstraction.md) | 迁移源与历史详细展开；通用概念/评估语义已在 `spec/` 重述，角色与 L0–L4 已作为软件专项解释 |
-| [02-five-phases.md](02-five-phases.md) | 迁移源与软件五阶段详细操作文本；通用关注点与专项结构已进入 `spec/` |
-| [03-cognitive-mechanisms.md](03-cognitive-mechanisms.md) | 迁移源；其内容已分流到自适应、评估、交互指导、表示指导等层，仍需核对剩余详细规则 |
-| [04-templates.md](04-templates.md) | 历史模板原貌；当前解释以 `guidance/templates.md` 的“载体而非规范”地位为准 |
-| [05-antipatterns-and-boundaries.md](05-antipatterns-and-boundaries.md) | 迁移源；失效模型、项目证据边界与研究入口已经分层，仍需核对原始清单是否有未承接细节 |
-| [decisions.md](decisions.md) | 兼容跳转；历史快照与当前解释均已迁入治理层 |
+完整的重组前单文件快照见 [`../archive/workflow-v0.15.md`](../archive/workflow-v0.15.md)。
 
 ## 执行保障边界
 

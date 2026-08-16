@@ -10,27 +10,27 @@
 
 ## 建议阅读顺序
 
-1. [`docs/spec/README.md`](docs/spec/README.md) — 当前维护的人机协作规格及迁移边界
+1. [`docs/spec/README.md`](docs/spec/README.md) — 当前维护的人机协作规格
 2. [`docs/spec/norms.md`](docs/spec/norms.md) — 当前跨领域通用规范
 3. [`docs/spec/model.md`](docs/spec/model.md) — 参与者、角色、权威、协作状态、证据、表示、独立性等概念区分
 4. [`docs/spec/adaptation.md`](docs/spec/adaptation.md) / [`evaluation.md`](docs/spec/evaluation.md) / [`workflows.md`](docs/spec/workflows.md) — 自适应、评估与任务推进模型
 5. [`docs/guidance/`](docs/guidance/README.md) — 可替换的交互、表示与模板做法
 6. [`docs/governance/`](docs/governance/README.md) — 项目演进、证据边界与决策历史
 7. （按需）[`docs/research/`](docs/research/README.md) / [`docs/experiments/`](docs/experiments/README.md) — 研究依据与历史保障实验
-8. （迁移追溯）旧 [`docs/norm/`](docs/norm/README.md) — 尚未完成详细核对的历史章节
+8. （历史追溯）[`docs/archive/`](docs/archive/) / [`docs/norm/`](docs/norm/README.md) — 历史全文与旧路径兼容入口
 
 ## 目录角色
 
 | 路径 | 角色 |
 | --- | --- |
-| `docs/spec/` | **当前维护的人机协作规格**；已迁入内容以这里为权威 |
+| `docs/spec/` | **当前维护的人机协作规格** |
 | `docs/guidance/` | 可替换的交互、表示和模板方法；不是通用合规条件 |
 | `docs/governance/` | 项目自身的分类、关系、演进、证据治理与决策历史 |
 | `docs/research/` | 外部研究与成熟实践的证据/机制研究；不自动取得规范权威 |
 | `docs/experiments/` | 项目曾运行的实验性保障实现与试点记录 |
-| `docs/norm/` | 迁移中的旧规范目录；仅尚未完成详细核对的历史内容继续在此承载 |
 | `docs/overview.md` | 当前导读，非第二事实源 |
-| `docs/archive/` | 历史全文与迁出笔记 |
+| `docs/archive/` | 历史全文、旧版本快照与迁出材料 |
+| `docs/norm/` | 旧规范路径的兼容与历史路由；不再承载当前正文 |
 | `feedback/` | 实战观察与摩擦入口；内容先保真，再决定去向 |
 | `insights/` | 候选主张与设计解释，非当前规格 |
 | `skills/` | 实验性 Skill 载体与行为 eval；非规范权威 |
@@ -43,4 +43,4 @@
 - 不是“克隆即可在任意项目启用”的安装说明；
 - 也不把当前分类体系视为不可修改的封闭本体。
 
-当前仍处于规格重构与真实任务校准阶段。新发现可以被吸收、缩窄、重分类或搁置；只有当前维护的规格内容应被当作项目现行立场。
+当前处于规格持续校准与执行保障探索阶段。新发现可以被吸收、缩窄、重分类或搁置；只有当前维护的规格内容应被当作项目现行立场。
