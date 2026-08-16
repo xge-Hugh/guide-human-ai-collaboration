@@ -15,8 +15,9 @@
 3. [`docs/spec/model.md`](docs/spec/model.md) — 参与者、角色、权威、协作状态、证据、表示、独立性等概念区分
 4. [`docs/spec/adaptation.md`](docs/spec/adaptation.md) / [`evaluation.md`](docs/spec/evaluation.md) / [`workflows.md`](docs/spec/workflows.md) — 自适应、评估与任务推进模型
 5. [`docs/guidance/`](docs/guidance/README.md) — 可替换的交互、表示与模板做法
-6. [`docs/governance/project-evolution.md`](docs/governance/project-evolution.md) — 反馈、候选、当前知识、关系与重分类如何演进
-7. （按需）旧 [`docs/norm/`](docs/norm/README.md) — 尚未完成物理拆分的历史章节
+6. [`docs/governance/`](docs/governance/README.md) — 项目演进、证据边界与决策历史
+7. （按需）[`docs/research/`](docs/research/README.md) / [`docs/experiments/`](docs/experiments/README.md) — 研究依据与历史保障实验
+8. （迁移追溯）旧 [`docs/norm/`](docs/norm/README.md) — 尚未完成详细核对的历史章节
 
 ## 目录角色
 
@@ -24,10 +25,11 @@
 | --- | --- |
 | `docs/spec/` | **当前维护的人机协作规格**；已迁入内容以这里为权威 |
 | `docs/guidance/` | 可替换的交互、表示和模板方法；不是通用合规条件 |
-| `docs/governance/` | 项目自身的分类、关系、演进与证据治理方法 |
-| `docs/norm/` | 迁移中的旧规范目录；仅尚未拆分内容继续在此承载 |
+| `docs/governance/` | 项目自身的分类、关系、演进、证据治理与决策历史 |
+| `docs/research/` | 外部研究与成熟实践的证据/机制研究；不自动取得规范权威 |
+| `docs/experiments/` | 项目曾运行的实验性保障实现与试点记录 |
+| `docs/norm/` | 迁移中的旧规范目录；仅尚未完成详细核对的历史内容继续在此承载 |
 | `docs/overview.md` | 当前导读，非第二事实源 |
-| `docs/*-reference-study.md` / `*-v1-implementation.md` | 尚待迁移的研究与保障形式实验笔记 |
 | `docs/archive/` | 历史全文与迁出笔记 |
 | `feedback/` | 实战观察与摩擦入口；内容先保真，再决定去向 |
 | `insights/` | 候选主张与设计解释，非当前规格 |
