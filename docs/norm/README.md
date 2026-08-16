@@ -10,17 +10,18 @@
 
 迁移期间不维护两份并列权威：
 
-- 原 Chapter 00 已迁移到 [`../spec/norms.md`](../spec/norms.md)，旧路径 [`00-purpose-and-principles.md`](00-purpose-and-principles.md) 只保留兼容跳转；
-- [`../spec/model.md`](../spec/model.md) 已承载从现有章节审查中提炼出的当前概念区分，但不增加新的规范义务；
-- 其余 Chapter 01–05 尚未完成物理拆分。在迁移前，它们仍是当前项目知识的历史承载文件，但必须结合本表的语义地位解释，不能因仍位于 `norm/` 就推断全部内容都是通用规范；
+- 原 Chapter 00 已完成全文迁移到 [`../spec/norms.md`](../spec/norms.md)，旧路径只保留兼容跳转；
+- [`../spec/model.md`](../spec/model.md) 已承载参与者/角色/权威、协作状态、抽象层与能力、证据/表示/独立性等当前概念区分；
+- Chapter 01/02 的**通用语义与领域定位**已分别提炼到 [`../spec/evaluation.md`](../spec/evaluation.md)、[`../spec/workflows.md`](../spec/workflows.md) 与 [`../spec/domains/software-development.md`](../spec/domains/software-development.md)；但旧文件仍暂时保留部分更细的操作文本，完成逐项核对前不删除；
+- Chapter 03–05 尚未完成物理拆分，必须结合本表解释其语义地位；
 - [`decisions.md`](decisions.md) 仍为历史决策与状态记录，主张以当前正文为准；后续将迁往治理层。
 
-## 尚未迁移内容
+## 旧文件的当前作用
 
 | 文件 | 当前解释 |
 | --- | --- |
-| [01-roles-and-abstraction.md](01-roles-and-abstraction.md) | 混合概念模型、角色/责任、抽象层与能力评估；已完成语义审查，待拆分 |
-| [02-five-phases.md](02-five-phases.md) | 可复用工作流关注点与软件研发五阶段实现混合；待拆成通用工作流与领域专项 |
+| [01-roles-and-abstraction.md](01-roles-and-abstraction.md) | 迁移源与历史详细展开；通用概念/评估语义已在 `spec/` 重述，角色与 L0–L4 已作为软件专项解释；待核对剩余细节后转兼容入口 |
+| [02-five-phases.md](02-five-phases.md) | 迁移源与软件五阶段详细操作文本；通用关注点已进入 `spec/workflows.md`，专项结构已进入 `spec/domains/software-development.md`；待核对后转兼容入口 |
 | [03-cognitive-mechanisms.md](03-cognitive-mechanisms.md) | 历史混合章节：通用机制、状态估计、评估、策略/配方、信息架构与工程专项；已完成语义审查，待物理拆分 |
 | [04-templates.md](04-templates.md) | 操作载体/指导性质模板；待迁入 guidance 层 |
 | [05-antipatterns-and-boundaries.md](05-antipatterns-and-boundaries.md) | 失效表现、项目证据边界与研究引用混合；待拆分 |
