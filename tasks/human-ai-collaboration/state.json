@@ -11,10 +11,10 @@
   "documents": {
     "overview": "../../docs/overview.md",
     "docs_index": "../../docs/README.md",
-    "norm": "../../docs/norm/README.md",
+    "norm": "../../docs/spec/norms.md",
     "feedback": "../../feedback/2026.md",
-    "reference_study": "../../docs/human-ai-collaboration-reference-study.md",
-    "implementation": "../../docs/human-ai-collaboration-v1-implementation.md",
+    "reference_study": "../../docs/research/assurance-mechanisms.md",
+    "implementation": "../../docs/experiments/assurance-v1.md",
     "micro_cognitive_friction": "../../insights/2026-08-11-micro-cognitive-friction.md",
     "action_grounding": "../../insights/2026-08-11-action-grounding.md",
     "shared_conversational_initiative": "../../insights/2026-08-12-shared-conversational-initiative.md",
