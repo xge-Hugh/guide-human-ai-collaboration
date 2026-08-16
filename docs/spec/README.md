@@ -25,9 +25,9 @@
 | [`failure-models.md`](failure-models.md) | 哪些条件/机制会使协作违反规范或失去预期价值 | 已从 Chapter 05 反模式与真实反馈中抽取条件化失效模型；不是反模式的机械反转 |
 | [`domains/software-development.md`](domains/software-development.md) | 软件开发中角色、抽象层、五阶段与证据实践如何专项化 | 已建立专项结构；旧 Chapter 01/02 仍暂时保留更细的历史操作文本，待后续完整迁移核对 |
 
-可替换的交互、表示与模板做法已开始迁入 [`../guidance/`](../guidance/README.md)，不作为规范性要求解释。项目自身的科学/经验主张边界见 [`../governance/evidence-policy.md`](../governance/evidence-policy.md)。
+可替换的交互、表示与模板做法见 [`../guidance/`](../guidance/README.md)。项目自身的科学/经验主张边界与历史决策见 [`../governance/`](../governance/README.md)；研究依据与历史保障实验已分别迁入 [`../research/`](../research/README.md) 与 [`../experiments/`](../experiments/README.md)。
 
-后续主要剩余迁移为研究、实验、历史决策与旧章节细节核对。只有实际内容迁入时才创建相应正文，不为目录完整性预建空分类。
+当前主要剩余迁移工作是**旧 Chapter 01–05 的详细文本核对**：确认其独有内容已进入正确的规格、指导、治理、研究或历史位置后，再把旧文件转为兼容入口或归档。不会为了目录完整性预建空分类。
 
 ## 权威与关系
 
