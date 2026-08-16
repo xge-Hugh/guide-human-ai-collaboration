@@ -1,6 +1,6 @@
 # 人机协作规格导读
 
-> 地位：导读，**不是**第二份事实源。当前通用规范以 [`spec/norms.md`](spec/norms.md) 为准；迁移状态见 [`spec/README.md`](spec/README.md)。
+> 地位：导读，**不是**第二份事实源。当前通用规范以 [`spec/norms.md`](spec/norms.md) 为准；项目知识如何演进见 [`governance/project-evolution.md`](governance/project-evolution.md)。
 
 ## 要解决什么问题
 
@@ -26,7 +26,7 @@
 
 ## 软件开发五阶段的当前地位
 
-软件五阶段现在被明确定位为**领域专项工作流**，不是所有人机协作的通用骨架。其通用来源被抽取为：
+软件五阶段是**领域专项工作流**，不是所有人机协作的通用骨架。其通用来源被抽取为：
 
 ```text
 问题框定
@@ -36,7 +36,7 @@
 → 反思 / 学习
 ```
 
-不同领域可以改变阶段数量、名称、产物和证据，只要不覆盖通用规范。旧 [`norm/02-five-phases.md`](norm/02-five-phases.md) 暂时继续保留更细的历史操作文本，完成逐项迁移核对后再转为兼容入口。
+不同领域可以改变阶段数量、名称、产物和证据，只要不覆盖通用规范。软件开发的具体阶段、退出条件、角色与技术证据见 [`spec/domains/software-development.md`](spec/domains/software-development.md)；旧 [`norm/02-five-phases.md`](norm/02-five-phases.md) 仅保留兼容路由，历史原文在 [`archive/norm-02-five-phases-v0.16.md`](archive/norm-02-five-phases-v0.16.md)。
 
 ## 仓库里的其他材料
 
@@ -46,7 +46,9 @@
 - [`guidance/`](guidance/README.md)：可替换的交互、表示与模板方法；
 - [`research/`](research/README.md)：保障机制研究与外部依据；
 - [`experiments/`](experiments/README.md)：历史保障形式实验与试点；
-- [`governance/`](governance/README.md)：项目演进、证据政策与历史决策。
+- [`governance/`](governance/README.md)：项目演进、证据政策与历史决策；
+- [`archive/`](archive/)：旧版本正文与历史快照；
+- [`norm/`](norm/README.md)：旧章节路径兼容与当前去向索引。
 
 ## 常见误解
 
@@ -54,7 +56,7 @@
 | --- | --- |
 | 这是必须安装的一套 Skill / Agent 规则 | 否。规格是根本；Skill 等只是载体或保障实验 |
 | 五阶段是所有人机协作必须采用的流程 | 否。它是软件开发专项的一种工作流实现 |
-| M0–M5 是人的永久等级 | 否。当前评估模型只把它保留为特定情境下可观察证据的历史表达，不是身份标签 |
+| M0–M5 是人的永久等级 | 否。当前评估模型只把相关表现解释为特定情境下的能力证据，不是身份标签 |
 | 模板逐项填写才算合规 | 否。表示与提问应服务当前任务，不把内部结构成本转嫁给人 |
 | AI 自审等于独立审查 | 否。独立性的证明力取决于与相关失效来源的实际分离 |
 | 测试全绿等于风险消失 | 否。证据只能证明它实际覆盖的断言和失效模式 |
@@ -64,8 +66,9 @@
 
 - 先读 [`spec/README.md`](spec/README.md) 与 [`spec/norms.md`](spec/norms.md)；
 - 需要概念边界时读 [`spec/model.md`](spec/model.md)；
-- 需要能力/协作评价时读 [`spec/evaluation.md`](spec/evaluation.md)；
+- 需要自适应投入、能力/协作评价时读 [`spec/adaptation.md`](spec/adaptation.md) 与 [`spec/evaluation.md`](spec/evaluation.md)；
 - 需要任务推进结构时读 [`spec/workflows.md`](spec/workflows.md)，软件开发再读 [`spec/domains/software-development.md`](spec/domains/software-development.md)；
+- 需要识别已知失效时读 [`spec/failure-models.md`](spec/failure-models.md)；
 - 需要维护项目或理解反馈如何进入规格时读 [`governance/project-evolution.md`](governance/project-evolution.md)；
 - 需要研究依据或历史保障实验时读 [`research/`](research/README.md) 与 [`experiments/`](experiments/README.md)；
-- 需要核对尚未完全迁出的历史细节时，再进入 [`norm/README.md`](norm/README.md)。
+- 需要核对旧版本表述时读 [`archive/`](archive/)；旧链接的当前去向见 [`norm/README.md`](norm/README.md)。
