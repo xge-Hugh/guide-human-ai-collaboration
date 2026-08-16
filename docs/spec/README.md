@@ -18,7 +18,7 @@
 
 可替换的交互、表示与模板做法见 [`../guidance/`](../guidance/README.md)。项目自身的科学/经验主张边界与历史决策见 [`../governance/`](../governance/README.md)；研究依据与历史保障实验分别位于 [`../research/`](../research/README.md) 与 [`../experiments/`](../experiments/README.md)。
 
-旧 `docs/norm/` 已完成退役：其中 Chapter 00–05 与 `decisions.md` 仅保留兼容路由；原始正文和旧版本材料保存在 [`../archive/`](../archive/)。旧表述若与当前规格冲突，以本目录当前正文及明确的缩窄/取代关系为准。
+旧 `docs/norm/` 等历史拓扑已从当前树移除。原始正文、旧章节快照以及旧结构到当前结构的对应关系保存在 [`../archive/`](../archive/README.md)；Git 历史仍可恢复旧路径本身。旧表述若与当前规格冲突，以本目录当前正文及明确的缩窄/取代关系为准。
 
 ## 权威与关系
 

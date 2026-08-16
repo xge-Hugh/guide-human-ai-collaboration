@@ -17,7 +17,7 @@
 5. [`docs/guidance/`](docs/guidance/README.md) — 可替换的交互、表示与模板做法
 6. [`docs/governance/`](docs/governance/README.md) — 项目演进、证据边界与决策历史
 7. （按需）[`docs/research/`](docs/research/README.md) / [`docs/experiments/`](docs/experiments/README.md) — 研究依据与历史保障实验
-8. （历史追溯）[`docs/archive/`](docs/archive/) / [`docs/norm/`](docs/norm/README.md) — 历史全文与旧路径兼容入口
+8. （历史追溯）[`docs/archive/`](docs/archive/README.md) — 历史全文、旧版本快照与迁出材料
 
 ## 目录角色
 
@@ -30,7 +30,6 @@
 | `docs/experiments/` | 项目曾运行的实验性保障实现与试点记录 |
 | `docs/overview.md` | 当前导读，非第二事实源 |
 | `docs/archive/` | 历史全文、旧版本快照与迁出材料 |
-| `docs/norm/` | 旧规范路径的兼容与历史路由；不再承载当前正文 |
 | `feedback/` | 实战观察与摩擦入口；内容先保真，再决定去向 |
 | `insights/` | 候选主张与设计解释，非当前规格 |
 | `skills/` | 实验性 Skill 载体与行为 eval；非规范权威 |

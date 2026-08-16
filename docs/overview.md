@@ -36,7 +36,7 @@
 → 反思 / 学习
 ```
 
-不同领域可以改变阶段数量、名称、产物和证据，只要不覆盖通用规范。软件开发的具体阶段、退出条件、角色与技术证据见 [`spec/domains/software-development.md`](spec/domains/software-development.md)；旧 [`norm/02-five-phases.md`](norm/02-five-phases.md) 仅保留兼容路由，历史原文在 [`archive/norm-02-five-phases-v0.16.md`](archive/norm-02-five-phases-v0.16.md)。
+不同领域可以改变阶段数量、名称、产物和证据，只要不覆盖通用规范。软件开发的具体阶段、退出条件、角色与技术证据见 [`spec/domains/software-development.md`](spec/domains/software-development.md)；历史五阶段原文保存在 [`archive/norm-02-five-phases-v0.16.md`](archive/norm-02-five-phases-v0.16.md)。
 
 ## 仓库里的其他材料
 
@@ -47,8 +47,7 @@
 - [`research/`](research/README.md)：保障机制研究与外部依据；
 - [`experiments/`](experiments/README.md)：历史保障形式实验与试点；
 - [`governance/`](governance/README.md)：项目演进、证据政策与历史决策；
-- [`archive/`](archive/)：旧版本正文与历史快照；
-- [`norm/`](norm/README.md)：旧章节路径兼容与当前去向索引。
+- [`archive/`](archive/README.md)：旧版本正文、历史快照以及旧结构到当前结构的对应关系。
 
 ## 常见误解
 
@@ -71,4 +70,4 @@
 - 需要识别已知失效时读 [`spec/failure-models.md`](spec/failure-models.md)；
 - 需要维护项目或理解反馈如何进入规格时读 [`governance/project-evolution.md`](governance/project-evolution.md)；
 - 需要研究依据或历史保障实验时读 [`research/`](research/README.md) 与 [`experiments/`](experiments/README.md)；
-- 需要核对旧版本表述时读 [`archive/`](archive/)；旧链接的当前去向见 [`norm/README.md`](norm/README.md)。
+- 需要核对旧版本表述或旧结构去向时读 [`archive/`](archive/README.md)。
