@@ -13,19 +13,20 @@
 1. [`docs/spec/README.md`](docs/spec/README.md) — 当前维护的人机协作规格及迁移边界
 2. [`docs/spec/norms.md`](docs/spec/norms.md) — 当前跨领域通用规范
 3. [`docs/spec/model.md`](docs/spec/model.md) — 参与者、角色、权威、协作状态、证据、表示、独立性等概念区分
-4. [`docs/governance/project-evolution.md`](docs/governance/project-evolution.md) — 反馈、候选、当前知识、关系与重分类如何演进
-5. （按需）旧 [`docs/norm/`](docs/norm/README.md) — 尚未完成物理拆分的历史章节
-
-`docs/overview.md` 仍是旧结构形成的导读，迁移完成前不作为当前架构或权威入口。
+4. [`docs/spec/adaptation.md`](docs/spec/adaptation.md) / [`evaluation.md`](docs/spec/evaluation.md) / [`workflows.md`](docs/spec/workflows.md) — 自适应、评估与任务推进模型
+5. [`docs/guidance/`](docs/guidance/README.md) — 可替换的交互、表示与模板做法
+6. [`docs/governance/project-evolution.md`](docs/governance/project-evolution.md) — 反馈、候选、当前知识、关系与重分类如何演进
+7. （按需）旧 [`docs/norm/`](docs/norm/README.md) — 尚未完成物理拆分的历史章节
 
 ## 目录角色
 
 | 路径 | 角色 |
 | --- | --- |
 | `docs/spec/` | **当前维护的人机协作规格**；已迁入内容以这里为权威 |
+| `docs/guidance/` | 可替换的交互、表示和模板方法；不是通用合规条件 |
 | `docs/governance/` | 项目自身的分类、关系、演进与证据治理方法 |
 | `docs/norm/` | 迁移中的旧规范目录；仅尚未拆分内容继续在此承载 |
-| `docs/overview.md` | 旧结构导读，非第二事实源 |
+| `docs/overview.md` | 当前导读，非第二事实源 |
 | `docs/*-reference-study.md` / `*-v1-implementation.md` | 尚待迁移的研究与保障形式实验笔记 |
 | `docs/archive/` | 历史全文与迁出笔记 |
 | `feedback/` | 实战观察与摩擦入口；内容先保真，再决定去向 |
