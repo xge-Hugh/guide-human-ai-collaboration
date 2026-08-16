@@ -7,3 +7,5 @@
 当前内容：
 
 - [`assurance-v1.md`](assurance-v1.md)：首版保障形式的设计、试跑与结论记录。
+
+实验正文保留试点发生时的若干旧目录名和文件名，以维持历史语境；它们不再是当前入口。旧结构到当前位置的对应关系见 [`../archive/README.md`](../archive/README.md)，当前规格与研究入口分别见 [`../spec/README.md`](../spec/README.md) 和 [`../research/README.md`](../research/README.md)。
