@@ -36,7 +36,7 @@
 - 充分 ≠ 对整包说了 yes；须方向可判断、承重可调点已露面或人明示不再谈细、下潜入口未关死或已点名快速通道。
 - 成长力气用在高杠杆判断；低收益繁琐可交 AI。下一层勿再端成新的整包点头。
 
-本五阶段是实验 Skill 采用的**软件开发专项实现**。其当前完整语义见 `docs/spec/domains/software-development.md`；跨领域工作流模型见 `docs/spec/workflows.md`。旧 `docs/norm/02-five-phases.md` 仅为兼容路由，不再是规范正文。
+本五阶段是实验 Skill 采用的**软件开发专项实现**。其当前完整语义见 `docs/spec/domains/software-development.md`；跨领域工作流模型见 `docs/spec/workflows.md`。
 
 ## 阶段中的能力机会
 

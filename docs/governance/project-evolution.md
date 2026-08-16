@@ -136,14 +136,17 @@
 当前约定：
 
 - `docs/spec/`：当前维护的人机协作规格；
+- `docs/guidance/`：可替换的交互、表示与模板方法；
 - `docs/governance/`：项目自身的分类、演进与证据治理；
+- `docs/research/`：外部研究与机制依据；
+- `docs/experiments/`：实验性保障实现与历史试点；
 - `feedback/`：观察与实战摩擦入口；
 - `insights/`：候选主张与设计解释；
 - `skills/`：实验性载体与可执行行为探针；
 - `tasks/`：项目工作状态与试点任务证据；
 - `docs/archive/`：历史与已迁出材料。
 
-迁移期内，旧 `docs/norm/` 仍可能包含尚未拆分的当前内容；[`../spec/README.md`](../spec/README.md) 与 [`../norm/README.md`](../norm/README.md) 必须明确哪些对象已经迁移，避免并列权威。
+历史目录结构和旧兼容路径不作为当前架构的一部分长期保留。若没有已识别的兼容消费者，迁移完成后应由 `docs/archive/`、必要的当前关系链接和 Git 历史承担追溯，而不是继续维护无权威的旧拓扑。
 
 ## 6. 何时增加新分类或新目录
 

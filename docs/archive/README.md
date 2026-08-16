@@ -16,7 +16,21 @@
 | [`norm-05-antipatterns-and-boundaries-v0.16.md`](norm-05-antipatterns-and-boundaries-v0.16.md) | 旧反模式、科学边界与参考资料章节原文 |
 | [`assurance-and-pilot-notes-from-workflow-v0.15.md`](assurance-and-pilot-notes-from-workflow-v0.15.md) | 从旧单文件拆出的保障与早期试点记录 |
 
-旧章节路径与当前去向的对应关系见 [`../norm/README.md`](../norm/README.md)。历史决策表另保存在 [`../governance/decision-log-v0.16.md`](../governance/decision-log-v0.16.md)。
+历史决策表另保存在 [`../governance/decision-log-v0.16.md`](../governance/decision-log-v0.16.md)。旧目录和兼容跳转不继续保留在当前树；需要精确查看旧路径时使用 Git 历史。
+
+## 旧结构到当前结构
+
+| 历史对象 | 当前去向 |
+| --- | --- |
+| Chapter 00：目标与原则 | [`../spec/norms.md`](../spec/norms.md)；相关概念区分见 [`../spec/model.md`](../spec/model.md) |
+| Chapter 01：角色与抽象 | [`../spec/model.md`](../spec/model.md)、[`../spec/evaluation.md`](../spec/evaluation.md)、[`../spec/domains/software-development.md`](../spec/domains/software-development.md) |
+| Chapter 02：五阶段 | 通用关注点见 [`../spec/workflows.md`](../spec/workflows.md)；软件五阶段见 [`../spec/domains/software-development.md`](../spec/domains/software-development.md) |
+| Chapter 03：横切认知机制 | [`../spec/adaptation.md`](../spec/adaptation.md)、[`../spec/evaluation.md`](../spec/evaluation.md)、[`../guidance/`](../guidance/README.md)、[`../spec/failure-models.md`](../spec/failure-models.md) 及软件专项 |
+| Chapter 04：模板 | [`../guidance/templates.md`](../guidance/templates.md) |
+| Chapter 05：反模式与科学边界 | [`../spec/failure-models.md`](../spec/failure-models.md)、[`../governance/evidence-policy.md`](../governance/evidence-policy.md)、[`../research/scientific-basis.md`](../research/scientific-basis.md) |
+| 旧 `decisions.md` | 当前解释见 [`../governance/decisions.md`](../governance/decisions.md)；原表见 [`../governance/decision-log-v0.16.md`](../governance/decision-log-v0.16.md) |
+| reference study | [`../research/assurance-mechanisms.md`](../research/assurance-mechanisms.md) |
+| v1 implementation experiment | [`../experiments/assurance-v1.md`](../experiments/assurance-v1.md) |
 
 ## 使用原则
 
