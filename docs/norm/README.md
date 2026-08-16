@@ -1,29 +1,31 @@
-# 人机协作规范正文
+# 旧规范目录：迁移中
 
-> 地位：**规范权威正文**（由 `workflow` v0.15 重组并持续校准）。  
-> 导读：[../overview.md](../overview.md)  
+> 本目录正在迁往 [`../spec/`](../spec/README.md)。不要把本目录整体继续理解成一个同层级的“规范正文”。
+>
+> 项目的当前分类与演进方法见 [`../governance/project-evolution.md`](../governance/project-evolution.md)。
+>
 > 重组前快照：[../archive/workflow-v0.15.md](../archive/workflow-v0.15.md)
 
-本目录承载「理想的人机协作应满足什么」。通用协作规范与特定领域工作流需要分层表达；执行保障的具体技术形态（Skill、子代理、`AGENTS.md`、任务胶囊、记忆或恢复设施等）不是规范本身，相关探索见仓库中的研究与实施笔记。
+## 权威边界
 
-当前文档仍包含从软件研发实践形成的五阶段工作流和若干工程化表达，后续将继续按「通用协作规范 → 自适应状态估计与评估机制 → 可复用策略/工作流 → 领域扩展 → 执行保障」的方向审查和重组；在完成迁移前，各章正文仍按其明确地位解释，不能因为文件顺序推断所有内容处于同一抽象层。
+迁移期间不维护两份并列权威：
 
-对原 Chapter 03 的逐项审查已经确认：其中大量内容不是新的通用规范，而是自适应状态估计、能力/协作评估、认知与表示策略、实现配方、信息架构及软件工程专项规则。通用层只吸收经过独立审查后确认缺失的语义；没有实质新增时允许结论为「无新的通用规范」，不为填补分类或保持章节数量而制造要求。
+- 原 Chapter 00 已迁移到 [`../spec/norms.md`](../spec/norms.md)，旧路径 [`00-purpose-and-principles.md`](00-purpose-and-principles.md) 只保留兼容跳转；
+- [`../spec/model.md`](../spec/model.md) 已承载从现有章节审查中提炼出的当前概念区分，但不增加新的规范义务；
+- 其余 Chapter 01–05 尚未完成物理拆分。在迁移前，它们仍是当前项目知识的历史承载文件，但必须结合本表的语义地位解释，不能因仍位于 `norm/` 就推断全部内容都是通用规范；
+- [`decisions.md`](decisions.md) 仍为历史决策与状态记录，主张以当前正文为准；后续将迁往治理层。
 
-## 阅读顺序
+## 尚未迁移内容
 
-| 顺序 | 文件 | 内容 |
-| --- | --- | --- |
-| 1 | [00-purpose-and-principles.md](00-purpose-and-principles.md) | 通用目标；基础承诺；认识论约束；通用策略与机制；执行保障边界 |
-| 2 | [01-roles-and-abstraction.md](01-roles-and-abstraction.md) | 角色；抽象层 L0–L4；掌握层次 M0–M5（待继续审查通用层与领域层边界） |
-| 3 | [02-five-phases.md](02-five-phases.md) | 任务理解 → 实施讨论 → 代码实施 → 独立审查 → 复盘（工程/执行型工作流，待继续定位） |
-| 4 | [03-cognitive-mechanisms.md](03-cognitive-mechanisms.md) | 历史混合章节：含通用机制的展开、状态估计、评估机制、策略/配方、信息架构与工程专项内容；已完成语义审查，待按新分层物理拆分 |
-| 5 | [04-templates.md](04-templates.md) | 可裁剪模板（附录性质，按风险选用） |
-| 6 | [05-antipatterns-and-boundaries.md](05-antipatterns-and-boundaries.md) | 反模式、科学表述边界、精简参考资料 |
-| 附录 | [decisions.md](decisions.md) | 文档状态与历史决策记录（追溯用；历史决策不自动等于当前规范层级） |
+| 文件 | 当前解释 |
+| --- | --- |
+| [01-roles-and-abstraction.md](01-roles-and-abstraction.md) | 混合概念模型、角色/责任、抽象层与能力评估；已完成语义审查，待拆分 |
+| [02-five-phases.md](02-five-phases.md) | 可复用工作流关注点与软件研发五阶段实现混合；待拆成通用工作流与领域专项 |
+| [03-cognitive-mechanisms.md](03-cognitive-mechanisms.md) | 历史混合章节：通用机制、状态估计、评估、策略/配方、信息架构与工程专项；已完成语义审查，待物理拆分 |
+| [04-templates.md](04-templates.md) | 操作载体/指导性质模板；待迁入 guidance 层 |
+| [05-antipatterns-and-boundaries.md](05-antipatterns-and-boundaries.md) | 失效表现、项目证据边界与研究引用混合；待拆分 |
+| [decisions.md](decisions.md) | 历史决策与项目状态；追溯用，不自动等于当前规范层级 |
 
 ## 执行保障边界
 
-原 §10「执行保障机制与试点」已归档至 [../archive/assurance-and-pilot-notes-from-workflow-v0.15.md](../archive/assurance-and-pilot-notes-from-workflow-v0.15.md)。
-
-规范保留「不能只依赖人的记忆、AI 上下文或软性约定，需要可观察、可检查、可恢复的执行保障」这一**需求**，但不预设 Skill、状态文件、会话恢复、子代理、Hook 或其他具体实现形式。载体与保障系统应根据规范对象、失效模型和真实运行证据另行设计。
+当前通用规范仍保留“不能只依赖人的记忆、AI 上下文或软性约定，需要可观察、可检查、可恢复的执行保障”这一需求，但不预设 Skill、状态文件、会话恢复、子代理、Hook 或其他具体实现形式。载体与保障系统应根据规范对象、失效模型和真实运行证据另行设计。
