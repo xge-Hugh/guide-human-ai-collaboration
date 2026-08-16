@@ -1,104 +1,11 @@
-# 常见反模式与科学表述边界
+# 反模式与科学边界章节已拆分
 
-> 地位：人机协作**规范正文**的一部分（由 workflow v0.15 拆分，语义不减）。
->
-> 版本基线：v0.15 → 文档重组 v0.16-doc
->
-> 阅读导航：[目录](README.md) · 上一篇：[模板](04-templates.md) · 附录：[决策记录](decisions.md)
->
-> 完整快照：[workflow-v0.15.md](../archive/workflow-v0.15.md)
+本章原先混合了不同职责，现已按当前架构拆分：
 
-## 8. 常见反模式
+- 协作失效条件与机制：[`../spec/failure-models.md`](../spec/failure-models.md)
+- 项目证据与主张边界：[`../governance/evidence-policy.md`](../governance/evidence-policy.md)
+- 科学依据与参考资料：[`../research/scientific-basis.md`](../research/scientific-basis.md)
+- 具体交互、表示与模板缓解方法：[`../guidance/`](../guidance/README.md)
+- 软件开发专项失效与证据实践：[`../spec/domains/software-development.md`](../spec/domains/software-development.md)
 
-- “人许愿，AI 实现”，人不参与问题定义、取舍和验证；
-- AI 先给完整答案，人把熟悉感误认为独立掌握；
-- AI 先建完候选终表、利弊和推荐，再以接受、删除、补漏或局部追问制造已经共同建构的假象；
-- 把波利亚、苏格拉底或根因分析等方法完整展示为人的问卷，或把方法名称和步骤齐全当作推理可信证据；
-- 根据 Prompt 长短、响应速度或一次错误给人贴能力标签；
-- 使用隐蔽陷阱、文字游戏或羞辱式纠错；
-- 任务成功全部归因于人，或把使用 AI 本身视为能力不足；
-- 用大量背景和专业术语掩盖目标仍不清楚；
-- 在意图和行为未确定时过早深入代码或底层原理；
-- 强制解释所有实现层级，制造无限认知递归；
-- 强制隐藏所有底层细节，使抽象泄漏在生产故障时突然暴露；
-- 为每个内容强配图、视频或多个重复视图；
-- 输出覆盖所有相关信息的长文，却没有控制人每轮需要整合的概念和决定；
-- 把轻量机械解释为更短、更密或更多分片，因追求字数而省略必要前提、因果、风险或过渡，或用摘要和反复“继续”替代用户要求的完整成果；
-- 把工作流模板直接变成人必须逐项填写的问卷；
-- 人说“看不懂”后继续追加长篇解释，或立即要求其完成理解测试；
-- 要求人严格按单一抽象层表达，打断自然联想和跨层思考；
-- 把人的沉默一律视为对高风险推断的确认；
-- 为保持表面和谐而隐瞒重要异议，或反过来用泛化风险和术语制造权威感；
-- 只告诉人“不能做”，却不解释后果、验证办法或可逆替代方案；
-- 发现状态差异后沉默采用其中一项，或反过来把所有措辞差异都升级成人工审批；
-- 用“最新内容覆盖一切”或“初始文档永不改变”代替来源、层次和影响判断；
-- 用生动类比代替真实证据；
-- 用生动故事制造确定感，却不说明它只是例子、适用边界或正式依据；
-- 为了吸引注意加入与当前判断无关的情节和情绪刺激；
-- 把 AI 自审称为独立审查；
-- 代码实施后静默替人选择独立审查方式，并长时间跨阶段执行；
-- 把几百行或几千行差异直接交给人，再把遗漏问题归因于人的直觉不足；
-- 把编译通过、测试通过等同于需求正确和风险消失；
-- 为展示严谨、提高覆盖率或修复每个缺陷而条件反射式增加测试；
-- 只凭静态怀疑把 N+1 等性能问题判为必须重构，不测量实际业务影响；
-- 由 AI 单方面写复盘总结、塞进架构文档并直接关单；
-- 把架构文档写成逐轮调查、实现和验证流水账；
-- 为展示学习而阻断紧急交付，或以紧急为由永久取消学习；
-- 用单一总分、排行榜、连胜或虚假百分比衡量能力和进度；
-- 每个任务都生成完整文档，形成无人检索的文档坟场；
-- 应急结束后不偿还验证、审查和认知债务；
-- 只依靠人的记忆、AI 会话上下文或一句提示词维持流程。
-
-## 9. 科学表述边界
-
-本文借鉴认知卸载、自动化偏差、认知负荷、脚手架、自我效能、检索练习、类比迁移、多媒体学习和复盘等研究，但不把工程化设计推论包装成已经普遍验证的定律。
-
-应保持以下边界：
-
-- 现有证据支持 AI 可能改变认知分工并诱发过度依赖风险，但不足以断言使用 AI 必然导致永久认知下降；
-- 压力可能削弱部分执行功能，但其效果受任务、控制感、强度和个体差异影响，不是简单的单调关系；
-- 独立预测有助于暴露当前模型，但一次预测正确不等于掌握；
-- 能解释不等于能执行，执行一次不等于能够迁移；
-- 自我效能不等于客观能力，必须结合任务和迁移证据校准；
-- 选择、填空、一行代码到函数是合理的脚手架设计，不是唯一且普遍适用的固定序列；
-- 刻意练习能改善特定能力，但不能单独解释综合表现，远迁移通常有限；
-- 图文结合可能改善理解，动画和视频并不天然优于静态图或文字；
-- 类比可以帮助理解，不能证明两个系统具有相同机制；
-- 结构化复盘通常有益，但评分、徽章和排行榜可能诱发刷指标；
-- 80/20 不是普遍成立的教育科学定律；
-- 本工作流不是心理测评，不推断智力、人格、心理健康或职业等级；
-- 本工作流应通过真实任务持续修订，而不是宣称对所有人和所有任务最优。
-
-
-## 12. 精简参考资料
-
-以下资料用于校准工作流设计的证据边界，不表示本文每条工程规则均已被直接实验验证：
-
-- [生成式 AI 与知识工作者批判性思考投入](https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/)
-- [认知卸载综述](https://discovery.ucl.ac.uk/id/eprint/1508770/)
-- [任务中断后的目标恢复实验](https://pubmed.ncbi.nlm.nih.gov/19102614/)
-- [减少任务中断后果的系统综述与 Meta 分析](https://pubmed.ncbi.nlm.nih.gov/34273814/)
-- [外部提醒与前瞻记忆研究](https://pubmed.ncbi.nlm.nih.gov/32400318/)
-- [急性压力与核心执行功能 Meta 分析](https://pubmed.ncbi.nlm.nih.gov/27371161/)
-- [认知负荷理论](https://doi.org/10.1207/S15516709COG1202_4)
-- [Worked examples 综述](https://doi.org/10.3102/00346543070002181)
-- [专业知识反转效应](https://doi.org/10.1207/S15326985EP3801_4)
-- [Bandura 自我效能综述](https://coalea.univ-lorraine.fr/sites/coalea.univ-lorraine.fr/files/bandura1994ehb.pdf)
-- [反馈 Meta 分析](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2019.03087/full)
-- [检索练习综述](https://www.psychologicalscience.org/journals/perspectives/j.1745-6916.2006.00012.x/)
-- [类比的结构映射理论](https://doi.org/10.1207/s15516709cog0702_3)
-- [叙事理解与认知过程综述](https://pubmed.ncbi.nlm.nih.gov/15193948/)
-- [叙事说服 Meta 分析](https://doi.org/10.1080/03637751.2015.1128555)
-- [多媒体学习原则](https://doi.org/10.1111/jcal.12197)
-- [多媒体学习 Meta 分析](https://doi.org/10.1016/j.edurev.2025.100730)
-- [分段效应 Meta 分析](https://doi.org/10.1007/s10648-018-9456-4)
-- [对话中的共同理解与修复](https://web.stanford.edu/~clark/1990s/Clark%2C%20H.H.%20_%20Brennan%2C%20S.E._Grounding%20in%20communication_%201991.pdf)
-- [学习者控制 Meta 分析](https://doi.org/10.3102/0034654314526064)
-- [自适应指导 Meta 分析](https://doi.org/10.1016/j.edurev.2015.04.001)
-- [AutoTutor 对话效率研究](https://doi.org/10.1016/j.learninstruc.2011.12.002)
-- [时间管理 Meta 分析](https://doi.org/10.1371/journal.pone.0245066)
-- [目标进度监控 Meta 分析](https://pubmed.ncbi.nlm.nih.gov/26479070/)
-- [学习停滞研究](https://pmc.ncbi.nlm.nih.gov/articles/PMC7334700/)
-- [生产性失败 Meta 分析](https://eric.ed.gov/?id=EJ1308129)
-- [结构化复盘 Meta 分析](https://pubmed.ncbi.nlm.nih.gov/23516804/)
-- [游戏化 Meta 分析](https://doi.org/10.1007/s10648-019-09498-w)
+迁移前原文完整保存在 [`../archive/norm-05-antipatterns-and-boundaries-v0.16.md`](../archive/norm-05-antipatterns-and-boundaries-v0.16.md)。

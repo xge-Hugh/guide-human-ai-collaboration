@@ -6,4 +6,5 @@
 
 当前内容：
 
-- [`assurance-mechanisms.md`](assurance-mechanisms.md)：执行保障机制的社区参考、筛选与取舍研究。
+- [`assurance-mechanisms.md`](assurance-mechanisms.md)：执行保障机制的社区参考、筛选与取舍研究；
+- [`scientific-basis.md`](scientific-basis.md)：从旧规范章节迁出的科学表述依据与参考资料索引。
