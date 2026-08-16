@@ -1,41 +1,43 @@
-# 轻量人机协作规范
+# 人机协作规格与演进实验
 
-本仓库沉淀一套面向长期研发的人机协作**规范草案**：交付可靠的同时，保留人的独立判断、可观察贡献与渐进学习。
+本仓库探索一套可跨软件开发、研究、学习、数据分析等领域使用的**通用人机协作规格**，并用真实任务持续校准其工作流、指导与执行保障方式。
 
 ## 不变量
 
-**规范内容是根本。** Agent 入口、Skill、任务状态等只是可选的体现或保障形式；本仓库尚未决定最终以何种形式落地，当前目标是让浏览者读懂规范主张什么，而不是提供开箱即用工具。
+**规格内容是根本。** Agent 入口、Skill、任务状态、模板、UI 或其他技术只是可选的体现、检验或保障形式；具体载体不能自动取得规范权威。
 
-## 本仓库现在不是什么
-
-- 不是 IDE 插件、工作流引擎或强制门禁
-- 不是已定型的 Skill / `AGENTS.md` 产品包
-- 不是「克隆即可在任意项目启用」的安装说明
-
-仓库里仍保留 `skills/` 与 `tasks/`，那是试点期的**实验载体与证据**，请勿当作产品入口。
+仓库同时保留观察、候选主张、研究、实验和历史，用来解释当前知识从何而来、还缺什么证据以及如何继续修订。
 
 ## 建议阅读顺序
 
-1. [docs/overview.md](docs/overview.md) — 一两屏导读：问题、主张、阶段与常见误解  
-2. [docs/norm/README.md](docs/norm/README.md) — 规范正文（按章节阅读）  
-3. （可选）[docs/human-ai-collaboration-reference-study.md](docs/human-ai-collaboration-reference-study.md) — 保障机制的社区参考与取舍  
-4. （可选）[docs/human-ai-collaboration-v1-implementation.md](docs/human-ai-collaboration-v1-implementation.md) — 保障形式实验笔记（非规范正文）
+1. [`docs/spec/README.md`](docs/spec/README.md) — 当前维护的人机协作规格及迁移边界
+2. [`docs/spec/norms.md`](docs/spec/norms.md) — 当前跨领域通用规范
+3. [`docs/spec/model.md`](docs/spec/model.md) — 参与者、角色、权威、协作状态、证据、表示、独立性等概念区分
+4. [`docs/governance/project-evolution.md`](docs/governance/project-evolution.md) — 反馈、候选、当前知识、关系与重分类如何演进
+5. （按需）旧 [`docs/norm/`](docs/norm/README.md) — 尚未完成物理拆分的历史章节
 
-文档角色总表见 [docs/README.md](docs/README.md)。重组前全文快照：[docs/archive/workflow-v0.15.md](docs/archive/workflow-v0.15.md)。
+`docs/overview.md` 仍是旧结构形成的导读，迁移完成前不作为当前架构或权威入口。
 
 ## 目录角色
 
 | 路径 | 角色 |
 | --- | --- |
-| `docs/norm/` | **规范正文**（权威） |
-| `docs/overview.md` | 导读（非第二事实源） |
-| `docs/*-reference-study.md` / `*-v1-implementation.md` | 研究与保障形式实验 |
-| `docs/archive/` | 历史全文与从正文迁出的试点/保障笔记 |
-| `feedback/` | 实战反馈日志（内容权威；Issue 按需提升） |
-| `insights/` | 候选主张与设计灵感（非规范正文；默认不升 Issue） |
-| `skills/` | 实验性 Skill 载体，形态未决 |
-| `tasks/` | 本规范自身的演进任务与试点证据归档 |
+| `docs/spec/` | **当前维护的人机协作规格**；已迁入内容以这里为权威 |
+| `docs/governance/` | 项目自身的分类、关系、演进与证据治理方法 |
+| `docs/norm/` | 迁移中的旧规范目录；仅尚未拆分内容继续在此承载 |
+| `docs/overview.md` | 旧结构导读，非第二事实源 |
+| `docs/*-reference-study.md` / `*-v1-implementation.md` | 尚待迁移的研究与保障形式实验笔记 |
+| `docs/archive/` | 历史全文与迁出笔记 |
+| `feedback/` | 实战观察与摩擦入口；内容先保真，再决定去向 |
+| `insights/` | 候选主张与设计解释，非当前规格 |
+| `skills/` | 实验性 Skill 载体与行为 eval；非规范权威 |
+| `tasks/` | 本项目演进任务状态与历史试点证据 |
 
-## 状态
+## 本仓库现在不是什么
 
-草案。正在以「可读雏形」整理文档；「拿来用」的保障形式另议。
+- 不是 IDE 插件、工作流引擎或强制门禁；
+- 不是已定型的 Skill / `AGENTS.md` 产品包；
+- 不是“克隆即可在任意项目启用”的安装说明；
+- 也不把当前分类体系视为不可修改的封闭本体。
+
+当前仍处于规格重构与真实任务校准阶段。新发现可以被吸收、缩窄、重分类或搁置；只有当前维护的规格内容应被当作项目现行立场。
