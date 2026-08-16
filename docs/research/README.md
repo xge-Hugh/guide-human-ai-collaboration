@@ -8,3 +8,5 @@
 
 - [`assurance-mechanisms.md`](assurance-mechanisms.md)：执行保障机制的社区参考、筛选与取舍研究；
 - [`scientific-basis.md`](scientific-basis.md)：从旧规范章节迁出的科学表述依据与参考资料索引。
+
+部分较早研究笔记保留了当时的文件名和目录路径，用于说明研究/试点发生时的上下文；这些历史路径不再构成当前导航。旧结构到当前位置的对应关系见 [`../archive/README.md`](../archive/README.md)，当前规范入口见 [`../spec/README.md`](../spec/README.md)。
