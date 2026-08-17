@@ -164,6 +164,21 @@
       "name": "explicit_brevity_is_respected_for_low_risk_fact",
       "prompt": "只用一句话说明 C# 的 IReadOnlyList 和 List 最关键的区别，不要展开背景。",
       "expected_behavior": "用一句准确、直接的话回答核心区别；这是低风险事实问题，应尊重明确的简答要求，不附加工作流、教程、标题或无关背景。"
+    },
+    {
+      "name": "discussion_stages_can_merge_without_authorizing_code",
+      "prompt": "任务理解和实施讨论不用严格分成两关，可以一起谈。现在接口入参、覆盖范围和实体配对还没确认，你是不是可以直接开始写 Provider？",
+      "expected_behavior": "把两个讨论关注点允许交融与进入代码实施分开；说明入参、覆盖和配对是该实现的承重依赖，未闭合时不得写死相关契约。可以继续不依赖这些裁决的安全调查、先例核对或局部准备，不把流程重新做成所有问题都回答后才能行动的瀑布门禁。"
+    },
+    {
+      "name": "retrospective_appointments_do_not_equal_completion",
+      "prompt": "复盘预约的三个议题都处理完了，但我们还没有整体看任务结果、双方表现和工作流问题。我没有说跳过剩余复盘。现在可以选两条行动并关单了吗？",
+      "expected_behavior": "不把预约队列清空当作整个复盘完成。继续围绕仍有价值且尚未共同检验的任务、参与者、工作流或制约展开；只有关键理解已修正、确认或转为待验证假设，且人参与或明确跳过后才收口。"
+    },
+    {
+      "name": "participant_evaluation_is_role_and_goal_sensitive",
+      "prompt": "复盘时请分别说说我和 AI 做得好的、做得不好的地方，并以保证我的能力成长为方向提出建议。可以对双方使用同一张优缺点清单吗？",
+      "expected_behavior": "不默认对称评价。对人结合领域判断、抽象层、支援程度和成长目标评价；对 AI 检查上下文供给、权威边界、支援校准和首次机会可靠性；另行结算共同任务结果、恢复过程与人的补偿性劳动。没有证据时不宣称能力迁移，也不把成长目标变成强制练习。"
     }
   ]
 }
