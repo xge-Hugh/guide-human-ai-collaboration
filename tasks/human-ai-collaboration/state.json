@@ -3,9 +3,9 @@
   "task_id": "human-ai-collaboration",
   "title": "轻量人机协作规范与保障系统",
   "status": "active",
-  "phase": "assurance_phase_b_ready",
+  "phase": "assurance_phase_b_runner_handoff",
   "current_actor": "human",
-  "next_action": "Phase A 语义参考基线已完成，Phase B 的 B0/B1/B2 受控回放包已就绪；下一步由人选择最小受控执行环境/runner，再执行首次机会识别对照，之后才进入真实客户端生态试跑",
+  "next_action": "本地 Agent 按 assurance-v2-runner-handoff.md 从当前 main 启动：先做只读检查与最小方案，再实现 fake-provider 优先的 runner 管线和测试；不要先跑大规模付费实验。完成实现分支/PR 后，由云端审查 Agent 对实验隔离、证据边界和实现差异做复核，再由人裁决真正会改变实验意义的分歧",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -22,6 +22,7 @@
     "assurance_v2_phase_b_generation": "../../docs/experiments/assurance-v2-phase-b-generation.json",
     "assurance_v2_phase_b_rubrics": "../../docs/experiments/assurance-v2-phase-b-rubrics.json",
     "assurance_v2_phase_b_variants": "../../docs/experiments/assurance-v2-phase-b-variants.json",
+    "assurance_v2_runner_handoff": "../../docs/experiments/assurance-v2-runner-handoff.md",
     "micro_cognitive_friction": "../../insights/2026-08-11-micro-cognitive-friction.md",
     "action_grounding": "../../insights/2026-08-11-action-grounding.md",
     "shared_conversational_initiative": "../../insights/2026-08-12-shared-conversational-initiative.md",
@@ -34,7 +35,8 @@
   "notes": {
     "batch1": "可读雏形已验收",
     "batch2": "reference-study 与 v1-implementation 已规范化导航与试点/现状分层",
-    "assurance_v2": "当前规范已纳入责任—能力与长期能力成长语义；Phase A 已覆盖 FM-01～FM-20，Phase B 已形成平台无关生成包、隐藏 rubric 与 B0/B1/B2 固定变量；尚未取得任何新载体的运行可靠性证据",
+    "assurance_v2": "当前规范已纳入责任—能力与长期能力成长语义；Phase A 已覆盖 FM-01～FM-20，Phase B 已形成平台无关生成包、隐藏 rubric 与 B0/B1/B2 固定变量；runner handoff 已进入 main，但尚未取得 runner smoke test、正式 Phase B 运行或任何新载体可靠性证据",
+    "three_way_collaboration": "人负责实验方向与规范性裁决；本地 Agent 负责 runner 实现与本地执行；云端审查 Agent 负责对照当前规范/协议审查实现和证据。三方结构本身不自动构成 grader 独立性",
     "deferred": "Issue #2 的建构路径已作为 D-062 写入规范并通过独立审查；A 层常驻底线不再按历史清单直接重启，先由 Phase B 的 B1/B2 对照检验其实际边际价值",
     "open_issues": [
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/1",
