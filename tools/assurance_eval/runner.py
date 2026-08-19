@@ -100,7 +100,8 @@ def _write_new_json(path: Path, value: Mapping[str, Any]) -> None:
         raise FileExistsError(path)
     temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
     try:
-        with temporary.open("x", encoding="utf-8") as handle:
+        descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
             json.dump(value, handle, ensure_ascii=False, indent=2, allow_nan=False)
             handle.write("\n")
             handle.flush()
@@ -167,14 +168,15 @@ class AssuranceEvalRunner:
             "runner_source_sha256": _runner_source_digest(self.repo_root),
         }
         run_dir = config.output_root.resolve() / run_id
-        run_dir.mkdir(parents=True, exist_ok=False)
+        run_dir.mkdir(mode=0o700, parents=True, exist_ok=False)
+        os.chmod(run_dir, 0o700)
         started_at = self.now()
         manifest = {
             "schema_version": 1,
             "run_id": run_id,
             "started_at": started_at,
             "run_mode": config.run_mode,
-            "evidence_use": "not_experimental_evidence",
+            "evidence_use": config.evidence_label,
             "runner_provenance": provenance,
             "source_files": inputs.source_files,
             "config": {
@@ -211,10 +213,19 @@ class AssuranceEvalRunner:
                     _write_new_json(run_dir / relative_path, record)
                     records.append({"path": str(relative_path), "record": record})
 
-        _write_new_json(run_dir / "summary.json", self._summarize(run_id, records))
+        _write_new_json(
+            run_dir / "summary.json",
+            self._summarize(run_id, config.run_mode, config.evidence_label, records),
+        )
         _write_new_json(
             run_dir / "completed.json",
-            {"schema_version": 1, "run_id": run_id, "completed_at": self.now()},
+            {
+                "schema_version": 1,
+                "run_id": run_id,
+                "run_mode": config.run_mode,
+                "evidence_use": config.evidence_label,
+                "completed_at": self.now(),
+            },
         )
         return run_dir
 
@@ -251,6 +262,7 @@ class AssuranceEvalRunner:
         generator_request = {
             "call_kind": "generator",
             "context_id": context_id,
+            "variant_id": variant_id,
             "system_instruction": system_instruction,
             "packet": {
                 "case_id": case_id,
@@ -259,6 +271,8 @@ class AssuranceEvalRunner:
             },
         }
         generator_call = self._invoke(self.generator, generator_request, config.max_retries)
+        generator_call["run_mode"] = config.run_mode
+        generator_call["evidence_use"] = config.evidence_label
         record_stem = f"{case_id}__{variant_id}__r{repetition:03d}"
         _write_new_json(
             run_dir / "call_evidence" / f"{record_stem}__generator.json",
@@ -272,6 +286,8 @@ class AssuranceEvalRunner:
             "repetition": repetition,
             "context_id": context_id,
             "rubric_adjudication": inputs.rubrics[case_id]["adjudication"],
+            "run_mode": config.run_mode,
+            "evidence_use": config.evidence_label,
             "generator": generator_call,
             "grader": None,
         }
@@ -292,6 +308,8 @@ class AssuranceEvalRunner:
             "packet": grader_packet,
         }
         grader_call = self._invoke(self.grader, grader_request, config.max_retries)
+        grader_call["run_mode"] = config.run_mode
+        grader_call["evidence_use"] = config.evidence_label
         if grader_call["invocation_status"] == "succeeded":
             try:
                 grader_call["axis_results"] = _parse_grade(grader_call["raw_output"])
@@ -380,7 +398,10 @@ class AssuranceEvalRunner:
 
     @staticmethod
     def _summarize(
-        run_id: str, records: list[dict[str, Any]]
+        run_id: str,
+        run_mode: str,
+        evidence_label: str,
+        records: list[dict[str, Any]],
     ) -> dict[str, Any]:
         generation = Counter()
         grading = Counter()
@@ -443,6 +464,8 @@ class AssuranceEvalRunner:
         return {
             "schema_version": 1,
             "run_id": run_id,
+            "run_mode": run_mode,
+            "evidence_use": evidence_label,
             "record_count": len(records),
             "generation": dict(generation),
             "grading": dict(grading),

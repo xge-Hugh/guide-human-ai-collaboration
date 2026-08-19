@@ -6,6 +6,7 @@ import json
 import stat
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 from urllib.parse import urlparse
 
 
@@ -29,14 +30,24 @@ def _required_string(value: object, field_name: str) -> str:
 def load_local_provider_config(
     path: Path, *, connection_label: str, repository_root: Path
 ) -> LocalProviderConfig:
+    resolved_path = _validated_private_path(path, repository_root)
+    document = json.loads(resolved_path.read_text(encoding="utf-8"))
+    return _config_from_document(document, connection_label)
+
+
+def _validated_private_path(path: Path, repository_root: Path) -> Path:
     resolved_path = path.resolve()
     if resolved_path.is_relative_to(repository_root.resolve()):
         raise ValueError("provider config must be stored outside the repository")
     mode = stat.S_IMODE(resolved_path.stat().st_mode)
     if mode & 0o077:
         raise PermissionError("provider config must not be accessible by group or other users")
+    return resolved_path
 
-    document = json.loads(resolved_path.read_text(encoding="utf-8"))
+
+def _config_from_document(document: object, connection_label: str) -> LocalProviderConfig:
+    if not isinstance(document, dict):
+        raise ValueError("local provider config must be a JSON object")
     if document.get("schema_version") != 1:
         raise ValueError("unsupported local provider config schema_version")
     connections = document.get("connections")
@@ -73,3 +84,75 @@ def load_local_provider_config(
         base_url=base_url.rstrip("/"),
         api_key=_required_string(connection.get("api_key"), "api_key"),
     )
+
+
+def load_only_local_provider_config_and_scan_values(
+    path: Path, *, repository_root: Path
+) -> tuple[LocalProviderConfig, tuple[str, ...]]:
+    """Load the sole approved config and scan needles from the same secured bytes."""
+    resolved_path = _validated_private_path(path, repository_root)
+    document = json.loads(resolved_path.read_text(encoding="utf-8"))
+    if not isinstance(document, dict):
+        raise ValueError("local provider config must be a JSON object")
+    connections = document.get("connections")
+    if not isinstance(connections, list) or len(connections) != 1:
+        raise ValueError("transport smoke requires exactly one approved connection")
+    connection = connections[0]
+    if not isinstance(connection, dict):
+        raise ValueError("approved connection must be a JSON object")
+    label = _required_string(connection.get("label"), "label")
+    config = _config_from_document(document, label)
+    private_values = tuple(
+        dict.fromkeys(
+            (
+                config.label,
+                config.base_url,
+                config.api_key,
+                *_secret_scan_values(document),
+            )
+        )
+    )
+    return config, private_values
+
+
+def load_only_local_provider_config(path: Path, *, repository_root: Path) -> LocalProviderConfig:
+    config, _ = load_only_local_provider_config_and_scan_values(
+        path, repository_root=repository_root
+    )
+    return config
+
+
+def _secret_scan_values(document: dict[str, Any]) -> tuple[str, ...]:
+    public_keys = {
+        "schema_version",
+        "provider",
+        "api_style",
+        "model_id",
+        "declared_model_snapshot",
+        "candidate_roles",
+    }
+    values: list[str] = []
+
+    def visit(value: object, key: str | None = None) -> None:
+        if isinstance(value, dict):
+            for child_key, child_value in value.items():
+                visit(child_value, child_key)
+        elif isinstance(value, list):
+            for child_value in value:
+                visit(child_value, key)
+        elif isinstance(value, str) and key not in public_keys and len(value) >= 4:
+            values.append(value)
+
+    visit(document)
+    connections = document.get("connections")
+    if isinstance(connections, list):
+        for connection in connections:
+            if not isinstance(connection, dict):
+                continue
+            base_url = connection.get("base_url")
+            if isinstance(base_url, str):
+                parsed = urlparse(base_url)
+                for endpoint_part in (parsed.hostname, parsed.netloc):
+                    if endpoint_part and len(endpoint_part) >= 4:
+                        values.append(endpoint_part)
+    return tuple(dict.fromkeys(values))

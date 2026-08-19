@@ -7,6 +7,12 @@ from pathlib import Path
 from typing import Any, Mapping
 
 
+EVIDENCE_LABELS = {
+    "fake_pipeline": "not_experimental_evidence",
+    "transport_smoke": "transport_validation_only_not_phase_b_effect_evidence",
+}
+
+
 @dataclass(frozen=True)
 class ProviderDescriptor:
     provider: str
@@ -43,8 +49,8 @@ class RunConfig:
     max_retries: int = 0
 
     def validate(self) -> None:
-        if self.run_mode != "fake_pipeline":
-            raise ValueError("Stage 1 supports only run_mode='fake_pipeline'")
+        if self.run_mode not in EVIDENCE_LABELS:
+            raise ValueError(f"unsupported run_mode {self.run_mode!r}")
         language_fields = {
             "generator_base_language": self.generator_base_language,
             "case_packet_language": self.case_packet_language,
@@ -79,3 +85,12 @@ class RunConfig:
             raise ValueError("repetitions must be at least 1")
         if self.max_retries < 0:
             raise ValueError("max_retries cannot be negative")
+        if self.run_mode == "transport_smoke":
+            if self.case_ids != ("p002",) or self.variant_ids != ("B0",):
+                raise ValueError("transport_smoke is fixed to p002/B0")
+            if self.repetitions != 1 or self.max_retries != 0:
+                raise ValueError("transport_smoke requires one repetition and zero retries")
+
+    @property
+    def evidence_label(self) -> str:
+        return EVIDENCE_LABELS[self.run_mode]

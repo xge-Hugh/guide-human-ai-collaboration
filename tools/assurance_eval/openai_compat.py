@@ -44,7 +44,7 @@ def _chat_completions_url(base_url: str) -> str:
     return f"{base_url}/v1/chat/completions"
 
 
-def _urllib_transport(url: str, headers: Mapping[str, str], body: bytes, timeout: float) -> bytes:
+def urllib_transport(url: str, headers: Mapping[str, str], body: bytes, timeout: float) -> bytes:
     request = Request(url, data=body, headers=dict(headers), method="POST")
     opener = build_opener(_NoRedirect)
     try:
@@ -68,7 +68,7 @@ class DeepSeekChatCompletionsProvider:
         renderer_id: str,
         renderer_sha256: str,
         timeout_seconds: float = 30.0,
-        transport: Transport = _urllib_transport,
+        transport: Transport = urllib_transport,
     ) -> None:
         if timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
@@ -80,6 +80,7 @@ class DeepSeekChatCompletionsProvider:
         self._timeout_seconds = timeout_seconds
         self._transport = transport
         self._request_renderer = request_renderer
+        self._private_response_identifiers: tuple[str, ...] = ()
         self._descriptor = ProviderDescriptor(
             provider=config.provider,
             configured_model=config.configured_model,
@@ -136,6 +137,9 @@ class DeepSeekChatCompletionsProvider:
         )
         try:
             response = json.loads(response_bytes)
+            response_id = response.get("id")
+            if isinstance(response_id, str) and response_id:
+                self._private_response_identifiers = (response_id,)
             choice = response["choices"][0]
             message = choice["message"]
             content = message["content"]
@@ -146,7 +150,13 @@ class DeepSeekChatCompletionsProvider:
             raise ProviderError("provider returned an invalid chat completion", retryable=False) from None
 
         usage = response.get("usage")
-        public_metadata: dict[str, Any] = {"finish_reason": choice.get("finish_reason")}
+        finish_reason = choice.get("finish_reason")
+        allowed_finish_reasons = {"stop", "length", "tool_calls", "content_filter"}
+        public_metadata: dict[str, Any] = {
+            "finish_reason": (
+                finish_reason if finish_reason in allowed_finish_reasons else "other"
+            )
+        }
         if isinstance(usage, dict):
             public_metadata["usage"] = {
                 key: usage[key]
@@ -159,3 +169,7 @@ class DeepSeekChatCompletionsProvider:
             model_visible_request=effective_request,
             public_metadata=public_metadata,
         )
+
+    def private_artifact_scan_values(self) -> tuple[str, ...]:
+        """Return provider correlation IDs for local scan without artifact storage."""
+        return self._private_response_identifiers

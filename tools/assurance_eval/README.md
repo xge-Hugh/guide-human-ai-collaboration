@@ -44,8 +44,7 @@ canonical Chinese formal condition.
 
 `local_config.py` loads a mode-`0600` provider file and rejects any path inside
 the repository. `openai_compat.py` contains a narrow DeepSeek-style Chat
-Completions transport. It does not provide a production renderer or a real-run
-CLI, so it cannot make a Stage 2 call accidentally.
+Completions transport.
 
 Every generator and grader adapter requires a separately supplied renderer ID,
 renderer source digest, and renderer function. This keeps the exact message and
@@ -59,3 +58,25 @@ The local provider file must remain outside the repository. It needs
 guarantee a pinned backend, omit it and the artifact records `null` rather than
 inventing reproducibility. Endpoint URLs and API keys are never provider
 descriptor or artifact fields.
+
+The explicit Stage 2 transport smoke path is fixed to `p002`, `B0`, one
+repetition, zero retries, a real generator, and a deterministic fake grader. It
+uses the reviewed Chinese two-message renderer, disables thinking and streaming,
+and writes only to an output directory outside the repository. The run mode is
+`transport_smoke`; every artifact is labeled
+`transport_validation_only_not_phase_b_effect_evidence` and must not be counted
+as B0 or other Phase B effect evidence.
+
+Omitting `--confirm-network` performs the local preflight and exits without a
+network call:
+
+```bash
+python3 -m tools.assurance_eval.transport_smoke \
+  --config /absolute/outside-repository/setting.json \
+  --output-dir /absolute/outside-repository/smoke-runs
+```
+
+Only after human approval of the provider/model and single-call budget, add
+`--confirm-network`. The smoke path enforces a one-shot transport gate and will
+not retry. Raw run artifacts remain local unless a human separately approves
+sharing them.
