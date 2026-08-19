@@ -54,6 +54,8 @@ model alias, operator-declared snapshot, provider-reported model field, and exac
 secret-free model-visible request separately.
 
 The local provider file must remain outside the repository. It needs
-`api_style: openai_chat_completions` at connection level and a
-`declared_model_snapshot` beside each `model_id`. Endpoint URLs and API keys are
-never provider descriptor or artifact fields.
+`api_style: openai_chat_completions` at connection level. A
+`declared_model_snapshot` beside `model_id` is optional: when the provider cannot
+guarantee a pinned backend, omit it and the artifact records `null` rather than
+inventing reproducibility. Endpoint URLs and API keys are never provider
+descriptor or artifact fields.

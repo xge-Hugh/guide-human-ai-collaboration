@@ -47,7 +47,6 @@ class LocalConfigTest(unittest.TestCase):
                                 "models": [
                                     {
                                         "model_id": "moving-alias",
-                                        "declared_model_snapshot": "fixed-snapshot",
                                     }
                                 ],
                             }
@@ -62,7 +61,7 @@ class LocalConfigTest(unittest.TestCase):
             )
 
         self.assertEqual(config.configured_model, "moving-alias")
-        self.assertEqual(config.declared_model_snapshot, "fixed-snapshot")
+        self.assertIsNone(config.declared_model_snapshot)
         self.assertNotIn("test-secret-key", repr(config))
         self.assertNotIn("private.example.invalid", repr(config))
 

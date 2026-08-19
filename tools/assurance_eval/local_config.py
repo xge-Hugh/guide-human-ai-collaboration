@@ -61,9 +61,9 @@ def load_local_provider_config(
     if not isinstance(models, list) or len(models) != 1 or not isinstance(models[0], dict):
         raise ValueError("Stage 2 local config currently requires exactly one model")
     model = models[0]
-    snapshot = _required_string(
-        model.get("declared_model_snapshot"), "declared_model_snapshot"
-    )
+    snapshot = model.get("declared_model_snapshot")
+    if snapshot is not None:
+        snapshot = _required_string(snapshot, "declared_model_snapshot")
     return LocalProviderConfig(
         label=_required_string(connection.get("label"), "label"),
         provider=_required_string(connection.get("provider"), "provider"),
