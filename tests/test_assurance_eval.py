@@ -53,6 +53,11 @@ class RunnerTest(unittest.TestCase):
             "case_ids": ("p001",),
             "variant_ids": ("B0",),
             "run_mode": "fake_pipeline",
+            "generator_base_language": "en",
+            "case_packet_language": "zh-CN",
+            "variant_condition_language": "none",
+            "grader_instruction_language": "en",
+            "grader_context_language": "zh-CN",
             "repetitions": 1,
             "max_retries": 0,
         }
@@ -94,7 +99,7 @@ class RunnerTest(unittest.TestCase):
             request_dict = dict(request)  # type: ignore[arg-type]
             return ProviderResponse(
                 raw_output=f"  raw::{request_dict['context_id']}::响应\n",
-                actual_model="fake-generator-snapshot",
+                provider_reported_model="fake-generator-snapshot",
                 public_metadata={"finish_reason": "stop"},
             )
 
@@ -114,7 +119,11 @@ class RunnerTest(unittest.TestCase):
             new_id=self.new_id,
         )
         run_dir = runner.run(
-            self.config(variant_ids=("B0", "B1", "B2"), repetitions=2)
+            self.config(
+                variant_ids=("B0", "B1", "B2"),
+                variant_condition_language="en",
+                repetitions=2,
+            )
         )
 
         self.assertEqual(len(generator.calls), call_count)
@@ -169,6 +178,14 @@ class RunnerTest(unittest.TestCase):
                 f"  raw::{record['context_id']}::响应\n",
             )
             self.assertIn("axis_results", record["grader"])
+            self.assertEqual(
+                record["generator"]["model_identity"],
+                {
+                    "configured_model": "fake-generator",
+                    "declared_model_snapshot": None,
+                    "provider_reported_model": "fake-generator-snapshot",
+                },
+            )
 
         summary = json.loads((run_dir / "summary.json").read_text(encoding="utf-8"))
         self.assertEqual(summary["record_count"], call_count)
@@ -184,6 +201,16 @@ class RunnerTest(unittest.TestCase):
         manifest = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["run_mode"], "fake_pipeline")
         self.assertEqual(manifest["evidence_use"], "not_experimental_evidence")
+        self.assertEqual(
+            manifest["config"]["language_components"],
+            {
+                "generator_base": "en",
+                "case_packet": "zh-CN",
+                "variant_condition": "en",
+                "grader_instruction": "en",
+                "grader_context": "zh-CN",
+            },
+        )
         self.assertIn("runner_source_sha256", manifest["runner_provenance"])
 
     def test_records_failures_retries_and_unparsed_grader_output(self) -> None:
@@ -224,6 +251,12 @@ class RunnerTest(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "standalone context mode"):
             AssuranceEvalRunner(REPO_ROOT, provider, grader)
+
+    def test_does_not_allow_english_variants_to_be_labeled_chinese(self) -> None:
+        with self.assertRaisesRegex(ValueError, "checked-in B1/B2 rendering is English"):
+            self.config(
+                variant_ids=("B1",), variant_condition_language="zh-CN"
+            ).validate()
 
 
 if __name__ == "__main__":

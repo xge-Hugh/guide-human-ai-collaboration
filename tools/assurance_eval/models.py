@@ -12,6 +12,7 @@ class ProviderDescriptor:
     provider: str
     configured_model: str
     context_mode: str
+    declared_model_snapshot: str | None = None
     public_parameters: Mapping[str, Any] = field(default_factory=dict)
     uncontrolled_parameters: tuple[str, ...] = ()
 
@@ -19,7 +20,8 @@ class ProviderDescriptor:
 @dataclass(frozen=True)
 class ProviderResponse:
     raw_output: str
-    actual_model: str
+    provider_reported_model: str
+    model_visible_request: Mapping[str, Any] | None = None
     public_metadata: Mapping[str, Any] = field(default_factory=dict)
 
 
@@ -32,12 +34,37 @@ class RunConfig:
     case_ids: tuple[str, ...]
     variant_ids: tuple[str, ...]
     run_mode: str
+    generator_base_language: str
+    case_packet_language: str
+    variant_condition_language: str
+    grader_instruction_language: str
+    grader_context_language: str
     repetitions: int = 3
     max_retries: int = 0
 
     def validate(self) -> None:
         if self.run_mode != "fake_pipeline":
             raise ValueError("Stage 1 supports only run_mode='fake_pipeline'")
+        language_fields = {
+            "generator_base_language": self.generator_base_language,
+            "case_packet_language": self.case_packet_language,
+            "variant_condition_language": self.variant_condition_language,
+            "grader_instruction_language": self.grader_instruction_language,
+            "grader_context_language": self.grader_context_language,
+        }
+        for field_name, value in language_fields.items():
+            if not value.strip():
+                raise ValueError(f"{field_name} must be explicit and non-empty")
+        if self.case_packet_language != "zh-CN":
+            raise ValueError("the checked-in Phase B case packets are Chinese")
+        if any(variant_id != "B0" for variant_id in self.variant_ids):
+            if self.variant_condition_language != "en":
+                raise ValueError(
+                    "the checked-in B1/B2 rendering is English; a different language "
+                    "requires a separately reviewed variant source"
+                )
+        elif self.variant_condition_language != "none":
+            raise ValueError("B0-only runs must record variant_condition_language='none'")
         if not self.base_generator_instruction.strip():
             raise ValueError("base_generator_instruction must be explicit and non-empty")
         if not self.grader_instruction.strip():

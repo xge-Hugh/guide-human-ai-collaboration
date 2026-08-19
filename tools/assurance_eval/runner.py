@@ -184,6 +184,13 @@ class AssuranceEvalRunner:
                 "case_ids": list(config.case_ids),
                 "variant_ids": list(config.variant_ids),
                 "run_mode": config.run_mode,
+                "language_components": {
+                    "generator_base": config.generator_base_language,
+                    "case_packet": config.case_packet_language,
+                    "variant_condition": config.variant_condition_language,
+                    "grader_instruction": config.grader_instruction_language,
+                    "grader_context": config.grader_context_language,
+                },
                 "repetitions": config.repetitions,
                 "max_retries": config.max_retries,
             },
@@ -343,8 +350,18 @@ class AssuranceEvalRunner:
             return {
                 "invocation_status": "succeeded",
                 "request": request_snapshot,
+                "model_visible_request": (
+                    request_snapshot
+                    if response.model_visible_request is None
+                    else dict(response.model_visible_request)
+                ),
                 "provider": descriptor,
-                "actual_model": response.actual_model,
+                "provider_reported_model": response.provider_reported_model,
+                "model_identity": {
+                    "configured_model": descriptor["configured_model"],
+                    "declared_model_snapshot": descriptor["declared_model_snapshot"],
+                    "provider_reported_model": response.provider_reported_model,
+                },
                 "attempts": attempts,
                 "retry_count": attempt_number - 1,
                 "raw_output": response.raw_output,
@@ -354,7 +371,7 @@ class AssuranceEvalRunner:
             "invocation_status": "failed",
             "request": request_snapshot,
             "provider": descriptor,
-            "actual_model": None,
+            "provider_reported_model": None,
             "attempts": attempts,
             "retry_count": len(attempts) - 1,
             "raw_output": None,

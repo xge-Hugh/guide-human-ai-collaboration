@@ -37,6 +37,11 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--variants", default=("B0", "B1", "B2"), type=_comma_separated)
     parser.add_argument("--repetitions", default=3, type=int)
     parser.add_argument("--max-retries", default=0, type=int)
+    parser.add_argument("--generator-base-language", required=True)
+    parser.add_argument("--case-packet-language", required=True)
+    parser.add_argument("--variant-condition-language", required=True)
+    parser.add_argument("--grader-instruction-language", required=True)
+    parser.add_argument("--grader-context-language", required=True)
     return parser
 
 
@@ -45,7 +50,7 @@ def main() -> int:
     call_count = len(args.cases) * len(args.variants) * args.repetitions
     generator_response = ProviderResponse(
         raw_output="FAKE generator output; no model or network was used.",
-        actual_model="fake-generator-v1",
+        provider_reported_model="fake-generator-v1",
     )
     fake_grade = json.dumps(
         {
@@ -60,11 +65,21 @@ def main() -> int:
     )
     grader_response = ProviderResponse(fake_grade, "fake-grader-v1")
     generator = ScriptedFakeProvider(
-        ProviderDescriptor("fake", "fake-generator-v1", "standalone", {"network": False}),
+        ProviderDescriptor(
+            provider="fake",
+            configured_model="fake-generator-v1",
+            context_mode="standalone",
+            public_parameters={"network": False},
+        ),
         [generator_response] * call_count,
     )
     grader = ScriptedFakeProvider(
-        ProviderDescriptor("fake", "fake-grader-v1", "standalone", {"network": False}),
+        ProviderDescriptor(
+            provider="fake",
+            configured_model="fake-grader-v1",
+            context_mode="standalone",
+            public_parameters={"network": False},
+        ),
         [grader_response] * call_count,
     )
     repo_root = Path(__file__).resolve().parents[2]
@@ -76,6 +91,11 @@ def main() -> int:
         case_ids=args.cases,
         variant_ids=args.variants,
         run_mode="fake_pipeline",
+        generator_base_language=args.generator_base_language,
+        case_packet_language=args.case_packet_language,
+        variant_condition_language=args.variant_condition_language,
+        grader_instruction_language=args.grader_instruction_language,
+        grader_context_language=args.grader_context_language,
         repetitions=args.repetitions,
         max_retries=args.max_retries,
     )
