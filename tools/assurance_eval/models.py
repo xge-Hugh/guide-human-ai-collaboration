@@ -12,6 +12,9 @@ from .loading import DEFAULT_VARIANTS_FILE
 EVIDENCE_LABELS = {
     "fake_pipeline": "not_experimental_evidence",
     "transport_smoke": "transport_validation_only_not_phase_b_effect_evidence",
+    "thinking_compatibility_smoke": (
+        "thinking_compatibility_only_not_phase_b_effect_evidence"
+    ),
 }
 
 CHINESE_VARIANTS_FILE = "assurance-v2-phase-b-variants.zh-CN.json"
@@ -107,6 +110,13 @@ class RunConfig:
                 raise ValueError("transport_smoke is fixed to p002/B0")
             if self.repetitions != 1 or self.max_retries != 0:
                 raise ValueError("transport_smoke requires one repetition and zero retries")
+        if self.run_mode == "thinking_compatibility_smoke":
+            if self.case_ids != ("p002",) or self.variant_ids != ("B0",):
+                raise ValueError("thinking_compatibility_smoke is fixed to p002/B0")
+            if self.repetitions != 1 or self.max_retries != 0:
+                raise ValueError(
+                    "thinking_compatibility_smoke requires one repetition and zero retries"
+                )
 
     @property
     def evidence_label(self) -> str:

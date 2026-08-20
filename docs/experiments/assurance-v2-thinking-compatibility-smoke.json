@@ -1,7 +1,8 @@
 {
   "schema_version": 1,
-  "status": "candidate_for_human_cost_privacy_approval",
-  "execution_enabled": false,
+  "status": "human_approved_for_exactly_one_compatibility_call",
+  "execution_enabled": true,
+  "approval_scope": "one_generator_call_only_no_formal_replay_or_real_grader",
   "run_mode": "thinking_compatibility_smoke",
   "evidence_use": "thinking_compatibility_only_not_phase_b_effect_evidence",
   "case_id": "p002",
@@ -9,6 +10,20 @@
   "repetitions": 1,
   "maximum_generator_network_calls": 1,
   "grader": "deterministic_fake_no_network",
+  "provider_provenance": {
+    "transport_provider": "custom_isolated_provider",
+    "model_family": "DeepSeek",
+    "configured_model": "deepseek-v4-flash",
+    "declared_snapshot": null,
+    "official_deepseek_api_claimed": false,
+    "uncontrolled_factors": [
+      "custom_provider_routing",
+      "backend_identity",
+      "backend_seed",
+      "server_side_model_alias_resolution",
+      "provider_retention"
+    ]
+  },
   "renderer": {
     "id": "phase-b-thinking-compat-smoke-generator-zh-cn-v1",
     "sha256": "39f6b30731e3cdd9c28896655a7ff255e3fabb73efa69d3b353d5d4532e97e3c",

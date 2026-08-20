@@ -5,7 +5,7 @@
   "status": "active",
   "phase": "assurance_phase_b_stage3_post_cloud_review",
   "current_actor": "human_ai_collaboration",
-  "next_action": "Stage 3 候选已按云端审查完成离线修订，execution_enabled 仍为 false。下一步由人批准一次 thinking compatibility smoke 的成本/隐私，并冻结正式 output budget、实际 grader 路径与独立性、完整成本/配额/retention 上限，以及剩余方向规则机械细节；获批前不得进行正式 B0/B1/B2 调用。",
+  "next_action": "Stage 3 正式 replay 的 execution_enabled 仍为 false。一次 thinking compatibility smoke 已获得严格的一次调用成本/隐私授权，下一步在提交并通过离线门禁后执行该 smoke，然后停止供云端复核；它不授权正式 B0/B1/B2 或真实 grader。",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {

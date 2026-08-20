@@ -58,7 +58,7 @@ def urllib_transport(url: str, headers: Mapping[str, str], body: bytes, timeout:
 
 
 class DeepSeekChatCompletionsProvider:
-    """Narrow stateless Chat Completions dialect for the approved DeepSeek endpoint."""
+    """Narrow stateless Chat Completions dialect for a DeepSeek-family model route."""
 
     def __init__(
         self,
@@ -70,6 +70,8 @@ class DeepSeekChatCompletionsProvider:
         timeout_seconds: float = 30.0,
         transport: Transport = urllib_transport,
         allow_thinking: bool = False,
+        provider_boundary: str | None = None,
+        model_family: str | None = None,
     ) -> None:
         if timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
@@ -77,25 +79,37 @@ class DeepSeekChatCompletionsProvider:
             raise ValueError("renderer_id must be non-empty")
         if not re.fullmatch(r"[0-9a-f]{64}", renderer_sha256):
             raise ValueError("renderer_sha256 must be a lowercase SHA-256 digest")
+        for field_name, value in (
+            ("provider_boundary", provider_boundary),
+            ("model_family", model_family),
+        ):
+            if value is not None and not value.strip():
+                raise ValueError(f"{field_name} must be non-empty when provided")
         self._config = config
         self._timeout_seconds = timeout_seconds
         self._transport = transport
         self._request_renderer = request_renderer
         self._allow_thinking = allow_thinking
         self._private_response_identifiers: tuple[str, ...] = ()
+        public_parameters = {
+            "api_style": config.api_style,
+            "renderer_id": renderer_id,
+            "renderer_sha256": renderer_sha256,
+            "thinking_enabled_allowed": allow_thinking,
+            "reasoning_content_retention": "not_recorded",
+        }
+        if provider_boundary is not None:
+            public_parameters["provider_boundary"] = provider_boundary
+        if model_family is not None:
+            public_parameters["model_family"] = model_family
         self._descriptor = ProviderDescriptor(
             provider=config.provider,
             configured_model=config.configured_model,
             declared_model_snapshot=config.declared_model_snapshot,
             context_mode="standalone",
-            public_parameters={
-                "api_style": config.api_style,
-                "renderer_id": renderer_id,
-                "renderer_sha256": renderer_sha256,
-                "thinking_enabled_allowed": allow_thinking,
-                "reasoning_content_retention": "not_recorded",
-            },
+            public_parameters=public_parameters,
             uncontrolled_parameters=(
+                "backend_identity",
                 "backend_seed",
                 "custom_provider_routing",
                 "server_side_model_alias_resolution",
@@ -152,6 +166,11 @@ class DeepSeekChatCompletionsProvider:
             choice = response["choices"][0]
             message = choice["message"]
             content = message["content"]
+            reasoning_content = message.get("reasoning_content")
+            if isinstance(reasoning_content, str) and reasoning_content:
+                self._private_response_identifiers = tuple(
+                    dict.fromkeys((*self._private_response_identifiers, reasoning_content))
+                )
             reported_model = response["model"]
             if not isinstance(content, str) or not isinstance(reported_model, str):
                 raise TypeError

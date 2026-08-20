@@ -206,14 +206,14 @@ generator 的理论 completion ceiling 为 368,640 tokens；若 grader 使用 1,
 
 正式运行前准备一个独立、非效果证据的一次调用候选：`p002`、B0、1 repetition、真实 generator、deterministic fake grader、thinking enabled、streaming 关闭、零重试、`max_tokens=4096` 候选值，且不发送 temperature/top-p/reasoning effort。其运行模式为 `thinking_compatibility_smoke`，证据标签为 `thinking_compatibility_only_not_phase_b_effect_evidence`。
 
-当前配置 `execution_enabled=false`。即使提供 `--confirm-network`，离线预检也只会报告等待人类成本/隐私批准并保持零调用。未来执行器最多允许一次 generator call；thinking 参数拒绝、`finish_reason=length`、reasoning 文本进入 artifact、秘密扫描命中或 unexpected response 都继续阻塞正式运行。该 smoke 只验证 dialect、返回字段和 artifact 路径，不证明 B0 表现，也不单独证明 4096 足够或中性。
+该 smoke 已获得严格限于一次 generator call 的人类成本/隐私授权；正式 replay 和真实 grader 仍未授权。执行仍要求显式 `--confirm-network`、干净提交、外部私有配置与输出目录，并在配置旁原子消费一次性授权，换输出目录不能重新执行。thinking 参数拒绝、非 `stop` finish reason、reasoning 文本进入 artifact、秘密扫描命中或 unexpected response 都继续阻塞正式运行。该 smoke 只验证 dialect、返回字段和 artifact 路径，不证明 B0 表现，也不单独证明 4096 足够或中性。
 
 ## 12. 尚待人 / 云端裁决
 
 1. 批准或修改中文 B1/B2 逐字内容及语义等价说明；批准后才把 rendering status 冻结为 approved。
 2. 批准 10-case subset、三次 repetition 和 180-call 上限。
 3. 选择 grader provider/model 与 Level；若增加连接，同时批准其成本、隐私和保留政策。
-4. 单独批准 thinking compatibility smoke 的一次调用成本与隐私；通过后再冻结 thinking enabled 与 4096（或新版本）预算。
+4. compatibility smoke 完成并经云端复核后，再冻结 thinking enabled 与 4096（或新版本）预算。
 5. 冻结上节列出的方向规则机械歧义、盲抽查上限和人类裁决流程。
 6. 批准包含 secondary review 的完整调用/货币/配额硬上限。
 7. 批准正式运行后，才把 `execution_enabled` 改为 true、完成真实 grader wiring，并以 `--confirm-formal-run` 发起运行。

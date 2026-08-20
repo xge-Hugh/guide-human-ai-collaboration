@@ -2,9 +2,9 @@
 
 > 地位：**不含秘密的候选能力与成本边界说明，不是 grader 选择或正式调用授权。**
 
-## 1. 主路径候选：本地已配置 API 模型
+## 1. 主路径候选：本地已配置的自定义隔离 provider
 
-- model / family：配置的 outbound model identifier 为 `deepseek-v4-flash`；服务端 snapshot 未知。它与 generator 属同一 DeepSeek-like 模型家族，不能仅凭另开请求宣称更强模型独立性。
+- provider / model / family：transport 是自定义隔离 provider，不宣称为官方 DeepSeek API；配置的 outbound model identifier 为 `deepseek-v4-flash`，模型家族为 DeepSeek，服务端 snapshot 未知。自定义 routing/backend identity、alias 解析与 retention 均保持为不可控因素。它与 generator 属同一模型家族，不能仅凭另开请求宣称更强模型独立性。
 - context isolation：现有 adapter 声明每条 record 使用独立 standalone Chat Completions 请求，不携带 session 或历史状态；这支持 Level 1 上下文隔离，但不能切断模型、训练或服务端路由的共同失效来源。
 - repo / other outputs：API 只收到固定 grader renderer 产生的消息，不会被提供 repo、其他 variant/repetition 输出或 generator reasoning。provider/client 是否注入未披露上下文仍未知。
 - reproducibility：实际 model-visible grader prompt 与最终原始输出可逐字保存在本地私有 artifact；renderer ID、源码/内容摘要和参数必须同时记录。provider alias、后端路由、snapshot、seed 与服务端注入使模型行为不能完全复现。

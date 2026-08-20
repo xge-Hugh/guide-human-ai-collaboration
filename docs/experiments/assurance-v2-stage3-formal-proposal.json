@@ -20,11 +20,11 @@
   "review_sources": {
     "grader_capability": {
       "path": "docs/experiments/assurance-v2-stage3-grader-capability.md",
-      "sha256": "e58ead9d274f489f301bafe1d901b7dd8c9bf290f5cdcfffb82ee7df4c72191c"
+      "sha256": "647b21eb58ba32df8be76c42b3128f7632c32ac3cffc9bffa69236e879c859e3"
     },
     "thinking_compatibility_smoke": {
       "path": "docs/experiments/assurance-v2-thinking-compatibility-smoke.json",
-      "sha256": "7fbf2c6a3ea4904002a94dbb7718343f798963901894fedee7e5a779672ef1f3"
+      "sha256": "d6c8e6da6b01d5b635d47f066856c4fe2a7d92764657a59545b8bcacd1eb9199"
     }
   },
   "repetitions": 3,
