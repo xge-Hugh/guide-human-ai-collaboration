@@ -13,8 +13,9 @@
 - [`assurance-v2-phase-b-protocol.md`](assurance-v2-phase-b-protocol.md)：Phase B 的受控回放 / 生态试跑协议，固定信息隔离、独立评价与结果解释；
 - [`assurance-v2-phase-b-generation.json`](assurance-v2-phase-b-generation.json) / [`assurance-v2-phase-b-rubrics.json`](assurance-v2-phase-b-rubrics.json)：生成侧测试包与隐藏评价边界，物理分离以降低答案泄漏；
 - [`assurance-v2-phase-b-variants.json`](assurance-v2-phase-b-variants.json)：B0/B1/B2 的固定实验变量；这里只是对照输入，不代表正式常驻规则已经选定；
-- [`assurance-v2-runner-handoff.md`](assurance-v2-runner-handoff.md)：本地 Agent 实现最小可重复 runner 的三方协作与验收契约，明确实现权限、证据隔离和升级边界，不把 runner 结构误当保障本身。
+- [`assurance-v2-runner-handoff.md`](assurance-v2-runner-handoff.md)：本地 Agent 实现最小可重复 runner 的三方协作与验收契约，明确实现权限、证据隔离和升级边界，不把 runner 结构误当保障本身；
+- [`assurance-v2-experiment-owner-guide.md`](assurance-v2-experiment-owner-guide.md)：面向实验负责人的实现—证据桥接说明，解释实验源、renderer、模型参数、证据链和 grader 独立性，不要求负责人承担 Python 操作责任。
 
-v2 当前已完成 Phase A 的**结构性基线**并准备好 Phase B 的平台无关执行包；这仍不表示任何保障载体已经运行、通过或获得可靠性证据。下一步由本地 Agent 按 runner handoff 契约实现 fake-provider 优先的最小受控回放工具；经管线与 smoke test 审查后，才执行正式 B0/B1/B2 小规模运行。
+v2 当前已完成 Phase A 的**结构性基线**、Phase B runner 的 fake 管线和一次明确标记为非效果证据的真实 transport smoke。当前仍没有 B0/B1/B2 的正式效果证据；下一步是在冻结中文首轮条件、正式 renderer、模型参数、grader 与运行顺序后，执行小规模受控回放。
 
 实验正文保留试点发生时的若干旧目录名和文件名，以维持历史语境；它们不再是当前入口。旧结构到当前位置的对应关系见 [`../archive/README.md`](../archive/README.md)，当前规格与研究入口分别见 [`../spec/README.md`](../spec/README.md) 和 [`../research/README.md`](../research/README.md)。
