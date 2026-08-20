@@ -6,11 +6,15 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping
 
+from .loading import DEFAULT_VARIANTS_FILE
+
 
 EVIDENCE_LABELS = {
     "fake_pipeline": "not_experimental_evidence",
     "transport_smoke": "transport_validation_only_not_phase_b_effect_evidence",
 }
+
+CHINESE_VARIANTS_FILE = "assurance-v2-phase-b-variants.zh-CN.json"
 
 
 @dataclass(frozen=True)
@@ -47,6 +51,8 @@ class RunConfig:
     grader_context_language: str
     repetitions: int = 3
     max_retries: int = 0
+    variants_file: str = DEFAULT_VARIANTS_FILE
+    variant_order_by_repetition: tuple[tuple[str, ...], ...] | None = None
 
     def validate(self) -> None:
         if self.run_mode not in EVIDENCE_LABELS:
@@ -64,10 +70,15 @@ class RunConfig:
         if self.case_packet_language != "zh-CN":
             raise ValueError("the checked-in Phase B case packets are Chinese")
         if any(variant_id != "B0" for variant_id in self.variant_ids):
-            if self.variant_condition_language != "en":
+            expected_variant_language = {
+                DEFAULT_VARIANTS_FILE: "en",
+                CHINESE_VARIANTS_FILE: "zh-CN",
+            }.get(self.variants_file)
+            if expected_variant_language is None:
+                raise ValueError("variant source language is not recognized")
+            if self.variant_condition_language != expected_variant_language:
                 raise ValueError(
-                    "the checked-in B1/B2 rendering is English; a different language "
-                    "requires a separately reviewed variant source"
+                    "variant_condition_language does not match the selected variant source"
                 )
         elif self.variant_condition_language != "none":
             raise ValueError("B0-only runs must record variant_condition_language='none'")
@@ -85,6 +96,12 @@ class RunConfig:
             raise ValueError("repetitions must be at least 1")
         if self.max_retries < 0:
             raise ValueError("max_retries cannot be negative")
+        if self.variant_order_by_repetition is not None:
+            if len(self.variant_order_by_repetition) != self.repetitions:
+                raise ValueError("variant order must contain one row per repetition")
+            expected = sorted(self.variant_ids)
+            if any(sorted(order) != expected for order in self.variant_order_by_repetition):
+                raise ValueError("each variant order must be a permutation of variant_ids")
         if self.run_mode == "transport_smoke":
             if self.case_ids != ("p002",) or self.variant_ids != ("B0",):
                 raise ValueError("transport_smoke is fixed to p002/B0")

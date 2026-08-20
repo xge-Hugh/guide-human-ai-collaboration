@@ -95,7 +95,8 @@ def _working_tree_status(repo_root: Path) -> dict[str, Any]:
 
 
 def _write_new_json(path: Path, value: Mapping[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+    path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    os.chmod(path.parent, 0o700)
     if path.exists():
         raise FileExistsError(path)
     temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
@@ -158,8 +159,10 @@ class AssuranceEvalRunner:
 
     def run(self, config: RunConfig) -> Path:
         config.validate()
-        inputs = load_phase_b_inputs(self.repo_root)
+        inputs = load_phase_b_inputs(self.repo_root, variants_file=config.variants_file)
         self._validate_selection(config, inputs)
+
+        execution_plan = self._execution_plan(config)
 
         run_id = self.new_id()
         provenance = {
@@ -185,6 +188,7 @@ class AssuranceEvalRunner:
                 "grader_normative_context": config.grader_normative_context,
                 "case_ids": list(config.case_ids),
                 "variant_ids": list(config.variant_ids),
+                "variants_file": config.variants_file,
                 "run_mode": config.run_mode,
                 "language_components": {
                     "generator_base": config.generator_base_language,
@@ -195,6 +199,12 @@ class AssuranceEvalRunner:
                 },
                 "repetitions": config.repetitions,
                 "max_retries": config.max_retries,
+                "variant_order_by_repetition": (
+                    None
+                    if config.variant_order_by_repetition is None
+                    else [list(order) for order in config.variant_order_by_repetition]
+                ),
+                "planned_execution_order": execution_plan,
             },
             "generator_provider": _descriptor_dict(self.generator.descriptor),
             "grader_provider": _descriptor_dict(self.grader.descriptor),
@@ -202,16 +212,25 @@ class AssuranceEvalRunner:
         _write_new_json(run_dir / "manifest.json", manifest)
 
         records: list[dict[str, Any]] = []
-        for case_id in config.case_ids:
-            for variant_id in config.variant_ids:
-                for repetition in range(1, config.repetitions + 1):
-                    record = self._run_record(
-                        run_dir, run_id, case_id, variant_id, repetition, config, inputs
-                    )
-                    filename = f"{case_id}__{variant_id}__r{repetition:03d}.json"
-                    relative_path = Path("records") / filename
-                    _write_new_json(run_dir / relative_path, record)
-                    records.append({"path": str(relative_path), "record": record})
+        for planned in execution_plan:
+            record = self._run_record(
+                run_dir,
+                run_id,
+                planned["case_id"],
+                planned["variant_id"],
+                planned["repetition"],
+                planned["execution_index"],
+                planned["variant_position"],
+                config,
+                inputs,
+            )
+            filename = (
+                f"{planned['case_id']}__{planned['variant_id']}__"
+                f"r{planned['repetition']:03d}.json"
+            )
+            relative_path = Path("records") / filename
+            _write_new_json(run_dir / relative_path, record)
+            records.append({"path": str(relative_path), "record": record})
 
         _write_new_json(
             run_dir / "summary.json",
@@ -228,6 +247,37 @@ class AssuranceEvalRunner:
             },
         )
         return run_dir
+
+    @staticmethod
+    def _execution_plan(config: RunConfig) -> list[dict[str, Any]]:
+        plan: list[dict[str, Any]] = []
+        if config.variant_order_by_repetition is None:
+            selections = (
+                (case_id, variant_id, repetition, config.variant_ids.index(variant_id) + 1)
+                for case_id in config.case_ids
+                for variant_id in config.variant_ids
+                for repetition in range(1, config.repetitions + 1)
+            )
+        else:
+            selections = (
+                (case_id, variant_id, repetition, position)
+                for repetition, order in enumerate(config.variant_order_by_repetition, start=1)
+                for case_id in config.case_ids
+                for position, variant_id in enumerate(order, start=1)
+            )
+        for execution_index, (case_id, variant_id, repetition, variant_position) in enumerate(
+            selections, start=1
+        ):
+            plan.append(
+                {
+                    "execution_index": execution_index,
+                    "case_id": case_id,
+                    "variant_id": variant_id,
+                    "repetition": repetition,
+                    "variant_position": variant_position,
+                }
+            )
+        return plan
 
     @staticmethod
     def _validate_selection(config: RunConfig, inputs: PhaseBInputs) -> None:
@@ -249,6 +299,8 @@ class AssuranceEvalRunner:
         case_id: str,
         variant_id: str,
         repetition: int,
+        execution_index: int,
+        variant_position: int,
         config: RunConfig,
         inputs: PhaseBInputs,
     ) -> dict[str, Any]:
@@ -284,6 +336,8 @@ class AssuranceEvalRunner:
             "case_id": case_id,
             "variant_id": variant_id,
             "repetition": repetition,
+            "execution_index": execution_index,
+            "variant_position": variant_position,
             "context_id": context_id,
             "rubric_adjudication": inputs.rubrics[case_id]["adjudication"],
             "run_mode": config.run_mode,
@@ -434,6 +488,8 @@ class AssuranceEvalRunner:
             )
             repetition_result = {
                 "repetition": record["repetition"],
+                "execution_index": record["execution_index"],
+                "variant_position": record["variant_position"],
                 "generator_invocation": record["generator"]["invocation_status"],
                 "grader_invocation": None if grader is None else grader["invocation_status"],
                 "grade_parse_status": None if grader is None else grader.get("grade_parse_status"),
@@ -447,6 +503,8 @@ class AssuranceEvalRunner:
                     "case_id": record["case_id"],
                     "variant_id": record["variant_id"],
                     "repetition": record["repetition"],
+                    "execution_index": record["execution_index"],
+                    "variant_position": record["variant_position"],
                     "rubric_adjudication": record["rubric_adjudication"],
                     "record_path": item["path"],
                 }

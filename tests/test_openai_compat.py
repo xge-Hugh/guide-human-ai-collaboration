@@ -177,7 +177,7 @@ class OpenAICompatProviderTest(unittest.TestCase):
             renderer_sha256=RENDERER_SHA256,
             transport=lambda *_: self.fail("transport must not be called"),
         )
-        with self.assertRaisesRegex(ValueError, "explicitly disable thinking"):
+        with self.assertRaisesRegex(ValueError, "not approved"):
             provider.invoke_standalone(
                 {
                     "model_visible_request": {
@@ -186,6 +186,46 @@ class OpenAICompatProviderTest(unittest.TestCase):
                     }
                 }
             )
+
+    def test_approved_thinking_does_not_retain_reasoning_content(self) -> None:
+        def transport(_url: str, _headers: object, _body: bytes, _timeout: float) -> bytes:
+            return json.dumps(
+                {
+                    "id": "private-reasoning-response",
+                    "model": "reported-alias",
+                    "choices": [
+                        {
+                            "message": {
+                                "content": "最终回答",
+                                "reasoning_content": "synthetic hidden reasoning",
+                            },
+                            "finish_reason": "stop",
+                        }
+                    ],
+                },
+                ensure_ascii=False,
+            ).encode("utf-8")
+
+        provider = DeepSeekChatCompletionsProvider(
+            self.config(),
+            request_renderer=model_request_renderer,
+            renderer_id="toy-thinking-renderer",
+            renderer_sha256=RENDERER_SHA256,
+            transport=transport,
+            allow_thinking=True,
+        )
+        response = provider.invoke_standalone(
+            {
+                "model_visible_request": {
+                    "messages": [{"role": "user", "content": "test"}],
+                    "thinking": {"type": "enabled"},
+                    "stream": False,
+                }
+            }
+        )
+
+        self.assertEqual(response.raw_output, "最终回答")
+        self.assertNotIn("reasoning", json.dumps(response.__dict__, ensure_ascii=False))
 
     def test_runner_uses_injected_renderer_without_network(self) -> None:
         def semantic_renderer(request: object) -> dict[str, object]:

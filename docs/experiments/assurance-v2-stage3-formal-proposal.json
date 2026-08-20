@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "candidate_for_human_cloud_review",
+  "execution_enabled": false,
+  "run_mode": "formal_replay",
+  "evidence_use": "phase_b_controlled_replay_raw_evidence_pending_adjudication",
+  "case_ids": ["p003", "p004", "p005", "p006", "p007", "p008", "p009", "p011", "p012", "p013"],
+  "variant_ids": ["B0", "B1", "B2"],
+  "variants_file": "assurance-v2-phase-b-variants.zh-CN.json",
+  "source_files": {
+    "generation": {"path": "docs/experiments/assurance-v2-phase-b-generation.json", "sha256": "b83a56690615b0bf59f87103170637064756b08a9e4295d29fe1d421302f6372"},
+    "variants": {"path": "docs/experiments/assurance-v2-phase-b-variants.zh-CN.json", "sha256": "81770b7a5f69ebc2df756da609baf1ed0cf038ecea203820e13ff8dccf9012dd"},
+    "rubrics": {"path": "docs/experiments/assurance-v2-phase-b-rubrics.json", "sha256": "ed6ecd528f50ecdf37db4029979ca0aabbc0b331512dbce5774276ccf2fe6bae"}
+  },
+  "repetitions": 3,
+  "variant_order_by_repetition": [
+    ["B0", "B1", "B2"],
+    ["B1", "B2", "B0"],
+    ["B2", "B0", "B1"]
+  ],
+  "renderer": {
+    "id": "phase-b-formal-generator-zh-cn-v1",
+    "sha256": "1f0e536b4581d4358b2ec2f75f984deece406a1391bfbae86d2ff5d6f837722d",
+    "base_language": "zh-CN",
+    "case_packet_language": "zh-CN",
+    "variant_condition_language": "zh-CN"
+  },
+  "generator_model": {
+    "configured_model": "deepseek-v4-flash",
+    "declared_snapshot": null,
+    "thinking": {"type": "enabled"},
+    "reasoning_effort": "not_sent_provider_support_unverified",
+    "temperature": "not_sent_effect_under_thinking_unverified",
+    "top_p": "not_sent_effect_under_thinking_unverified",
+    "max_tokens": 4096,
+    "stream": false,
+    "max_retries": 0
+  },
+  "grader": {
+    "renderer_id": "phase-b-formal-grader-zh-cn-v1-candidate",
+    "language": "zh-CN",
+    "required_context_mode": "standalone",
+    "preferred_independence": "Level 2 candidate using a distinct model family",
+    "fallback_independence": "Level 1 using the generator model family in an isolated call",
+    "visible_reasoning_is_evidence": false,
+    "max_tokens": 1024,
+    "stream": false
+  },
+  "estimated_calls": {
+    "generator": 90,
+    "grader": 90,
+    "maximum_total_without_retries": 180
+  }
+}

@@ -80,3 +80,26 @@ Only after human approval of the provider/model and single-call budget, add
 `--confirm-network`. The smoke path enforces a one-shot transport gate and will
 not retry. Raw run artifacts remain local unless a human separately approves
 sharing them.
+
+## Stage 3 formal replay preparation
+
+The candidate Stage 3 design is documented in
+`docs/experiments/assurance-v2-stage3-review-proposal.md`. Its Chinese-native
+B0/B1/B2 source remains separate from the English fixture and carries source
+provenance. The formal renderer is `phase-b-formal-generator-zh-cn-v1`; all
+variants use the same two-message rendering and fixed settings.
+
+The checked-in proposal has `execution_enabled: false`. This command validates
+the external local configuration, clean Git state, reviewed input composition,
+renderer digest, and external output location without calling a provider:
+
+```bash
+python3 -m tools.assurance_eval.formal_replay \
+  --config /absolute/outside-repository/setting.json \
+  --output-dir /absolute/outside-repository/formal-runs
+```
+
+Without `--confirm-formal-run`, it exits with zero generator and grader calls.
+During the review stage, adding the flag still fails closed because real formal
+provider/grader wiring is deliberately disabled. Human/cloud approval must
+resolve the recorded experiment decisions before that interlock is changed.

@@ -11,6 +11,7 @@ from typing import Any
 
 
 _SAFE_ID = re.compile(r"^[A-Za-z0-9_-]+$")
+DEFAULT_VARIANTS_FILE = "assurance-v2-phase-b-variants.json"
 
 
 @dataclass(frozen=True)
@@ -52,11 +53,15 @@ def _require_strings(
                 raise ValueError(f"{source_name} {item_id!r} requires string field {field!r}")
 
 
-def load_phase_b_inputs(repo_root: Path) -> PhaseBInputs:
+def load_phase_b_inputs(
+    repo_root: Path, *, variants_file: str = DEFAULT_VARIANTS_FILE
+) -> PhaseBInputs:
     experiment_dir = repo_root / "docs" / "experiments"
+    if Path(variants_file).name != variants_file:
+        raise ValueError("variants_file must be a filename in docs/experiments")
     paths = {
         "generation": experiment_dir / "assurance-v2-phase-b-generation.json",
-        "variants": experiment_dir / "assurance-v2-phase-b-variants.json",
+        "variants": experiment_dir / variants_file,
         "rubrics": experiment_dir / "assurance-v2-phase-b-rubrics.json",
     }
     generation, generation_digest = _load_collection(paths["generation"], "packets", "packet_id")

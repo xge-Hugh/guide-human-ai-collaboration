@@ -69,6 +69,7 @@ class DeepSeekChatCompletionsProvider:
         renderer_sha256: str,
         timeout_seconds: float = 30.0,
         transport: Transport = urllib_transport,
+        allow_thinking: bool = False,
     ) -> None:
         if timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
@@ -80,6 +81,7 @@ class DeepSeekChatCompletionsProvider:
         self._timeout_seconds = timeout_seconds
         self._transport = transport
         self._request_renderer = request_renderer
+        self._allow_thinking = allow_thinking
         self._private_response_identifiers: tuple[str, ...] = ()
         self._descriptor = ProviderDescriptor(
             provider=config.provider,
@@ -90,6 +92,8 @@ class DeepSeekChatCompletionsProvider:
                 "api_style": config.api_style,
                 "renderer_id": renderer_id,
                 "renderer_sha256": renderer_sha256,
+                "thinking_enabled_allowed": allow_thinking,
+                "reasoning_content_retention": "not_recorded",
             },
             uncontrolled_parameters=(
                 "backend_seed",
@@ -116,10 +120,13 @@ class DeepSeekChatCompletionsProvider:
         if model_request.get("stream") not in (None, False):
             raise ValueError("streaming is not supported by the evidence recorder")
         thinking_disabled = model_request.get("thinking") == {"type": "disabled"}
+        thinking_enabled = model_request.get("thinking") == {"type": "enabled"}
         reasoning_disabled = model_request.get("reasoning_effort") == "none"
-        if not (thinking_disabled or reasoning_disabled):
+        if thinking_enabled and not self._allow_thinking:
+            raise ValueError("thinking is not approved for this provider invocation")
+        if not (thinking_disabled or reasoning_disabled or thinking_enabled):
             raise ValueError(
-                "renderer must explicitly disable thinking until reasoning retention is decided"
+                "renderer must explicitly select an approved thinking mode"
             )
 
         effective_request = {"model": self._config.configured_model, **dict(model_request)}
@@ -139,7 +146,9 @@ class DeepSeekChatCompletionsProvider:
             response = json.loads(response_bytes)
             response_id = response.get("id")
             if isinstance(response_id, str) and response_id:
-                self._private_response_identifiers = (response_id,)
+                self._private_response_identifiers = tuple(
+                    dict.fromkeys((*self._private_response_identifiers, response_id))
+                )
             choice = response["choices"][0]
             message = choice["message"]
             content = message["content"]

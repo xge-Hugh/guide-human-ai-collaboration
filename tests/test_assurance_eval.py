@@ -253,7 +253,7 @@ class RunnerTest(unittest.TestCase):
             AssuranceEvalRunner(REPO_ROOT, provider, grader)
 
     def test_does_not_allow_english_variants_to_be_labeled_chinese(self) -> None:
-        with self.assertRaisesRegex(ValueError, "checked-in B1/B2 rendering is English"):
+        with self.assertRaisesRegex(ValueError, "does not match the selected variant source"):
             self.config(
                 variant_ids=("B1",), variant_condition_language="zh-CN"
             ).validate()
