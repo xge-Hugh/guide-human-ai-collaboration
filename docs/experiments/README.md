@@ -19,9 +19,10 @@
 - [`assurance-v2-stage3-review-proposal.md`](assurance-v2-stage3-review-proposal.md) / [`assurance-v2-stage3-formal-proposal.json`](assurance-v2-stage3-formal-proposal.json)：Stage 3 首批受控回放的可读与机器可读候选配置；仍保持执行禁用；
 - [`assurance-v2-stage3-cloud-review.md`](assurance-v2-stage3-cloud-review.md)：对首版 Stage 3 提案的云端审查记录；
 - [`assurance-v2-stage3-grader-capability.md`](assurance-v2-stage3-grader-capability.md)：不含秘密的 grader 隔离、复现、成本与隐私能力边界；
-- [`assurance-v2-grader-packet-bridge.md`](assurance-v2-grader-packet-bridge.md) / [`assurance-v2-grader-contract-compatibility-fixture.json`](assurance-v2-grader-contract-compatibility-fixture.json)：不同家族本地 scorer 的 packet-only export/import bridge、隔离审计与未执行的 p004 合成 fixture；
+- [`assurance-v2-grader-packet-bridge.md`](assurance-v2-grader-packet-bridge.md) / [`assurance-v2-grader-contract-compatibility-fixture.json`](assurance-v2-grader-contract-compatibility-fixture.json)：grader 的 packet-only export/import 证据边界、隔离审计与未执行的 p004 合成 fixture；
+- [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)：`qwen3.7-max` 不同系列直接无状态 API grader 的未批准、未执行、零重试兼容性候选；
 - [`assurance-v2-thinking-compatibility-smoke.json`](assurance-v2-thinking-compatibility-smoke.json)：已获一次调用授权的 thinking-enabled 兼容性 smoke 配置；原子消费门禁禁止重复执行，它不是 Phase B 效果证据。
 
-v2 当前已完成 Phase A 的**结构性基线**、Phase B runner 的 fake 管线和一次明确标记为非效果证据的真实 transport smoke。Stage 3 候选已按云端审查完成离线修订，但 thinking smoke 的成本/隐私、正式预算、grader 与解释细则仍待人批准；当前没有 B0/B1/B2 的正式效果证据，也未授权正式调用。
+v2 当前已完成 Phase A 的**结构性基线**、Phase B runner 的 fake 管线和明确标记为非效果证据的 transport/thinking compatibility smoke。Stage 3 的首选 grader 候选为同一自定义 provider 上的 Qwen 系列直接无状态 API 路径，外部 packet bridge 继续作为证据边界；其兼容性、正式预算与解释细则仍待人批准。当前没有 B0/B1/B2 的正式效果证据，也未授权正式调用。
 
 实验正文保留试点发生时的若干旧目录名和文件名，以维持历史语境；它们不再是当前入口。旧结构到当前位置的对应关系见 [`../archive/README.md`](../archive/README.md)，当前规格与研究入口分别见 [`../spec/README.md`](../spec/README.md) 和 [`../research/README.md`](../research/README.md)。

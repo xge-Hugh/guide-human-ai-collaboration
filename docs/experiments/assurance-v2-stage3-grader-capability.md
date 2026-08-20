@@ -2,32 +2,31 @@
 
 > 地位：**不含秘密的候选能力与成本边界说明，不是 grader 选择或正式调用授权。**
 
-## 1. 未授权的同族备选：本地已配置的自定义隔离 provider
+## 1. 首选候选：直接不同系列无状态 API grader
 
-- provider / model / family：transport 是自定义隔离 provider，不宣称为官方 DeepSeek API；配置的 outbound model identifier 为 `deepseek-v4-flash`，模型家族为 DeepSeek，服务端 snapshot 未知。自定义 routing/backend identity、alias 解析与 retention 均保持为不可控因素。它与 generator 属同一模型家族，不能仅凭另开请求宣称更强模型独立性。
-- context isolation：现有 adapter 声明每条 record 使用独立 standalone Chat Completions 请求，不携带 session 或历史状态；这支持 Level 1 上下文隔离，但不能切断模型、训练或服务端路由的共同失效来源。
-- repo / other outputs：API 只收到固定 grader renderer 产生的消息，不会被提供 repo、其他 variant/repetition 输出或 generator reasoning。provider/client 是否注入未披露上下文仍未知。
-- reproducibility：实际 model-visible grader prompt 与最终原始输出可逐字保存在本地私有 artifact；renderer ID、源码/内容摘要和参数必须同时记录。provider alias、后端路由、snapshot、seed 与服务端注入使模型行为不能完全复现。
-- reasoning：grader 只看 generator 最终 `content`；generator/grader 的 reasoning 文本都不保存或作为证据。provider 返回时可保存数值 reasoning-token usage。
-- cost / privacy / retention：本地非秘密配置没有价格、配额或账户成本资料，货币成本未知。每条 grader call 会向同一 provider 发送 rubric/语义边界和 generator 原始响应；服务端 retention 与二次使用策略当前未声明，必须由人审查后才可批准。
+- provider / model / family：transport 仍是本地配置的自定义隔离 provider，不宣称为官方 Qwen API；grader outbound model identifier 固定候选为 `qwen3.7-max`，按人工提供的 model ID/路由声明归为 Qwen 系列，但尚未由 API 响应验证；服务端 snapshot 未知。generator 继续使用 DeepSeek 系列的 `deepseek-v4-flash`。
+- 配置边界：同一私有连接可以列出两个获准模型，但 generator 和 grader 必须分别显式选择 model ID；不能靠“列表第一个”或临时覆盖来决定角色。当前外部配置据人工说明只列出 DeepSeek，因此兼容性调用前还需把 Qwen 作为第二个模型加入，而不是替换 generator。
+- context isolation：每条评分仅发送一个 standalone Chat Completions POST，不传 session、历史会话或其他输出。模型端没有 agent workspace、repository mount 或文件工具；它只接收 canonical grader packet 的固定渲染。
+- visible context：只包含 case-specific normative/rubric context、隐藏语义边界、generator 最终响应、评分轴/允许值、N/A 条件和 JSON schema；不包含 generator reasoning、其他 variant/repetition、预期 B0/B1/B2 顺序、汇总或 prior grade。
+- reproducibility：本地私有 artifact 保留 exact effective model-visible request、raw JSON output、renderer ID/content hash、配置/声明/provider-reported model identity、参数、elapsed time 和数值 usage。alias 解析、backend identity/seed、custom routing、snapshot 与服务端注入仍不可控。
+- tools / reasoning：请求不发送 tools；候选兼容性条件显式 `thinking={"type":"disabled"}`，不发送 reasoning effort、temperature 或 top-p。无论 provider 是否额外返回 reasoning content，都不得保存或作为评分证据；只保存返回时的数值 reasoning-token usage。
+- cost / privacy / retention：本地材料没有 Qwen 路由的价格、配额或 retention 声明。兼容性单调用和 90-call 正式 grader batch 都尚未获成本/隐私批准，不能从此前 DeepSeek generator smoke 的一次授权推导出来。
 
-因此，该路径当前最多只能作为 **Level 1 same-family fallback candidate**；本轮未授权调用，也不会在不同家族 scorer 不可用时自动回退到它。
+现有窄 Chat Completions transport 能表达该请求，但 `qwen3.7-max` 的可用性、`thinking=disabled` 接受情况、JSON-only 遵循、usage/identity 字段和无工具行为仍需一次**零重试、非效果证据**兼容性测试确认。测试配置已准备但保持 `execution_enabled=false`。
 
-## 2. 不同家族本地 scorer 候选
+若该测试通过，可声明“不同模型系列 + 独立 standalone context”的 **Level 2 candidate**；不能声明 provider 级完全独立，因为 generator 与 grader 仍共享 custom routing、运营边界和可能的后端基础设施。
 
-- model / family：可选择与 generator 不同的 Codex 模型家族作为第二审查路径；具体 model/version 尚未冻结。
-- context isolation：可以为单条 record 创建新任务上下文，但当前 coding-agent harness 仍带平台指令、工具与工作区能力。
-- repo / other outputs：无法以当前 harness 技术性保证它不读取 repo、其他 outputs 或线程注入上下文，因此不能只因模型家族不同就标为 Level 2。
-- reproducibility：显式 user prompt 和最终输出可保存，但平台/客户端注入、模型 alias 与工具环境使完整可见上下文和行为重现不充分。
-- cost / privacy / retention：当前仓库没有可审查的价格、配额、数据保留或账户边界；在这些信息获批前不得作为正式 grader 自动运行。
+## 2. 可选次级隔离实验：Codex CLI + bubblewrap
 
-内置协作 sub-agent 因共享文件系统，当前只能作为 bounded、human-supervised reviewer，不能成为已证明的 packet-isolated primary grader。
+独立 Codex CLI、仓库外 ephemeral cwd 和 filesystem namespace 仍可用于可选 secondary review/canary，但不再是 primary grader 的先决条件。其认证、模型网络、工具集合和完整 client-injected context 尚未验证，本轮不执行。
 
-独立 Codex CLI + 仓库外 ephemeral cwd + 忽略用户/项目配置可以去除对话和多数显式项目注入；外层 `bubblewrap` namespace 还有能力让 repository 技术上不可见。但认证、provider 网络、工具集合与完整注入上下文尚未在该 namespace 内验证。因此，该路径现在是**预期 primary 的 Level 2 candidate implementation path**，不是已获证的 Level 2 scorer。具体边界与 bridge 见 [`assurance-v2-grader-packet-bridge.md`](assurance-v2-grader-packet-bridge.md)。
+内置协作 sub-agent 共享文件系统，只能作为 bounded human-supervised reviewer，不能声称 repository isolation。
 
-在 launcher/canary 审查通过前，不执行 compatibility fixture，不自动回退到 DeepSeek grader，也不把 scorer 自报的 isolation 字段当作 bridge 已验证事实。
+## 3. 同系列 Level 1 fallback
 
-## 3. 调用量与批准边界
+同一自定义 provider 上的 `deepseek-v4-flash` grader 能形成 standalone context，但与 generator 同系列，只支持 Level 1。它不是默认降级路径；只有后续人明确批准 fallback 的实验含义、成本和隐私边界后才能启用。
+
+## 4. 调用量与批准边界
 
 10 cases × 3 variants × 3 repetitions 对应 90 次 generator 与 90 次 primary grader，零重试时主路径最多 180 calls。primary grader 的 1,024-token 输出上限对应 92,160 completion-token ceiling，另加输入；generator 的候选 4,096-token 上限对应 368,640 completion-token ceiling。
 

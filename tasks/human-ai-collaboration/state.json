@@ -5,7 +5,7 @@
   "status": "active",
   "phase": "assurance_phase_b_stage3_post_cloud_review",
   "current_actor": "human_ai_collaboration",
-  "next_action": "Stage 3 正式 replay 的 execution_enabled 仍为 false。Thinking compatibility smoke 已完成；当前准备不同模型家族本地 scorer 的 packet-only bridge。内置 sub-agent 不具备技术文件系统隔离，独立 Codex CLI + 外层 namespace 仍待 launcher/canary 审查；p004 grader-contract fixture 已准备但不得执行，也不自动回退到 DeepSeek grader。",
+  "next_action": "Stage 3 正式 replay 的 execution_enabled 仍为 false。首选 grader 候选改为同一自定义隔离 provider 上的 qwen3.7-max 直接无状态 API 路径，generator 继续使用 deepseek-v4-flash；packet bridge 仍是证据边界。Qwen compatibility fixture 已准备但不得执行；Codex CLI + bubblewrap 仅为可选 secondary，同系列 DeepSeek 只可经另行批准作 Level 1 fallback。",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -31,6 +31,7 @@
     "assurance_v2_stage3_grader_capability": "../../docs/experiments/assurance-v2-stage3-grader-capability.md",
     "assurance_v2_grader_packet_bridge": "../../docs/experiments/assurance-v2-grader-packet-bridge.md",
     "assurance_v2_grader_contract_fixture": "../../docs/experiments/assurance-v2-grader-contract-compatibility-fixture.json",
+    "assurance_v2_direct_grader_compatibility_smoke": "../../docs/experiments/assurance-v2-direct-grader-compatibility-smoke.json",
     "assurance_v2_thinking_compatibility_smoke": "../../docs/experiments/assurance-v2-thinking-compatibility-smoke.json",
     "micro_cognitive_friction": "../../insights/2026-08-11-micro-cognitive-friction.md",
     "action_grounding": "../../insights/2026-08-11-action-grounding.md",

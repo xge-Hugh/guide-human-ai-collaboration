@@ -2,7 +2,15 @@
 
 > 地位：**离线 bridge 与隔离能力审计；不是 scorer 执行授权，也不是正式评分结果。**
 
-## 1. 当前隔离结论
+## 1. 当前首选执行边界
+
+首选候选现在是同一自定义隔离 provider 上的直接、无状态 Chat Completions 评分请求：DeepSeek 系列 generator 与 `qwen3.7-max` Qwen 系列 grader 分别显式选择 model ID。模型服务只收到固定 renderer 从一个 canonical packet 产生的请求，不具有 agent workspace、repository mount 或文件工具。
+
+外部 packet bridge 继续作为证据边界：它导出 canonical packet；直接 API renderer 只选择允许字段；raw grader JSON 与 scorer provenance 再交给现有严格 importer。直接 transport 不得修改 generator evidence。
+
+这提供模型系列与 standalone context 分离，但 generator/grader 仍共享 custom provider routing、运营边界和可能的后端基础设施。因此兼容性验证通过后也只称为 Level 2 candidate，不称为完全独立。
+
+## 2. 可选 agent 隔离路径
 
 内置协作 sub-agent 可以使用新任务上下文和不同模型，但所有 agent 共享当前容器、文件系统和工作目录；spawn 接口没有 cwd、mount、文件系统 deny 或工具禁用参数。因此，`fork_turns=none` 只能消除对话继承，不能证明 scorer 看不到 repository、其他 outputs 或平台注入上下文。它不能作为已证明的 packet-isolated primary grader。
 
@@ -10,7 +18,9 @@
 
 主机存在 `bubblewrap`，所以可进一步构建只挂载 runtime、单个 packet 和空 output 的文件系统 namespace。不过 Codex 的认证、模型网络、工具集合和完整 client-injected context 尚未在该 namespace 内完成无评分验证。当前结论是：**技术上存在 Level 2 candidate 的实现路径，但尚未实现/证明，因此不能升级独立性声明。**
 
-## 2. 最强可行候选
+Codex CLI + bubblewrap 不再是主评分器的先决条件；以下约束仅适用于以后另行批准的可选 secondary isolation experiment。
+
+## 3. 可选路径的最强可行边界
 
 后续经人审查的 scorer launcher 应同时满足：
 
@@ -26,7 +36,7 @@
 
 全部成立后，可以称为“不同模型家族 + packet/filesystem 隔离的 Level 2 candidate”，仍不能声称完全独立：平台 system instructions、client 实现、认证/TLS、provider routing/retention、共同训练来源和 rubric 设计仍是残余共同来源。
 
-## 3. Runner-side bridge
+## 4. Runner-side bridge
 
 [`grader_bridge.py`](../../tools/assurance_eval/grader_bridge.py) 只执行离线操作：
 
@@ -46,7 +56,9 @@ new append-only imported_grade.json (0600)
 
 Importer 会核验 packet/output byte hash、拒绝重复 JSON key、缺失/额外轴和非法 N/A 组合，并再次确认 packet 未改变。它不会覆盖或修改 generator evidence。外部 provenance 的 packet/output hash 由 bridge 验证；执行环境字段仍标为 `externally_declared_not_bridge_verified`，不能靠 scorer 自述自动升级独立性。
 
-## 4. 未执行的兼容性 fixture
+直接 API 候选使用 [`direct_grader.py`](../../tools/assurance_eval/direct_grader.py) 的固定 renderer；其 compatibility 配置见 [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)。该配置零重试、最多一条 grader network call，但仍是禁用状态。
+
+## 5. 未执行的兼容性 fixture
 
 [`assurance-v2-grader-contract-compatibility-fixture.json`](assurance-v2-grader-contract-compatibility-fixture.json) 固定使用 `p004` 的 clear / not-applicable rubric 和一条合成 checklist 响应。它包含恰好一个 self-contained scorer packet：case-specific context、隐藏 acceptance boundary、generator final response、逐轴允许值和 required JSON schema。
 

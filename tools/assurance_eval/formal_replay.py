@@ -10,6 +10,7 @@ import stat
 from pathlib import Path
 from typing import Any, Mapping
 
+from .direct_grader import renderer_content_sha256 as grader_renderer_sha256
 from .loading import load_phase_b_inputs
 from .local_config import load_only_local_provider_config_and_scan_values
 from .models import CHINESE_VARIANTS_FILE
@@ -210,6 +211,10 @@ def _validate_proposal(repo_root: Path, proposal: Mapping[str, Any]) -> None:
             "grader_contract_fixture",
             "assurance-v2-grader-contract-compatibility-fixture.json",
         ),
+        (
+            "direct_grader_compatibility_smoke",
+            "assurance-v2-direct-grader-compatibility-smoke.json",
+        ),
         ("thinking_compatibility_smoke", "assurance-v2-thinking-compatibility-smoke.json"),
     ):
         path = experiment_dir / filename
@@ -227,24 +232,43 @@ def _validate_proposal(repo_root: Path, proposal: Mapping[str, Any]) -> None:
     }:
         raise ValueError("Stage 3 estimated call count differs from the frozen design")
     if proposal.get("grader") != {
-        "renderer_id": "phase-b-formal-grader-zh-cn-v1-candidate",
+        "renderer_id": "phase-b-direct-grader-zh-cn-v1-candidate",
+        "renderer_sha256": grader_renderer_sha256(),
         "language": "zh-CN",
-        "required_context_mode": "standalone",
-        "execution_path": "external_packet_bridge",
-        "execution_status": "bridge_prepared_scorer_not_executed",
-        "preferred_independence": (
-            "different-family packet-isolated Level 2 candidate pending launcher and canary "
-            "verification"
+        "required_context_mode": "standalone_single_request",
+        "execution_path": "direct_stateless_api_via_external_packet_bridge",
+        "execution_status": "renderer_and_bridge_prepared_transport_not_enabled",
+        "transport_provider": "custom_isolated_provider",
+        "model_family": "Qwen",
+        "model_family_basis": (
+            "human_declared_distinct_family_provider_route_not_api_verified"
         ),
-        "fallback_independence": "none_authorized",
+        "configured_model": "qwen3.7-max",
+        "declared_snapshot": None,
+        "preferred_independence": (
+            "different-model-family standalone-context Level 2 candidate pending "
+            "compatibility validation"
+        ),
+        "optional_secondary_isolation": (
+            "Codex CLI plus bubblewrap not required and not authorized"
+        ),
+        "fallback_independence": (
+            "same-family DeepSeek Level 1 only with separate human approval"
+        ),
         "same_deepseek_primary_authorized": False,
         "complete_model_visible_request_status": (
-            "unavailable_until_client_injection_is_attested"
+            "canonical_renderer_frozen_compatibility_not_run"
         ),
         "capability_statement": "docs/experiments/assurance-v2-stage3-grader-capability.md",
         "visible_reasoning_is_evidence": False,
+        "thinking": {"type": "disabled"},
+        "reasoning_effort": "not_sent",
+        "temperature": "not_sent",
+        "top_p": "not_sent",
         "max_tokens": 1024,
         "stream": False,
+        "tools": "not_sent",
+        "max_retries": 0,
     }:
         raise ValueError("Stage 3 grader proposal differs from the reviewed candidate")
     interpretation = proposal.get("directional_interpretation")
@@ -284,8 +308,11 @@ def preflight_formal_replay(
     output_root: Path,
     confirm_formal_run: bool,
 ) -> tuple[int, dict[str, Any]]:
+    proposal, proposal_sha256 = _load_proposal(repo_root)
+    _validate_proposal(repo_root, proposal)
+    expected_model = proposal["generator_model"]["configured_model"]
     config, _ = load_only_local_provider_config_and_scan_values(
-        config_path, repository_root=repo_root
+        config_path, repository_root=repo_root, model_id=expected_model
     )
     revision = _clean_git_revision(repo_root)
     resolved_output_root = _validate_output_root(output_root, repo_root)
@@ -293,9 +320,6 @@ def preflight_formal_replay(
         raise ValueError("formal output root must already exist as a private directory")
     if stat.S_IMODE(resolved_output_root.stat().st_mode) & 0o077:
         raise PermissionError("formal output root must not be accessible by group or other users")
-    proposal, proposal_sha256 = _load_proposal(repo_root)
-    _validate_proposal(repo_root, proposal)
-    expected_model = proposal["generator_model"]["configured_model"]
     if config.configured_model != expected_model:
         raise ValueError("local configured model differs from the Stage 3 proposal")
     report = {

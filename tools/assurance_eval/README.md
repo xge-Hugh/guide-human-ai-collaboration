@@ -43,8 +43,9 @@ canonical Chinese formal condition.
 ## Stage 2 transport scaffolding
 
 `local_config.py` loads a mode-`0600` provider file and rejects any path inside
-the repository. `openai_compat.py` contains a narrow DeepSeek-style Chat
-Completions transport.
+the repository. `openai_compat.py` contains a narrow, standalone Chat
+Completions transport; the compatibility name used by the earlier DeepSeek
+smoke remains available.
 
 Every generator and grader adapter requires a separately supplied renderer ID,
 renderer source digest, and renderer function. This keeps the exact message and
@@ -58,6 +59,11 @@ The local provider file must remain outside the repository. It needs
 guarantee a pinned backend, omit it and the artifact records `null` rather than
 inventing reproducibility. Endpoint URLs and API keys are never provider
 descriptor or artifact fields.
+
+One connection may list multiple approved `models`. When it does, callers must
+select an exact `model_id`; the loader never chooses by list order. The Stage 3
+candidate keeps `deepseek-v4-flash` for generation and adds `qwen3.7-max` as a
+second model on the same private connection for direct grading.
 
 The explicit Stage 2 transport smoke path is fixed to `p002`, `B0`, one
 repetition, zero retries, a real generator, and a deterministic fake grader. It
@@ -103,3 +109,16 @@ Without `--confirm-formal-run`, it exits with zero generator and grader calls.
 During the review stage, adding the flag still fails closed because real formal
 provider/grader wiring is deliberately disabled. Human/cloud approval must
 resolve the recorded experiment decisions before that interlock is changed.
+
+The different-family grader candidate has a separate no-network preparation
+command. It exports the canonical p004 packet and exact Qwen model-visible
+request to an external private directory, but has no transport executor and
+makes zero calls:
+
+```bash
+python3 -m tools.assurance_eval.direct_grader_compatibility \
+  --output-dir /absolute/outside-repository/grader-compatibility
+```
+
+Its checked-in compatibility configuration remains `execution_enabled: false`,
+uses zero retries, and leaves the strict packet importer as the evidence boundary.

@@ -17,7 +17,10 @@ from tools.assurance_eval import (
     RunConfig,
     ScriptedFakeProvider,
 )
-from tools.assurance_eval.openai_compat import DeepSeekChatCompletionsProvider
+from tools.assurance_eval.openai_compat import (
+    DeepSeekChatCompletionsProvider,
+    OpenAIChatCompletionsProvider,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +68,51 @@ class LocalConfigTest(unittest.TestCase):
         self.assertNotIn("test-secret-key", repr(config))
         self.assertNotIn("private.example.invalid", repr(config))
 
+    def test_selects_one_explicit_model_from_a_shared_connection(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "setting.json"
+            path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "connections": [
+                            {
+                                "label": "candidate-1",
+                                "provider": "custom",
+                                "api_style": "openai_chat_completions",
+                                "base_url": "https://private.example.invalid",
+                                "api_key": "test-secret-key",
+                                "models": [
+                                    {"model_id": "deepseek-v4-flash"},
+                                    {"model_id": "qwen3.7-max"},
+                                ],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            os.chmod(path, 0o600)
+            generator = load_local_provider_config(
+                path,
+                connection_label="candidate-1",
+                repository_root=REPO_ROOT,
+                model_id="deepseek-v4-flash",
+            )
+            grader = load_local_provider_config(
+                path,
+                connection_label="candidate-1",
+                repository_root=REPO_ROOT,
+                model_id="qwen3.7-max",
+            )
+            with self.assertRaisesRegex(ValueError, "explicit approved model_id"):
+                load_local_provider_config(
+                    path, connection_label="candidate-1", repository_root=REPO_ROOT
+                )
+
+        self.assertEqual(generator.configured_model, "deepseek-v4-flash")
+        self.assertEqual(grader.configured_model, "qwen3.7-max")
+
     def test_rejects_group_readable_config(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "setting.json"
@@ -97,6 +145,27 @@ class OpenAICompatProviderTest(unittest.TestCase):
             base_url="https://private.example.invalid",
             api_key="test-secret-key",
         )
+
+    def test_generic_adapter_preserves_explicit_qwen_model_selection(self) -> None:
+        config = LocalProviderConfig(
+            label="candidate-1",
+            provider="custom",
+            api_style="openai_chat_completions",
+            configured_model="qwen3.7-max",
+            declared_model_snapshot=None,
+            base_url="https://private.example.invalid",
+            api_key="test-secret-key",
+        )
+        provider = OpenAIChatCompletionsProvider(
+            config,
+            request_renderer=model_request_renderer,
+            renderer_id="toy-qwen-renderer",
+            renderer_sha256=RENDERER_SHA256,
+        )
+
+        self.assertIs(DeepSeekChatCompletionsProvider, OpenAIChatCompletionsProvider)
+        self.assertEqual(provider.descriptor.configured_model, "qwen3.7-max")
+        self.assertEqual(provider.descriptor.context_mode, "standalone")
 
     def test_sends_exact_model_request_and_returns_only_public_metadata(self) -> None:
         captured: dict[str, object] = {}

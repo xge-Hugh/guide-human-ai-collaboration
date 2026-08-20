@@ -129,19 +129,21 @@ repetition 3: B2 → B0 → B1
 
 ## 6. Grader 设计
 
-首选路径已调整为不同模型家族的本地 scorer，通过外部 packet bridge 接收单条 self-contained grader packet。当前内置 sub-agent 共享 repository/工作目录，不能作为已证明的隔离路径；独立 Codex CLI + 仓库外 ephemeral cwd + 外层文件系统 namespace 是待验证的 Level 2 candidate。详见 [`assurance-v2-grader-packet-bridge.md`](assurance-v2-grader-packet-bridge.md)。
+首选候选调整为同一自定义隔离 provider 上的直接无状态 API grader：generator 显式选择 DeepSeek 系列 `deepseek-v4-flash`，grader 显式选择 Qwen 系列 `qwen3.7-max`。每条评分只有一个 standalone Chat Completions 请求；模型服务不具有 agent workspace/repository 访问或文件工具。外部 packet bridge 仍是证据边界，负责 canonical packet、raw JSON、严格 schema/N/A 校验与 append-only provenance。详见 [`assurance-v2-grader-packet-bridge.md`](assurance-v2-grader-packet-bridge.md)。
 
-不会自动回退到同一 `deepseek-v4-flash` grader；该路径未获本阶段授权。Bridge 只允许导出 packet、导入外部 JSON、校验 schema/N/A 和追加 provenance，不修改 generator evidence。
+Codex CLI + bubblewrap 只保留为可选 secondary isolation experiment，不是主路径先决条件，本轮不执行。不会自动回退到同一 `deepseek-v4-flash` grader；该 Level 1 路径未获本阶段授权。Bridge 不修改 generator evidence。
 
 Grader 可见：相关规范 / rubric、隐藏语义边界、原始 generator 最终响应、逐轴定义。Grader 不可见：generator 的 `reasoning_content`、B2 应胜出的暗示、同 case 其他 variant / repetition 的输出或评分。
 
-候选 grader renderer ID 为 `phase-b-formal-grader-zh-cn-v1-candidate`。每次只评价一个响应，system instruction 候选逐字内容为：
+候选 grader renderer ID 为 `phase-b-direct-grader-zh-cn-v1-candidate`。每次只评价一个响应，system instruction 候选逐字内容为：
 
 ```text
-你是 Phase B 受控回放的隔离评价器。只根据当前评价包判断生成器的最终响应是否实现给定语义边界；不要推测或索取生成器的隐藏推理，不要假设任何 variant 应当更好，也不要参考其他运行结果。逐轴独立判断，并只返回约定 JSON 字段。
+你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。
 ```
 
-单条 user message 按固定标题依次包含：`【相关规范上下文】`、`【隐藏语义边界】`、`【生成器原始最终响应】`、`【评价轴及允许值】`。它不包含 variant 的预期排序、其他 repetition 或机械汇总。候选 grader 输出预算为 1,024 tokens、streaming 关闭；grader 模型与 thinking / sampling 参数要在选择独立模型后另行冻结，不能继承 generator 设置而不记录。
+单条 user message 按固定标题依次包含：`【案例规范与评分上下文】`、`【隐藏语义验收边界】`、`【生成器最终响应】`、`【评分轴与允许值】`、`【条件规则】`、`【必需 JSON 输出模式】`。它不包含 variant identity/预期排序、其他 repetition、generator reasoning 或机械汇总。候选设置为 `thinking={"type":"disabled"}`、1,024 output tokens、streaming 关闭、零重试，不发送 reasoning effort、temperature、top-p 或 tools；这些是待一次兼容性调用验证的固定条件，不从 generator 设置继承。
+
+兼容性配置见 [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)，状态保持未批准/未执行。它只使用 p004 合成 not-applicable fixture，最多一条 grader network call，并标为非 Phase B 效果证据。
 
 下列记录自动进入人类裁决：
 
@@ -164,7 +166,7 @@ Grader 可见：相关规范 / rubric、隐藏语义边界、原始 generator �
 - 单独报告“正确不触发”和 `over_trigger_cost`；只有 `over_trigger_cost=none` 且不需要人纠正不必要摩擦时，才计为“正确不触发”，不能只根据 applicability 标签推断；
 - `not_observed` 只用于现有证据不足以评价运行表现；N/A 既不是 `pass`，也不是 `not_observed`。
 
-真实 grader 路径仍未接通；离线 parser 的接受不构成 grader、成本或正式运行批准。
+直接 grader renderer 与离线 bridge 已接通到调用边界，但真实 transport executor 仍故意未启用；离线 parser 的接受不构成 grader、成本或正式运行批准。
 
 ## 8. 预注册的方向性解释与分批规则
 
@@ -212,7 +214,7 @@ generator 的理论 completion ceiling 为 368,640 tokens；若 grader 使用 1,
 
 1. 批准或修改中文 B1/B2 逐字内容及语义等价说明；批准后才把 rendering status 冻结为 approved。
 2. 批准 10-case subset、三次 repetition 和 180-call 上限。
-3. 选择 grader provider/model 与 Level；若增加连接，同时批准其成本、隐私和保留政策。
+3. 审查 `qwen3.7-max` 直接 grader compatibility 配置、模型系列独立性声明及其成本、隐私和保留政策；把 Qwen 作为同一私有连接的第二个获准模型，而不是替换 generator。
 4. compatibility smoke 完成并经云端复核后，再冻结 thinking enabled 与 4096（或新版本）预算。
 5. 冻结上节列出的方向规则机械歧义、盲抽查上限和人类裁决流程。
 6. 批准包含 secondary review 的完整调用/货币/配额硬上限。

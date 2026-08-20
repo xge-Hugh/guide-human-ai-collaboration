@@ -57,8 +57,8 @@ def urllib_transport(url: str, headers: Mapping[str, str], body: bytes, timeout:
         raise ProviderError("provider transport failure", retryable=True) from None
 
 
-class DeepSeekChatCompletionsProvider:
-    """Narrow stateless Chat Completions dialect for a DeepSeek-family model route."""
+class OpenAIChatCompletionsProvider:
+    """Narrow stateless Chat Completions dialect for one explicitly selected model route."""
 
     def __init__(
         self,
@@ -214,3 +214,7 @@ class DeepSeekChatCompletionsProvider:
     def private_artifact_scan_values(self) -> tuple[str, ...]:
         """Return provider correlation IDs for local scan without artifact storage."""
         return self._private_response_identifiers
+
+
+# Compatibility name retained for the already-reviewed Stage 2 generator paths.
+DeepSeekChatCompletionsProvider = OpenAIChatCompletionsProvider

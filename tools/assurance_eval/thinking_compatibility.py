@@ -174,8 +174,10 @@ def preflight_thinking_compatibility(
     output_root: Path,
     confirm_network: bool,
 ) -> tuple[int, dict[str, Any]]:
+    smoke_config, config_sha256 = _load_and_validate(repo_root)
+    expected_model = smoke_config["generator_model"]["configured_model"]
     provider_config, _ = load_only_local_provider_config_and_scan_values(
-        config_path, repository_root=repo_root
+        config_path, repository_root=repo_root, model_id=expected_model
     )
     if _consumption_marker(config_path).exists():
         raise ValueError("thinking compatibility one-call approval was already consumed")
@@ -187,8 +189,6 @@ def preflight_thinking_compatibility(
         raise PermissionError(
             "compatibility output root must not be accessible by group or other users"
         )
-    smoke_config, config_sha256 = _load_and_validate(repo_root)
-    expected_model = smoke_config["generator_model"]["configured_model"]
     if provider_config.configured_model != expected_model:
         raise ValueError("local configured model differs from compatibility proposal")
     if provider_config.provider != "custom":
@@ -305,13 +305,14 @@ def execute_thinking_compatibility(
     if preflight_code != 0:
         return preflight_code, preflight
 
+    smoke_config, config_sha256 = _load_and_validate(repo_root)
+    expected_model = smoke_config["generator_model"]["configured_model"]
     provider_config, private_config_values = load_only_local_provider_config_and_scan_values(
-        config_path, repository_root=repo_root
+        config_path, repository_root=repo_root, model_id=expected_model
     )
     private_config_sha256 = hashlib.sha256(config_path.resolve().read_bytes()).digest()
     revision = preflight["git_revision"]
     resolved_output_root = _validate_output_root(output_root, repo_root)
-    smoke_config, config_sha256 = _load_and_validate(repo_root)
     if (
         provider_config.provider != "custom"
         or provider_config.configured_model

@@ -28,11 +28,15 @@ def _required_string(value: object, field_name: str) -> str:
 
 
 def load_local_provider_config(
-    path: Path, *, connection_label: str, repository_root: Path
+    path: Path,
+    *,
+    connection_label: str,
+    repository_root: Path,
+    model_id: str | None = None,
 ) -> LocalProviderConfig:
     resolved_path = _validated_private_path(path, repository_root)
     document = json.loads(resolved_path.read_text(encoding="utf-8"))
-    return _config_from_document(document, connection_label)
+    return _config_from_document(document, connection_label, model_id=model_id)
 
 
 def _validated_private_path(path: Path, repository_root: Path) -> Path:
@@ -45,7 +49,9 @@ def _validated_private_path(path: Path, repository_root: Path) -> Path:
     return resolved_path
 
 
-def _config_from_document(document: object, connection_label: str) -> LocalProviderConfig:
+def _config_from_document(
+    document: object, connection_label: str, *, model_id: str | None = None
+) -> LocalProviderConfig:
     if not isinstance(document, dict):
         raise ValueError("local provider config must be a JSON object")
     if document.get("schema_version") != 1:
@@ -69,9 +75,19 @@ def _config_from_document(document: object, connection_label: str) -> LocalProvi
         raise ValueError("base_url must not contain credentials, a query, or a fragment")
 
     models = connection.get("models")
-    if not isinstance(models, list) or len(models) != 1 or not isinstance(models[0], dict):
-        raise ValueError("Stage 2 local config currently requires exactly one model")
-    model = models[0]
+    if not isinstance(models, list) or not models or not all(
+        isinstance(item, dict) for item in models
+    ):
+        raise ValueError("local provider config requires one or more models")
+    if model_id is None:
+        if len(models) != 1:
+            raise ValueError("multiple models require exactly one explicit approved model_id")
+        model = models[0]
+    else:
+        model_matches = [item for item in models if item.get("model_id") == model_id]
+        if len(model_matches) != 1:
+            raise ValueError("expected exactly one approved model entry for selected model_id")
+        model = model_matches[0]
     snapshot = model.get("declared_model_snapshot")
     if snapshot is not None:
         snapshot = _required_string(snapshot, "declared_model_snapshot")
@@ -87,7 +103,7 @@ def _config_from_document(document: object, connection_label: str) -> LocalProvi
 
 
 def load_only_local_provider_config_and_scan_values(
-    path: Path, *, repository_root: Path
+    path: Path, *, repository_root: Path, model_id: str | None = None
 ) -> tuple[LocalProviderConfig, tuple[str, ...]]:
     """Load the sole approved config and scan needles from the same secured bytes."""
     resolved_path = _validated_private_path(path, repository_root)
@@ -101,7 +117,7 @@ def load_only_local_provider_config_and_scan_values(
     if not isinstance(connection, dict):
         raise ValueError("approved connection must be a JSON object")
     label = _required_string(connection.get("label"), "label")
-    config = _config_from_document(document, label)
+    config = _config_from_document(document, label, model_id=model_id)
     private_values = tuple(
         dict.fromkeys(
             (
@@ -115,9 +131,11 @@ def load_only_local_provider_config_and_scan_values(
     return config, private_values
 
 
-def load_only_local_provider_config(path: Path, *, repository_root: Path) -> LocalProviderConfig:
+def load_only_local_provider_config(
+    path: Path, *, repository_root: Path, model_id: str | None = None
+) -> LocalProviderConfig:
     config, _ = load_only_local_provider_config_and_scan_values(
-        path, repository_root=repository_root
+        path, repository_root=repository_root, model_id=model_id
     )
     return config
 
