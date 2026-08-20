@@ -205,6 +205,11 @@ def _validate_proposal(repo_root: Path, proposal: Mapping[str, Any]) -> None:
     expected_review_sources: dict[str, dict[str, str]] = {}
     for name, filename in (
         ("grader_capability", "assurance-v2-stage3-grader-capability.md"),
+        ("grader_bridge_design", "assurance-v2-grader-packet-bridge.md"),
+        (
+            "grader_contract_fixture",
+            "assurance-v2-grader-contract-compatibility-fixture.json",
+        ),
         ("thinking_compatibility_smoke", "assurance-v2-thinking-compatibility-smoke.json"),
     ):
         path = experiment_dir / filename
@@ -225,8 +230,17 @@ def _validate_proposal(repo_root: Path, proposal: Mapping[str, Any]) -> None:
         "renderer_id": "phase-b-formal-grader-zh-cn-v1-candidate",
         "language": "zh-CN",
         "required_context_mode": "standalone",
-        "preferred_independence": "Level 2 candidate using a distinct model family",
-        "fallback_independence": "Level 1 using the generator model family in an isolated call",
+        "execution_path": "external_packet_bridge",
+        "execution_status": "bridge_prepared_scorer_not_executed",
+        "preferred_independence": (
+            "different-family packet-isolated Level 2 candidate pending launcher and canary "
+            "verification"
+        ),
+        "fallback_independence": "none_authorized",
+        "same_deepseek_primary_authorized": False,
+        "complete_model_visible_request_status": (
+            "unavailable_until_client_injection_is_attested"
+        ),
         "capability_statement": "docs/experiments/assurance-v2-stage3-grader-capability.md",
         "visible_reasoning_is_evidence": False,
         "max_tokens": 1024,

@@ -20,7 +20,15 @@
   "review_sources": {
     "grader_capability": {
       "path": "docs/experiments/assurance-v2-stage3-grader-capability.md",
-      "sha256": "647b21eb58ba32df8be76c42b3128f7632c32ac3cffc9bffa69236e879c859e3"
+      "sha256": "ad0f053146757a3b8b0d6ace66824d7cbab51d4cbc6dceac394f27d827a1d13a"
+    },
+    "grader_bridge_design": {
+      "path": "docs/experiments/assurance-v2-grader-packet-bridge.md",
+      "sha256": "7028c45c819c36875fd6bf93c7ba57fd6b78a99b483384c70fa62df761a4ed88"
+    },
+    "grader_contract_fixture": {
+      "path": "docs/experiments/assurance-v2-grader-contract-compatibility-fixture.json",
+      "sha256": "38571e67c0bdb4275db11f1c19e5e6ec11a3b0312a9ec4fbb7a0d583266660e1"
     },
     "thinking_compatibility_smoke": {
       "path": "docs/experiments/assurance-v2-thinking-compatibility-smoke.json",
@@ -56,8 +64,12 @@
     "renderer_id": "phase-b-formal-grader-zh-cn-v1-candidate",
     "language": "zh-CN",
     "required_context_mode": "standalone",
-    "preferred_independence": "Level 2 candidate using a distinct model family",
-    "fallback_independence": "Level 1 using the generator model family in an isolated call",
+    "execution_path": "external_packet_bridge",
+    "execution_status": "bridge_prepared_scorer_not_executed",
+    "preferred_independence": "different-family packet-isolated Level 2 candidate pending launcher and canary verification",
+    "fallback_independence": "none_authorized",
+    "same_deepseek_primary_authorized": false,
+    "complete_model_visible_request_status": "unavailable_until_client_injection_is_attested",
     "capability_statement": "docs/experiments/assurance-v2-stage3-grader-capability.md",
     "visible_reasoning_is_evidence": false,
     "max_tokens": 1024,

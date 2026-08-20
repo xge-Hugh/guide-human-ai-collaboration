@@ -2,7 +2,7 @@
 
 > 地位：**不含秘密的候选能力与成本边界说明，不是 grader 选择或正式调用授权。**
 
-## 1. 主路径候选：本地已配置的自定义隔离 provider
+## 1. 未授权的同族备选：本地已配置的自定义隔离 provider
 
 - provider / model / family：transport 是自定义隔离 provider，不宣称为官方 DeepSeek API；配置的 outbound model identifier 为 `deepseek-v4-flash`，模型家族为 DeepSeek，服务端 snapshot 未知。自定义 routing/backend identity、alias 解析与 retention 均保持为不可控因素。它与 generator 属同一模型家族，不能仅凭另开请求宣称更强模型独立性。
 - context isolation：现有 adapter 声明每条 record 使用独立 standalone Chat Completions 请求，不携带 session 或历史状态；这支持 Level 1 上下文隔离，但不能切断模型、训练或服务端路由的共同失效来源。
@@ -11,9 +11,9 @@
 - reasoning：grader 只看 generator 最终 `content`；generator/grader 的 reasoning 文本都不保存或作为证据。provider 返回时可保存数值 reasoning-token usage。
 - cost / privacy / retention：本地非秘密配置没有价格、配额或账户成本资料，货币成本未知。每条 grader call 会向同一 provider 发送 rubric/语义边界和 generator 原始响应；服务端 retention 与二次使用策略当前未声明，必须由人审查后才可批准。
 
-因此，该路径当前只能作为 **Level 1 primary candidate**，尚未获准调用。
+因此，该路径当前最多只能作为 **Level 1 same-family fallback candidate**；本轮未授权调用，也不会在不同家族 scorer 不可用时自动回退到它。
 
-## 2. 不同家族本地 coding-agent 候选
+## 2. 不同家族本地 scorer 候选
 
 - model / family：可选择与 generator 不同的 Codex 模型家族作为第二审查路径；具体 model/version 尚未冻结。
 - context isolation：可以为单条 record 创建新任务上下文，但当前 coding-agent harness 仍带平台指令、工具与工作区能力。
@@ -21,7 +21,11 @@
 - reproducibility：显式 user prompt 和最终输出可保存，但平台/客户端注入、模型 alias 与工具环境使完整可见上下文和行为重现不充分。
 - cost / privacy / retention：当前仓库没有可审查的价格、配额、数据保留或账户边界；在这些信息获批前不得作为正式 grader 自动运行。
 
-该路径可在严格限制输入后作为 derived、disagreement、conclusion-sensitive 与 blind sample 的 **secondary human-supervised review candidate**，而不是当前 primary Level 2 证据。
+内置协作 sub-agent 因共享文件系统，当前只能作为 bounded、human-supervised reviewer，不能成为已证明的 packet-isolated primary grader。
+
+独立 Codex CLI + 仓库外 ephemeral cwd + 忽略用户/项目配置可以去除对话和多数显式项目注入；外层 `bubblewrap` namespace 还有能力让 repository 技术上不可见。但认证、provider 网络、工具集合与完整注入上下文尚未在该 namespace 内验证。因此，该路径现在是**预期 primary 的 Level 2 candidate implementation path**，不是已获证的 Level 2 scorer。具体边界与 bridge 见 [`assurance-v2-grader-packet-bridge.md`](assurance-v2-grader-packet-bridge.md)。
+
+在 launcher/canary 审查通过前，不执行 compatibility fixture，不自动回退到 DeepSeek grader，也不把 scorer 自报的 isolation 字段当作 bridge 已验证事实。
 
 ## 3. 调用量与批准边界
 

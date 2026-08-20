@@ -129,9 +129,9 @@ repetition 3: B2 → B0 → B1
 
 ## 6. Grader 设计
 
-首选：人批准并在本地配置一个与 generator 不同模型家族的独立 grader，作为 Level 2 候选路径。当前本地配置只有一个模型，因此尚不能声称已满足更强独立性。
+首选路径已调整为不同模型家族的本地 scorer，通过外部 packet bridge 接收单条 self-contained grader packet。当前内置 sub-agent 共享 repository/工作目录，不能作为已证明的隔离路径；独立 Codex CLI + 仓库外 ephemeral cwd + 外层文件系统 namespace 是待验证的 Level 2 candidate。详见 [`assurance-v2-grader-packet-bridge.md`](assurance-v2-grader-packet-bridge.md)。
 
-若首批只能使用同一 `deepseek-v4-flash`，必须使用全新 standalone call，明确标记为 Level 1；它减少上下文污染，但不切断模型训练、架构和服务端路由等共同失效来源。
+不会自动回退到同一 `deepseek-v4-flash` grader；该路径未获本阶段授权。Bridge 只允许导出 packet、导入外部 JSON、校验 schema/N/A 和追加 provenance，不修改 generator evidence。
 
 Grader 可见：相关规范 / rubric、隐藏语义边界、原始 generator 最终响应、逐轴定义。Grader 不可见：generator 的 `reasoning_content`、B2 应胜出的暗示、同 case 其他 variant / repetition 的输出或评分。
 

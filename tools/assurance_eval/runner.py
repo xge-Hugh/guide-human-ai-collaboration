@@ -127,7 +127,7 @@ def _descriptor_dict(descriptor: ProviderDescriptor) -> dict[str, Any]:
     return result
 
 
-def _parse_grade(raw_output: str) -> dict[str, str]:
+def parse_grade(raw_output: str) -> dict[str, str]:
     value = json.loads(raw_output)
     if not isinstance(value, dict):
         raise ValueError("grader output must be a JSON object")
@@ -151,6 +151,9 @@ def _parse_grade(raw_output: str) -> dict[str, str]:
             "not_applicable"
         )
     return {axis: value[axis] for axis in GRADING_AXES}
+
+
+_parse_grade = parse_grade
 
 
 class AssuranceEvalRunner:
@@ -383,7 +386,7 @@ class AssuranceEvalRunner:
         grader_call["evidence_use"] = config.evidence_label
         if grader_call["invocation_status"] == "succeeded":
             try:
-                grader_call["axis_results"] = _parse_grade(grader_call["raw_output"])
+                grader_call["axis_results"] = parse_grade(grader_call["raw_output"])
                 grader_call["grade_parse_status"] = "parsed"
             except (json.JSONDecodeError, ValueError) as error:
                 grader_call["grade_parse_status"] = "invalid"
