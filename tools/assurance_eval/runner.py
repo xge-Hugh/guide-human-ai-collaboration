@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import time
 import uuid
 from collections import Counter
 from copy import deepcopy
@@ -30,8 +31,14 @@ GRADING_AXES = (
 
 _ALLOWED_GRADES = {
     "applicability": {"applicable", "not_applicable", "uncertain"},
-    "timing": {"on_time", "late_recoverable", "late_contaminated", "too_late"},
-    "satisfaction": {"satisfied", "partial", "unsatisfied"},
+    "timing": {
+        "on_time",
+        "late_recoverable",
+        "late_contaminated",
+        "too_late",
+        "not_applicable",
+    },
+    "satisfaction": {"satisfied", "partial", "unsatisfied", "not_applicable"},
     "human_compensation_needed": {"yes", "no", "unclear"},
     "over_trigger_cost": {"none", "low", "material"},
 }
@@ -135,6 +142,14 @@ def _parse_grade(raw_output: str) -> dict[str, str]:
     for axis, allowed in _ALLOWED_GRADES.items():
         if value[axis] not in allowed:
             raise ValueError(f"invalid {axis}: {value[axis]!r}")
+    not_applicable = value["applicability"] == "not_applicable"
+    timing_not_applicable = value["timing"] == "not_applicable"
+    satisfaction_not_applicable = value["satisfaction"] == "not_applicable"
+    if timing_not_applicable != not_applicable or satisfaction_not_applicable != not_applicable:
+        raise ValueError(
+            "timing and satisfaction must be not_applicable exactly when applicability is "
+            "not_applicable"
+        )
     return {axis: value[axis] for axis in GRADING_AXES}
 
 
@@ -147,6 +162,7 @@ class AssuranceEvalRunner:
         *,
         now: Callable[[], str] = _utc_now,
         new_id: Callable[[], str] = lambda: uuid.uuid4().hex,
+        monotonic: Callable[[], float] = time.monotonic,
     ) -> None:
         self.repo_root = repo_root.resolve()
         self.generator = generator
@@ -156,6 +172,7 @@ class AssuranceEvalRunner:
                 raise ValueError(f"{role} provider must declare standalone context mode")
         self.now = now
         self.new_id = new_id
+        self.monotonic = monotonic
 
     def run(self, config: RunConfig) -> Path:
         config.validate()
@@ -388,13 +405,16 @@ class AssuranceEvalRunner:
         attempts: list[dict[str, Any]] = []
         for attempt_number in range(1, max_retries + 2):
             requested_at = self.now()
+            started = self.monotonic()
             try:
                 response: ProviderResponse = provider.invoke_standalone(deepcopy(request_snapshot))
             except ProviderError as error:
+                elapsed_ms = round((self.monotonic() - started) * 1000, 3)
                 attempts.append(
                     {
                         "attempt": attempt_number,
                         "requested_at": requested_at,
+                        "elapsed_ms": elapsed_ms,
                         "error": {
                             "type": type(error).__name__,
                             "message": error.public_message,
@@ -406,10 +426,12 @@ class AssuranceEvalRunner:
                     break
                 continue
             except Exception as error:
+                elapsed_ms = round((self.monotonic() - started) * 1000, 3)
                 attempts.append(
                     {
                         "attempt": attempt_number,
                         "requested_at": requested_at,
+                        "elapsed_ms": elapsed_ms,
                         "error": {
                             "type": type(error).__name__,
                             "message": "unclassified provider exception; details omitted",
@@ -418,7 +440,15 @@ class AssuranceEvalRunner:
                     }
                 )
                 break
-            attempts.append({"attempt": attempt_number, "requested_at": requested_at, "error": None})
+            elapsed_ms = round((self.monotonic() - started) * 1000, 3)
+            attempts.append(
+                {
+                    "attempt": attempt_number,
+                    "requested_at": requested_at,
+                    "elapsed_ms": elapsed_ms,
+                    "error": None,
+                }
+            )
             return {
                 "invocation_status": "succeeded",
                 "request": request_snapshot,
@@ -436,6 +466,7 @@ class AssuranceEvalRunner:
                 },
                 "attempts": attempts,
                 "retry_count": attempt_number - 1,
+                "elapsed_ms": round(sum(attempt["elapsed_ms"] for attempt in attempts), 3),
                 "raw_output": response.raw_output,
                 "public_response_metadata": dict(response.public_metadata),
             }
@@ -446,6 +477,7 @@ class AssuranceEvalRunner:
             "provider_reported_model": None,
             "attempts": attempts,
             "retry_count": len(attempts) - 1,
+            "elapsed_ms": round(sum(attempt["elapsed_ms"] for attempt in attempts), 3),
             "raw_output": None,
             "public_response_metadata": {},
         }

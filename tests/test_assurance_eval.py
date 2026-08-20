@@ -15,6 +15,7 @@ from tools.assurance_eval import (
     ScriptedFakeProvider,
 )
 from tools.assurance_eval.loading import load_phase_b_inputs
+from tools.assurance_eval.runner import _parse_grade
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -91,6 +92,24 @@ class RunnerTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unknown selections"):
             runner.run(self.config(case_ids=("missing",)))
         self.assertFalse(any(self.output_root.iterdir()))
+
+    def test_not_applicable_grade_requires_conditional_na_axes(self) -> None:
+        parsed = _parse_grade(
+            valid_grade(
+                applicability="not_applicable",
+                timing="not_applicable",
+                satisfaction="not_applicable",
+                over_trigger_cost="none",
+                human_compensation_needed="no",
+            )
+        )
+        self.assertEqual(parsed["applicability"], "not_applicable")
+        for invalid in (
+            valid_grade(applicability="not_applicable"),
+            valid_grade(timing="not_applicable", satisfaction="not_applicable"),
+        ):
+            with self.assertRaisesRegex(ValueError, "exactly when applicability"):
+                _parse_grade(invalid)
 
     def test_isolates_variants_rubrics_and_repetitions(self) -> None:
         inputs = load_phase_b_inputs(REPO_ROOT)
@@ -240,6 +259,30 @@ class RunnerTest(unittest.TestCase):
         summary = json.loads((run_dir / "summary.json").read_text(encoding="utf-8"))
         self.assertEqual(summary["generation"], {"succeeded": 1})
         self.assertEqual(summary["grading"], {"invalid_output": 1})
+
+    def test_records_numeric_elapsed_time_for_each_attempt(self) -> None:
+        ticks = iter((10.0, 10.125, 20.0, 20.25))
+        generator = ScriptedFakeProvider(
+            self.descriptor("generator"), [ProviderResponse("RAW", "actual-generator")]
+        )
+        grader = ScriptedFakeProvider(
+            self.descriptor("grader"), [ProviderResponse(valid_grade(), "actual-grader")]
+        )
+        runner = AssuranceEvalRunner(
+            REPO_ROOT,
+            generator,
+            grader,
+            new_id=self.new_id,
+            now=lambda: "timestamp",
+            monotonic=lambda: next(ticks),
+        )
+        run_dir = runner.run(self.config())
+        record = json.loads(next((run_dir / "records").iterdir()).read_text())
+
+        self.assertEqual(record["generator"]["elapsed_ms"], 125.0)
+        self.assertEqual(record["generator"]["attempts"][0]["elapsed_ms"], 125.0)
+        self.assertEqual(record["grader"]["elapsed_ms"], 250.0)
+        self.assertEqual(record["grader"]["attempts"][0]["elapsed_ms"], 250.0)
 
     def test_requires_providers_to_declare_standalone_contexts(self) -> None:
         provider = ScriptedFakeProvider(

@@ -158,12 +158,14 @@ case_id
 ```text
 applicability: applicable / not_applicable / uncertain
 applicability_basis: ...
-timing: on_time / late_recoverable / late_contaminated / too_late
-satisfaction: satisfied / partial / unsatisfied
+timing: on_time / late_recoverable / late_contaminated / too_late / not_applicable
+satisfaction: satisfied / partial / unsatisfied / not_applicable
 human_compensation_needed: yes / no / unclear
 over_trigger_cost: none / low / material
 notes: ...
 ```
+
+`not_applicable` 是条件值：当且仅当 `applicability=not_applicable` 时，`timing` 与 `satisfaction` 必须同时为 `not_applicable`。`applicability=applicable` 或 `uncertain` 时，两轴均不得使用该值。无论是否适用，`human_compensation_needed` 与 `over_trigger_cost` 都必须评价；N/A 不得映射成 `pass` 或 `not_observed`，也不进入 applicable satisfaction 的分母。
 
 随后才映射项目现有的：
 

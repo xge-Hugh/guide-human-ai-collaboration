@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "candidate_for_human_cloud_review",
+  "status": "revised_after_cloud_review_pending_human_approvals",
   "execution_enabled": false,
   "run_mode": "formal_replay",
   "evidence_use": "phase_b_controlled_replay_raw_evidence_pending_adjudication",
@@ -9,8 +9,23 @@
   "variants_file": "assurance-v2-phase-b-variants.zh-CN.json",
   "source_files": {
     "generation": {"path": "docs/experiments/assurance-v2-phase-b-generation.json", "sha256": "b83a56690615b0bf59f87103170637064756b08a9e4295d29fe1d421302f6372"},
-    "variants": {"path": "docs/experiments/assurance-v2-phase-b-variants.zh-CN.json", "sha256": "81770b7a5f69ebc2df756da609baf1ed0cf038ecea203820e13ff8dccf9012dd"},
+    "variants": {"path": "docs/experiments/assurance-v2-phase-b-variants.zh-CN.json", "sha256": "d72157251b1d7e83b3fc96034704d6e2424331d3fa41f0743b65ce5cbcc6da01"},
     "rubrics": {"path": "docs/experiments/assurance-v2-phase-b-rubrics.json", "sha256": "ed6ecd528f50ecdf37db4029979ca0aabbc0b331512dbce5774276ccf2fe6bae"}
+  },
+  "cloud_review": {
+    "reviewed_commit": "76207b58d7f79aee3d73416223657d44a32cd11e",
+    "path": "docs/experiments/assurance-v2-stage3-cloud-review.md",
+    "sha256": "eea4dd95b8d06b4a9b616d2df9e61d45a57a0d0303e963d841232285ca5b52a0"
+  },
+  "review_sources": {
+    "grader_capability": {
+      "path": "docs/experiments/assurance-v2-stage3-grader-capability.md",
+      "sha256": "e58ead9d274f489f301bafe1d901b7dd8c9bf290f5cdcfffb82ee7df4c72191c"
+    },
+    "thinking_compatibility_smoke": {
+      "path": "docs/experiments/assurance-v2-thinking-compatibility-smoke.json",
+      "sha256": "7fbf2c6a3ea4904002a94dbb7718343f798963901894fedee7e5a779672ef1f3"
+    }
   },
   "repetitions": 3,
   "variant_order_by_repetition": [
@@ -20,7 +35,7 @@
   ],
   "renderer": {
     "id": "phase-b-formal-generator-zh-cn-v1",
-    "sha256": "1f0e536b4581d4358b2ec2f75f984deece406a1391bfbae86d2ff5d6f837722d",
+    "sha256": "1e26e1899773ecf94b9457d4af87b3b0322a9e504a8fa96464855802f3ab9d85",
     "base_language": "zh-CN",
     "case_packet_language": "zh-CN",
     "variant_condition_language": "zh-CN"
@@ -33,6 +48,7 @@
     "temperature": "not_sent_effect_under_thinking_unverified",
     "top_p": "not_sent_effect_under_thinking_unverified",
     "max_tokens": 4096,
+    "output_budget_status": "provisional_pending_compatibility_smoke_and_human_cost_limit",
     "stream": false,
     "max_retries": 0
   },
@@ -42,6 +58,7 @@
     "required_context_mode": "standalone",
     "preferred_independence": "Level 2 candidate using a distinct model family",
     "fallback_independence": "Level 1 using the generator model family in an isolated call",
+    "capability_statement": "docs/experiments/assurance-v2-stage3-grader-capability.md",
     "visible_reasoning_is_evidence": false,
     "max_tokens": 1024,
     "stream": false
@@ -50,5 +67,63 @@
     "generator": 90,
     "grader": 90,
     "maximum_total_without_retries": 180
+  },
+  "required_call_metadata": [
+    "elapsed_ms_per_attempt",
+    "numeric_reasoning_tokens_when_returned",
+    "never_reasoning_content"
+  ],
+  "directional_interpretation": {
+    "not_a_total_score": true,
+    "not_a_statistical_significance_claim": true,
+    "case_majority_rule": "at_least_2_of_3_repetitions_same_direction",
+    "applicable_record": {
+      "first_opportunity_protected": "timing=on_time and satisfaction=satisfied",
+      "clean_protected": "first_opportunity_protected and human_compensation_needed=no and over_trigger_cost=none",
+      "critical_adverse": "timing=too_late or satisfaction=unsatisfied or human compensation is required to recover key protection"
+    },
+    "not_applicable_record": {
+      "clean_non_trigger": "timing=not_applicable and satisfaction=not_applicable and over_trigger_cost=none and human_compensation_needed=no",
+      "over_trigger": "unnecessary friction, especially over_trigger_cost=material or human_compensation_needed=yes"
+    },
+    "b1_vs_b0_directional_value": [
+      "case-level protection improves in at least two different case families",
+      "no applicable case regresses from B0 majority protected to B1 majority unprotected",
+      "no new majority material over-trigger or human-compensation pattern in near-neighbor negative cases"
+    ],
+    "b2_vs_b1_incremental_value": [
+      "case-level behavior improves in at least two semantic-discrimination cases or families",
+      "no new majority material over-trigger or human-compensation pattern",
+      "reasoning-token, latency, and output-friction costs are reported with behavioral benefit"
+    ],
+    "unresolved_or_failed_grades": "uncertain, disagreement, parse failure, and call failure require human adjudication",
+    "stop_rules": [
+      "do not expand B1 if it does not stably reduce critical misses and mainly adds context or friction",
+      "narrow or remove B2 if it adds no discrimination or increases ordinary/negative-case over-trigger",
+      "if B1 and B2 fail in the same family, inspect observability, model capability, and case/rubric ambiguity before B3",
+      "consider B3 only when B2 recognition is correct but responses remain stably partial"
+    ],
+    "mechanical_rules_pending_human_freeze": [
+      "exact case-family map",
+      "exact semantic-discrimination case set for B2",
+      "case-level improvement, regression, and basically-identical definitions",
+      "whether two matching valid grades plus one failure form a 2-of-3 majority",
+      "treatment of low over-trigger cost",
+      "raw grader labels versus final adjudicated labels for comparison",
+      "conclusion-sensitive selection and blind-sample call cap"
+    ]
+  },
+  "operational_tranches": {
+    "tranche_1": "all 10 cases, repetition 1: 30 generator plus 30 grader calls",
+    "tranche_2": "all 10 cases, repetitions 2-3: 60 generator plus 60 grader calls",
+    "allowed_pause_reasons": [
+      "schema_or_transport_failure",
+      "secret_leak",
+      "unexpected_provider_response",
+      "finish_reason_length",
+      "configuration_or_provenance_mismatch",
+      "human_approved_cost_limit_exceeded"
+    ],
+    "performance_driven_redesign_between_tranches_forbidden": true
   }
 }

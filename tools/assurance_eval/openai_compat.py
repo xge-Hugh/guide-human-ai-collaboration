@@ -171,7 +171,20 @@ class DeepSeekChatCompletionsProvider:
                 key: usage[key]
                 for key in ("prompt_tokens", "completion_tokens", "total_tokens")
                 if isinstance(usage.get(key), int)
+                and not isinstance(usage.get(key), bool)
+                and usage[key] >= 0
             }
+            completion_details = usage.get("completion_tokens_details")
+            if isinstance(completion_details, dict):
+                reasoning_tokens = completion_details.get("reasoning_tokens")
+                if (
+                    isinstance(reasoning_tokens, int)
+                    and not isinstance(reasoning_tokens, bool)
+                    and reasoning_tokens >= 0
+                ):
+                    public_metadata["usage"]["completion_tokens_details"] = {
+                        "reasoning_tokens": reasoning_tokens
+                    }
         return ProviderResponse(
             raw_output=content,
             provider_reported_model=reported_model,

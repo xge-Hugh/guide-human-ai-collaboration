@@ -154,7 +154,7 @@ def _validate_proposal(repo_root: Path, proposal: Mapping[str, Any]) -> None:
         raise ValueError("Chinese B0/B1/B2 composition invariant failed")
     if proposal.get("run_mode") != RUN_MODE or proposal.get("evidence_use") != EVIDENCE_USE:
         raise ValueError("Stage 3 evidence identity differs from the reviewed proposal")
-    if proposal.get("status") != "candidate_for_human_cloud_review":
+    if proposal.get("status") != "revised_after_cloud_review_pending_human_approvals":
         raise ValueError("Stage 3 proposal review status is unexpected")
     if proposal.get("execution_enabled") is not False:
         raise ValueError("Stage 3 execution must remain disabled during preparation")
@@ -177,6 +177,7 @@ def _validate_proposal(repo_root: Path, proposal: Mapping[str, Any]) -> None:
         "temperature": "not_sent_effect_under_thinking_unverified",
         "top_p": "not_sent_effect_under_thinking_unverified",
         "max_tokens": 4096,
+        "output_budget_status": "provisional_pending_compatibility_smoke_and_human_cost_limit",
         "stream": False,
         "max_retries": 0,
     }:
@@ -194,6 +195,25 @@ def _validate_proposal(repo_root: Path, proposal: Mapping[str, Any]) -> None:
         }
     if proposal.get("source_files") != expected_sources:
         raise ValueError("Stage 3 source-file provenance is stale")
+    cloud_review_path = experiment_dir / "assurance-v2-stage3-cloud-review.md"
+    if proposal.get("cloud_review") != {
+        "reviewed_commit": "76207b58d7f79aee3d73416223657d44a32cd11e",
+        "path": "docs/experiments/assurance-v2-stage3-cloud-review.md",
+        "sha256": hashlib.sha256(cloud_review_path.read_bytes()).hexdigest(),
+    }:
+        raise ValueError("Stage 3 cloud-review provenance is stale")
+    expected_review_sources: dict[str, dict[str, str]] = {}
+    for name, filename in (
+        ("grader_capability", "assurance-v2-stage3-grader-capability.md"),
+        ("thinking_compatibility_smoke", "assurance-v2-thinking-compatibility-smoke.json"),
+    ):
+        path = experiment_dir / filename
+        expected_review_sources[name] = {
+            "path": f"docs/experiments/{filename}",
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        }
+    if proposal.get("review_sources") != expected_review_sources:
+        raise ValueError("Stage 3 review-source provenance is stale")
     expected_call_count = len(CASE_IDS) * 3 * 3
     if proposal.get("estimated_calls") != {
         "generator": expected_call_count,
@@ -207,11 +227,40 @@ def _validate_proposal(repo_root: Path, proposal: Mapping[str, Any]) -> None:
         "required_context_mode": "standalone",
         "preferred_independence": "Level 2 candidate using a distinct model family",
         "fallback_independence": "Level 1 using the generator model family in an isolated call",
+        "capability_statement": "docs/experiments/assurance-v2-stage3-grader-capability.md",
         "visible_reasoning_is_evidence": False,
         "max_tokens": 1024,
         "stream": False,
     }:
         raise ValueError("Stage 3 grader proposal differs from the reviewed candidate")
+    interpretation = proposal.get("directional_interpretation")
+    if not isinstance(interpretation, dict) or any(
+        (
+            interpretation.get("not_a_total_score") is not True,
+            interpretation.get("not_a_statistical_significance_claim") is not True,
+            interpretation.get("case_majority_rule")
+            != "at_least_2_of_3_repetitions_same_direction",
+            len(interpretation.get("b1_vs_b0_directional_value", [])) != 3,
+            len(interpretation.get("b2_vs_b1_incremental_value", [])) != 3,
+            len(interpretation.get("stop_rules", [])) != 4,
+            len(interpretation.get("mechanical_rules_pending_human_freeze", [])) != 7,
+        )
+    ):
+        raise ValueError("Stage 3 directional interpretation is incomplete")
+    if proposal.get("required_call_metadata") != [
+        "elapsed_ms_per_attempt",
+        "numeric_reasoning_tokens_when_returned",
+        "never_reasoning_content",
+    ]:
+        raise ValueError("Stage 3 required call metadata differs")
+    tranches = proposal.get("operational_tranches")
+    if not isinstance(tranches, dict) or any(
+        (
+            tranches.get("performance_driven_redesign_between_tranches_forbidden") is not True,
+            len(tranches.get("allowed_pause_reasons", [])) != 6,
+        )
+    ):
+        raise ValueError("Stage 3 operational tranche rules are incomplete")
 
 
 def preflight_formal_replay(

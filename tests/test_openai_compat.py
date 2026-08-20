@@ -202,6 +202,12 @@ class OpenAICompatProviderTest(unittest.TestCase):
                             "finish_reason": "stop",
                         }
                     ],
+                    "usage": {
+                        "prompt_tokens": 12,
+                        "completion_tokens": 21,
+                        "total_tokens": 33,
+                        "completion_tokens_details": {"reasoning_tokens": 17},
+                    },
                 },
                 ensure_ascii=False,
             ).encode("utf-8")
@@ -225,7 +231,53 @@ class OpenAICompatProviderTest(unittest.TestCase):
         )
 
         self.assertEqual(response.raw_output, "最终回答")
-        self.assertNotIn("reasoning", json.dumps(response.__dict__, ensure_ascii=False))
+        self.assertEqual(
+            response.public_metadata["usage"]["completion_tokens_details"],
+            {"reasoning_tokens": 17},
+        )
+        response_text = json.dumps(response.__dict__, ensure_ascii=False)
+        self.assertNotIn("reasoning_content", response_text)
+        self.assertNotIn("synthetic hidden reasoning", response_text)
+
+    def test_malformed_reasoning_token_usage_is_omitted(self) -> None:
+        for malformed in (True, -1, 1.5, "17"):
+            def transport(
+                _url: str,
+                _headers: object,
+                _body: bytes,
+                _timeout: float,
+                value: object = malformed,
+            ) -> bytes:
+                return json.dumps(
+                    {
+                        "model": "reported-alias",
+                        "choices": [
+                            {"message": {"content": "final"}, "finish_reason": "stop"}
+                        ],
+                        "usage": {
+                            "completion_tokens_details": {"reasoning_tokens": value}
+                        },
+                    }
+                ).encode()
+
+            provider = DeepSeekChatCompletionsProvider(
+                self.config(),
+                request_renderer=model_request_renderer,
+                renderer_id="toy-thinking-renderer",
+                renderer_sha256=RENDERER_SHA256,
+                transport=transport,
+                allow_thinking=True,
+            )
+            response = provider.invoke_standalone(
+                {
+                    "model_visible_request": {
+                        "messages": [{"role": "user", "content": "test"}],
+                        "thinking": {"type": "enabled"},
+                        "stream": False,
+                    }
+                }
+            )
+            self.assertNotIn("completion_tokens_details", response.public_metadata["usage"])
 
     def test_runner_uses_injected_renderer_without_network(self) -> None:
         def semantic_renderer(request: object) -> dict[str, object]:
