@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "assurance-v2-phase-b-stage3",
-  "formal_execution_enabled": false,
+  "formal_execution_enabled": true,
   "sources": {
     "generation": "assurance-v2-phase-b-generation.json",
     "variants": "assurance-v2-phase-b-variants.zh-CN.json",

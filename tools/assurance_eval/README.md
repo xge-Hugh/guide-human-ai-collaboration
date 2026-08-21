@@ -55,9 +55,9 @@ python3 -m tools.assurance_eval run \
   --tranche tranche_1
 ```
 
-The checked-in recipe has `formal_execution_enabled: false`, so that command
-currently fails closed with zero calls. Enabling formal execution requires a
-reviewed, committed recipe change. No automatic retry occurs. Any operational
+The checked-in recipe has `formal_execution_enabled: true`; formal execution
+still requires clean committed provenance and explicit network authorization.
+No automatic retry occurs. Any operational
 failure blocks only that execution, preserves its sanitized call/record evidence,
 and stops all further calls; it creates no reusable denial or authorization marker.
 
@@ -102,11 +102,11 @@ An abbreviated resolved plan looks like:
   "resolved_plan_sha256": "<sha256>",
   "plan": {
     "mode": "formal",
-    "formal_execution_enabled": false,
+    "formal_execution_enabled": true,
     "profile": "phase-b-stage3",
     "selection": {"cases": ["p003", "...", "p013"], "variants": ["B0", "B1", "B2"]},
     "roles": {
-      "generator": {"provider": "custom", "model": "deepseek-v4-flash", "family": "DeepSeek", "parameters": {"thinking": {"type": "enabled"}, "max_tokens": 4096, "stream": false}},
+      "generator": {"provider": "custom", "model": "deepseek-v4-pro", "family": "DeepSeek", "parameters": {"thinking": {"type": "enabled"}, "max_tokens": 4096, "stream": false}},
       "grader": {"provider": "custom", "model": "qwen3.7-max", "family": "Qwen", "parameters": {"thinking": {"type": "disabled"}, "max_tokens": 1024, "stream": false}}
     },
     "expected_calls": {"generator": 90, "grader": 90, "maximum_total": 180},

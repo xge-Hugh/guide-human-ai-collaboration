@@ -91,7 +91,7 @@ class HarnessTest(unittest.TestCase):
     def test_checked_in_recipe_preserves_stage3_semantics(self) -> None:
         experiment = load_experiment(REPO_ROOT, RECIPE)
         recipe = experiment.recipe
-        self.assertFalse(recipe["formal_execution_enabled"])
+        self.assertTrue(recipe["formal_execution_enabled"])
         self.assertEqual(recipe["selection"]["cases"], ["p003", "p004", "p005", "p006", "p007", "p008", "p009", "p011", "p012", "p013"])
         self.assertEqual(recipe["selection"]["variants"], ["B0", "B1", "B2"])
         self.assertEqual(recipe["schedule"]["variant_order_by_repetition"], [["B0", "B1", "B2"], ["B1", "B2", "B0"], ["B2", "B0", "B1"]])
@@ -320,11 +320,11 @@ class HarnessTest(unittest.TestCase):
             execute_resolved_plan(repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog, experiment=experiment, resolved=resolved, authorize_network=False, transport=lambda *args: calls.append(args))
         self.assertEqual(calls, [])
         clean = {"available": True, "git_revision": "abc", "clean": True, "status_sha256": sha256_bytes(b""), "harness_source_sha256": "x"}
-        checked_in = load_experiment(REPO_ROOT, RECIPE)
+        disabled = self.small_experiment(self.root / "disabled-formal-output")
         with patch("tools.assurance_eval.planning.git_provenance", return_value=clean), patch("tools.assurance_eval.planning.require_committed_paths"):
-            formal, formal_resolved = build_resolved_plan(repo_root=REPO_ROOT, experiment=checked_in, catalog=self.catalog, profile="test", mode="formal")
+            formal, formal_resolved = build_resolved_plan(repo_root=REPO_ROOT, experiment=disabled, catalog=self.catalog, profile="test", mode="formal")
         with self.assertRaisesRegex(PermissionError, "formal execution remains disabled"):
-            execute_resolved_plan(repo_root=REPO_ROOT, envelope=formal, catalog=self.catalog, experiment=checked_in, resolved=formal_resolved, authorize_network=True, transport=lambda *args: calls.append(args))
+            execute_resolved_plan(repo_root=REPO_ROOT, envelope=formal, catalog=self.catalog, experiment=disabled, resolved=formal_resolved, authorize_network=True, transport=lambda *args: calls.append(args))
         self.assertEqual(calls, [])
 
     def test_transport_failure_is_recorded_once_without_retry_or_grader(self) -> None:

@@ -9,9 +9,9 @@
     }
   },
   "models": {
-    "deepseek-v4-flash": {
+    "deepseek-v4-pro": {
       "connection": "private-route",
-      "model_id": "deepseek-v4-flash",
+      "model_id": "deepseek-v4-pro",
       "family": "DeepSeek",
       "declared_snapshot": null
     },
@@ -25,7 +25,7 @@
   "profiles": {
     "phase-b-stage3": {
       "roles": {
-        "generator": "deepseek-v4-flash",
+        "generator": "deepseek-v4-pro",
         "grader": "qwen3.7-max"
       }
     }
