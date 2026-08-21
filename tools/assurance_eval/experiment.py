@@ -191,6 +191,13 @@ def load_experiment(repo_root: Path, recipe_path: Path) -> Experiment:
         key in grading for key in ("policy_id", "axes", "conditional_rule", "output_schema")
     ):
         raise ValueError("grading must define policy, axes, conditional rule, and output schema")
+    if grading.get("interpretation") != {
+        "not_a_total_score": True,
+        "unresolved_grades_not_favorable": True,
+        "preserve_original_grader_judgments_after_adjudication": True,
+        "automatic_variant_winner_or_pass_fail": False,
+    }:
+        raise ValueError("grading interpretation must preserve the lightweight human-analysis boundary")
     from .grading import validate_grading_contract
     from .renderers import validate_parameters
 

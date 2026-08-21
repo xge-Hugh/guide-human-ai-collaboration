@@ -1,7 +1,8 @@
 {
   "schema_version": 1,
-  "status": "revised_after_cloud_review_pending_human_approvals",
+  "status": "historical_superseded_by_unified_harness",
   "execution_enabled": false,
+  "active_execution_recipe": "docs/experiments/assurance-v2-phase-b.recipe.json",
   "run_mode": "formal_replay",
   "evidence_use": "phase_b_controlled_replay_raw_evidence_pending_adjudication",
   "case_ids": ["p003", "p004", "p005", "p006", "p007", "p008", "p009", "p011", "p012", "p013"],
@@ -32,11 +33,11 @@
     },
     "direct_grader_compatibility_smoke": {
       "path": "docs/experiments/assurance-v2-direct-grader-compatibility-smoke.json",
-      "sha256": "30f2628f5b1d183701981eeb4f2a7fe42ffb82391b5b2b15e26c110ea87456c3"
+      "sha256": "5872df7fb3eec859112a85200b5f117a96b27ae1965e0e8ac60bdbebe431f3a1"
     },
     "thinking_compatibility_smoke": {
       "path": "docs/experiments/assurance-v2-thinking-compatibility-smoke.json",
-      "sha256": "d6c8e6da6b01d5b635d47f066856c4fe2a7d92764657a59545b8bcacd1eb9199"
+      "sha256": "ecdadbe15603caf69f64e05c2b3e2a844a8ae254e0de7987a537072643995660"
     }
   },
   "repetitions": 3,
@@ -102,7 +103,7 @@
     "numeric_reasoning_tokens_when_returned",
     "never_reasoning_content"
   ],
-  "directional_interpretation": {
+  "historical_directional_interpretation": {
     "not_a_total_score": true,
     "not_a_statistical_significance_claim": true,
     "case_majority_rule": "at_least_2_of_3_repetitions_same_direction",
@@ -131,15 +132,6 @@
       "narrow or remove B2 if it adds no discrimination or increases ordinary/negative-case over-trigger",
       "if B1 and B2 fail in the same family, inspect observability, model capability, and case/rubric ambiguity before B3",
       "consider B3 only when B2 recognition is correct but responses remain stably partial"
-    ],
-    "mechanical_rules_pending_human_freeze": [
-      "exact case-family map",
-      "exact semantic-discrimination case set for B2",
-      "case-level improvement, regression, and basically-identical definitions",
-      "whether two matching valid grades plus one failure form a 2-of-3 majority",
-      "treatment of low over-trigger cost",
-      "raw grader labels versus final adjudicated labels for comparison",
-      "conclusion-sensitive selection and blind-sample call cap"
     ]
   },
   "operational_tranches": {

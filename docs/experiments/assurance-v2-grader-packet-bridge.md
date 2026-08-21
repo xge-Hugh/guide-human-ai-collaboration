@@ -56,7 +56,7 @@ new append-only imported_grade.json (0600)
 
 Importer 会核验 packet/output byte hash、拒绝重复 JSON key、缺失/额外轴和非法 N/A 组合，并再次确认 packet 未改变。它不会覆盖或修改 generator evidence。外部 provenance 的 packet/output hash 由 bridge 验证；执行环境字段仍标为 `externally_declared_not_bridge_verified`，不能靠 scorer 自述自动升级独立性。
 
-直接 API 候选使用 [`renderers.py`](../../tools/assurance_eval/renderers.py) 的固定 grader renderer；历史 compatibility 配置见 [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)。统一执行策略保持单次调用零重试；formal 是否可执行由 frozen resolved-plan hash、显式 hash 批准和 network authorization 共同控制。
+直接 API 候选使用 [`renderers.py`](../../tools/assurance_eval/renderers.py) 的固定 grader renderer；历史 compatibility 配置见 [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)。统一执行策略保持单次调用零重试；formal 要求干净提交状态、运行开始时一次性解析配置和显式 network authorization，resolved-plan hash 自动保留为来源元数据。
 
 ## 5. 未执行的兼容性 fixture
 

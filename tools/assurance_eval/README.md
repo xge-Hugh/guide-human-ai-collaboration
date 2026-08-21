@@ -27,7 +27,7 @@ python3 -m tools.assurance_eval plan \
 ```
 
 An exploratory run may use modified semantic sources. It resolves the recipe
-once, records exact hashes and dirty-tree provenance, and is permanently labeled
+once at run start, records exact hashes and dirty-tree provenance, and is permanently labeled
 `non_formal_exploratory_evidence`:
 
 ```bash
@@ -35,37 +35,31 @@ python3 -m tools.assurance_eval run \
   --recipe docs/experiments/assurance-v2-phase-b.recipe.json \
   --settings /absolute/private/setting.json \
   --profile phase-b-stage3 \
+  --mode exploratory \
   --authorize-network
 ```
 
-A formal run has two distinct human steps. From a clean committed tree, freeze
-the complete secret-free plan to an existing private directory:
-
-```bash
-python3 -m tools.assurance_eval plan \
-  --settings /absolute/private/setting.json \
-  --profile phase-b-stage3 \
-  --mode formal \
-  --freeze /absolute/private/formal-plan.json
-```
-
-Review the displayed SHA-256 and plan file. Execute only by supplying that exact
-digest and explicit network authorization. The recipe's resolved formal output
-root must already exist outside the repository with mode `0700`:
+A formal run resolves the recipe and selected profile once at run start. It
+captures that secret-free resolved configuration in the run directory and uses
+the captured in-memory experiment and model assignments for the entire execution.
+There is no frozen-plan file or manual SHA approval step. The output root must
+already exist outside the repository with mode `0700`:
 
 ```bash
 python3 -m tools.assurance_eval run \
-  --plan /absolute/private/formal-plan.json \
+  --recipe docs/experiments/assurance-v2-phase-b.recipe.json \
   --settings /absolute/private/setting.json \
+  --profile phase-b-stage3 \
+  --mode formal \
   --authorize-network \
-  --approve-plan-sha256 REVIEWED_RESOLVED_PLAN_SHA256 \
   --tranche tranche_1
 ```
 
 The checked-in recipe has `formal_execution_enabled: false`, so that command
-currently fails closed with zero calls, even when its flags are present. Enabling
-formal execution requires a reviewed, committed recipe change followed by a new
-frozen plan and hash approval. No automatic retry occurs.
+currently fails closed with zero calls. Enabling formal execution requires a
+reviewed, committed recipe change. No automatic retry occurs. Any operational
+failure blocks only that execution, preserves its sanitized call/record evidence,
+and stops all further calls; it creates no reusable denial or authorization marker.
 
 Tranche 2 additionally requires the completed private tranche-1 run; the harness
 verifies its plan hash, tranche identity, artifact-tree digest, and secret-scan
@@ -73,10 +67,11 @@ status before continuation:
 
 ```bash
 python3 -m tools.assurance_eval run \
-  --plan /absolute/private/formal-plan.json \
+  --recipe docs/experiments/assurance-v2-phase-b.recipe.json \
   --settings /absolute/private/setting.json \
+  --profile phase-b-stage3 \
+  --mode formal \
   --authorize-network \
-  --approve-plan-sha256 REVIEWED_RESOLVED_PLAN_SHA256 \
   --tranche tranche_2 \
   --prior-run /absolute/private/runs/TRANCHE_1_RUN_ID
 ```
@@ -85,6 +80,8 @@ Inspect a completed run offline:
 
 ```bash
 python3 -m tools.assurance_eval report /absolute/private/runs/RUN_ID
+
+python3 -m tools.assurance_eval report /absolute/private/runs/RUN_ID --case p005
 ```
 
 ## What `plan` shows
@@ -144,19 +141,27 @@ artifact paths in Python.
 - Generator packets contain only case ID, pre-context, user message, selected
   variant instruction, and common generator instruction. Rubrics are introduced
   only when constructing a fresh standalone grader packet.
-- Exact model-visible requests and raw final response text are stored. Configured
-  model, declared snapshot, and provider-reported model remain separate fields.
-- Provider response IDs and reasoning text are discarded; only numeric reasoning
-  token counts may be retained. Post-run scanning checks credentials, endpoints,
-  response IDs, and discarded reasoning values.
+- Exact model-visible requests and raw final response text are stored. Provider
+  type, configured model, declared family, declared snapshot, and per-call
+  provider-reported model remain separate fields. No route identity is invented;
+  custom routing, backend identity, alias resolution, and backend seed remain
+  uncontrolled where the provider does not expose them.
+- Provider response IDs and reasoning text are structurally discarded; only
+  numeric reasoning token counts may be retained. Post-run scanning checks
+  credentials and private endpoints. Discarded fields are never turned into
+  substring deny-lists that could erase identical legitimate final-response text.
 - Grade parsing rejects duplicate JSON keys, missing/extra axes, invalid enums,
   empty applicability basis, and violations of the conditional N/A rule.
 - Artifacts are new-only, mode `0600` under private mode-`0700` directories,
   outside the repository by default.
-- Formal planning and execution require the same clean commit, different declared
-  generator/grader families, an intact frozen-plan hash, exact hash approval, an
-  unchanged profile projection, and explicit network authorization.
+- Formal resolution requires a clean committed tree, different declared
+  generator/grader families, and explicit network authorization. The automatic
+  resolved-plan hash remains provenance metadata; execution uses the once-resolved
+  in-memory recipe, sources, and model assignments without reloading them.
 
-The summary is mechanical. Invalid, missing, uncertain, or conclusion-sensitive
-grades still require human adjudication; the harness does not turn them into a
-total score or significance claim.
+The default report includes case/variant groups and adjudication flags. Case
+inspection shows final responses, axis judgments, model identities, usage,
+timing, status, and artifact paths. The harness does not compute a total score,
+automatic B0/B1/B2 winner, or pass/fail conclusion. The old DeepSeek-thinking
+and Qwen-grader compatibility configurations are historical, completed, and
+non-executable; the unified recipe/harness is the active execution path.

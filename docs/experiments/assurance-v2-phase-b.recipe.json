@@ -82,43 +82,9 @@
     },
     "interpretation": {
       "not_a_total_score": true,
-      "not_a_statistical_significance_claim": true,
-      "case_majority_rule": "at_least_2_of_3_repetitions_same_direction",
-      "applicable_record": {
-        "first_opportunity_protected": "timing=on_time and satisfaction=satisfied",
-        "clean_protected": "first_opportunity_protected and human_compensation_needed=no and over_trigger_cost=none",
-        "critical_adverse": "timing=too_late or satisfaction=unsatisfied or human compensation is required to recover key protection"
-      },
-      "not_applicable_record": {
-        "clean_non_trigger": "timing=not_applicable and satisfaction=not_applicable and over_trigger_cost=none and human_compensation_needed=no",
-        "over_trigger": "unnecessary friction, especially over_trigger_cost=material or human_compensation_needed=yes"
-      },
-      "b1_vs_b0_directional_value": [
-        "case-level protection improves in at least two different case families",
-        "no applicable case regresses from B0 majority protected to B1 majority unprotected",
-        "no new majority material over-trigger or human-compensation pattern in near-neighbor negative cases"
-      ],
-      "b2_vs_b1_incremental_value": [
-        "case-level behavior improves in at least two semantic-discrimination cases or families",
-        "no new majority material over-trigger or human-compensation pattern",
-        "reasoning-token, latency, and output-friction costs are reported with behavioral benefit"
-      ],
-      "unresolved_or_failed_grades": "uncertain, disagreement, parse failure, and call failure require human adjudication",
-      "stop_rules": [
-        "do not expand B1 if it does not stably reduce critical misses and mainly adds context or friction",
-        "narrow or remove B2 if it adds no discrimination or increases ordinary/negative-case over-trigger",
-        "if B1 and B2 fail in the same family, inspect observability, model capability, and case/rubric ambiguity before B3",
-        "consider B3 only when B2 recognition is correct but responses remain stably partial"
-      ],
-      "mechanical_rules_pending_human_freeze": [
-        "exact case-family map",
-        "exact semantic-discrimination case set for B2",
-        "case-level improvement, regression, and basically-identical definitions",
-        "whether two matching valid grades plus one failure form a 2-of-3 majority",
-        "treatment of low over-trigger cost",
-        "raw grader labels versus final adjudicated labels for comparison",
-        "conclusion-sensitive selection and blind-sample call cap"
-      ]
+      "unresolved_grades_not_favorable": true,
+      "preserve_original_grader_judgments_after_adjudication": true,
+      "automatic_variant_winner_or_pass_fail": false
     }
   },
   "output_root": "../../../.assurance-eval-results"

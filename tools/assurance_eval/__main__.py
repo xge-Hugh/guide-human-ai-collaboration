@@ -6,13 +6,11 @@ import argparse
 import json
 from pathlib import Path
 
-from .artifacts import write_new_json
 from .config import load_model_catalog
 from .execution import execute_resolved_plan
 from .experiment import load_experiment
 from .planning import build_resolved_plan, load_resolved_plan, plan_preview
-from .policy import validate_private_output
-from .reporting import load_report
+from .reporting import inspect_case, load_report
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -34,26 +32,27 @@ def _parser() -> argparse.ArgumentParser:
     plan = commands.add_parser("plan", help="Resolve and preview an immutable, secret-free plan; no network.")
     _common_recipe(plan)
     plan.add_argument("--mode", choices=("exploratory", "formal"), required=True)
-    plan.add_argument("--freeze", type=Path, help="Write the resolved plan to a new private file.")
-    run = commands.add_parser("run", help="Execute a resolved plan with explicit network authorization.")
+    run = commands.add_parser("run", help="Resolve once and execute with explicit network authorization.")
     source = run.add_mutually_exclusive_group(required=True)
-    source.add_argument("--plan", type=Path)
+    source.add_argument("--plan", type=Path, help="Exploratory compatibility path for an existing plan.")
     source.add_argument("--recipe", type=Path)
     run.add_argument("--settings", required=True, type=Path)
-    run.add_argument("--profile", help="Required with --recipe; frozen plans carry their profile.")
+    run.add_argument("--profile", help="Required with --recipe; resolved plans carry their profile.")
+    run.add_argument("--mode", choices=("exploratory", "formal"), default="exploratory")
     run.add_argument("--authorize-network", action="store_true")
-    run.add_argument("--approve-plan-sha256")
     run.add_argument("--tranche", help="Operational tranche ID; required for tranche-controlled formal plans.")
     run.add_argument("--prior-run", type=Path, help="Completed prior-tranche run required for formal continuation.")
-    report = commands.add_parser("report", help="Inspect a completed run; no network.")
+    report = commands.add_parser("report", help="Inspect a completed or blocked run; no network.")
     report.add_argument("run_dir", type=Path)
+    report.add_argument("--case", dest="case_id", help="Show record-level evidence for one case ID.")
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     if args.command == "report":
-        print(json.dumps(load_report(args.run_dir), ensure_ascii=False, indent=2))
+        value = inspect_case(args.run_dir, args.case_id) if args.case_id else load_report(args.run_dir)
+        print(json.dumps(value, ensure_ascii=False, indent=2))
         return 0
     catalog = load_model_catalog(args.settings, REPO_ROOT)
     if args.command == "validate":
@@ -67,23 +66,31 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "plan":
         experiment = load_experiment(REPO_ROOT, args.recipe)
         envelope, _ = build_resolved_plan(repo_root=REPO_ROOT, experiment=experiment, catalog=catalog, profile=args.profile, mode=args.mode)
-        if args.mode == "formal" and args.freeze is None:
-            raise ValueError("formal planning requires --freeze")
-        if args.freeze is not None:
-            parent = validate_private_output(args.freeze.parent, REPO_ROOT, must_exist=True)
-            write_new_json(parent / args.freeze.name, envelope)
         print(json.dumps(plan_preview(envelope), ensure_ascii=False, indent=2))
         return 0
     if args.plan is not None:
         envelope = load_resolved_plan(args.plan)
+        if envelope["plan"]["mode"] == "formal":
+            raise ValueError("formal runs must resolve --recipe and --profile at run start")
+        recipe_path = Path(envelope["plan"]["recipe"]["path"])
+        if not recipe_path.is_absolute():
+            recipe_path = REPO_ROOT / recipe_path
+        experiment = load_experiment(REPO_ROOT, recipe_path)
+        resolved = catalog.resolve(
+            envelope["plan"]["profile"],
+            {role: envelope["plan"]["roles"][role]["parameters"] for role in ("generator", "grader")},
+        )
     else:
         if not args.profile:
             raise ValueError("--profile is required with --recipe")
         experiment = load_experiment(REPO_ROOT, args.recipe)
-        envelope, _ = build_resolved_plan(repo_root=REPO_ROOT, experiment=experiment, catalog=catalog, profile=args.profile, mode="exploratory")
+        envelope, resolved = build_resolved_plan(
+            repo_root=REPO_ROOT, experiment=experiment, catalog=catalog,
+            profile=args.profile, mode=args.mode,
+        )
     run_dir = execute_resolved_plan(
         repo_root=REPO_ROOT, envelope=envelope, catalog=catalog,
-        authorize_network=args.authorize_network, approved_plan_sha256=args.approve_plan_sha256,
+        experiment=experiment, resolved=resolved, authorize_network=args.authorize_network,
         tranche_id=args.tranche, prior_run=args.prior_run,
     )
     print(run_dir)

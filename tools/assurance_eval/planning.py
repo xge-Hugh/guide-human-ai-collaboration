@@ -1,4 +1,4 @@
-"""Pure run planning and frozen resolved-plan verification."""
+"""Pure run planning and resolved-plan hash verification."""
 
 from __future__ import annotations
 

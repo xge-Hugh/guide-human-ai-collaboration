@@ -13,10 +13,10 @@ from typing import Any, Callable, Mapping
 
 from .artifacts import contains_private_value, scan_private_values, tree_sha256, write_new_json
 from .config import ModelCatalog
-from .experiment import Experiment, load_experiment
+from .experiment import Experiment
 from .grading import build_grader_packet, parse_grade
 from .models import Provider, ProviderError, ResolvedProvider, Transport
-from .planning import build_resolved_plan, public_roles, verify_resolved_plan
+from .planning import public_roles, verify_resolved_plan
 from .policy import NetworkGate, git_provenance, validate_private_output
 from .renderers import get_renderer
 from .transport import OpenAIChatCompletionsProvider, urllib_transport
@@ -45,7 +45,8 @@ def _invoke(
     started = time.monotonic()
     try:
         response = provider.invoke_standalone(request)
-    except (ProviderError, ValueError) as error:
+    except Exception as error:
+        message = str(error) if isinstance(error, (ProviderError, ValueError)) else "unexpected provider invocation failure"
         return {
             "invocation_status": "failed",
             "requested_at": requested_at,
@@ -57,7 +58,7 @@ def _invoke(
             "raw_output": None,
             "attempt_count": 1,
             "retry_count": 0,
-            "error": {"type": type(error).__name__, "message": str(error)},
+            "error": {"type": type(error).__name__, "message": message},
         }
     return {
         "invocation_status": "succeeded",
@@ -80,50 +81,66 @@ def _invoke(
     }
 
 
-def _load_bound_experiment(repo_root: Path, envelope: Mapping[str, Any]) -> Experiment:
+def _verify_captured_binding(
+    *, repo_root: Path, envelope: Mapping[str, Any], experiment: Experiment,
+    resolved: Mapping[str, ResolvedProvider],
+) -> None:
     plan = envelope["plan"]
-    recipe_path = Path(plan["recipe"]["path"])
-    if not recipe_path.is_absolute():
-        recipe_path = repo_root / recipe_path
-    experiment = load_experiment(repo_root, recipe_path)
-    if experiment.recipe_sha256 != plan["recipe"]["sha256"]:
-        raise ValueError("recipe changed after plan resolution")
-    if experiment.sources != plan["sources"]:
-        raise ValueError("semantic sources changed after plan resolution")
-    return experiment
-
-
-def _verify_run_binding(
-    *, repo_root: Path, envelope: Mapping[str, Any], catalog: ModelCatalog
-) -> tuple[Experiment, dict[str, ResolvedProvider]]:
-    experiment = _load_bound_experiment(repo_root, envelope)
-    plan = envelope["plan"]
-    providers = catalog.resolve(
-        plan["profile"],
-        {role: plan["roles"][role]["parameters"] for role in ("generator", "grader")},
-    )
-    # Catalog resolution consumes only the parameters member for each role.
-    if public_roles(providers, envelope) != plan["roles"]:
-        raise ValueError("private model profile no longer resolves to the frozen public role assignments")
-    current = git_provenance(repo_root)
-    if current["harness_source_sha256"] != plan["provenance"]["harness_source_sha256"]:
-        raise ValueError("assurance harness source changed after plan resolution")
-    rebuilt, _ = build_resolved_plan(
-        repo_root=repo_root, experiment=experiment, catalog=catalog,
-        profile=plan["profile"], mode=plan["mode"],
-    )
-    if rebuilt != envelope:
-        raise ValueError("resolved plan is not the canonical resolution of its bound recipe and profile")
+    if experiment.recipe_sha256 != plan["recipe"]["sha256"] or experiment.sources != plan["sources"]:
+        raise ValueError("captured experiment differs from the resolved plan")
+    if public_roles(resolved, envelope) != plan["roles"]:
+        raise ValueError("captured model assignments differ from the resolved plan")
+    recipe = experiment.recipe
+    expected_order: list[dict[str, Any]] = []
+    tranches = recipe["schedule"].get("operational_tranches") or {}
+    tranche_by_repetition = {
+        repetition: tranche_id
+        for tranche_id, value in tranches.items()
+        if tranche_id.startswith("tranche_") and isinstance(value, Mapping)
+        for repetition in value.get("repetitions", [])
+    }
+    for repetition, order in enumerate(recipe["schedule"]["variant_order_by_repetition"], start=1):
+        for case_id in recipe["selection"]["cases"]:
+            for position, variant_id in enumerate(order, start=1):
+                expected_order.append({
+                    "execution_index": len(expected_order) + 1,
+                    "repetition": repetition,
+                    "case_id": case_id,
+                    "variant_id": variant_id,
+                    "variant_position": position,
+                    "tranche_id": tranche_by_repetition.get(repetition),
+                })
+    if (
+        plan["formal_execution_enabled"] != recipe["formal_execution_enabled"]
+        or plan["selection"] != recipe["selection"]
+        or plan["instructions"] != recipe["instructions"]
+        or plan["grading"] != recipe["grading"]
+        or any(
+            plan["roles"][role]["parameters"] != recipe["parameters"][role]
+            or plan["roles"][role]["renderer"]["id"] != recipe["renderers"][role]
+            for role in ("generator", "grader")
+        )
+        or plan["schedule"]["repetitions"] != recipe["schedule"]["repetitions"]
+        or plan["schedule"]["variant_order_by_repetition"] != recipe["schedule"]["variant_order_by_repetition"]
+        or plan["schedule"]["operational_tranches"] != recipe["schedule"].get("operational_tranches")
+        or plan["schedule"]["execution_order"] != expected_order
+    ):
+        raise ValueError("resolved plan is not the canonical projection of the captured experiment")
     if plan["mode"] == "formal":
+        current = git_provenance(repo_root)
         frozen = plan["provenance"]
-        if not current["available"] or not current["clean"] or current["git_revision"] != frozen["git_revision"]:
-            raise ValueError("formal execution requires the frozen clean committed provenance")
-    return experiment, providers
+        if (
+            not current["available"] or not current["clean"]
+            or current["git_revision"] != frozen["git_revision"]
+            or current["harness_source_sha256"] != frozen["harness_source_sha256"]
+        ):
+            raise ValueError("formal execution requires the resolved clean committed provenance")
 
 
 def _summary(
     run_id: str, envelope: Mapping[str, Any], records: list[dict[str, Any]],
-    execution_scope: Mapping[str, Any],
+    execution_scope: Mapping[str, Any], operational_status: str,
+    blocked_reason: Mapping[str, Any] | None,
 ) -> dict[str, Any]:
     generation = Counter()
     grading = Counter()
@@ -141,6 +158,8 @@ def _summary(
             grading["invalid_output"] += 1
         key = (record["case_id"], record["variant_id"])
         group = groups.setdefault(key, {"case_id": key[0], "variant_id": key[1], "grades": [], "requires_human_adjudication": False})
+        if record.get("operational_status") == "blocked":
+            group["requires_human_adjudication"] = True
         if grader is not None and grader.get("grade_parse_status") == "parsed":
             group["grades"].append(grader["axis_results"])
             if any(value in {"uncertain", "unclear"} for value in grader["axis_results"].values()):
@@ -159,21 +178,48 @@ def _summary(
         "mode": plan["mode"],
         "evidence_label": plan["evidence_label"],
         "execution_scope": dict(execution_scope),
+        "operational_status": operational_status,
+        "blocked_reason": dict(blocked_reason) if blocked_reason is not None else None,
         "planned_calls": {
-            "generator": len(records), "grader": len(records),
-            "maximum_total": len(records) * 2,
+            "generator": execution_scope["record_count"], "grader": execution_scope["record_count"],
+            "maximum_total": execution_scope["record_count"] * 2,
         },
         "actual_calls": {"generator": sum(generation.values()), "grader": sum(grading[key] for key in ("succeeded", "call_failed", "invalid_output"))},
         "generation": dict(generation),
         "grading": dict(grading),
         "groups": list(groups.values()),
-        "interpretation": "Mechanical labels only; raw evidence and unresolved records require human adjudication before effect claims.",
+        "interpretation": (
+            "Axis judgments remain separate; ambiguous, failed, or uncertain grades are not "
+            "counted favorably, and original grader judgments remain preserved for human adjudication."
+        ),
     }
+
+
+def _formal_blocking_reason(role: str, call: Mapping[str, Any]) -> dict[str, str] | None:
+    if call["invocation_status"] != "succeeded":
+        error = call.get("error") or {}
+        message = error.get("message", "")
+        if error.get("type") == "PrivateValueBlocked" or "private value" in message:
+            code = "secret_or_private_value_blocked"
+        elif "provenance" in message or "configuration" in message:
+            code = "configuration_or_committed_provenance_mismatch"
+        elif "invalid chat completion" in message:
+            code = "unexpected_provider_response"
+        else:
+            code = f"{role}_transport_or_invocation_failure"
+        return {"code": code, "role": role}
+    finish_reason = call.get("public_response_metadata", {}).get("finish_reason")
+    if finish_reason != "stop":
+        return {"code": f"{role}_finish_reason_not_stop", "role": role, "finish_reason": str(finish_reason)}
+    if role == "grader" and call.get("grade_parse_status") != "parsed":
+        return {"code": "invalid_or_unparseable_grader_output", "role": role}
+    return None
 
 
 def execute_resolved_plan(
     *, repo_root: Path, envelope: Mapping[str, Any], catalog: ModelCatalog,
-    authorize_network: bool, approved_plan_sha256: str | None = None,
+    experiment: Experiment, resolved: Mapping[str, ResolvedProvider],
+    authorize_network: bool,
     tranche_id: str | None = None, prior_run: Path | None = None,
     transport: Transport = urllib_transport, now: Callable[[], str] = _utc_now,
     new_id: Callable[[], str] = lambda: uuid.uuid4().hex,
@@ -183,11 +229,11 @@ def execute_resolved_plan(
     digest = envelope["resolved_plan_sha256"]
     if not authorize_network:
         raise PermissionError("explicit network authorization is required; no calls made")
-    if plan["mode"] == "formal" and approved_plan_sha256 != digest:
-        raise PermissionError("formal run requires explicit approval of the frozen resolved-plan hash; no calls made")
     if plan["mode"] == "formal" and plan.get("formal_execution_enabled") is not True:
         raise PermissionError("formal execution remains disabled in the committed experiment recipe; no calls made")
-    experiment, resolved = _verify_run_binding(repo_root=repo_root, envelope=envelope, catalog=catalog)
+    _verify_captured_binding(
+        repo_root=repo_root, envelope=envelope, experiment=experiment, resolved=resolved,
+    )
     tranches = plan["schedule"].get("operational_tranches") or {}
     tranche_ids = [key for key in tranches if key.startswith("tranche_")]
     prior_evidence: dict[str, Any] | None = None
@@ -205,6 +251,7 @@ def execute_resolved_plan(
         if (
             prior_report["resolved_plan_sha256"] != digest
             or prior_report["execution_scope"].get("tranche_id") != expected_prior
+            or prior_report["operational_status"] != "completed"
         ):
             raise ValueError("prior tranche evidence does not bind to the required plan and tranche")
         prior_evidence = {
@@ -242,9 +289,7 @@ def execute_resolved_plan(
         for role in ("generator", "grader")
     }
     def private_values() -> tuple[str, ...]:
-        return tuple(dict.fromkeys(
-            (*catalog.private_scan_values, *providers["generator"].private_response_values, *providers["grader"].private_response_values)
-        ))
+        return catalog.private_scan_values
 
     def persist(relative_path: str, value: Any) -> None:
         if contains_private_value(value, private_values()):
@@ -283,6 +328,7 @@ def execute_resolved_plan(
         },
     )
     records: list[dict[str, Any]] = []
+    blocked_reason: dict[str, str] | None = None
     for scheduled in selected_order:
         case_id = scheduled["case_id"]
         variant_id = scheduled["variant_id"]
@@ -301,7 +347,8 @@ def execute_resolved_plan(
         stem = f"{case_id}__{variant_id}__r{scheduled['repetition']:03d}"
         persist(f"call_evidence/{stem}__generator.json", generator_call)
         grader_call: dict[str, Any] | None = None
-        if generator_call["invocation_status"] == "succeeded":
+        generator_block = _formal_blocking_reason("generator", generator_call) if plan["mode"] == "formal" else None
+        if generator_call["invocation_status"] == "succeeded" and generator_block is None:
             grader_request = {
                 "call_kind": "grader", "context_id": new_id(),
                 "packet": build_grader_packet(
@@ -322,24 +369,36 @@ def execute_resolved_plan(
             else:
                 grader_call["grade_parse_status"] = "not_available"
             persist(f"call_evidence/{stem}__grader.json", grader_call)
+            if plan["mode"] == "formal":
+                blocked_reason = _formal_blocking_reason("grader", grader_call)
+        elif generator_block is not None:
+            blocked_reason = generator_block
         record = {
             "schema_version": 1, "run_id": run_id, "resolved_plan_sha256": digest,
             **scheduled, "context_id": context_id, "rubric_adjudication": experiment.rubrics[case_id]["adjudication"],
             "mode": plan["mode"], "evidence_label": plan["evidence_label"],
+            "operational_status": "blocked" if blocked_reason is not None else "completed",
+            "blocked_reason": blocked_reason,
             "generator": generator_call, "grader": grader_call,
         }
         persist(f"records/{stem}.json", record)
         records.append(record)
-    summary = _summary(run_id, envelope, records, execution_scope)
+        if blocked_reason is not None:
+            break
+    operational_status = "blocked" if blocked_reason is not None else "completed"
+    summary = _summary(
+        run_id, envelope, records, execution_scope, operational_status, blocked_reason,
+    )
     persist("summary.json", summary)
     matches = scan_private_values(run_dir, private_values())
     persist(
-        "completed.json",
+        "run_status.json",
         {
-            "schema_version": 1, "run_id": run_id, "completed_at": now(),
+            "schema_version": 1, "run_id": run_id, "finalized_at": now(),
             "resolved_plan_sha256": digest, "mode": plan["mode"],
             "evidence_label": plan["evidence_label"], "network_calls": gate.calls,
             "execution_scope": execution_scope,
+            "operational_status": operational_status, "blocked_reason": blocked_reason,
             "secret_scan": "pass" if not matches else "fail", "secret_match_files": matches,
             "artifact_tree_sha256": tree_sha256(run_dir),
         },

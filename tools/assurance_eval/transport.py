@@ -58,7 +58,6 @@ class OpenAIChatCompletionsProvider:
         self._renderer = renderer
         self._transport = transport
         self._timeout_seconds = timeout_seconds
-        self.private_response_values: tuple[str, ...] = ()
         self.last_model_visible_request: Mapping[str, Any] | None = None
 
     def invoke_standalone(self, request: Mapping[str, Any]) -> ProviderResponse:
@@ -89,11 +88,6 @@ class OpenAIChatCompletionsProvider:
                 raise TypeError
         except (json.JSONDecodeError, KeyError, IndexError, TypeError):
             raise ProviderError("provider returned an invalid chat completion") from None
-        private = []
-        for value in (response.get("id"), message.get("reasoning_content")):
-            if isinstance(value, str) and value:
-                private.append(value)
-        self.private_response_values = tuple(dict.fromkeys((*self.private_response_values, *private)))
         finish_reason = choice.get("finish_reason")
         metadata: dict[str, Any] = {
             "finish_reason": finish_reason if finish_reason in {"stop", "length", "tool_calls", "content_filter"} else "other"

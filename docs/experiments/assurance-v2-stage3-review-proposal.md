@@ -1,10 +1,10 @@
 # 执行保障 v2 Phase B：Stage 3 首批正式回放评审提案
 
-> 地位：**待人类 / 云端审查的实验配置，不是规范正文，也不是已获准执行的正式运行。**
+> 地位：**历史评审提案，已由统一 harness 与 `assurance-v2-phase-b.recipe.json` 取代，不可执行。**
 > 机器可读配置：[`assurance-v2-stage3-formal-proposal.json`](assurance-v2-stage3-formal-proposal.json)
 > 中文变量：[`assurance-v2-phase-b-variants.zh-CN.json`](assurance-v2-phase-b-variants.zh-CN.json)
 
-本提案只冻结第一批受控回放的候选配置。`execution_enabled=false`；即使本地凭证存在，也不能据此发起模型调用。
+本提案仅保留评审历史。当前唯一活动执行路径是统一 harness；`execution_enabled=false`，不能据此发起模型调用。
 
 ## 1. 中文 B0 / B1 / B2
 
