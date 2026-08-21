@@ -51,6 +51,7 @@
   },
   "network_gate": {
     "explicit_flag": "--confirm-network",
+    "approval_state_directory_required": true,
     "maximum_grader_network_calls": 1,
     "one_shot_transport_guard_required": true,
     "formal_replay_authorized": false

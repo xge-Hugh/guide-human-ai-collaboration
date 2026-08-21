@@ -32,7 +32,7 @@
     },
     "direct_grader_compatibility_smoke": {
       "path": "docs/experiments/assurance-v2-direct-grader-compatibility-smoke.json",
-      "sha256": "d129f7f482629076c22e1e5c56dcc348b47b0efc1e5434838383d009b4a7ff55"
+      "sha256": "30f2628f5b1d183701981eeb4f2a7fe42ffb82391b5b2b15e26c110ea87456c3"
     },
     "thinking_compatibility_smoke": {
       "path": "docs/experiments/assurance-v2-thinking-compatibility-smoke.json",

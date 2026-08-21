@@ -121,6 +121,8 @@ python3 -m tools.assurance_eval.direct_grader_compatibility \
 
 The checked-in compatibility configuration authorizes exactly one zero-retry
 call. Execution additionally requires the external dual-model config, an empty
-private output directory, a clean committed tree, an unconsumed durable marker,
-and `--confirm-network`. Formal replay remains disabled. The strict packet
-importer remains the evidence boundary.
+private output directory, a separate private writable `--approval-state-dir`, a
+clean committed tree, an unconsumed durable marker, and `--confirm-network`.
+The separate state directory supports read-only mounted credential files without
+copying them. Formal replay remains disabled. The strict packet importer remains
+the evidence boundary.

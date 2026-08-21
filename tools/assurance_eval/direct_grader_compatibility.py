@@ -109,6 +109,7 @@ def load_and_validate(repo_root: Path) -> tuple[dict[str, Any], str]:
     gate = value.get("network_gate")
     if gate != {
         "explicit_flag": "--confirm-network",
+        "approval_state_directory_required": True,
         "maximum_grader_network_calls": 1,
         "one_shot_transport_guard_required": True,
         "formal_replay_authorized": False,
@@ -142,14 +143,20 @@ def prepare_offline(*, repo_root: Path, output_dir: Path) -> dict[str, Any]:
     }
 
 
-def _consumption_marker(config_path: Path) -> Path:
-    return config_path.resolve().with_name(
-        ".assurance-direct-qwen-grader-compatibility-v1-consumed"
+def _consumption_marker(config_path: Path, approval_state_dir: Path) -> Path:
+    config_identity = hashlib.sha256(str(config_path.resolve()).encode("utf-8")).hexdigest()[:16]
+    return approval_state_dir.resolve() / (
+        f".assurance-direct-qwen-grader-compatibility-v1-{config_identity}-consumed"
     )
 
 
-def _consume_approval(config_path: Path, revision: str, config_sha256: str) -> None:
-    marker = _consumption_marker(config_path)
+def _consume_approval(
+    config_path: Path,
+    approval_state_dir: Path,
+    revision: str,
+    config_sha256: str,
+) -> None:
+    marker = _consumption_marker(config_path, approval_state_dir)
     payload = json.dumps(
         {
             "approval": "direct_qwen_grader_compatibility_one_call_consumed",
@@ -166,6 +173,11 @@ def _consume_approval(config_path: Path, revision: str, config_sha256: str) -> N
         handle.write(payload)
         handle.flush()
         os.fsync(handle.fileno())
+    directory_descriptor = os.open(marker.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory_descriptor)
+    finally:
+        os.close(directory_descriptor)
 
 
 def _write_new_bytes(path: Path, value: bytes) -> None:
@@ -187,13 +199,21 @@ def _artifacts_private(directory: Path) -> bool:
 
 
 def preflight(
-    *, repo_root: Path, config_path: Path, output_dir: Path, confirm_network: bool
+    *,
+    repo_root: Path,
+    config_path: Path,
+    output_dir: Path,
+    approval_state_dir: Path,
+    confirm_network: bool,
 ) -> tuple[int, dict[str, Any]]:
     smoke_config, config_sha256 = load_and_validate(repo_root)
     provider_config, _ = load_only_local_provider_config_and_scan_values(
         config_path, repository_root=repo_root, model_id=CONFIGURED_MODEL
     )
-    if _consumption_marker(config_path).exists():
+    state_directory = _validate_output_root(approval_state_dir, repo_root)
+    if not state_directory.is_dir() or stat.S_IMODE(state_directory.stat().st_mode) & 0o077:
+        raise PermissionError("approval state directory must be private")
+    if _consumption_marker(config_path, state_directory).exists():
         raise ValueError("direct grader compatibility approval was already consumed")
     revision = _clean_git_revision(repo_root)
     directory = _validate_output_root(output_dir, repo_root)
@@ -229,6 +249,7 @@ def execute(
     repo_root: Path,
     config_path: Path,
     output_dir: Path,
+    approval_state_dir: Path,
     confirm_network: bool,
     transport: Transport | None = None,
 ) -> tuple[int, dict[str, Any]]:
@@ -236,6 +257,7 @@ def execute(
         repo_root=repo_root,
         config_path=config_path,
         output_dir=output_dir,
+        approval_state_dir=approval_state_dir,
         confirm_network=confirm_network,
     )
     if preflight_code != 0:
@@ -247,6 +269,7 @@ def execute(
     private_config_sha256 = hashlib.sha256(config_path.resolve().read_bytes()).digest()
     revision = preflight_report["git_revision"]
     directory = _validate_output_root(output_dir, repo_root)
+    state_directory = _validate_output_root(approval_state_dir, repo_root)
     prepared = prepare_offline(repo_root=repo_root, output_dir=directory)
     packet_path = directory / "grader_packet.json"
     packet = json.loads(packet_path.read_text(encoding="utf-8"))
@@ -304,7 +327,7 @@ def execute(
         provider_boundary="custom_isolated_provider",
         model_family=MODEL_FAMILY,
     )
-    _consume_approval(config_path, revision, config_sha256)
+    _consume_approval(config_path, state_directory, revision, config_sha256)
     started = time.perf_counter()
     try:
         response = provider.invoke_standalone(semantic_request)
@@ -444,7 +467,9 @@ def execute(
         "artifact_tree_sha256": _tree_sha256(directory),
         "strict_import_succeeded": import_succeeded,
         "blocking_outcomes": blocking,
-        "one_call_approval_consumed": _consumption_marker(config_path).exists(),
+        "one_call_approval_consumed": _consumption_marker(
+            config_path, state_directory
+        ).exists(),
         "formal_replay_executed": False,
     }
     return (0 if not blocking else 1), report
@@ -454,6 +479,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Prepare or run the direct grader compatibility check.")
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--config", type=Path)
+    parser.add_argument("--approval-state-dir", type=Path)
     parser.add_argument("--confirm-network", action="store_true")
     args = parser.parse_args()
     repo_root = Path(__file__).resolve().parents[2]
@@ -461,10 +487,13 @@ def main() -> int:
         report = prepare_offline(repo_root=repo_root, output_dir=args.output_dir)
         code = 0
     else:
+        if args.approval_state_dir is None:
+            parser.error("--approval-state-dir is required with --config")
         code, report = execute(
             repo_root=repo_root,
             config_path=args.config,
             output_dir=args.output_dir,
+            approval_state_dir=args.approval_state_dir,
             confirm_network=args.confirm_network,
         )
     print(json.dumps(report, ensure_ascii=False, indent=2))

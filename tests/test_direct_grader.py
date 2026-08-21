@@ -155,6 +155,7 @@ class DirectGraderRendererTest(unittest.TestCase):
                     repo_root=REPO_ROOT,
                     config_path=config_path,
                     output_dir=output,
+                    approval_state_dir=root,
                     confirm_network=True,
                     transport=transport,
                 )
@@ -165,6 +166,7 @@ class DirectGraderRendererTest(unittest.TestCase):
                         repo_root=REPO_ROOT,
                         config_path=config_path,
                         output_dir=second_output,
+                        approval_state_dir=root,
                         confirm_network=True,
                         transport=transport,
                     )
