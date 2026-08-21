@@ -20,7 +20,7 @@
   "review_sources": {
     "grader_capability": {
       "path": "docs/experiments/assurance-v2-stage3-grader-capability.md",
-      "sha256": "5116decb715a9989ea3ac547a1ae26d88427522aaa791ad9d911d8dc45cf33a7"
+      "sha256": "fc7c768844106d9b19244318745cde030df0ce2dd15c5ef828d5e030d48fed83"
     },
     "grader_bridge_design": {
       "path": "docs/experiments/assurance-v2-grader-packet-bridge.md",
@@ -32,7 +32,7 @@
     },
     "direct_grader_compatibility_smoke": {
       "path": "docs/experiments/assurance-v2-direct-grader-compatibility-smoke.json",
-      "sha256": "4bfbfe28ec597b08ee82c4039c01009b07216b737d84b1a5916c4655f351ba42"
+      "sha256": "d129f7f482629076c22e1e5c56dcc348b47b0efc1e5434838383d009b4a7ff55"
     },
     "thinking_compatibility_smoke": {
       "path": "docs/experiments/assurance-v2-thinking-compatibility-smoke.json",

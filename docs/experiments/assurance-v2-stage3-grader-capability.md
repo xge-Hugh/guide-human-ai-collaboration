@@ -10,9 +10,9 @@
 - visible context：只包含 case-specific normative/rubric context、隐藏语义边界、generator 最终响应、评分轴/允许值、N/A 条件和 JSON schema；不包含 generator reasoning、其他 variant/repetition、预期 B0/B1/B2 顺序、汇总或 prior grade。
 - reproducibility：本地私有 artifact 保留 exact effective model-visible request、raw JSON output、renderer ID/content hash、配置/声明/provider-reported model identity、参数、elapsed time 和数值 usage。alias 解析、backend identity/seed、custom routing、snapshot 与服务端注入仍不可控。
 - tools / reasoning：请求不发送 tools；候选兼容性条件显式 `thinking={"type":"disabled"}`，不发送 reasoning effort、temperature 或 top-p。无论 provider 是否额外返回 reasoning content，都不得保存或作为评分证据；只保存返回时的数值 reasoning-token usage。
-- cost / privacy / retention：本地材料没有 Qwen 路由的价格、配额或 retention 声明。兼容性单调用和 90-call 正式 grader batch 都尚未获成本/隐私批准，不能从此前 DeepSeek generator smoke 的一次授权推导出来。
+- cost / privacy / retention：本地材料没有 Qwen 路由的价格、配额或 retention 声明。人工现已批准仅使用 p004 合成 packet 的一次 compatibility call；这不批准 90-call 正式 grader batch，也不能从该调用推导正式成本/隐私边界。
 
-现有窄 Chat Completions transport 能表达该请求，但 `qwen3.7-max` 的可用性、`thinking=disabled` 接受情况、JSON-only 遵循、usage/identity 字段和无工具行为仍需一次**零重试、非效果证据**兼容性测试确认。测试配置已准备但保持 `execution_enabled=false`。
+现有窄 Chat Completions transport 能表达该请求，但 `qwen3.7-max` 的可用性、`thinking=disabled` 接受情况、JSON-only 遵循、usage/identity 字段和无工具行为仍需一次**零重试、非效果证据**兼容性测试确认。测试现已获严格限于一次调用的批准；正式 replay 仍为 `execution_enabled=false`。
 
 若该测试通过，可声明“不同模型系列 + 独立 standalone context”的 **Level 2 candidate**；不能声明 provider 级完全独立，因为 generator 与 grader 仍共享 custom routing、运营边界和可能的后端基础设施。
 

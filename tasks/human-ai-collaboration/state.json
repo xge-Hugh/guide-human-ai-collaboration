@@ -5,7 +5,7 @@
   "status": "active",
   "phase": "assurance_phase_b_stage3_post_cloud_review",
   "current_actor": "human_ai_collaboration",
-  "next_action": "Stage 3 正式 replay 的 execution_enabled 仍为 false。首选 grader 候选改为同一自定义隔离 provider 上的 qwen3.7-max 直接无状态 API 路径，generator 继续使用 deepseek-v4-flash；packet bridge 仍是证据边界。Qwen compatibility fixture 已准备但不得执行；Codex CLI + bubblewrap 仅为可选 secondary，同系列 DeepSeek 只可经另行批准作 Level 1 fallback。",
+  "next_action": "Stage 3 正式 replay 的 execution_enabled 仍为 false。首选 grader 候选是同一自定义隔离 provider 上的 qwen3.7-max 直接无状态 API 路径，generator 继续使用 deepseek-v4-flash；packet bridge 仍是证据边界。人工仅批准一次 Qwen compatibility call，零重试；Codex CLI + bubblewrap 仅为可选 secondary，同系列 DeepSeek 只可经另行批准作 Level 1 fallback。",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {

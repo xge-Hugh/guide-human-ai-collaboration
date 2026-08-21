@@ -1,7 +1,8 @@
 {
   "schema_version": 1,
-  "status": "candidate_pending_human_approval_not_executed",
-  "execution_enabled": false,
+  "status": "human_approved_for_exactly_one_compatibility_call",
+  "execution_enabled": true,
+  "approval_scope": "one_qwen_grader_compatibility_call_only_no_formal_replay",
   "run_mode": "direct_grader_compatibility_smoke",
   "evidence_use": "direct_grader_transport_contract_only_not_phase_b_effect_evidence",
   "source_fixture": {

@@ -112,13 +112,15 @@ resolve the recorded experiment decisions before that interlock is changed.
 
 The different-family grader candidate has a separate no-network preparation
 command. It exports the canonical p004 packet and exact Qwen model-visible
-request to an external private directory, but has no transport executor and
-makes zero calls:
+request to an external private directory and makes zero calls:
 
 ```bash
 python3 -m tools.assurance_eval.direct_grader_compatibility \
   --output-dir /absolute/outside-repository/grader-compatibility
 ```
 
-Its checked-in compatibility configuration remains `execution_enabled: false`,
-uses zero retries, and leaves the strict packet importer as the evidence boundary.
+The checked-in compatibility configuration authorizes exactly one zero-retry
+call. Execution additionally requires the external dual-model config, an empty
+private output directory, a clean committed tree, an unconsumed durable marker,
+and `--confirm-network`. Formal replay remains disabled. The strict packet
+importer remains the evidence boundary.

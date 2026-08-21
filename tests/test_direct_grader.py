@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from tools.assurance_eval.direct_grader import (
     CONFIGURED_MODEL,
@@ -13,7 +15,7 @@ from tools.assurance_eval.direct_grader import (
     render_grader_packet,
     renderer_content_sha256,
 )
-from tools.assurance_eval.direct_grader_compatibility import prepare_offline
+from tools.assurance_eval.direct_grader_compatibility import execute, prepare_offline
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -75,12 +77,111 @@ class DirectGraderRendererTest(unittest.TestCase):
             )
 
         self.assertEqual(report["status"], "prepared_offline_not_executed")
-        self.assertFalse(report["execution_enabled"])
+        self.assertTrue(report["execution_enabled"])
         self.assertEqual(report["model_calls"], 0)
         self.assertEqual(report["network_calls"], 0)
         self.assertEqual(request["model"], "qwen3.7-max")
         self.assertEqual(request["thinking"], {"type": "disabled"})
         self.assertNotIn("tools", request)
+
+    def test_executes_one_synthetic_transport_call_and_consumes_approval(self) -> None:
+        grade = {
+            "applicability": "not_applicable",
+            "applicability_basis": "synthetic compatibility response",
+            "timing": "not_applicable",
+            "satisfaction": "not_applicable",
+            "human_compensation_needed": "no",
+            "over_trigger_cost": "none",
+            "notes": "offline transport fixture",
+        }
+        calls = {"count": 0}
+
+        def transport(url: str, headers: object, body: bytes, timeout: float) -> bytes:
+            calls["count"] += 1
+            return json.dumps(
+                {
+                    "id": "private-response-id",
+                    "model": "qwen-provider-reported",
+                    "choices": [
+                        {
+                            "message": {
+                                "role": "assistant",
+                                "content": json.dumps(grade),
+                                "reasoning_content": "private synthetic reasoning",
+                            },
+                            "finish_reason": "stop",
+                        }
+                    ],
+                    "usage": {
+                        "prompt_tokens": 100,
+                        "completion_tokens": 20,
+                        "total_tokens": 120,
+                    },
+                }
+            ).encode("utf-8")
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_path = root / "setting.json"
+            config_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "connections": [
+                            {
+                                "label": "private-candidate",
+                                "provider": "custom",
+                                "api_style": "openai_chat_completions",
+                                "base_url": "https://private.example.invalid",
+                                "api_key": "test-secret-key",
+                                "models": [
+                                    {"model_id": "deepseek-v4-flash"},
+                                    {"model_id": "qwen3.7-max"},
+                                ],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            os.chmod(config_path, 0o600)
+            output = root / "output"
+            output.mkdir(mode=0o700)
+            with patch(
+                "tools.assurance_eval.direct_grader_compatibility._clean_git_revision",
+                return_value="r" * 40,
+            ):
+                code, report = execute(
+                    repo_root=REPO_ROOT,
+                    config_path=config_path,
+                    output_dir=output,
+                    confirm_network=True,
+                    transport=transport,
+                )
+                second_output = root / "second-output"
+                second_output.mkdir(mode=0o700)
+                with self.assertRaisesRegex(ValueError, "already consumed"):
+                    execute(
+                        repo_root=REPO_ROOT,
+                        config_path=config_path,
+                        output_dir=second_output,
+                        confirm_network=True,
+                        transport=transport,
+                    )
+
+            artifact_text = "\n".join(
+                path.read_text(encoding="utf-8")
+                for path in output.iterdir()
+                if path.is_file()
+            )
+
+        self.assertEqual(code, 0)
+        self.assertEqual(report["smoke_status"], "passed")
+        self.assertEqual(report["network_call_count"], 1)
+        self.assertEqual(calls["count"], 1)
+        self.assertTrue(report["strict_import_succeeded"])
+        self.assertNotIn("private synthetic reasoning", artifact_text)
+        self.assertNotIn("test-secret-key", artifact_text)
 
 
 if __name__ == "__main__":

@@ -143,7 +143,7 @@ Grader 可见：相关规范 / rubric、隐藏语义边界、原始 generator �
 
 单条 user message 按固定标题依次包含：`【案例规范与评分上下文】`、`【隐藏语义验收边界】`、`【生成器最终响应】`、`【评分轴与允许值】`、`【条件规则】`、`【必需 JSON 输出模式】`。它不包含 variant identity/预期排序、其他 repetition、generator reasoning 或机械汇总。候选设置为 `thinking={"type":"disabled"}`、1,024 output tokens、streaming 关闭、零重试，不发送 reasoning effort、temperature、top-p 或 tools；这些是待一次兼容性调用验证的固定条件，不从 generator 设置继承。
 
-兼容性配置见 [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)，状态保持未批准/未执行。它只使用 p004 合成 not-applicable fixture，最多一条 grader network call，并标为非 Phase B 效果证据。
+兼容性配置见 [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)。人工已批准严格的一次调用；它只使用 p004 合成 not-applicable fixture，零重试、最多一条 grader network call，并标为非 Phase B 效果证据。该批准不包含正式 replay。
 
 下列记录自动进入人类裁决：
 
