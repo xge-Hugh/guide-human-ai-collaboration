@@ -1,4 +1,4 @@
-"""Command-line entry point for a no-network Stage 1 pipeline run."""
+"""Human-facing validate / plan / run / report workflow."""
 
 from __future__ import annotations
 
@@ -6,100 +6,86 @@ import argparse
 import json
 from pathlib import Path
 
-from .models import ProviderDescriptor, ProviderResponse, RunConfig
-from .providers import ScriptedFakeProvider
-from .runner import AssuranceEvalRunner
+from .artifacts import write_new_json
+from .config import load_model_catalog
+from .execution import execute_resolved_plan
+from .experiment import load_experiment
+from .planning import build_resolved_plan, load_resolved_plan, plan_preview
+from .policy import validate_private_output
+from .reporting import load_report
 
 
-def _read_required(path: Path) -> str:
-    value = path.read_text(encoding="utf-8")
-    if not value.strip():
-        raise ValueError(f"{path} is empty")
-    return value
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_RECIPE = REPO_ROOT / "docs" / "experiments" / "assurance-v2-phase-b.recipe.json"
 
 
-def _comma_separated(value: str) -> tuple[str, ...]:
-    values = tuple(item.strip() for item in value.split(",") if item.strip())
-    if not values:
-        raise argparse.ArgumentTypeError("provide at least one comma-separated value")
-    return values
+def _common_recipe(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--recipe", type=Path, default=DEFAULT_RECIPE)
+    parser.add_argument("--settings", required=True, type=Path)
+    parser.add_argument("--profile", required=True)
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Run the assurance Phase B pipeline with fake, no-network providers."
-    )
-    parser.add_argument("--output-dir", required=True, type=Path)
-    parser.add_argument("--base-instructions-file", required=True, type=Path)
-    parser.add_argument("--grader-instructions-file", required=True, type=Path)
-    parser.add_argument("--grader-context-file", required=True, type=Path)
-    parser.add_argument("--cases", required=True, type=_comma_separated)
-    parser.add_argument("--variants", default=("B0", "B1", "B2"), type=_comma_separated)
-    parser.add_argument("--repetitions", default=3, type=int)
-    parser.add_argument("--max-retries", default=0, type=int)
-    parser.add_argument("--generator-base-language", required=True)
-    parser.add_argument("--case-packet-language", required=True)
-    parser.add_argument("--variant-condition-language", required=True)
-    parser.add_argument("--grader-instruction-language", required=True)
-    parser.add_argument("--grader-context-language", required=True)
+    parser = argparse.ArgumentParser(description="Small, human-operated assurance evaluation harness.")
+    commands = parser.add_subparsers(dest="command", required=True)
+    validate = commands.add_parser("validate", help="Validate recipe, sources, catalog, and profile; no network.")
+    _common_recipe(validate)
+    validate.add_argument("--mode", choices=("exploratory", "formal"), default="exploratory")
+    plan = commands.add_parser("plan", help="Resolve and preview an immutable, secret-free plan; no network.")
+    _common_recipe(plan)
+    plan.add_argument("--mode", choices=("exploratory", "formal"), required=True)
+    plan.add_argument("--freeze", type=Path, help="Write the resolved plan to a new private file.")
+    run = commands.add_parser("run", help="Execute a resolved plan with explicit network authorization.")
+    source = run.add_mutually_exclusive_group(required=True)
+    source.add_argument("--plan", type=Path)
+    source.add_argument("--recipe", type=Path)
+    run.add_argument("--settings", required=True, type=Path)
+    run.add_argument("--profile", help="Required with --recipe; frozen plans carry their profile.")
+    run.add_argument("--authorize-network", action="store_true")
+    run.add_argument("--approve-plan-sha256")
+    run.add_argument("--tranche", help="Operational tranche ID; required for tranche-controlled formal plans.")
+    run.add_argument("--prior-run", type=Path, help="Completed prior-tranche run required for formal continuation.")
+    report = commands.add_parser("report", help="Inspect a completed run; no network.")
+    report.add_argument("run_dir", type=Path)
     return parser
 
 
-def main() -> int:
-    args = _parser().parse_args()
-    call_count = len(args.cases) * len(args.variants) * args.repetitions
-    generator_response = ProviderResponse(
-        raw_output="FAKE generator output; no model or network was used.",
-        provider_reported_model="fake-generator-v1",
+def main(argv: list[str] | None = None) -> int:
+    args = _parser().parse_args(argv)
+    if args.command == "report":
+        print(json.dumps(load_report(args.run_dir), ensure_ascii=False, indent=2))
+        return 0
+    catalog = load_model_catalog(args.settings, REPO_ROOT)
+    if args.command == "validate":
+        experiment = load_experiment(REPO_ROOT, args.recipe)
+        build_resolved_plan(
+            repo_root=REPO_ROOT, experiment=experiment, catalog=catalog,
+            profile=args.profile, mode=args.mode,
+        )
+        print(json.dumps({"status": "valid", "experiment_id": experiment.recipe["experiment_id"], "profile": args.profile, "mode": args.mode, "network_calls": 0}, ensure_ascii=False, indent=2))
+        return 0
+    if args.command == "plan":
+        experiment = load_experiment(REPO_ROOT, args.recipe)
+        envelope, _ = build_resolved_plan(repo_root=REPO_ROOT, experiment=experiment, catalog=catalog, profile=args.profile, mode=args.mode)
+        if args.mode == "formal" and args.freeze is None:
+            raise ValueError("formal planning requires --freeze")
+        if args.freeze is not None:
+            parent = validate_private_output(args.freeze.parent, REPO_ROOT, must_exist=True)
+            write_new_json(parent / args.freeze.name, envelope)
+        print(json.dumps(plan_preview(envelope), ensure_ascii=False, indent=2))
+        return 0
+    if args.plan is not None:
+        envelope = load_resolved_plan(args.plan)
+    else:
+        if not args.profile:
+            raise ValueError("--profile is required with --recipe")
+        experiment = load_experiment(REPO_ROOT, args.recipe)
+        envelope, _ = build_resolved_plan(repo_root=REPO_ROOT, experiment=experiment, catalog=catalog, profile=args.profile, mode="exploratory")
+    run_dir = execute_resolved_plan(
+        repo_root=REPO_ROOT, envelope=envelope, catalog=catalog,
+        authorize_network=args.authorize_network, approved_plan_sha256=args.approve_plan_sha256,
+        tranche_id=args.tranche, prior_run=args.prior_run,
     )
-    fake_grade = json.dumps(
-        {
-            "applicability": "uncertain",
-            "applicability_basis": "Synthetic Stage 1 result; not experimental evidence.",
-            "timing": "too_late",
-            "satisfaction": "unsatisfied",
-            "human_compensation_needed": "unclear",
-            "over_trigger_cost": "none",
-            "notes": "Pipeline fixture only.",
-        }
-    )
-    grader_response = ProviderResponse(fake_grade, "fake-grader-v1")
-    generator = ScriptedFakeProvider(
-        ProviderDescriptor(
-            provider="fake",
-            configured_model="fake-generator-v1",
-            context_mode="standalone",
-            public_parameters={"network": False},
-        ),
-        [generator_response] * call_count,
-    )
-    grader = ScriptedFakeProvider(
-        ProviderDescriptor(
-            provider="fake",
-            configured_model="fake-grader-v1",
-            context_mode="standalone",
-            public_parameters={"network": False},
-        ),
-        [grader_response] * call_count,
-    )
-    repo_root = Path(__file__).resolve().parents[2]
-    config = RunConfig(
-        output_root=args.output_dir,
-        base_generator_instruction=_read_required(args.base_instructions_file),
-        grader_instruction=_read_required(args.grader_instructions_file),
-        grader_normative_context=_read_required(args.grader_context_file),
-        case_ids=args.cases,
-        variant_ids=args.variants,
-        run_mode="fake_pipeline",
-        generator_base_language=args.generator_base_language,
-        case_packet_language=args.case_packet_language,
-        variant_condition_language=args.variant_condition_language,
-        grader_instruction_language=args.grader_instruction_language,
-        grader_context_language=args.grader_context_language,
-        repetitions=args.repetitions,
-        max_retries=args.max_retries,
-    )
-    run_dir = AssuranceEvalRunner(repo_root, generator, grader).run(config)
     print(run_dir)
     return 0
 

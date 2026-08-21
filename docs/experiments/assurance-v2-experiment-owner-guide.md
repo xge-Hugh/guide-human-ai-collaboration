@@ -77,10 +77,10 @@ Generator 不能看到 rubric；grader 可以看到 rubric 和 generator 原始�
 
 Request renderer 的职责是把抽象 packet 变成模型 API 真正看到的 messages / request。
 
-例如当前 Stage 2 smoke renderer 位于：
+当前统一 renderer 位于：
 
 ```text
-tools/assurance_eval/transport_smoke.py
+tools/assurance_eval/renderers.py
 ```
 
 它把：

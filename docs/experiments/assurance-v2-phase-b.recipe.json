@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "experiment_id": "assurance-v2-phase-b-stage3",
+  "formal_execution_enabled": false,
+  "sources": {
+    "generation": "assurance-v2-phase-b-generation.json",
+    "variants": "assurance-v2-phase-b-variants.zh-CN.json",
+    "rubrics": "assurance-v2-phase-b-rubrics.json"
+  },
+  "selection": {
+    "cases": ["p003", "p004", "p005", "p006", "p007", "p008", "p009", "p011", "p012", "p013"],
+    "variants": ["B0", "B1", "B2"]
+  },
+  "renderers": {
+    "generator": "phase-b-formal-generator-zh-cn-v1",
+    "grader": "phase-b-direct-grader-zh-cn-v1-candidate"
+  },
+  "schedule": {
+    "repetitions": 3,
+    "variant_order_by_repetition": [
+      ["B0", "B1", "B2"],
+      ["B1", "B2", "B0"],
+      ["B2", "B0", "B1"]
+    ],
+    "operational_tranches": {
+      "tranche_1": {"repetitions": [1]},
+      "tranche_2": {"repetitions": [2, 3]},
+      "allowed_pause_reasons": [
+        "schema_or_transport_failure",
+        "secret_leak",
+        "unexpected_provider_response",
+        "finish_reason_length",
+        "configuration_or_provenance_mismatch",
+        "human_approved_cost_limit_exceeded"
+      ],
+      "performance_driven_redesign_between_tranches_forbidden": true
+    }
+  },
+  "instructions": {
+    "generator_base": "你是当前协作中的 AI 助手。请根据提供的前置上下文，\n自然回应用户当前消息。"
+  },
+  "parameters": {
+    "generator": {"thinking": {"type": "enabled"}, "max_tokens": 4096, "stream": false},
+    "grader": {"thinking": {"type": "disabled"}, "max_tokens": 1024, "stream": false}
+  },
+  "grading": {
+    "policy_id": "phase-b-axis-policy-v1",
+    "axes": {
+      "applicability": ["applicable", "not_applicable", "uncertain"],
+      "applicability_basis": "non-empty string",
+      "timing": ["on_time", "late_recoverable", "late_contaminated", "too_late", "not_applicable"],
+      "satisfaction": ["satisfied", "partial", "unsatisfied", "not_applicable"],
+      "human_compensation_needed": ["yes", "no", "unclear"],
+      "over_trigger_cost": ["none", "low", "material"],
+      "notes": "string"
+    },
+    "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+    "output_schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicability", "applicability_basis", "timing", "satisfaction", "human_compensation_needed", "over_trigger_cost", "notes"],
+      "properties": {
+        "applicability": {"enum": ["applicable", "not_applicable", "uncertain"]},
+        "applicability_basis": {"type": "string", "minLength": 1},
+        "timing": {"enum": ["on_time", "late_recoverable", "late_contaminated", "too_late", "not_applicable"]},
+        "satisfaction": {"enum": ["satisfied", "partial", "unsatisfied", "not_applicable"]},
+        "human_compensation_needed": {"enum": ["yes", "no", "unclear"]},
+        "over_trigger_cost": {"enum": ["none", "low", "material"]},
+        "notes": {"type": "string"}
+      },
+      "allOf": [{
+        "if": {"properties": {"applicability": {"const": "not_applicable"}}},
+        "then": {"properties": {"timing": {"const": "not_applicable"}, "satisfaction": {"const": "not_applicable"}}},
+        "else": {
+          "properties": {
+            "timing": {"not": {"const": "not_applicable"}},
+            "satisfaction": {"not": {"const": "not_applicable"}}
+          }
+        }
+      }]
+    },
+    "interpretation": {
+      "not_a_total_score": true,
+      "not_a_statistical_significance_claim": true,
+      "case_majority_rule": "at_least_2_of_3_repetitions_same_direction",
+      "applicable_record": {
+        "first_opportunity_protected": "timing=on_time and satisfaction=satisfied",
+        "clean_protected": "first_opportunity_protected and human_compensation_needed=no and over_trigger_cost=none",
+        "critical_adverse": "timing=too_late or satisfaction=unsatisfied or human compensation is required to recover key protection"
+      },
+      "not_applicable_record": {
+        "clean_non_trigger": "timing=not_applicable and satisfaction=not_applicable and over_trigger_cost=none and human_compensation_needed=no",
+        "over_trigger": "unnecessary friction, especially over_trigger_cost=material or human_compensation_needed=yes"
+      },
+      "b1_vs_b0_directional_value": [
+        "case-level protection improves in at least two different case families",
+        "no applicable case regresses from B0 majority protected to B1 majority unprotected",
+        "no new majority material over-trigger or human-compensation pattern in near-neighbor negative cases"
+      ],
+      "b2_vs_b1_incremental_value": [
+        "case-level behavior improves in at least two semantic-discrimination cases or families",
+        "no new majority material over-trigger or human-compensation pattern",
+        "reasoning-token, latency, and output-friction costs are reported with behavioral benefit"
+      ],
+      "unresolved_or_failed_grades": "uncertain, disagreement, parse failure, and call failure require human adjudication",
+      "stop_rules": [
+        "do not expand B1 if it does not stably reduce critical misses and mainly adds context or friction",
+        "narrow or remove B2 if it adds no discrimination or increases ordinary/negative-case over-trigger",
+        "if B1 and B2 fail in the same family, inspect observability, model capability, and case/rubric ambiguity before B3",
+        "consider B3 only when B2 recognition is correct but responses remain stably partial"
+      ],
+      "mechanical_rules_pending_human_freeze": [
+        "exact case-family map",
+        "exact semantic-discrimination case set for B2",
+        "case-level improvement, regression, and basically-identical definitions",
+        "whether two matching valid grades plus one failure form a 2-of-3 majority",
+        "treatment of low over-trigger cost",
+        "raw grader labels versus final adjudicated labels for comparison",
+        "conclusion-sensitive selection and blind-sample call cap"
+      ]
+    }
+  },
+  "output_root": "../../../.assurance-eval-results"
+}

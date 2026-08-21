@@ -62,7 +62,7 @@ B2 的字节内容必须是完整 B1、两个换行符，再追加：
 
 ## 2. Formal generator renderer
 
-Renderer ID：`phase-b-formal-generator-zh-cn-v1`。内容摘要由 `tools/assurance_eval/formal_replay.py` 对 canonical renderer spec 与函数源码共同计算并在 preflight / artifact 中记录。
+Renderer ID：`phase-b-formal-generator-zh-cn-v1`。内容摘要由 `tools/assurance_eval/renderers.py` 的 canonical renderer spec 计算；variant source 另以 source hash 绑定，两者都进入 resolved-plan hash 与 artifact。
 
 所有 variant 使用同一个 renderer。它只接受两个消息：
 
@@ -206,7 +206,7 @@ generator 的理论 completion ceiling 为 368,640 tokens；若 grader 使用 1,
 
 ## 11. Thinking compatibility smoke
 
-正式运行前准备一个独立、非效果证据的一次调用候选：`p002`、B0、1 repetition、真实 generator、deterministic fake grader、thinking enabled、streaming 关闭、零重试、`max_tokens=4096` 候选值，且不发送 temperature/top-p/reasoning effort。其运行模式为 `thinking_compatibility_smoke`，证据标签为 `thinking_compatibility_only_not_phase_b_effect_evidence`。
+正式运行前的一次调用 compatibility 能力现由统一 recipe/resolved-plan 路径的单 case、单 variant、1 repetition 配置和注入 transport 测试覆盖：真实使用时仍须明确标为 exploratory、thinking enabled、streaming 关闭、零重试、`max_tokens=4096`，且不发送 temperature/top-p/reasoning effort。它不能作为 Phase B 效果证据。
 
 该 smoke 已获得严格限于一次 generator call 的人类成本/隐私授权；正式 replay 和真实 grader 仍未授权。执行仍要求显式 `--confirm-network`、干净提交、外部私有配置与输出目录，并在配置旁原子消费一次性授权，换输出目录不能重新执行。thinking 参数拒绝、非 `stop` finish reason、reasoning 文本进入 artifact、秘密扫描命中或 unexpected response 都继续阻塞正式运行。该 smoke 只验证 dialect、返回字段和 artifact 路径，不证明 B0 表现，也不单独证明 4096 足够或中性。
 

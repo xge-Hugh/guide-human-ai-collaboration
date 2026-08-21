@@ -1,14 +1,14 @@
-"""Minimal local runner for the assurance v2 Phase B experiment."""
+"""Human-operated semantic assurance evaluation harness."""
 
-from .models import ProviderDescriptor, ProviderResponse, RunConfig
-from .providers import ProviderError, ScriptedFakeProvider
-from .runner import AssuranceEvalRunner
+from .config import load_model_catalog
+from .execution import execute_resolved_plan
+from .experiment import load_experiment
+from .planning import build_resolved_plan, load_resolved_plan
 
 __all__ = [
-    "AssuranceEvalRunner",
-    "ProviderDescriptor",
-    "ProviderError",
-    "ProviderResponse",
-    "RunConfig",
-    "ScriptedFakeProvider",
+    "build_resolved_plan",
+    "execute_resolved_plan",
+    "load_experiment",
+    "load_model_catalog",
+    "load_resolved_plan",
 ]

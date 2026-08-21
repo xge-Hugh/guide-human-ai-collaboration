@@ -1,0 +1,33 @@
+{
+  "schema_version": 2,
+  "connections": {
+    "private-route": {
+      "provider": "custom",
+      "api_style": "openai_chat_completions",
+      "base_url": "https://REDACTED",
+      "api_key": "REDACTED"
+    }
+  },
+  "models": {
+    "deepseek-v4-flash": {
+      "connection": "private-route",
+      "model_id": "deepseek-v4-flash",
+      "family": "DeepSeek",
+      "declared_snapshot": null
+    },
+    "qwen3.7-max": {
+      "connection": "private-route",
+      "model_id": "qwen3.7-max",
+      "family": "Qwen",
+      "declared_snapshot": null
+    }
+  },
+  "profiles": {
+    "phase-b-stage3": {
+      "roles": {
+        "generator": "deepseek-v4-flash",
+        "grader": "qwen3.7-max"
+      }
+    }
+  }
+}
