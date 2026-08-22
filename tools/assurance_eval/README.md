@@ -87,7 +87,7 @@ python3 -m tools.assurance_eval report /absolute/private/runs/RUN_ID --case p005
 ## What `plan` shows
 
 The preview includes mode, selected cases and variants, the generator and grader
-provider/model/family and parameters, repetitions and counterbalanced order,
+provider/model/family, parameters, role-specific timeouts, repetitions and counterbalanced order,
 planned generator/grader call counts, renderer IDs and hashes, evidence label,
 output destination, and the resolved-plan hash. The saved plan also binds source
 hashes, grading schema/policy, instructions, exact execution order, provenance,
@@ -106,9 +106,10 @@ An abbreviated resolved plan looks like:
     "profile": "phase-b-stage3",
     "selection": {"cases": ["p003", "...", "p013"], "variants": ["B0", "B1", "B2"]},
     "roles": {
-      "generator": {"provider": "custom", "model": "deepseek-v4-pro", "family": "DeepSeek", "parameters": {"thinking": {"type": "enabled"}, "max_tokens": 4096, "stream": false}},
-      "grader": {"provider": "custom", "model": "qwen3.7-max", "family": "Qwen", "parameters": {"thinking": {"type": "disabled"}, "max_tokens": 1024, "stream": false}}
+      "generator": {"provider": "custom", "model": "deepseek-v4-flash", "family": "DeepSeek", "parameters": {"thinking": {"type": "enabled"}, "max_tokens": 65536, "stream": false}},
+      "grader": {"provider": "custom", "model": "qwen3.7-plus", "family": "Qwen", "parameters": {"thinking": {"type": "enabled"}, "max_tokens": 32768, "stream": false}}
     },
+    "timeouts_seconds": {"generator": 900, "grader": 600},
     "expected_calls": {"generator": 90, "grader": 90, "maximum_total": 180},
     "evidence_label": "phase_b_controlled_replay_raw_evidence_pending_adjudication"
   }

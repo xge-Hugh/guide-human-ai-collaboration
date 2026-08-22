@@ -23,6 +23,6 @@
 - [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)：已完成、不可执行的历史 `qwen3.7-max` grader 兼容性配置；
 - [`assurance-v2-thinking-compatibility-smoke.json`](assurance-v2-thinking-compatibility-smoke.json)：已完成、不可执行的历史 thinking-enabled 兼容性配置。
 
-v2 当前已完成 Phase A 的**结构性基线**与历史兼容性 smoke。统一 harness 和 [`assurance-v2-phase-b.recipe.json`](assurance-v2-phase-b.recipe.json) 是当前唯一活动执行路径。当前没有 B0/B1/B2 的正式效果证据，且 recipe 仍明确关闭正式执行。
+v2 当前已完成 Phase A 的**结构性基线**与历史兼容性 smoke。统一 harness 和 [`assurance-v2-phase-b.recipe.json`](assurance-v2-phase-b.recipe.json) 是当前唯一活动执行路径。recipe 已启用正式执行，并基于预运行证据重新配置为 DeepSeek flash generator 与 Qwen plus thinking grader；新配置仍须通过兼容性复核。当前没有完整的 B0/B1/B2 正式效果证据。
 
 实验正文保留试点发生时的若干旧目录名和文件名，以维持历史语境；它们不再是当前入口。旧结构到当前位置的对应关系见 [`../archive/README.md`](../archive/README.md)，当前规格与研究入口分别见 [`../spec/README.md`](../spec/README.md) 和 [`../research/README.md`](../research/README.md)。

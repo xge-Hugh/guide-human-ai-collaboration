@@ -104,6 +104,7 @@ def build_resolved_plan(
             role: _public_role(providers[role], recipe["renderers"][role])
             for role in ("generator", "grader")
         },
+        "timeouts_seconds": dict(recipe["timeouts_seconds"]),
         "instructions": dict(recipe["instructions"]),
         "grading": dict(recipe["grading"]),
         "expected_calls": {
@@ -160,6 +161,12 @@ def verify_resolved_plan(envelope: object) -> dict[str, Any]:
         roles[role].get("context_mode") != "standalone" for role in roles
     ):
         raise ValueError("resolved plan roles must be standalone generator and grader")
+    timeouts = plan.get("timeouts_seconds")
+    if not isinstance(timeouts, dict) or set(timeouts) != {"generator", "grader"} or any(
+        not isinstance(value, int) or isinstance(value, bool) or value < 1
+        for value in timeouts.values()
+    ):
+        raise ValueError("resolved plan timeouts_seconds are invalid")
     if plan["mode"] == "formal":
         if roles["generator"].get("family") == roles["grader"].get("family"):
             raise ValueError("formal resolved plan requires different declared model families")
@@ -187,6 +194,7 @@ def plan_preview(envelope: Mapping[str, Any]) -> dict[str, Any]:
         "cases": plan["selection"]["cases"],
         "variants": plan["selection"]["variants"],
         "roles": plan["roles"],
+        "timeouts_seconds": plan["timeouts_seconds"],
         "repetitions": plan["schedule"]["repetitions"],
         "variant_order_by_repetition": plan["schedule"]["variant_order_by_repetition"],
         "expected_calls": plan["expected_calls"],

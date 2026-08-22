@@ -95,8 +95,9 @@ class HarnessTest(unittest.TestCase):
         self.assertEqual(recipe["selection"]["cases"], ["p003", "p004", "p005", "p006", "p007", "p008", "p009", "p011", "p012", "p013"])
         self.assertEqual(recipe["selection"]["variants"], ["B0", "B1", "B2"])
         self.assertEqual(recipe["schedule"]["variant_order_by_repetition"], [["B0", "B1", "B2"], ["B1", "B2", "B0"], ["B2", "B0", "B1"]])
-        self.assertEqual(recipe["parameters"]["generator"], {"thinking": {"type": "enabled"}, "max_tokens": 4096, "stream": False})
-        self.assertEqual(recipe["parameters"]["grader"], {"thinking": {"type": "disabled"}, "max_tokens": 1024, "stream": False})
+        self.assertEqual(recipe["parameters"]["generator"], {"thinking": {"type": "enabled"}, "max_tokens": 65536, "stream": False})
+        self.assertEqual(recipe["parameters"]["grader"], {"thinking": {"type": "enabled"}, "max_tokens": 32768, "stream": False})
+        self.assertEqual(recipe["timeouts_seconds"], {"generator": 900, "grader": 600})
         self.assertEqual(recipe["schedule"]["operational_tranches"]["tranche_1"]["repetitions"], [1])
         self.assertEqual(recipe["grading"]["interpretation"], {
             "not_a_total_score": True,
@@ -124,6 +125,7 @@ class HarnessTest(unittest.TestCase):
         self.assertEqual(preview["expected_calls"], {"generator": 90, "grader": 90, "maximum_total": 180})
         self.assertEqual(preview["roles"]["generator"]["model"], "generator-test")
         self.assertEqual(preview["roles"]["grader"]["family"], "FamilyR")
+        self.assertEqual(preview["timeouts_seconds"], {"generator": 900, "grader": 600})
         self.assertEqual(preview["roles"]["generator"]["renderer"]["id"], GENERATOR_ID)
         self.assertEqual(preview["roles"]["grader"]["renderer"]["id"], GRADER_ID)
         self.assertRegex(preview["roles"]["generator"]["renderer"]["sha256"], r"^[0-9a-f]{64}$")
@@ -163,6 +165,35 @@ class HarnessTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "canonical projection"):
             execute_resolved_plan(repo_root=REPO_ROOT, envelope=changed, catalog=self.catalog, experiment=experiment, resolved=resolved, authorize_network=True, transport=lambda *args: calls.append(args))
         self.assertEqual(calls, [])
+
+        changed = copy.deepcopy(envelope)
+        changed["plan"]["timeouts_seconds"]["generator"] = 901
+        changed["resolved_plan_sha256"] = sha256_bytes(canonical_json(changed["plan"]))
+        with self.assertRaisesRegex(ValueError, "canonical projection"):
+            execute_resolved_plan(repo_root=REPO_ROOT, envelope=changed, catalog=self.catalog, experiment=experiment, resolved=resolved, authorize_network=True, transport=lambda *args: calls.append(args))
+        self.assertEqual(calls, [])
+
+    def test_recipe_requires_positive_role_timeouts(self) -> None:
+        recipe = json.loads(RECIPE.read_text(encoding="utf-8"))
+        experiment_dir = RECIPE.parent
+        recipe["sources"] = {
+            "generation": str(experiment_dir / "assurance-v2-phase-b-generation.json"),
+            "variants": str(experiment_dir / "assurance-v2-phase-b-variants.zh-CN.json"),
+            "rubrics": str(experiment_dir / "assurance-v2-phase-b-rubrics.json"),
+        }
+        invalid_values = (
+            {"generator": 0, "grader": 600},
+            {"generator": True, "grader": 600},
+            {"generator": 900},
+            {"generator": 900, "grader": 600, "other": 1},
+        )
+        for index, value in enumerate(invalid_values):
+            with self.subTest(value=value):
+                recipe["timeouts_seconds"] = value
+                path = self.root / f"bad-timeout-{index}.recipe.json"
+                path.write_text(json.dumps(recipe, ensure_ascii=False), encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "positive integers"):
+                    load_experiment(REPO_ROOT, path)
 
     def test_formal_plan_requires_clean_provenance_and_distinct_families(self) -> None:
         experiment = self.small_experiment(self.root / "output")
@@ -241,8 +272,10 @@ class HarnessTest(unittest.TestCase):
         experiment = self.small_experiment(output)
         envelope, resolved = build_resolved_plan(repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog, profile="test", mode="exploratory")
         requests: list[dict[str, object]] = []
+        timeouts: list[float] = []
 
         def transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            timeouts.append(timeout)
             request = json.loads(body)
             requests.append(request)
             if len(requests) == 1:
@@ -252,6 +285,8 @@ class HarnessTest(unittest.TestCase):
 
         run_dir = execute_resolved_plan(repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog, experiment=experiment, resolved=resolved, authorize_network=True, transport=transport, new_id=iter(("run", "generator-context", "grader-context")).__next__)
         self.assertEqual(len(requests), 2)
+        self.assertEqual(timeouts, [900, 600])
+        self.assertTrue(all("timeouts_seconds" not in request for request in requests))
         record = json.loads(next((run_dir / "records").glob("*.json")).read_text(encoding="utf-8"))
         self.assertEqual(record["generator"]["raw_output"], "raw generator response")
         self.assertEqual(record["grader"]["grade_parse_status"], "parsed")

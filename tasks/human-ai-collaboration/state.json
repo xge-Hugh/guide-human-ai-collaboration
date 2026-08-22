@@ -3,9 +3,9 @@
   "task_id": "human-ai-collaboration",
   "title": "轻量人机协作规范与保障系统",
   "status": "active",
-  "phase": "assurance_phase_b_unified_harness_pre_formal",
+  "phase": "assurance_phase_b_reconfigured_compatibility",
   "current_actor": "human_ai_collaboration",
-  "next_action": "统一 assurance harness 已成为当前活动执行路径；DeepSeek thinking 与 Qwen grader 兼容性 smoke 均已完成并作为历史非效果证据停用。正式 Phase B 仍由 recipe 的 formal_execution_enabled=false 阻塞。下一步是在统一 harness 上执行一次 p002/B0/1 repetition 的 exploratory 端到端验证（DeepSeek generator 1 call + Qwen grader 1 call）；通过后再进入正式 tranche 1 的启用与执行。",
+  "next_action": "统一 assurance harness 已成为当前活动执行路径，formal execution 已启用。预运行发现固定 60 秒 timeout 与 4096 completion-token 上限不足；当前候选改为 deepseek-v4-flash generator（thinking、65536 tokens、900 秒）与 qwen3.7-plus grader（thinking、32768 tokens、600 秒）。下一步先执行零重试兼容性复核；通过后从新的 clean committed plan 重启 tranche 1。",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -45,7 +45,7 @@
   "notes": {
     "batch1": "可读雏形已验收",
     "batch2": "reference-study 与 v1-implementation 已规范化导航与试点/现状分层",
-    "assurance_v2": "Phase A 已覆盖 FM-01～FM-20；Phase B 已形成 generation/rubric/variant 语义包，并完成 DeepSeek transport/thinking 与不同系列 Qwen grader 的历史兼容性验证。当前执行路径已统一为 human-operated semantic eval harness；兼容性结果均为非效果证据，当前仍无正式 B0/B1/B2 效果结论。",
+    "assurance_v2": "Phase A 已覆盖 FM-01～FM-20；Phase B 已形成 generation/rubric/variant 语义包。预运行证据表明 DeepSeek pro 在真实 thinking 请求上超过原 60 秒 timeout，flash 在 4096 completion tokens 下也会因 reasoning 占用而截断；这些 blocked/partial run 均不构成效果结论。当前活动候选为 flash/64K generator 与 plus/thinking/32K grader，需先完成新配置兼容性复核。",
     "three_way_collaboration": "人负责实验方向、成本/隐私与规范性裁决；本地 Agent 负责 runner 实现与本地执行；云端审查 Agent 负责对照当前规范/协议审查实现和证据。三方结构本身不自动构成 grader 独立性。",
     "experiment_owner_capability": "实验负责人不需要承担 Python 操作责任，但需要能判断 variant 唯一变化、模型可见输入、隐藏 rubric、模型/参数不确定性、evidence 链和 grader 独立性；统一 harness 提供 validate/plan/run/report 与 case-level evidence inspection 支持直接参与。",
     "external_reference_policy": "外部 harness/prompt/agent 项目优先作为变量控制、消融方法、provenance 和候选机制来源；任务分数或轨迹改善不能直接外推为本项目的人机协作保障证据。",

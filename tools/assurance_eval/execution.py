@@ -114,6 +114,7 @@ def _verify_captured_binding(
         plan["formal_execution_enabled"] != recipe["formal_execution_enabled"]
         or plan["selection"] != recipe["selection"]
         or plan["instructions"] != recipe["instructions"]
+        or plan["timeouts_seconds"] != recipe["timeouts_seconds"]
         or plan["grading"] != recipe["grading"]
         or any(
             plan["roles"][role]["parameters"] != recipe["parameters"][role]
@@ -284,7 +285,8 @@ def execute_resolved_plan(
     )
     providers = {
         role: OpenAIChatCompletionsProvider(
-            resolved[role], get_renderer(plan["roles"][role]["renderer"]["id"]), transport=gate,
+            resolved[role], get_renderer(plan["roles"][role]["renderer"]["id"]),
+            transport=gate, timeout_seconds=plan["timeouts_seconds"][role],
         )
         for role in ("generator", "grader")
     }
