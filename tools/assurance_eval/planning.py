@@ -114,7 +114,11 @@ def build_resolved_plan(
         },
         "execution_policy": {
             "network_authorization_required": True,
-            "automatic_retries": 0,
+            "automatic_retries": 2,
+            "max_attempts_per_logical_call": 3,
+            "retry_backoff_seconds": [1.0, 2.0],
+            "grader_parallelism": 3,
+            "decoupled_stages": True,
             "exact_requests_and_raw_final_outputs": True,
             "reasoning_content_retained": False,
             "standalone_grader": True,
@@ -142,14 +146,26 @@ def verify_resolved_plan(envelope: object) -> dict[str, Any]:
         raise ValueError("resolved plan mode is invalid")
     if plan.get("evidence_label") != EVIDENCE_LABELS[plan["mode"]]:
         raise ValueError("resolved plan evidence label differs from execution policy")
-    expected_policy = {
+    policy = plan.get("execution_policy")
+    legacy_policy = {
         "network_authorization_required": True,
         "automatic_retries": 0,
         "exact_requests_and_raw_final_outputs": True,
         "reasoning_content_retained": False,
         "standalone_grader": True,
     }
-    if plan.get("execution_policy") != expected_policy:
+    current_policy = {
+        "network_authorization_required": True,
+        "automatic_retries": 2,
+        "max_attempts_per_logical_call": 3,
+        "retry_backoff_seconds": [1.0, 2.0],
+        "grader_parallelism": 3,
+        "decoupled_stages": True,
+        "exact_requests_and_raw_final_outputs": True,
+        "reasoning_content_retained": False,
+        "standalone_grader": True,
+    }
+    if policy not in (legacy_policy, current_policy):
         raise ValueError("resolved plan execution policy differs")
     order = plan.get("schedule", {}).get("execution_order")
     if not isinstance(order, list) or plan.get("expected_calls") != {

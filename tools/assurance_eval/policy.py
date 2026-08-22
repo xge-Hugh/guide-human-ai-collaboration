@@ -78,22 +78,35 @@ def validate_private_output(path: Path, repo_root: Path, *, must_exist: bool) ->
 
 @dataclass
 class NetworkGate:
-    """One shared per-run call budget; each planned call is single-shot."""
+    """Shared per-run transport budget across logical calls and retry attempts."""
 
     transport: Transport
     authorized: bool
-    maximum_calls: int
+    maximum_network_attempts: int
     before_call: Callable[[], None]
     forbidden_values: tuple[str, ...] = ()
-    calls: int = 0
+    network_attempts: int = 0
+    planned_logical_calls: int = 0
+    completed_logical_calls: int = 0
+
+    @property
+    def calls(self) -> int:
+        return self.network_attempts
 
     def __call__(self, url: str, headers: Mapping[str, str], body: bytes, timeout: float) -> bytes:
         if not self.authorized:
             raise ProviderError("network authorization is missing")
-        if self.calls >= self.maximum_calls:
+        if self.network_attempts >= self.maximum_network_attempts:
             raise ProviderError("resolved-plan network call budget exhausted")
         if any(value.encode("utf-8") in body for value in self.forbidden_values if value):
             raise ProviderError("model-visible request contains a private value")
         self.before_call()
-        self.calls += 1
+        self.network_attempts += 1
         return self.transport(url, headers, body, timeout)
+
+    def accounting(self) -> dict[str, int]:
+        return {
+            "planned_logical_calls": self.planned_logical_calls,
+            "completed_logical_calls": self.completed_logical_calls,
+            "actual_network_attempts": self.network_attempts,
+        }

@@ -42,6 +42,8 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--authorize-network", action="store_true")
     run.add_argument("--tranche", help="Operational tranche ID; required for tranche-controlled formal plans.")
     run.add_argument("--prior-run", type=Path, help="Completed prior-tranche run required for formal continuation.")
+    run.add_argument("--resume-from", type=Path, help="Prior episode run directory to continue without mutating it.")
+    run.add_argument("--grader-parallelism", type=int, help="Override grader worker count for this run.")
     report = commands.add_parser("report", help="Inspect a completed or blocked run; no network.")
     report.add_argument("run_dir", type=Path)
     report.add_argument("--case", dest="case_id", help="Show record-level evidence for one case ID.")
@@ -92,6 +94,7 @@ def main(argv: list[str] | None = None) -> int:
         repo_root=REPO_ROOT, envelope=envelope, catalog=catalog,
         experiment=experiment, resolved=resolved, authorize_network=args.authorize_network,
         tranche_id=args.tranche, prior_run=args.prior_run,
+        resume_from=args.resume_from, grader_parallelism=args.grader_parallelism,
     )
     print(run_dir)
     return 0

@@ -5,6 +5,7 @@ import io
 import json
 import os
 import stat
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,9 +17,12 @@ from tools.assurance_eval.__main__ import main
 from tools.assurance_eval.execution import _formal_blocking_reason, _summary, execute_resolved_plan
 from tools.assurance_eval.experiment import canonical_json, load_experiment, sha256_bytes
 from tools.assurance_eval.grading import build_grader_packet, parse_grade
+from tools.assurance_eval.models import ProviderError
 from tools.assurance_eval.planning import build_resolved_plan, plan_preview, verify_resolved_plan
 from tools.assurance_eval.renderers import GENERATOR_ID, GRADER_ID, render_generator, render_grader
 from tools.assurance_eval.reporting import inspect_case, load_report
+from tools.assurance_eval.retry import classify_retryability
+from tools.assurance_eval.semantics import compare_treatment_semantics, extract_treatment_semantics, require_compatible_treatment
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -67,6 +71,13 @@ class HarnessTest(unittest.TestCase):
             encoding="utf-8",
         )
         os.chmod(self.settings, 0o600)
+        if sys.platform == "win32":
+            self._private_path_patch = patch(
+                "tools.assurance_eval.config._private_path",
+                side_effect=lambda path, repo: path.resolve(),
+            )
+            self._private_path_patch.start()
+            self.addCleanup(self._private_path_patch.stop)
         self.catalog = load_model_catalog(self.settings, REPO_ROOT)
 
     def small_experiment(
@@ -306,6 +317,7 @@ class HarnessTest(unittest.TestCase):
         report = load_report(run_dir)
         self.assertEqual(report["actual_calls"], {"generator": 1, "grader": 1})
         self.assertEqual(report["network_calls"], 2)
+        self.assertEqual(report["network_accounting"]["actual_network_attempts"], 2)
         self.assertEqual(len(report["groups"]), 1)
         detail = inspect_case(run_dir, "p003")["records"][0]
         self.assertEqual(detail["generator_final_response"], "raw generator response")
@@ -362,7 +374,7 @@ class HarnessTest(unittest.TestCase):
             execute_resolved_plan(repo_root=REPO_ROOT, envelope=formal, catalog=self.catalog, experiment=disabled, resolved=formal_resolved, authorize_network=True, transport=lambda *args: calls.append(args))
         self.assertEqual(calls, [])
 
-    def test_transport_failure_is_recorded_once_without_retry_or_grader(self) -> None:
+    def test_transport_failure_retries_then_records_all_attempts(self) -> None:
         output = self.root / "failure-output"
         experiment = self.small_experiment(output)
         envelope, resolved = build_resolved_plan(repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog, profile="test", mode="exploratory")
@@ -371,22 +383,25 @@ class HarnessTest(unittest.TestCase):
         def failing_transport(*args) -> bytes:
             nonlocal calls
             calls += 1
-            from tools.assurance_eval.models import ProviderError
-            raise ProviderError("synthetic transport failure")
+            raise ProviderError("provider transport failure")
 
         run_dir = execute_resolved_plan(
             repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
             experiment=experiment, resolved=resolved,
             authorize_network=True, transport=failing_transport,
+            sleep=lambda _seconds: None,
             new_id=iter(("failed-run", "generator-context")).__next__,
         )
-        self.assertEqual(calls, 1)
+        self.assertEqual(calls, 3)
         record = json.loads(next((run_dir / "records").glob("*.json")).read_text())
-        self.assertEqual(record["generator"]["attempt_count"], 1)
-        self.assertEqual(record["generator"]["retry_count"], 0)
+        self.assertEqual(record["generator"]["attempt_count"], 3)
+        self.assertEqual(record["generator"]["retry_count"], 2)
+        self.assertEqual(record["generator"]["final_status"], "failed_retryable")
+        self.assertEqual(len(record["generator"]["attempt_evidence_paths"]), 3)
         self.assertIsNone(record["grader"])
+        self.assertEqual(load_report(run_dir)["network_accounting"]["actual_network_attempts"], 3)
 
-    def test_formal_invalid_grader_blocks_run_and_stops_future_calls(self) -> None:
+    def test_formal_invalid_grader_blocks_integrity_but_continues_other_records(self) -> None:
         output = self.root / "formal-output"
         output.mkdir(mode=0o700)
         experiment = self.small_experiment(
@@ -409,7 +424,9 @@ class HarnessTest(unittest.TestCase):
             nonlocal calls
             calls += 1
             request = json.loads(body)
-            content = "raw generator response" if calls == 1 else "not-json"
+            content = "raw generator response" if request["model"] == "generator-test" else (
+                "not-json" if calls == 3 else grade_json()
+            )
             return json.dumps({
                 "model": request["model"] + "-reported",
                 "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
@@ -420,24 +437,18 @@ class HarnessTest(unittest.TestCase):
                 repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
                 experiment=experiment, resolved=resolved, authorize_network=True,
                 transport=transport,
-                new_id=iter(("formal-blocked", "generator-context", "grader-context")).__next__,
+                new_id=iter(("formal-blocked", "g1", "g2", "j1", "j2")).__next__,
             )
-        self.assertEqual(calls, 2)
-        self.assertEqual(len(list((run_dir / "records").glob("*.json"))), 1)
+        self.assertEqual(calls, 4)
+        self.assertEqual(len(list((run_dir / "records").glob("*.json"))), 2)
         report = load_report(run_dir)
-        self.assertEqual(report["operational_status"], "blocked")
+        self.assertEqual(report["operational_status"], "blocked_integrity")
         self.assertEqual(report["blocked_reason"]["code"], "invalid_or_unparseable_grader_output")
         self.assertTrue(report["requires_human_adjudication"])
-        self.assertEqual(report["planned_calls"], {"generator": 2, "grader": 2, "maximum_total": 4})
-        record = json.loads(next((run_dir / "records").glob("*.json")).read_text())
+        record = json.loads((run_dir / "records" / "p003__B0__r001.json").read_text())
         self.assertEqual(record["grader"]["raw_output"], "not-json")
         self.assertEqual(record["grader"]["attempt_count"], 1)
         self.assertEqual(record["grader"]["retry_count"], 0)
-        detail = inspect_case(run_dir, "p003")["records"][0]
-        self.assertEqual(detail["grader_raw_output"], "not-json")
-        self.assertEqual(detail["call_status"]["grader"]["grade_parse"], "invalid")
-        self.assertIsNotNone(detail["call_status"]["grader"]["parse_error"])
-        self.assertTrue(detail["call_evidence_paths"]["grader"].endswith("__grader.json"))
 
     def test_formal_blocking_condition_classification_is_centralized(self) -> None:
         failed = {"invocation_status": "failed", "error": {"type": "ProviderError", "message": "transport failed"}}
@@ -484,12 +495,12 @@ class HarnessTest(unittest.TestCase):
                 repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
                 experiment=experiment, resolved=resolved, authorize_network=True,
                 transport=transport,
+                sleep=lambda _seconds: None,
                 new_id=iter(("formal-transport-blocked", "generator-context")).__next__,
             )
         self.assertEqual(calls, 1)
         report = load_report(run_dir)
-        self.assertEqual(report["operational_status"], "blocked")
-        self.assertEqual(report["blocked_reason"]["code"], "generator_transport_or_invocation_failure")
+        self.assertEqual(report["operational_status"], "blocked_integrity")
         record = json.loads(next((run_dir / "records").glob("*.json")).read_text())
         self.assertEqual(record["generator"]["error"]["message"], "unexpected provider invocation failure")
         self.assertNotIn("sensitive adapter details", json.dumps(record))
@@ -527,6 +538,293 @@ class HarnessTest(unittest.TestCase):
         detail = inspect_case(run_dir, "p003")["records"][0]
         self.assertEqual(detail["generator_final_response"], "same-public-text")
         self.assertEqual(load_report(run_dir)["secret_scan"], "pass")
+
+    def test_transient_generator_failure_then_success_on_retry(self) -> None:
+        output = self.root / "retry-success-output"
+        experiment = self.small_experiment(output)
+        envelope, resolved = build_resolved_plan(
+            repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+            profile="test", mode="exploratory",
+        )
+        calls = 0
+
+        def transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            nonlocal calls
+            calls += 1
+            request = json.loads(body)
+            if request["model"] == "generator-test" and calls == 1:
+                raise ProviderError("provider transport failure")
+            content = "raw generator response" if request["model"] == "generator-test" else grade_json()
+            return json.dumps({
+                "model": request["model"] + "-reported",
+                "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
+            }).encode()
+
+        run_dir = execute_resolved_plan(
+            repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
+            experiment=experiment, resolved=resolved, authorize_network=True,
+            transport=transport, sleep=lambda _seconds: None,
+            new_id=iter(("retry-success", "generator-context", "grader-context")).__next__,
+        )
+        record = json.loads(next((run_dir / "records").glob("*.json")).read_text())
+        self.assertEqual(record["generator"]["attempt_count"], 2)
+        self.assertEqual(record["generator"]["retry_count"], 1)
+        self.assertEqual(record["generator"]["successful_attempt"], 2)
+        self.assertIsNotNone(record["generator"]["successful_attempt_elapsed_ms"])
+        self.assertLess(record["generator"]["successful_attempt_elapsed_ms"], record["generator"]["elapsed_ms"])
+        self.assertEqual(len(record["generator"]["attempt_evidence_paths"]), 2)
+        self.assertEqual(calls, 3)
+
+    def test_transient_grader_failure_then_success_on_retry(self) -> None:
+        output = self.root / "grader-retry-output"
+        experiment = self.small_experiment(output)
+        envelope, resolved = build_resolved_plan(
+            repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+            profile="test", mode="exploratory",
+        )
+        calls = 0
+
+        def transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            nonlocal calls
+            calls += 1
+            request = json.loads(body)
+            if request["model"] == "grader-test" and calls == 2:
+                raise ProviderError("provider HTTP status 503")
+            content = "raw generator response" if request["model"] == "generator-test" else grade_json()
+            return json.dumps({
+                "model": request["model"] + "-reported",
+                "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
+            }).encode()
+
+        run_dir = execute_resolved_plan(
+            repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
+            experiment=experiment, resolved=resolved, authorize_network=True,
+            transport=transport, sleep=lambda _seconds: None,
+            new_id=iter(("grader-retry", "generator-context", "grader-context")).__next__,
+        )
+        record = json.loads(next((run_dir / "records").glob("*.json")).read_text())
+        self.assertEqual(record["grader"]["attempt_count"], 2)
+        self.assertEqual(record["grader"]["retry_count"], 1)
+        self.assertEqual(record["grader"]["grade_parse_status"], "parsed")
+
+    def test_retry_exhaustion_produces_paused_retryable(self) -> None:
+        output = self.root / "paused-output"
+        output.mkdir(mode=0o700)
+        experiment = self.small_experiment(output, formal_execution_enabled=True)
+        clean = {
+            "available": True, "git_revision": "abc", "clean": True,
+            "status_sha256": sha256_bytes(b""), "harness_source_sha256": "harness",
+        }
+        with patch("tools.assurance_eval.planning.git_provenance", return_value=clean), patch(
+            "tools.assurance_eval.planning.require_committed_paths"
+        ):
+            envelope, resolved = build_resolved_plan(
+                repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+                profile="test", mode="formal",
+            )
+
+        def transport(*args) -> bytes:
+            raise ProviderError("provider transport failure")
+
+        with patch("tools.assurance_eval.execution.git_provenance", return_value=clean):
+            run_dir = execute_resolved_plan(
+                repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
+                experiment=experiment, resolved=resolved, authorize_network=True,
+                transport=transport, sleep=lambda _seconds: None,
+                new_id=iter(("paused-run", "generator-context")).__next__,
+            )
+        report = load_report(run_dir)
+        self.assertEqual(report["operational_status"], "paused_retryable")
+        self.assertEqual(report["paused_retryable_observations"], 1)
+
+    def test_no_retry_on_schema_or_integrity_failures(self) -> None:
+        self.assertEqual(classify_retryability({"type": "PrivateValueBlocked", "message": "blocked"}), "not_retryable")
+        self.assertEqual(classify_retryability({"type": "ProviderError", "message": "provider returned an invalid chat completion"}), "not_retryable")
+        self.assertEqual(classify_retryability({"type": "ProviderError", "message": "formal provenance changed"}), "not_retryable")
+        self.assertEqual(classify_retryability({"type": "ProviderError", "message": "provider transport failure"}), "retryable")
+        self.assertEqual(classify_retryability({"type": "ProviderError", "message": "provider HTTP status 429"}), "retryable")
+
+    def test_resume_reuses_generator_and_retries_only_grader(self) -> None:
+        prefix = self.root / "prefix-run"
+        prefix.mkdir(mode=0o700)
+        experiment = self.small_experiment(prefix, cases=["p003"], formal_execution_enabled=True)
+        clean = {
+            "available": True, "git_revision": "abc", "clean": True,
+            "status_sha256": sha256_bytes(b""), "harness_source_sha256": "harness",
+        }
+        with patch("tools.assurance_eval.planning.git_provenance", return_value=clean), patch(
+            "tools.assurance_eval.planning.require_committed_paths"
+        ):
+            envelope, resolved = build_resolved_plan(
+                repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+                profile="test", mode="formal",
+            )
+        calls = 0
+
+        def prefix_transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            nonlocal calls
+            calls += 1
+            request = json.loads(body)
+            if request["model"] == "grader-test":
+                raise ProviderError("provider transport failure")
+            return json.dumps({
+                "model": request["model"] + "-reported",
+                "choices": [{"message": {"content": "stable generator output"}, "finish_reason": "stop"}],
+            }).encode()
+
+        with patch("tools.assurance_eval.execution.git_provenance", return_value=clean):
+            prefix_run = execute_resolved_plan(
+                repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
+                experiment=experiment, resolved=resolved, authorize_network=True,
+                transport=prefix_transport, sleep=lambda _seconds: None,
+                new_id=iter(("prefix-run", "generator-context", "grader-context")).__next__,
+            )
+        self.assertEqual(calls, 4)
+        continuation = self.root / "continuation-run"
+        continuation.mkdir(mode=0o700)
+        experiment2 = self.small_experiment(continuation, cases=["p003"], formal_execution_enabled=True)
+        with patch("tools.assurance_eval.planning.git_provenance", return_value=clean), patch(
+            "tools.assurance_eval.planning.require_committed_paths"
+        ):
+            envelope2, resolved2 = build_resolved_plan(
+                repo_root=REPO_ROOT, experiment=experiment2, catalog=self.catalog,
+                profile="test", mode="formal",
+            )
+        calls = 0
+
+        def continuation_transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            nonlocal calls
+            calls += 1
+            request = json.loads(body)
+            self.assertEqual(request["model"], "grader-test")
+            return json.dumps({
+                "model": request["model"] + "-reported",
+                "choices": [{"message": {"content": grade_json()}, "finish_reason": "stop"}],
+            }).encode()
+
+        with patch("tools.assurance_eval.execution.git_provenance", return_value=clean):
+            resume_run = execute_resolved_plan(
+                repo_root=REPO_ROOT, envelope=envelope2, catalog=self.catalog,
+                experiment=experiment2, resolved=resolved2, authorize_network=True,
+                transport=continuation_transport, sleep=lambda _seconds: None,
+                resume_from=prefix_run,
+                new_id=iter(("resume-run", "grader-context")).__next__,
+            )
+        self.assertEqual(calls, 1)
+        record = json.loads(next((resume_run / "records").glob("*.json")).read_text())
+        self.assertEqual(record["generator"]["raw_output"], "stable generator output")
+        self.assertIn("imported_from_episode", record["generator"])
+        self.assertEqual(record["grader"]["grade_parse_status"], "parsed")
+        prefix_record_path = next((prefix_run / "records").glob("*.json"))
+        self.assertTrue(prefix_record_path.exists())
+
+    def test_resume_rejects_material_semantic_change(self) -> None:
+        output = self.root / "semantic-output"
+        experiment = self.small_experiment(output)
+        envelope, resolved = build_resolved_plan(
+            repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+            profile="test", mode="exploratory",
+        )
+
+        def transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            request = json.loads(body)
+            content = "raw generator response" if request["model"] == "generator-test" else grade_json()
+            return json.dumps({
+                "model": request["model"] + "-reported",
+                "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
+            }).encode()
+
+        prefix_run = execute_resolved_plan(
+            repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
+            experiment=experiment, resolved=resolved, authorize_network=True,
+            transport=transport,
+            new_id=iter(("semantic-prefix", "generator-context", "grader-context")).__next__,
+        )
+        changed = copy.deepcopy(envelope)
+        changed["plan"]["instructions"]["generator_base"] = "mutated treatment instruction"
+        changed["resolved_plan_sha256"] = sha256_bytes(canonical_json(changed["plan"]))
+        changed_experiment = self.small_experiment(self.root / "changed-output")
+        changed_experiment.recipe["instructions"]["generator_base"] = "mutated treatment instruction"
+        with self.assertRaisesRegex(ValueError, "incompatible"):
+            require_compatible_treatment(changed["plan"], envelope["plan"])
+
+    def test_harmless_plan_metadata_diff_allows_semantic_equivalence(self) -> None:
+        experiment = self.small_experiment(self.root / "semantic-compare")
+        envelope, _ = build_resolved_plan(
+            repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+            profile="test", mode="exploratory",
+        )
+        harmless = copy.deepcopy(envelope["plan"])
+        harmless["provenance"] = {
+            "available": True, "git_revision": "different", "clean": True,
+            "status_sha256": "other", "harness_source_sha256": "other-harness",
+        }
+        harmless["output_root"] = str(Path(harmless["output_root"]).resolve())
+        report = compare_treatment_semantics(envelope["plan"], harmless)
+        self.assertEqual(report["treatment_semantics"], "equivalent")
+        self.assertNotEqual(envelope["resolved_plan_sha256"], sha256_bytes(canonical_json(harmless)))
+
+    def test_generator_order_remains_serial(self) -> None:
+        output = self.root / "serial-output"
+        experiment = self.small_experiment(output, cases=["p003", "p004"])
+        envelope, resolved = build_resolved_plan(
+            repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+            profile="test", mode="exploratory",
+        )
+        order: list[str] = []
+
+        def transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            request = json.loads(body)
+            if request["model"] == "generator-test":
+                order.append(request["messages"][1]["content"][:20])
+            content = "raw generator response" if request["model"] == "generator-test" else grade_json()
+            return json.dumps({
+                "model": request["model"] + "-reported",
+                "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
+            }).encode()
+
+        execute_resolved_plan(
+            repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
+            experiment=experiment, resolved=resolved, authorize_network=True,
+            transport=transport,
+            new_id=iter(("serial-run", "g1", "j1", "g2", "j2")).__next__,
+        )
+        self.assertEqual(len(order), 2)
+        self.assertNotEqual(order[0], order[1])
+
+    def test_grader_parallelism_isolates_failures(self) -> None:
+        output = self.root / "parallel-output"
+        experiment = self.small_experiment(output, cases=["p003", "p004"])
+        envelope, resolved = build_resolved_plan(
+            repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+            profile="test", mode="exploratory",
+        )
+        calls = 0
+        grader_transport_calls = 0
+
+        def transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            nonlocal calls, grader_transport_calls
+            calls += 1
+            request = json.loads(body)
+            if request["model"] == "grader-test":
+                grader_transport_calls += 1
+                if grader_transport_calls <= 3:
+                    raise ProviderError("provider transport failure")
+            content = "raw generator response" if request["model"] == "generator-test" else grade_json()
+            return json.dumps({
+                "model": request["model"] + "-reported",
+                "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
+            }).encode()
+
+        run_dir = execute_resolved_plan(
+            repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
+            experiment=experiment, resolved=resolved, authorize_network=True,
+            transport=transport, sleep=lambda _seconds: None, grader_parallelism=1,
+            new_id=iter(("parallel-run", "g1", "g2", "j1", "j2")).__next__,
+        )
+        records = {path.stem: json.loads(path.read_text()) for path in (run_dir / "records").glob("*.json")}
+        self.assertEqual(records["p003__B0__r001"]["grader"]["final_status"], "failed_retryable")
+        self.assertEqual(records["p004__B0__r001"]["grader"]["grade_parse_status"], "parsed")
 
 
 if __name__ == "__main__":
