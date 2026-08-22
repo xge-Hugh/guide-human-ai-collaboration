@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "run_id": "fba674d20de748de888bbde81ee30d24",
+  "status": "completed",
+  "blocked_reason": null,
+  "network_calls": 3,
+  "secret_scan": "pass",
+  "secret_match_files": [],
+  "artifact_tree_sha256": "861f2b873d49bff9824f7f07ab5a91c0f163219e544a683c21bd8a4474cba8d4"
+}

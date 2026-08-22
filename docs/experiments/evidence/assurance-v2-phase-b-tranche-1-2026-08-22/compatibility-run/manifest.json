@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "run_id": "fba674d20de748de888bbde81ee30d24",
+  "evidence_label": "phase_b_reconfigured_compatibility_only_not_effect_evidence",
+  "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+  "git_revision": "4c805561e0d3d73613291133e9bed6b5b786a484",
+  "roles": {
+    "generator": {
+      "provider": "custom",
+      "model": "deepseek-v4-flash",
+      "family": "DeepSeek",
+      "declared_snapshot": null,
+      "parameters": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "max_tokens": 65536,
+        "stream": false
+      },
+      "renderer": {
+        "id": "phase-b-formal-generator-zh-cn-v1",
+        "sha256": "4fcc602d28c48056ee6f0085ebf9ad50b4c0d71c621734af60666da20f2cf9af"
+      },
+      "context_mode": "standalone"
+    },
+    "grader": {
+      "provider": "custom",
+      "model": "qwen3.7-plus",
+      "family": "Qwen",
+      "declared_snapshot": null,
+      "parameters": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "max_tokens": 32768,
+        "stream": false
+      },
+      "renderer": {
+        "id": "phase-b-direct-grader-zh-cn-v1-candidate",
+        "sha256": "18c8e659c1a513a5aab901cc9c665624e0228835ed6a73859167faaf127218aa"
+      },
+      "context_mode": "standalone"
+    }
+  },
+  "timeouts_seconds": {
+    "generator": 900,
+    "grader": 600
+  },
+  "maximum_calls": 3
+}

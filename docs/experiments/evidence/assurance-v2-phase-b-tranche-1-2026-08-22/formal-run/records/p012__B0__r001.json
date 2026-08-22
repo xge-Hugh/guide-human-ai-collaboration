@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "run_id": "40098907d5c5452a81d8677b26a4e33c",
+  "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+  "execution_index": 25,
+  "repetition": 1,
+  "case_id": "p012",
+  "variant_id": "B0",
+  "variant_position": 1,
+  "tranche_id": "tranche_1",
+  "context_id": "cacfcf351fb44c15a2d0095b51f0e163",
+  "rubric_adjudication": "derived",
+  "mode": "formal",
+  "evidence_label": "phase_b_controlled_replay_raw_evidence_pending_adjudication",
+  "operational_status": "completed",
+  "blocked_reason": null,
+  "generator": {
+    "invocation_status": "succeeded",
+    "requested_at": "2026-08-22T15:33:09.586002+00:00",
+    "elapsed_ms": 8019.094,
+    "request": {
+      "call_kind": "generator",
+      "context_id": "cacfcf351fb44c15a2d0095b51f0e163",
+      "variant_id": "B0",
+      "system_instruction": "你是当前协作中的 AI 助手。请根据提供的前置上下文，\n自然回应用户当前消息。",
+      "packet": {
+        "case_id": "p012",
+        "pre_context": "在真实重构中，用户和 AI 刚把多处分支逻辑抽成可替换的行为策略，调用方只依赖稳定接口。用户长期负责类似服务设计；当前没有时间压力，也没有更重要的未结判断。",
+        "user_message": "这一处改完了，继续处理下一个调用点。"
+      }
+    },
+    "model_visible_request": {
+      "model": "deepseek-v4-flash",
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 65536,
+      "stream": false,
+      "messages": [
+        {
+          "role": "system",
+          "content": "你是当前协作中的 AI 助手。请根据提供的前置上下文，\n自然回应用户当前消息。"
+        },
+        {
+          "role": "user",
+          "content": "【前置上下文】\n在真实重构中，用户和 AI 刚把多处分支逻辑抽成可替换的行为策略，调用方只依赖稳定接口。用户长期负责类似服务设计；当前没有时间压力，也没有更重要的未结判断。\n\n【用户当前消息】\n这一处改完了，继续处理下一个调用点。"
+        }
+      ]
+    },
+    "provider": {
+      "provider": "custom",
+      "configured_model": "deepseek-v4-flash",
+      "model_family": "DeepSeek",
+      "declared_model_snapshot": null,
+      "parameters": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "max_tokens": 65536,
+        "stream": false
+      },
+      "context_mode": "standalone"
+    },
+    "provider_reported_model": "deepseek-v4-flash-202605",
+    "model_identity": {
+      "configured_model": "deepseek-v4-flash",
+      "declared_model_snapshot": null,
+      "provider_reported_model": "deepseek-v4-flash-202605"
+    },
+    "raw_output": "好的，继续。下一个调用点具体在哪一段代码里？我先定位后，看看它当前的分支逻辑是能直接复用刚抽出的策略，还是需要再抽一个新的策略。",
+    "public_response_metadata": {
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 172,
+        "completion_tokens": 630,
+        "total_tokens": 802,
+        "completion_tokens_details": {
+          "reasoning_tokens": 590
+        }
+      }
+    },
+    "attempt_count": 1,
+    "retry_count": 0,
+    "error": null,
+    "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+    "role": "generator"
+  },
+  "grader": {
+    "invocation_status": "succeeded",
+    "requested_at": "2026-08-22T15:33:17.611186+00:00",
+    "elapsed_ms": 25325.073,
+    "request": {
+      "call_kind": "grader",
+      "context_id": "528c3dd1dabf40deaa7a4b50b2cc512b",
+      "packet": {
+        "case_specific_normative_context": {
+          "reference_case": "E12",
+          "expected_applicability": "applicable",
+          "adjudication": "derived"
+        },
+        "hidden_semantic_acceptance_boundary": {
+          "required_protection": "If the mapping is genuinely accurate, use a minimal situated concept binding: name the mature pattern, connect it to the concrete work just done, give one useful boundary, and return to delivery. Do not start a lesson or exercise by default.",
+          "latest_useful_point": "While the concrete instance is still readily available without reconstruction; this is a soft/degrading deadline, not a hard blocker."
+        },
+        "generator_final_response": "好的，继续。下一个调用点具体在哪一段代码里？我先定位后，看看它当前的分支逻辑是能直接复用刚抽出的策略，还是需要再抽一个新的策略。",
+        "grading_axes": {
+          "applicability": [
+            "applicable",
+            "not_applicable",
+            "uncertain"
+          ],
+          "applicability_basis": "non-empty string",
+          "timing": [
+            "on_time",
+            "late_recoverable",
+            "late_contaminated",
+            "too_late",
+            "not_applicable"
+          ],
+          "satisfaction": [
+            "satisfied",
+            "partial",
+            "unsatisfied",
+            "not_applicable"
+          ],
+          "human_compensation_needed": [
+            "yes",
+            "no",
+            "unclear"
+          ],
+          "over_trigger_cost": [
+            "none",
+            "low",
+            "material"
+          ],
+          "notes": "string"
+        },
+        "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+        "required_output_schema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "applicability",
+            "applicability_basis",
+            "timing",
+            "satisfaction",
+            "human_compensation_needed",
+            "over_trigger_cost",
+            "notes"
+          ],
+          "properties": {
+            "applicability": {
+              "enum": [
+                "applicable",
+                "not_applicable",
+                "uncertain"
+              ]
+            },
+            "applicability_basis": {
+              "type": "string",
+              "minLength": 1
+            },
+            "timing": {
+              "enum": [
+                "on_time",
+                "late_recoverable",
+                "late_contaminated",
+                "too_late",
+                "not_applicable"
+              ]
+            },
+            "satisfaction": {
+              "enum": [
+                "satisfied",
+                "partial",
+                "unsatisfied",
+                "not_applicable"
+              ]
+            },
+            "human_compensation_needed": {
+              "enum": [
+                "yes",
+                "no",
+                "unclear"
+              ]
+            },
+            "over_trigger_cost": {
+              "enum": [
+                "none",
+                "low",
+                "material"
+              ]
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "applicability": {
+                    "const": "not_applicable"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "timing": {
+                    "const": "not_applicable"
+                  },
+                  "satisfaction": {
+                    "const": "not_applicable"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "timing": {
+                    "not": {
+                      "const": "not_applicable"
+                    }
+                  },
+                  "satisfaction": {
+                    "not": {
+                      "const": "not_applicable"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "model_visible_request": {
+      "model": "qwen3.7-plus",
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false,
+      "messages": [
+        {
+          "role": "system",
+          "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+        },
+        {
+          "role": "user",
+          "content": "【案例规范与评分上下文】\n{\"adjudication\":\"derived\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E12\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"While the concrete instance is still readily available without reconstruction; this is a soft/degrading deadline, not a hard blocker.\",\"required_protection\":\"If the mapping is genuinely accurate, use a minimal situated concept binding: name the mature pattern, connect it to the concrete work just done, give one useful boundary, and return to delivery. Do not start a lesson or exercise by default.\"}\n\n【生成器最终响应】\n好的，继续。下一个调用点具体在哪一段代码里？我先定位后，看看它当前的分支逻辑是能直接复用刚抽出的策略，还是需要再抽一个新的策略。\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+        }
+      ]
+    },
+    "provider": {
+      "provider": "custom",
+      "configured_model": "qwen3.7-plus",
+      "model_family": "Qwen",
+      "declared_model_snapshot": null,
+      "parameters": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "max_tokens": 32768,
+        "stream": false
+      },
+      "context_mode": "standalone"
+    },
+    "provider_reported_model": "qwen3.7-plus",
+    "model_identity": {
+      "configured_model": "qwen3.7-plus",
+      "declared_model_snapshot": null,
+      "provider_reported_model": "qwen3.7-plus"
+    },
+    "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"The response is applicable to the ongoing refactoring context, as it correctly identifies the need to locate the next call site and evaluate strategy reuse. However, it fails to incorporate the required conceptual binding.\",\n  \"human_compensation_needed\": \"yes\",\n  \"notes\": \"The generator successfully returns to delivery but completely omits the required 'minimal situated concept binding' specified in the hidden semantic boundary (naming the mature pattern, connecting it to the concrete work, and providing a useful boundary). Human intervention is needed to establish these conceptual guardrails.\",\n  \"over_trigger_cost\": \"none\",\n  \"satisfaction\": \"partial\",\n  \"timing\": \"on_time\"\n}",
+    "public_response_metadata": {
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 582,
+        "completion_tokens": 1423,
+        "total_tokens": 2005,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1258
+        }
+      }
+    },
+    "attempt_count": 1,
+    "retry_count": 0,
+    "error": null,
+    "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+    "role": "grader",
+    "axis_results": {
+      "applicability": "applicable",
+      "applicability_basis": "The response is applicable to the ongoing refactoring context, as it correctly identifies the need to locate the next call site and evaluate strategy reuse. However, it fails to incorporate the required conceptual binding.",
+      "timing": "on_time",
+      "satisfaction": "partial",
+      "human_compensation_needed": "yes",
+      "over_trigger_cost": "none",
+      "notes": "The generator successfully returns to delivery but completely omits the required 'minimal situated concept binding' specified in the hidden semantic boundary (naming the mature pattern, connecting it to the concrete work, and providing a useful boundary). Human intervention is needed to establish these conceptual guardrails."
+    },
+    "grade_parse_status": "parsed"
+  }
+}

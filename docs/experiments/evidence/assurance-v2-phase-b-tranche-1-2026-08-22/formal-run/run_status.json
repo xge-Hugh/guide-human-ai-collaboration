@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "run_id": "40098907d5c5452a81d8677b26a4e33c",
+  "finalized_at": "2026-08-22T15:37:08.661727+00:00",
+  "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+  "mode": "formal",
+  "evidence_label": "phase_b_controlled_replay_raw_evidence_pending_adjudication",
+  "network_calls": 60,
+  "execution_scope": {
+    "tranche_id": "tranche_1",
+    "record_count": 30
+  },
+  "operational_status": "completed",
+  "blocked_reason": null,
+  "secret_scan": "pass",
+  "secret_match_files": [],
+  "artifact_tree_sha256": "916e1f90859f31d12a3ff7a8883bec43eb6ce3cecbfbe8db62ca86a4e8139c78"
+}

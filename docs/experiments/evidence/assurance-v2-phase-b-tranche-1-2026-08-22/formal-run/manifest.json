@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "run_id": "40098907d5c5452a81d8677b26a4e33c",
+  "started_at": "2026-08-22T15:17:47.003496+00:00",
+  "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+  "mode": "formal",
+  "evidence_label": "phase_b_controlled_replay_raw_evidence_pending_adjudication",
+  "runner_provenance": {
+    "available": true,
+    "git_revision": "4c805561e0d3d73613291133e9bed6b5b786a484",
+    "clean": true,
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "harness_source_sha256": "c77d6ed079c5702c1af9905c76e5e77f6ea1c747f28e3843b87915f3f3849937"
+  },
+  "roles": {
+    "generator": {
+      "provider": "custom",
+      "model": "deepseek-v4-flash",
+      "family": "DeepSeek",
+      "declared_snapshot": null,
+      "parameters": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "max_tokens": 65536,
+        "stream": false
+      },
+      "renderer": {
+        "id": "phase-b-formal-generator-zh-cn-v1",
+        "sha256": "4fcc602d28c48056ee6f0085ebf9ad50b4c0d71c621734af60666da20f2cf9af"
+      },
+      "context_mode": "standalone"
+    },
+    "grader": {
+      "provider": "custom",
+      "model": "qwen3.7-plus",
+      "family": "Qwen",
+      "declared_snapshot": null,
+      "parameters": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "max_tokens": 32768,
+        "stream": false
+      },
+      "renderer": {
+        "id": "phase-b-direct-grader-zh-cn-v1-candidate",
+        "sha256": "18c8e659c1a513a5aab901cc9c665624e0228835ed6a73859167faaf127218aa"
+      },
+      "context_mode": "standalone"
+    }
+  },
+  "sources": {
+    "generation": {
+      "path": "docs/experiments/assurance-v2-phase-b-generation.json",
+      "sha256": "b83a56690615b0bf59f87103170637064756b08a9e4295d29fe1d421302f6372"
+    },
+    "variants": {
+      "path": "docs/experiments/assurance-v2-phase-b-variants.zh-CN.json",
+      "sha256": "d72157251b1d7e83b3fc96034704d6e2424331d3fa41f0743b65ce5cbcc6da01"
+    },
+    "rubrics": {
+      "path": "docs/experiments/assurance-v2-phase-b-rubrics.json",
+      "sha256": "ed6ecd528f50ecdf37db4029979ca0aabbc0b331512dbce5774276ccf2fe6bae"
+    }
+  },
+  "execution_scope": {
+    "tranche_id": "tranche_1",
+    "record_count": 30
+  },
+  "prior_tranche_evidence": null
+}
