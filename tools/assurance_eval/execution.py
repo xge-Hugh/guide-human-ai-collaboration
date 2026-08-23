@@ -538,10 +538,13 @@ def execute_resolved_plan(
     generator_by_stem: dict[str, dict[str, Any]] = {}
     generator_context_by_stem: dict[str, str] = {}
     retry_counter: Counter[str] = Counter()
-    generation_integrity_blocked = False
+    # Formal generation must preserve serial counterbalanced order: halt after
+    # integrity failure or retryable transport exhaustion so later generators
+    # are not scheduled ahead of an unfinished earlier observation.
+    generation_halted = False
 
     for scheduled in selected_order:
-        if generation_integrity_blocked:
+        if generation_halted:
             break
         stem = _record_stem(scheduled)
         prior_record = prior_episode["records"].get(stem) if prior_episode else None
@@ -574,8 +577,8 @@ def execute_resolved_plan(
         generator_context_by_stem[stem] = context_id
         if plan["mode"] == "formal":
             block = _formal_blocking_reason("generator", generator_call)
-            if block is not None:
-                generation_integrity_blocked = True
+            if block is not None or generator_call.get("final_status") == "failed_retryable":
+                generation_halted = True
 
     grading_jobs: list[tuple[dict[str, Any], str, dict[str, Any], str | None]] = []
     for scheduled in selected_order:

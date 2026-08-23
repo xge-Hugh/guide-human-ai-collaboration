@@ -650,6 +650,110 @@ class HarnessTest(unittest.TestCase):
         self.assertEqual(report["paused_retryable_observations"], 1)
         self.assertEqual(report["retry_summary"]["total_retries"], 2)
 
+    def test_formal_generator_retry_exhaustion_halts_later_generators_until_resume(self) -> None:
+        prefix = self.root / "halt-prefix"
+        prefix.mkdir(mode=0o700)
+        experiment = self.small_experiment(
+            prefix, cases=["p003", "p004"], formal_execution_enabled=True,
+        )
+        clean = {
+            "available": True, "git_revision": "abc", "clean": True,
+            "status_sha256": sha256_bytes(b""), "harness_source_sha256": "harness",
+        }
+        with patch("tools.assurance_eval.planning.git_provenance", return_value=clean), patch(
+            "tools.assurance_eval.planning.require_committed_paths"
+        ):
+            envelope, resolved = build_resolved_plan(
+                repo_root=REPO_ROOT, experiment=experiment, catalog=self.catalog,
+                profile="test", mode="formal",
+            )
+        calls = 0
+
+        def failing_first_transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            nonlocal calls
+            calls += 1
+            request = json.loads(body)
+            if request["model"] != "generator-test":
+                raise AssertionError("grader must not run when the first generator exhausts retries")
+            raise ProviderError("provider transport failure")
+
+        with patch("tools.assurance_eval.execution.git_provenance", return_value=clean):
+            prefix_run = execute_resolved_plan(
+                repo_root=REPO_ROOT, envelope=envelope, catalog=self.catalog,
+                experiment=experiment, resolved=resolved, authorize_network=True,
+                transport=failing_first_transport, sleep=lambda _seconds: None,
+                new_id=iter(("halt-prefix", "g1")).__next__,
+            )
+        self.assertEqual(calls, 3)
+        self.assertEqual(len(list((prefix_run / "records").glob("*.json"))), 1)
+        prefix_record = json.loads((prefix_run / "records" / "p003__B0__r001.json").read_text())
+        self.assertEqual(prefix_record["operational_status"], "paused_retryable")
+        self.assertEqual(prefix_record["blocked_reason"]["code"], "generator_transport_retries_exhausted")
+        self.assertEqual(prefix_record["generator"]["final_status"], "failed_retryable")
+        self.assertEqual(prefix_record["generator"]["attempt_count"], 3)
+        self.assertEqual(len(prefix_record["generator"]["attempt_evidence_paths"]), 3)
+        self.assertIsNone(prefix_record["grader"])
+        self.assertFalse((prefix_run / "records" / "p004__B0__r001.json").exists())
+        report = load_report(prefix_run)
+        self.assertEqual(report["operational_status"], "paused_retryable")
+        self.assertNotEqual(report["operational_status"], "blocked_integrity")
+
+        continuation = self.root / "halt-resume"
+        continuation.mkdir(mode=0o700)
+        experiment2 = self.small_experiment(
+            continuation, cases=["p003", "p004"], formal_execution_enabled=True,
+        )
+        with patch("tools.assurance_eval.planning.git_provenance", return_value=clean), patch(
+            "tools.assurance_eval.planning.require_committed_paths"
+        ):
+            envelope2, resolved2 = build_resolved_plan(
+                repo_root=REPO_ROOT, experiment=experiment2, catalog=self.catalog,
+                profile="test", mode="formal",
+            )
+        generator_outputs: list[str] = []
+        calls = 0
+
+        def resume_transport(url: str, headers, body: bytes, timeout: float) -> bytes:
+            nonlocal calls
+            calls += 1
+            request = json.loads(body)
+            if request["model"] == "generator-test":
+                content = f"generator output {len(generator_outputs) + 1}"
+                generator_outputs.append(content)
+            else:
+                content = grade_json()
+            return json.dumps({
+                "model": request["model"] + "-reported",
+                "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
+            }).encode()
+
+        with patch("tools.assurance_eval.execution.git_provenance", return_value=clean):
+            resume_run = execute_resolved_plan(
+                repo_root=REPO_ROOT, envelope=envelope2, catalog=self.catalog,
+                experiment=experiment2, resolved=resolved2, authorize_network=True,
+                transport=resume_transport, sleep=lambda _seconds: None,
+                resume_from=prefix_run, grader_parallelism=1,
+                new_id=iter(("halt-resume", "g1", "g2", "j1", "j2")).__next__,
+            )
+        self.assertEqual(generator_outputs, ["generator output 1", "generator output 2"])
+        self.assertEqual(calls, 4)
+        records = {
+            path.stem: json.loads(path.read_text())
+            for path in sorted((resume_run / "records").glob("*.json"))
+        }
+        self.assertEqual(list(records), ["p003__B0__r001", "p004__B0__r001"])
+        self.assertEqual(records["p003__B0__r001"]["generator"]["raw_output"], "generator output 1")
+        self.assertEqual(records["p004__B0__r001"]["generator"]["raw_output"], "generator output 2")
+        self.assertNotIn("imported_from_episode", records["p003__B0__r001"]["generator"])
+        self.assertNotIn("imported_from_episode", records["p004__B0__r001"]["generator"])
+        self.assertEqual(records["p003__B0__r001"]["grader"]["grade_parse_status"], "parsed")
+        self.assertEqual(records["p004__B0__r001"]["grader"]["grade_parse_status"], "parsed")
+        self.assertEqual(load_report(resume_run)["operational_status"], "completed")
+        self.assertEqual(
+            json.loads((prefix_run / "records" / "p003__B0__r001.json").read_text())["generator"]["final_status"],
+            "failed_retryable",
+        )
+
     def test_no_retry_on_schema_or_integrity_failures(self) -> None:
         self.assertEqual(classify_retryability({"type": "PrivateValueBlocked", "message": "blocked"}), "not_retryable")
         self.assertEqual(classify_retryability({"type": "ProviderError", "message": "provider returned an invalid chat completion"}), "not_retryable")
