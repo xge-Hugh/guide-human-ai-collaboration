@@ -1,0 +1,77 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T02:56:41.550818+00:00",
+  "elapsed_ms": 8379.369,
+  "successful_attempt_elapsed_ms": 8379.307,
+  "request": {
+    "call_kind": "generator",
+    "context_id": "053437e8a07c4ff9a8d98859da8500e8",
+    "variant_id": "B0",
+    "system_instruction": "你是当前协作中的 AI 助手。请根据提供的前置上下文，\n自然回应用户当前消息。",
+    "packet": {
+      "case_id": "p012",
+      "pre_context": "在真实重构中，用户和 AI 刚把多处分支逻辑抽成可替换的行为策略，调用方只依赖稳定接口。用户长期负责类似服务设计；当前没有时间压力，也没有更重要的未结判断。",
+      "user_message": "这一处改完了，继续处理下一个调用点。"
+    }
+  },
+  "model_visible_request": {
+    "model": "deepseek-v4-flash",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 65536,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是当前协作中的 AI 助手。请根据提供的前置上下文，\n自然回应用户当前消息。"
+      },
+      {
+        "role": "user",
+        "content": "【前置上下文】\n在真实重构中，用户和 AI 刚把多处分支逻辑抽成可替换的行为策略，调用方只依赖稳定接口。用户长期负责类似服务设计；当前没有时间压力，也没有更重要的未结判断。\n\n【用户当前消息】\n这一处改完了，继续处理下一个调用点。"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "deepseek-v4-flash",
+    "model_family": "DeepSeek",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 65536,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "deepseek-v4-flash-202605",
+  "raw_output": "好的，继续推进。请把下一个调用点的代码贴出来，或者告诉我文件路径和大致位置，我按刚才的模式来抽取：把这块分支逻辑替换成同样的策略接口调用，保持调用方不再感知具体实现。\n\n你方便直接贴过来就行。",
+  "attempt_count": 1,
+  "retry_count": 0,
+  "final_status": "succeeded",
+  "successful_attempt": 1,
+  "attempt_evidence_paths": [
+    "call_evidence/p012__B0__r002__generator__attempt_001.json"
+  ],
+  "error": null,
+  "model_identity": {
+    "configured_model": "deepseek-v4-flash",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "deepseek-v4-flash-202605"
+  },
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 172,
+      "completion_tokens": 360,
+      "total_tokens": 532,
+      "completion_tokens_details": {
+        "reasoning_tokens": 304
+      }
+    }
+  },
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "generator"
+}

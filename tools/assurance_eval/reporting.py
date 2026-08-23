@@ -37,6 +37,13 @@ def load_report(run_dir: Path) -> dict[str, Any]:
         "planned_calls": summary["planned_calls"],
         "actual_calls": summary["actual_calls"],
         "network_calls": status.get("network_calls"),
+        "network_accounting": status.get("network_accounting", summary.get("network_accounting")),
+        "retry_summary": status.get("retry_summary", summary.get("retry_summary")),
+        "execution_episodes": status.get("execution_episodes", summary.get("execution_episodes", [])),
+        "completed_observations": summary.get("completed_observations"),
+        "unfinished_observations": summary.get("unfinished_observations"),
+        "paused_retryable_observations": summary.get("paused_retryable_observations"),
+        "resume_from": status.get("resume_from"),
         "generation": summary["generation"],
         "grading": summary["grading"],
         "operational_status": operational_status,
@@ -98,6 +105,18 @@ def inspect_case(run_dir: Path, case_id: str) -> dict[str, Any]:
                 "elapsed_ms": {
                     "generator": generator.get("elapsed_ms"),
                     "grader": grader.get("elapsed_ms") if grader else None,
+                },
+                "successful_attempt_elapsed_ms": {
+                    "generator": generator.get("successful_attempt_elapsed_ms"),
+                    "grader": grader.get("successful_attempt_elapsed_ms") if grader else None,
+                },
+                "attempt_evidence_paths": {
+                    "generator": generator.get("attempt_evidence_paths", []),
+                    "grader": grader.get("attempt_evidence_paths", []) if grader else [],
+                },
+                "imported_from_episode": {
+                    "generator": generator.get("imported_from_episode"),
+                    "grader": grader.get("imported_from_episode") if grader else None,
                 },
                 "operational_status": record.get("operational_status", "completed"),
                 "blocked_reason": record.get("blocked_reason"),

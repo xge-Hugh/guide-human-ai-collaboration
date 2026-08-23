@@ -5,8 +5,9 @@ from __future__ import annotations
 import hashlib
 import stat
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
+from threading import Lock
 from typing import Any, Callable, Mapping
 
 from .models import ProviderError, Transport
@@ -78,22 +79,43 @@ def validate_private_output(path: Path, repo_root: Path, *, must_exist: bool) ->
 
 @dataclass
 class NetworkGate:
-    """One shared per-run call budget; each planned call is single-shot."""
+    """Shared per-run transport budget across logical calls and retry attempts."""
 
     transport: Transport
     authorized: bool
-    maximum_calls: int
+    maximum_network_attempts: int
     before_call: Callable[[], None]
     forbidden_values: tuple[str, ...] = ()
-    calls: int = 0
+    network_attempts: int = 0
+    planned_logical_calls: int = 0
+    completed_logical_calls: int = 0
+    _accounting_lock: Any = field(default_factory=Lock, init=False, repr=False)
+
+    @property
+    def calls(self) -> int:
+        with self._accounting_lock:
+            return self.network_attempts
 
     def __call__(self, url: str, headers: Mapping[str, str], body: bytes, timeout: float) -> bytes:
         if not self.authorized:
             raise ProviderError("network authorization is missing")
-        if self.calls >= self.maximum_calls:
-            raise ProviderError("resolved-plan network call budget exhausted")
         if any(value.encode("utf-8") in body for value in self.forbidden_values if value):
             raise ProviderError("model-visible request contains a private value")
-        self.before_call()
-        self.calls += 1
+        with self._accounting_lock:
+            if self.network_attempts >= self.maximum_network_attempts:
+                raise ProviderError("resolved-plan network call budget exhausted")
+            self.before_call()
+            self.network_attempts += 1
         return self.transport(url, headers, body, timeout)
+
+    def mark_logical_call_completed(self) -> None:
+        with self._accounting_lock:
+            self.completed_logical_calls += 1
+
+    def accounting(self) -> dict[str, int]:
+        with self._accounting_lock:
+            return {
+                "planned_logical_calls": self.planned_logical_calls,
+                "completed_logical_calls": self.completed_logical_calls,
+                "actual_network_attempts": self.network_attempts,
+            }

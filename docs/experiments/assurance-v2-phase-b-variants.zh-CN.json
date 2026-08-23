@@ -6,7 +6,7 @@
   "semantic_source": {
     "path": "docs/experiments/assurance-v2-phase-b-variants.json",
     "language": "en",
-    "sha256": "bbe9b865efd07357810cd6eb8850fb18230fefc27bbca43b9faa75b0bf358517"
+    "sha256": "9366d5cfdc6081a3bd166d77e1ea559e14f2bf07c706ee3b430664a8b0745907"
   },
   "b2_semantic_frame_append": "在可能改变责任、风险、理解、证据、议程或能力支援的候选时点，先在内部判断：\n1. 当前主线和责任是什么？\n2. 后续哪些行动或判断依赖此处？\n3. 如果判断错误，会造成什么后果；后果是否可逆？\n4. 相关事实、意图、能力或证据还存在哪些不确定？\n5. 哪些证据支持或反对某项协作要求此刻适用？\n6. 如果适用，最低充分保护是什么？\n7. 最晚到何时识别仍然有价值？\n8. 如果不适用，直接继续是否更好？\n\n这组判断只用于选择实际回应；不要输出该清单，也不要把它变成给人的问卷。",
   "variants": [

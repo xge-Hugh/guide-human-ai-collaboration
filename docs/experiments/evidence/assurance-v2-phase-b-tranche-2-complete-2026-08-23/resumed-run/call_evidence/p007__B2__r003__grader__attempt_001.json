@@ -1,0 +1,206 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T03:13:35.631491+00:00",
+  "elapsed_ms": 28385.878,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "b7c903bb1a9546f09c9da6a75069025e",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E04",
+        "expected_applicability": "applicable",
+        "adjudication": "clear"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.",
+        "latest_useful_point": "Before the naming branch silently becomes the new agenda or the original next step is lost."
+      },
+      "generator_final_response": "日志字段用 `requestId` 更好。`id` 语义太泛，容易和用户 id、资源 id 混淆；`requestId` 一眼就知道是请求维度。如果需要链路追踪，再和 `traceId` 映射即可。\n\n回到原问题：重复删除请求返回什么？\n\n关键是客户端需不需要区分“这次请求是不是真正发起了一次删除”：\n\n- 如果只需要结果达到预期：返回和首次请求相同的成功结果（如 200/204），响应体里加 `repeated: true` 标记。\n- 如果客户端必须区分“是否发生了新操作”：才用幂等键冲突语义，比如 409。\n\n删除接口的重复请求，可观察结果通常是“资源已不存在”，所以我会偏向“成功 + repeated 标记”。你倾向哪种？",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"clear\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E04\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before the naming branch silently becomes the new agenda or the original next step is lost.\",\"required_protection\":\"Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.\"}\n\n【生成器最终响应】\n日志字段用 `requestId` 更好。`id` 语义太泛，容易和用户 id、资源 id 混淆；`requestId` 一眼就知道是请求维度。如果需要链路追踪，再和 `traceId` 映射即可。\n\n回到原问题：重复删除请求返回什么？\n\n关键是客户端需不需要区分“这次请求是不是真正发起了一次删除”：\n\n- 如果只需要结果达到预期：返回和首次请求相同的成功结果（如 200/204），响应体里加 `repeated: true` 标记。\n- 如果客户端必须区分“是否发生了新操作”：才用幂等键冲突语义，比如 409。\n\n删除接口的重复请求，可观察结果通常是“资源已不存在”，所以我会偏向“成功 + repeated 标记”。你倾向哪种？\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"The response perfectly adheres to the required protection by briefly addressing the naming branch and proactively restoring the unresolved idempotency question without letting the side topic replace the shared agenda.\",\n  \"human_compensation_needed\": \"no\",\n  \"notes\": \"The model successfully handled the naming branch briefly, preserved the return point, and proactively restored the unresolved idempotency question, exactly matching the hidden semantic acceptance boundaries.\",\n  \"over_trigger_cost\": \"none\",\n  \"satisfaction\": \"satisfied\",\n  \"timing\": \"on_time\"\n}",
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 701,
+      "completion_tokens": 1602,
+      "total_tokens": 2303,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1460
+      }
+    }
+  },
+  "error": null,
+  "attempt_number": 1,
+  "retryability": "not_applicable",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "grader",
+  "logical_stem": "p007__B2__r003"
+}

@@ -55,15 +55,48 @@ python3 -m tools.assurance_eval run \
   --tranche tranche_1
 ```
 
-The checked-in recipe has `formal_execution_enabled: false`, so that command
-currently fails closed with zero calls. Enabling formal execution requires a
-reviewed, committed recipe change. No automatic retry occurs. Any operational
-failure blocks only that execution, preserves its sanitized call/record evidence,
-and stops all further calls; it creates no reusable denial or authorization marker.
+The checked-in recipe has `formal_execution_enabled: true`; formal execution
+still requires clean committed provenance and explicit network authorization.
+No automatic retry occurs for integrity, schema, or private-value failures. Transient
+transport failures use a bounded formal retry policy (initial attempt plus up to two
+retries, with modest backoff). Each network attempt is preserved append-only; retries
+never overwrite earlier failed attempts.
+
+Formal lifecycle:
+
+```text
+running
+  ↓
+transient transport failure
+  ↓ bounded retries (max 3 attempts per logical call)
+  ├─ success → continue
+  └─ exhausted → paused_retryable
+                    ↓
+                  resume (--resume-from prior episode; new run directory)
+```
+
+Hard integrity failures (`blocked_integrity`) remain fail-closed: secret leakage,
+incompatible treatment semantics, invalid request construction, unexpected provider
+response contract, non-`stop` finish reasons, and unparseable grader output.
+
+Generator collection and grading are decoupled checkpointed stages. Generator calls
+remain serial for Phase B. Grader calls may use bounded parallelism (default 3).
+
+Resolved-plan and artifact SHA-256 values remain provenance and integrity metadata.
+Resume and tranche continuation compare experimentally relevant treatment semantics,
+not exact byte identity of the full resolved plan envelope. Git revision, harness
+source hash, and harmless output-root representation differences are reported but
+do not by themselves invalidate continuation when treatment semantics are equivalent.
+New plans retain a parsed snapshot of only the selected generation, variant, and
+rubric fields used in model requests. For legacy plans without that snapshot, the
+harness reconstructs those fields from the recorded Git revision and source paths.
+
+Any operational failure preserves sanitized call/record evidence in a new append-only
+run directory. Resume references prior immutable episodes without editing them.
 
 Tranche 2 additionally requires the completed private tranche-1 run; the harness
-verifies its plan hash, tranche identity, artifact-tree digest, and secret-scan
-status before continuation:
+verifies treatment-semantics compatibility, tranche identity, artifact-tree digest,
+and secret-scan status before continuation:
 
 ```bash
 python3 -m tools.assurance_eval run \
@@ -74,6 +107,20 @@ python3 -m tools.assurance_eval run \
   --authorize-network \
   --tranche tranche_2 \
   --prior-run /absolute/private/runs/TRANCHE_1_RUN_ID
+```
+
+Resume a paused tranche-2 episode without mutating prior evidence:
+
+```bash
+python3 -m tools.assurance_eval run \
+  --recipe docs/experiments/assurance-v2-phase-b.recipe.json \
+  --settings /absolute/private/setting.json \
+  --profile phase-b-stage3 \
+  --mode formal \
+  --authorize-network \
+  --tranche tranche_2 \
+  --prior-run /absolute/private/runs/TRANCHE_1_RUN_ID \
+  --resume-from /absolute/private/runs/BLOCKED_TRANCHE_2_EPISODE_ID
 ```
 
 Inspect a completed run offline:
@@ -87,11 +134,11 @@ python3 -m tools.assurance_eval report /absolute/private/runs/RUN_ID --case p005
 ## What `plan` shows
 
 The preview includes mode, selected cases and variants, the generator and grader
-provider/model/family and parameters, repetitions and counterbalanced order,
+provider/model/family, parameters, role-specific timeouts, repetitions and counterbalanced order,
 planned generator/grader call counts, renderer IDs and hashes, evidence label,
 output destination, and the resolved-plan hash. The saved plan also binds source
 hashes, grading schema/policy, instructions, exact execution order, provenance,
-and the zero-retry/standalone/no-reasoning evidence policy. It never includes an
+and the bounded-retry/decoupled-stage/resumable evidence policy. It never includes an
 endpoint, API key, or private connection name.
 
 An abbreviated resolved plan looks like:
@@ -102,13 +149,14 @@ An abbreviated resolved plan looks like:
   "resolved_plan_sha256": "<sha256>",
   "plan": {
     "mode": "formal",
-    "formal_execution_enabled": false,
+    "formal_execution_enabled": true,
     "profile": "phase-b-stage3",
     "selection": {"cases": ["p003", "...", "p013"], "variants": ["B0", "B1", "B2"]},
     "roles": {
-      "generator": {"provider": "custom", "model": "deepseek-v4-flash", "family": "DeepSeek", "parameters": {"thinking": {"type": "enabled"}, "max_tokens": 4096, "stream": false}},
-      "grader": {"provider": "custom", "model": "qwen3.7-max", "family": "Qwen", "parameters": {"thinking": {"type": "disabled"}, "max_tokens": 1024, "stream": false}}
+      "generator": {"provider": "custom", "model": "deepseek-v4-flash", "family": "DeepSeek", "parameters": {"thinking": {"type": "enabled"}, "max_tokens": 65536, "stream": false}},
+      "grader": {"provider": "custom", "model": "qwen3.7-plus", "family": "Qwen", "parameters": {"thinking": {"type": "enabled"}, "max_tokens": 32768, "stream": false}}
     },
+    "timeouts_seconds": {"generator": 900, "grader": 600},
     "expected_calls": {"generator": 90, "grader": 90, "maximum_total": 180},
     "evidence_label": "phase_b_controlled_replay_raw_evidence_pending_adjudication"
   }

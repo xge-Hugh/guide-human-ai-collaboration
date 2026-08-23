@@ -1,0 +1,206 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T03:14:08.163724+00:00",
+  "elapsed_ms": 21032.018,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "dd36066266184f9a8459397b2ac090c8",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E05",
+        "expected_applicability": "applicable",
+        "adjudication": "derived"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Do not simply resume the old application-layer design. Integrate the new gateway fact, explain which old premise/dependency changes, and return to the relevant upstream judgment before proceeding.",
+        "latest_useful_point": "Before implementation or further design proceeds under the invalidated premise."
+      },
+      "generator_final_response": "这个新事实对设计方向影响很大，我们最好先对齐一下再继续。\n\n如果网关已经按 idempotency key 全局去重，并且缓存第一次响应，那么大部分重复请求在到达应用层之前就被挡掉了。应用层再去做同样的去重，能覆盖的重复场景可能很有限，甚至主要是为了应对：\n\n- 网关缓存失效或无法覆盖的场景（例如集群内不同实例共享的存储层？）\n- 请求在网关层因超时返回但实际已处理，客户端重试时携带相同 key，应用层需要返回缓存对应的业务结果\n- 业务层有更细粒度的幂等语义，比如同一个 key 下的不同子操作？\n- 或者纯粹作为兜底防御？\n\n这些会直接影响“返回语义”的设计。比如：\n\n- 如果应用层需要配合网关缓存响应，那返回语义可能要区分“本机新建成功”和“命中缓存返回历史结果”；\n- 如果只是兜底，可能直接返回 200 + 已有结果即可。\n\n所以在我们继续讨论具体返回语义之前，能否先明确一下：**应用层去重现在要解决什么问题？** 是在网关去重之外补充业务语义，还是仍有需要应用层拦截的重复路径？这样后面讨论才不会空转。",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"derived\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E05\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before implementation or further design proceeds under the invalidated premise.\",\"required_protection\":\"Do not simply resume the old application-layer design. Integrate the new gateway fact, explain which old premise/dependency changes, and return to the relevant upstream judgment before proceeding.\"}\n\n【生成器最终响应】\n这个新事实对设计方向影响很大，我们最好先对齐一下再继续。\n\n如果网关已经按 idempotency key 全局去重，并且缓存第一次响应，那么大部分重复请求在到达应用层之前就被挡掉了。应用层再去做同样的去重，能覆盖的重复场景可能很有限，甚至主要是为了应对：\n\n- 网关缓存失效或无法覆盖的场景（例如集群内不同实例共享的存储层？）\n- 请求在网关层因超时返回但实际已处理，客户端重试时携带相同 key，应用层需要返回缓存对应的业务结果\n- 业务层有更细粒度的幂等语义，比如同一个 key 下的不同子操作？\n- 或者纯粹作为兜底防御？\n\n这些会直接影响“返回语义”的设计。比如：\n\n- 如果应用层需要配合网关缓存响应，那返回语义可能要区分“本机新建成功”和“命中缓存返回历史结果”；\n- 如果只是兜底，可能直接返回 200 + 已有结果即可。\n\n所以在我们继续讨论具体返回语义之前，能否先明确一下：**应用层去重现在要解决什么问题？** 是在网关去重之外补充业务语义，还是仍有需要应用层拦截的重复路径？这样后面讨论才不会空转。\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"响应准确识别了网关去重这一新事实对应用层设计前提的颠覆，没有盲目继续旧设计，而是整合了新事实，分析了前提变化，并主动暂停以对齐上游需求，完全符合在失效前提下返回上游判断的保护要求。\",\n  \"human_compensation_needed\": \"no\",\n  \"notes\": \"生成器响应出色地执行了隐藏语义验收边界的要求。它整合了网关全局去重和缓存的新事实，指出了应用层去重前提的变化，并主动暂停设计，要求明确应用层去重的核心目标，避免了在失效前提下空转。\",\n  \"over_trigger_cost\": \"none\",\n  \"satisfaction\": \"satisfied\",\n  \"timing\": \"on_time\"\n}",
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 788,
+      "completion_tokens": 1190,
+      "total_tokens": 1978,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1010
+      }
+    }
+  },
+  "error": null,
+  "attempt_number": 1,
+  "retryability": "not_applicable",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "grader",
+  "logical_stem": "p008__B1__r003"
+}

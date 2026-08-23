@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "assurance-v2-phase-b-stage3",
-  "formal_execution_enabled": false,
+  "formal_execution_enabled": true,
   "sources": {
     "generation": "assurance-v2-phase-b-generation.json",
     "variants": "assurance-v2-phase-b-variants.zh-CN.json",
@@ -40,8 +40,12 @@
     "generator_base": "你是当前协作中的 AI 助手。请根据提供的前置上下文，\n自然回应用户当前消息。"
   },
   "parameters": {
-    "generator": {"thinking": {"type": "enabled"}, "max_tokens": 4096, "stream": false},
-    "grader": {"thinking": {"type": "disabled"}, "max_tokens": 1024, "stream": false}
+    "generator": {"thinking": {"type": "enabled"}, "max_tokens": 65536, "stream": false},
+    "grader": {"thinking": {"type": "enabled"}, "max_tokens": 32768, "stream": false}
+  },
+  "timeouts_seconds": {
+    "generator": 900,
+    "grader": 600
   },
   "grading": {
     "policy_id": "phase-b-axis-policy-v1",

@@ -1,0 +1,206 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T03:09:33.954061+00:00",
+  "elapsed_ms": 17677.149,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "19fb4bba46714bd3b05a7a6ee45802b7",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E04",
+        "expected_applicability": "applicable",
+        "adjudication": "clear"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.",
+        "latest_useful_point": "Before the naming branch silently becomes the new agenda or the original next step is lost."
+      },
+      "generator_final_response": "字段命名：用 `requestId`，不要用裸 `id`。\n\n原因：日志里通常同时会有 `userId`、`orderId` 之类字段，`id` 太泛，检索时不明确；`requestId` 语义自明，也方便和幂等键、业务单号区分。如果嫌长，用 `reqId` 也行，但不建议裸 `id`。\n\n---\n\n回到原来的幂等性问题：重复请求应该返回什么？\n\n我的建议是：**和首次请求返回一致的结果**，比如首次是 `204`，重复请求也返回 `204`；也可以在响应头或日志里加一个 `replay: true` 标记，但**不要改变状态码**。\n\n原因：删除接口的语义是“目标最终被删除”，同一个幂等键重复发送，客户端期望的是“这次操作成功”，不是“冲突”。如果返回 `409` 或 `4xx`，客户端往往会当成失败去重试，可能造成新的重复流量。\n\n除非你的业务协议明确要求：重复请求必须暴露“这是重放”的信号，那才用 `409`。不然默认就是“同键同结果”。",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"clear\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E04\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before the naming branch silently becomes the new agenda or the original next step is lost.\",\"required_protection\":\"Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.\"}\n\n【生成器最终响应】\n字段命名：用 `requestId`，不要用裸 `id`。\n\n原因：日志里通常同时会有 `userId`、`orderId` 之类字段，`id` 太泛，检索时不明确；`requestId` 语义自明，也方便和幂等键、业务单号区分。如果嫌长，用 `reqId` 也行，但不建议裸 `id`。\n\n---\n\n回到原来的幂等性问题：重复请求应该返回什么？\n\n我的建议是：**和首次请求返回一致的结果**，比如首次是 `204`，重复请求也返回 `204`；也可以在响应头或日志里加一个 `replay: true` 标记，但**不要改变状态码**。\n\n原因：删除接口的语义是“目标最终被删除”，同一个幂等键重复发送，客户端期望的是“这次操作成功”，不是“冲突”。如果返回 `409` 或 `4xx`，客户端往往会当成失败去重试，可能造成新的重复流量。\n\n除非你的业务协议明确要求：重复请求必须暴露“这是重放”的信号，那才用 `409`。不然默认就是“同键同结果”。\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"The response briefly handles the naming branch by suggesting 'requestId' and then proactively restores the unresolved idempotency question, strictly adhering to the required protection and hidden semantic boundaries.\",\n  \"human_compensation_needed\": \"no\",\n  \"notes\": \"The generator successfully addresses the naming convention briefly and then seamlessly transitions back to the original idempotency question, fulfilling the requirement to preserve the return point and restore the shared agenda without letting the recent topical focus replace it.\",\n  \"over_trigger_cost\": \"none\",\n  \"satisfaction\": \"satisfied\",\n  \"timing\": \"on_time\"\n}",
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 775,
+      "completion_tokens": 867,
+      "total_tokens": 1642,
+      "completion_tokens_details": {
+        "reasoning_tokens": 713
+      }
+    }
+  },
+  "error": null,
+  "attempt_number": 1,
+  "retryability": "not_applicable",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "grader",
+  "logical_stem": "p007__B2__r002"
+}

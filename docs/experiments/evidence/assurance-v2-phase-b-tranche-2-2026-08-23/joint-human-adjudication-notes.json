@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "joint_human_adjudication_notes",
+  "scope": "tranche_1_repetition_1_only",
+  "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+  "source_run_id": "40098907d5c5452a81d8677b26a4e33c",
+  "preserve_original_qwen_judgments": true,
+  "modify_prompts_rubrics_or_tranche_2_conditions": false,
+  "notes": [
+    {
+      "record_id": "p011__B0__r001",
+      "case_id": "p011",
+      "variant_id": "B0",
+      "repetition": 1,
+      "human_adjudication": {
+        "satisfaction": "partial",
+        "qualification": "provisional; not confidently satisfied"
+      }
+    },
+    {
+      "record_id": "p012__B1__r001",
+      "case_id": "p012",
+      "variant_id": "B1",
+      "repetition": 1,
+      "human_adjudication": {
+        "satisfaction": "boundary_between_partial_and_satisfied"
+      }
+    },
+    {
+      "record_id": "p012__B2__r001",
+      "case_id": "p012",
+      "variant_id": "B2",
+      "repetition": 1,
+      "human_adjudication": {
+        "protection": "missed",
+        "timing": "late_recoverable",
+        "timing_qualification": "more plausible than too_late"
+      }
+    }
+  ]
+}

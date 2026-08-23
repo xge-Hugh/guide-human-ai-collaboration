@@ -15,9 +15,9 @@
       "family": "DeepSeek",
       "declared_snapshot": null
     },
-    "qwen3.7-max": {
+    "qwen3.7-plus": {
       "connection": "private-route",
-      "model_id": "qwen3.7-max",
+      "model_id": "qwen3.7-plus",
       "family": "Qwen",
       "declared_snapshot": null
     }
@@ -26,7 +26,7 @@
     "phase-b-stage3": {
       "roles": {
         "generator": "deepseek-v4-flash",
-        "grader": "qwen3.7-max"
+        "grader": "qwen3.7-plus"
       }
     }
   }

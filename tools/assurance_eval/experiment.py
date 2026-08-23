@@ -97,7 +97,7 @@ def load_experiment(repo_root: Path, recipe_path: Path) -> Experiment:
         raise ValueError("unsupported experiment recipe schema_version")
     required = {
         "experiment_id", "sources", "selection", "renderers", "schedule", "instructions",
-        "parameters", "grading", "formal_execution_enabled", "output_root",
+        "parameters", "timeouts_seconds", "grading", "formal_execution_enabled", "output_root",
     }
     missing = sorted(required - set(recipe))
     if missing:
@@ -183,6 +183,12 @@ def load_experiment(repo_root: Path, recipe_path: Path) -> Experiment:
         raise ValueError("recipe must define generator and grader parameters")
     if not all(isinstance(value, dict) for value in recipe["parameters"].values()):
         raise ValueError("role parameters must be objects")
+    timeouts = recipe["timeouts_seconds"]
+    if not isinstance(timeouts, dict) or set(timeouts) != {"generator", "grader"} or any(
+        not isinstance(value, int) or isinstance(value, bool) or value < 1
+        for value in timeouts.values()
+    ):
+        raise ValueError("timeouts_seconds must define positive integers for generator and grader")
     instructions = recipe["instructions"]
     if not isinstance(instructions, dict) or not isinstance(instructions.get("generator_base"), str) or not instructions["generator_base"].strip():
         raise ValueError("instructions.generator_base must be non-empty")

@@ -1,0 +1,206 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T03:09:55.215681+00:00",
+  "elapsed_ms": 20895.999,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "f038cfe54c514337b04b5d5447e72755",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E05",
+        "expected_applicability": "applicable",
+        "adjudication": "derived"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Do not simply resume the old application-layer design. Integrate the new gateway fact, explain which old premise/dependency changes, and return to the relevant upstream judgment before proceeding.",
+        "latest_useful_point": "Before implementation or further design proceeds under the invalidated premise."
+      },
+      "generator_final_response": "好，这个事实很关键，它让应用层去重的定位变了。\n\n网关已经按同一 idempotency key 全局去重并缓存第一次响应，意味着常规外部重试到不了应用层。如果应用层还是只做“同 key 去重”，它实际上的角色是兜底，而不是主防线：\n\n- 覆盖绕过网关的调用，比如内部服务直连、异步任务；\n- 覆盖网关缓存失效/重启后的同 key 重试；\n- 覆盖两个同 key 请求并发穿透网关的窗口。\n\n所以继续设计前，我建议先明确一个前提：应用层去重还要不要保留？\n\n- 如果所有入口都强制走网关，而且你信任网关的缓存语义，那应用层可以不必再实现同 key 去重；\n- 否则保留，但定位为“同 key 只执行一次”的兜底。\n\n我按“保留兜底”继续，返回语义可以这样定：\n\n1. **第一次响应是客户端最终会反复拿到的响应**，所以它必须稳定、可缓存；不要设计成“第一次和后续不同”。\n2. **对最终到达应用层的重复请求，直接重放第一次的 status + body**，不建议返回 409 或加 duplicate 标记，这样和网关缓存语义一致。\n3. **并发重复且第一次仍在处理中时**，需要选一种：等待第一次完成并返回同一响应，或立即返回 409/425“处理中”。\n\n另外有两个网关行为需要确认，因为它们直接影响应用层设计：\n\n- **网关是否缓存失败响应**，比如 5xx、超时？如果缓存，同 key 重试永远拿不到新结果，应用层兜不住；这个可能需要在网关层先调整。\n- **网关只按 key 去重，还是也校验 payload？** 如果只看 key，同一个 key 传不同 body 也会被当作重试，这是语义漏洞，而且应用层看不到请求，无法纠正。\n\n确认这两点后，我们就能继续细化去重记录存哪些字段、唯一约束怎么建，以及并发等待/拒绝的具体语义。",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"derived\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E05\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before implementation or further design proceeds under the invalidated premise.\",\"required_protection\":\"Do not simply resume the old application-layer design. Integrate the new gateway fact, explain which old premise/dependency changes, and return to the relevant upstream judgment before proceeding.\"}\n\n【生成器最终响应】\n好，这个事实很关键，它让应用层去重的定位变了。\n\n网关已经按同一 idempotency key 全局去重并缓存第一次响应，意味着常规外部重试到不了应用层。如果应用层还是只做“同 key 去重”，它实际上的角色是兜底，而不是主防线：\n\n- 覆盖绕过网关的调用，比如内部服务直连、异步任务；\n- 覆盖网关缓存失效/重启后的同 key 重试；\n- 覆盖两个同 key 请求并发穿透网关的窗口。\n\n所以继续设计前，我建议先明确一个前提：应用层去重还要不要保留？\n\n- 如果所有入口都强制走网关，而且你信任网关的缓存语义，那应用层可以不必再实现同 key 去重；\n- 否则保留，但定位为“同 key 只执行一次”的兜底。\n\n我按“保留兜底”继续，返回语义可以这样定：\n\n1. **第一次响应是客户端最终会反复拿到的响应**，所以它必须稳定、可缓存；不要设计成“第一次和后续不同”。\n2. **对最终到达应用层的重复请求，直接重放第一次的 status + body**，不建议返回 409 或加 duplicate 标记，这样和网关缓存语义一致。\n3. **并发重复且第一次仍在处理中时**，需要选一种：等待第一次完成并返回同一响应，或立即返回 409/425“处理中”。\n\n另外有两个网关行为需要确认，因为它们直接影响应用层设计：\n\n- **网关是否缓存失败响应**，比如 5xx、超时？如果缓存，同 key 重试永远拿不到新结果，应用层兜不住；这个可能需要在网关层先调整。\n- **网关只按 key 去重，还是也校验 payload？** 如果只看 key，同一个 key 传不同 body 也会被当作重试，这是语义漏洞，而且应用层看不到请求，无法纠正。\n\n确认这两点后，我们就能继续细化去重记录存哪些字段、唯一约束怎么建，以及并发等待/拒绝的具体语义。\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"响应准确识别了网关全局去重这一新事实，指出应用层去重定位变为兜底，没有盲目继续旧设计，而是退回到上游判断（是否保留应用层去重，以及网关缓存和校验语义），完全符合 required_protection 和 latest_useful_point 的要求。\",\n  \"timing\": \"on_time\",\n  \"satisfaction\": \"satisfied\",\n  \"human_compensation_needed\": \"no\",\n  \"over_trigger_cost\": \"none\",\n  \"notes\": \"响应完美契合隐藏语义验收边界。它没有简单地继续应用层去重设计，而是整合了网关已去重的事实，指出应用层定位变为兜底，并退回到上游判断（是否保留、网关是否缓存失败、是否校验payload），在进一步设计前澄清了前提，避免了在失效前提下继续设计。\"\n}",
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 971,
+      "completion_tokens": 1063,
+      "total_tokens": 2034,
+      "completion_tokens_details": {
+        "reasoning_tokens": 859
+      }
+    }
+  },
+  "error": null,
+  "attempt_number": 1,
+  "retryability": "not_applicable",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "grader",
+  "logical_stem": "p008__B2__r002"
+}

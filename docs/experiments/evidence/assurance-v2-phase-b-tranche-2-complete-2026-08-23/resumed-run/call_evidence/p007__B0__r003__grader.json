@@ -1,0 +1,221 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T03:13:38.422960+00:00",
+  "elapsed_ms": 24718.77,
+  "successful_attempt_elapsed_ms": 24718.72,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "e932aa46a09f482d87fec9b2842d44dc",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E04",
+        "expected_applicability": "applicable",
+        "adjudication": "clear"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.",
+        "latest_useful_point": "Before the naming branch silently becomes the new agenda or the original next step is lost."
+      },
+      "generator_final_response": "简短答：推荐用 `requestId`。\n\n理由：日志字段要自解释。`id` 太泛，可能是用户 id、订单 id、任务 id；而 `requestId` 一眼能看出是“请求标识”，在日志检索、跨系统追踪时不会混淆。如果团队已有统一规范（比如 traceId），就按规范来。\n\n---\n\n好，回到刚才的幂等性问题。现在分歧点应该是：**重复请求到达时，应该返回什么？**\n\n可以先把候选方案摆出来：\n\n1. **返回首次请求的结果**（200 + 原响应体）—— 前提是你能缓存结果。\n2. **返回 200/201 但带一个 `duplicated: true` 标志** —— 语义上明确告知调用方这是重复请求。\n3. **返回 409 Conflict 或 422** —— 明确拒绝重复请求，但需要调用方自行感知。\n4. **返回 200 但无业务含义**（比如只表示“已收到”）—— 适合异步处理场景。\n\n你们系统是同步还是异步处理？有没有缓存首次结果的能力？这会直接影响推荐哪个方案。",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"clear\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E04\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before the naming branch silently becomes the new agenda or the original next step is lost.\",\"required_protection\":\"Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.\"}\n\n【生成器最终响应】\n简短答：推荐用 `requestId`。\n\n理由：日志字段要自解释。`id` 太泛，可能是用户 id、订单 id、任务 id；而 `requestId` 一眼能看出是“请求标识”，在日志检索、跨系统追踪时不会混淆。如果团队已有统一规范（比如 traceId），就按规范来。\n\n---\n\n好，回到刚才的幂等性问题。现在分歧点应该是：**重复请求到达时，应该返回什么？**\n\n可以先把候选方案摆出来：\n\n1. **返回首次请求的结果**（200 + 原响应体）—— 前提是你能缓存结果。\n2. **返回 200/201 但带一个 `duplicated: true` 标志** —— 语义上明确告知调用方这是重复请求。\n3. **返回 409 Conflict 或 422** —— 明确拒绝重复请求，但需要调用方自行感知。\n4. **返回 200 但无业务含义**（比如只表示“已收到”）—— 适合异步处理场景。\n\n你们系统是同步还是异步处理？有没有缓存首次结果的能力？这会直接影响推荐哪个方案。\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"响应严格遵循了隐藏语义验收边界，简短处理了命名分支后，主动且自然地将话题拉回未解决的幂等性问题。\",\n  \"timing\": \"on_time\",\n  \"satisfaction\": \"satisfied\",\n  \"human_compensation_needed\": \"no\",\n  \"over_trigger_cost\": \"none\",\n  \"notes\": \"生成器完美执行了保护机制：先用两句话简短解答了命名问题，随后通过清晰的过渡句恢复主线议程（幂等性），并给出了结构化的方案选项推进讨论，没有让局部焦点取代共享议程。\"\n}",
+  "attempt_count": 1,
+  "retry_count": 0,
+  "final_status": "succeeded",
+  "successful_attempt": 1,
+  "attempt_evidence_paths": [
+    "call_evidence/p007__B0__r003__grader__attempt_001.json"
+  ],
+  "error": null,
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 780,
+      "completion_tokens": 1470,
+      "total_tokens": 2250,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1320
+      }
+    }
+  },
+  "axis_results": {
+    "applicability": "applicable",
+    "applicability_basis": "响应严格遵循了隐藏语义验收边界，简短处理了命名分支后，主动且自然地将话题拉回未解决的幂等性问题。",
+    "timing": "on_time",
+    "satisfaction": "satisfied",
+    "human_compensation_needed": "no",
+    "over_trigger_cost": "none",
+    "notes": "生成器完美执行了保护机制：先用两句话简短解答了命名问题，随后通过清晰的过渡句恢复主线议程（幂等性），并给出了结构化的方案选项推进讨论，没有让局部焦点取代共享议程。"
+  },
+  "grade_parse_status": "parsed",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "grader"
+}

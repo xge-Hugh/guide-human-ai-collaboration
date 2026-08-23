@@ -1,0 +1,215 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-22T15:27:21.718721+00:00",
+  "elapsed_ms": 18662.629,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "f224514af65a4b2e9dbab7f5d222c773",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E04",
+        "expected_applicability": "applicable",
+        "adjudication": "clear"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.",
+        "latest_useful_point": "Before the naming branch silently becomes the new agenda or the original next step is lost."
+      },
+      "generator_final_response": "日志字段建议用 `requestId`。理由很短：日志里常混有其他 ID（userId、orderId 之类），`id` 在这种场景下语义含糊，搜索和排查时容易看岔。如果确定日志里只有这一个 ID，用 `id` 也无可厚非，但我默认选 `requestId`，自描述性好，避免歧义。\n\n回到幂等性问题：重复请求返回什么，双方卡在哪一步？是返回第一次的成功结果，还是返回一个专门的“重复请求”响应？",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"clear\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E04\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before the naming branch silently becomes the new agenda or the original next step is lost.\",\"required_protection\":\"Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.\"}\n\n【生成器最终响应】\n日志字段建议用 `requestId`。理由很短：日志里常混有其他 ID（userId、orderId 之类），`id` 在这种场景下语义含糊，搜索和排查时容易看岔。如果确定日志里只有这一个 ID，用 `id` 也无可厚非，但我默认选 `requestId`，自描述性好，避免歧义。\n\n回到幂等性问题：重复请求返回什么，双方卡在哪一步？是返回第一次的成功结果，还是返回一个专门的“重复请求”响应？\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"The response briefly handles the naming branch and proactively restores the unresolved idempotency question, perfectly aligning with the required protection.\",\n  \"human_compensation_needed\": \"no\",\n  \"notes\": \"The model successfully navigated the hidden semantic boundary by briefly addressing the naming convention and explicitly pivoting back to the core unresolved issue of idempotency, preserving the shared agenda without letting the recent topical focus replace it.\",\n  \"over_trigger_cost\": \"none\",\n  \"satisfaction\": \"satisfied\",\n  \"timing\": \"on_time\"\n}",
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 633,
+      "completion_tokens": 1014,
+      "total_tokens": 1647,
+      "completion_tokens_details": {
+        "reasoning_tokens": 871
+      }
+    }
+  },
+  "attempt_count": 1,
+  "retry_count": 0,
+  "error": null,
+  "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+  "role": "grader",
+  "axis_results": {
+    "applicability": "applicable",
+    "applicability_basis": "The response briefly handles the naming branch and proactively restores the unresolved idempotency question, perfectly aligning with the required protection.",
+    "timing": "on_time",
+    "satisfaction": "satisfied",
+    "human_compensation_needed": "no",
+    "over_trigger_cost": "none",
+    "notes": "The model successfully navigated the hidden semantic boundary by briefly addressing the naming convention and explicitly pivoting back to the core unresolved issue of idempotency, preserving the shared agenda without letting the recent topical focus replace it."
+  },
+  "grade_parse_status": "parsed"
+}

@@ -12,6 +12,7 @@ from .experiment import Experiment, canonical_json, loads_exact, sha256_bytes
 from .models import ResolvedProvider
 from .policy import EVIDENCE_LABELS, git_provenance, require_committed_paths, validate_private_output
 from .renderers import renderer_identity
+from .semantics import capture_treatment_content
 
 
 def _execution_order(
@@ -104,6 +105,7 @@ def build_resolved_plan(
             role: _public_role(providers[role], recipe["renderers"][role])
             for role in ("generator", "grader")
         },
+        "timeouts_seconds": dict(recipe["timeouts_seconds"]),
         "instructions": dict(recipe["instructions"]),
         "grading": dict(recipe["grading"]),
         "expected_calls": {
@@ -113,7 +115,11 @@ def build_resolved_plan(
         },
         "execution_policy": {
             "network_authorization_required": True,
-            "automatic_retries": 0,
+            "automatic_retries": 2,
+            "max_attempts_per_logical_call": 3,
+            "retry_backoff_seconds": [1.0, 2.0],
+            "grader_parallelism": 3,
+            "decoupled_stages": True,
             "exact_requests_and_raw_final_outputs": True,
             "reasoning_content_retained": False,
             "standalone_grader": True,
@@ -121,6 +127,9 @@ def build_resolved_plan(
         "output_root": str(output_root),
         "provenance": provenance,
     }
+    body["treatment_content_snapshot"] = capture_treatment_content(
+        body, experiment.generation, experiment.variants, experiment.rubrics
+    )
     digest = sha256_bytes(canonical_json(body))
     envelope = {"schema_version": 1, "resolved_plan_sha256": digest, "plan": body}
     if contains_private_value(envelope, catalog.private_scan_values):
@@ -141,14 +150,26 @@ def verify_resolved_plan(envelope: object) -> dict[str, Any]:
         raise ValueError("resolved plan mode is invalid")
     if plan.get("evidence_label") != EVIDENCE_LABELS[plan["mode"]]:
         raise ValueError("resolved plan evidence label differs from execution policy")
-    expected_policy = {
+    policy = plan.get("execution_policy")
+    legacy_policy = {
         "network_authorization_required": True,
         "automatic_retries": 0,
         "exact_requests_and_raw_final_outputs": True,
         "reasoning_content_retained": False,
         "standalone_grader": True,
     }
-    if plan.get("execution_policy") != expected_policy:
+    current_policy = {
+        "network_authorization_required": True,
+        "automatic_retries": 2,
+        "max_attempts_per_logical_call": 3,
+        "retry_backoff_seconds": [1.0, 2.0],
+        "grader_parallelism": 3,
+        "decoupled_stages": True,
+        "exact_requests_and_raw_final_outputs": True,
+        "reasoning_content_retained": False,
+        "standalone_grader": True,
+    }
+    if policy not in (legacy_policy, current_policy):
         raise ValueError("resolved plan execution policy differs")
     order = plan.get("schedule", {}).get("execution_order")
     if not isinstance(order, list) or plan.get("expected_calls") != {
@@ -160,6 +181,12 @@ def verify_resolved_plan(envelope: object) -> dict[str, Any]:
         roles[role].get("context_mode") != "standalone" for role in roles
     ):
         raise ValueError("resolved plan roles must be standalone generator and grader")
+    timeouts = plan.get("timeouts_seconds")
+    if not isinstance(timeouts, dict) or set(timeouts) != {"generator", "grader"} or any(
+        not isinstance(value, int) or isinstance(value, bool) or value < 1
+        for value in timeouts.values()
+    ):
+        raise ValueError("resolved plan timeouts_seconds are invalid")
     if plan["mode"] == "formal":
         if roles["generator"].get("family") == roles["grader"].get("family"):
             raise ValueError("formal resolved plan requires different declared model families")
@@ -187,6 +214,7 @@ def plan_preview(envelope: Mapping[str, Any]) -> dict[str, Any]:
         "cases": plan["selection"]["cases"],
         "variants": plan["selection"]["variants"],
         "roles": plan["roles"],
+        "timeouts_seconds": plan["timeouts_seconds"],
         "repetitions": plan["schedule"]["repetitions"],
         "variant_order_by_repetition": plan["schedule"]["variant_order_by_repetition"],
         "expected_calls": plan["expected_calls"],

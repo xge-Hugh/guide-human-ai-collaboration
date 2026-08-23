@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import socket
+from http.client import RemoteDisconnected
 from collections.abc import Mapping
 from copy import deepcopy
 from typing import Any, Callable
@@ -40,7 +41,10 @@ def urllib_transport(url: str, headers: Mapping[str, str], body: bytes, timeout:
             return response.read()
     except HTTPError as error:
         raise ProviderError(f"provider HTTP status {error.code}") from None
-    except (URLError, TimeoutError, socket.timeout):
+    except (
+        URLError, TimeoutError, socket.timeout, RemoteDisconnected,
+        ConnectionResetError, ConnectionAbortedError, BrokenPipeError,
+    ):
         raise ProviderError("provider transport failure") from None
 
 
@@ -72,12 +76,17 @@ class OpenAIChatCompletionsProvider:
         model_request = {"model": self.assignment.model, **rendered}
         self.last_model_visible_request = deepcopy(model_request)
         body = json.dumps(model_request, ensure_ascii=False, allow_nan=False, separators=(",", ":")).encode("utf-8")
-        raw = self._transport(
-            chat_completions_url(self._credentials.base_url),
-            {"Authorization": f"Bearer {self._credentials.api_key}", "Content-Type": "application/json"},
-            body,
-            self._timeout_seconds,
-        )
+        try:
+            raw = self._transport(
+                chat_completions_url(self._credentials.base_url),
+                {"Authorization": f"Bearer {self._credentials.api_key}", "Content-Type": "application/json"},
+                body,
+                self._timeout_seconds,
+            )
+        except (
+            RemoteDisconnected, ConnectionResetError, ConnectionAbortedError, BrokenPipeError,
+        ):
+            raise ProviderError("provider transport failure") from None
         try:
             response = json.loads(raw)
             choice = response["choices"][0]
