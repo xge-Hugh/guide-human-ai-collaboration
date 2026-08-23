@@ -18,12 +18,14 @@
 - [`assurance-v2-experiment-owner-guide.md`](assurance-v2-experiment-owner-guide.md)：面向实验负责人的实现—证据桥接说明，解释实验源、renderer、模型参数、证据链和 grader 独立性，不要求负责人承担 Python 操作责任。
 - [`assurance-v2-stage3-review-proposal.md`](assurance-v2-stage3-review-proposal.md) / [`assurance-v2-stage3-formal-proposal.json`](assurance-v2-stage3-formal-proposal.json)：Stage 3 首批受控回放的可读与机器可读候选配置；仍保持执行禁用；
 - [`assurance-v2-stage3-cloud-review.md`](assurance-v2-stage3-cloud-review.md)：对首版 Stage 3 提案的云端审查记录；
-- [`evidence/assurance-v2-phase-b-tranche-1-2026-08-22/`](evidence/assurance-v2-phase-b-tranche-1-2026-08-22/)：Phase B tranche 1 的完整脱敏证据与云端协作交接；
+- [`evidence/assurance-v2-phase-b-tranche-1-2026-08-22/`](evidence/assurance-v2-phase-b-tranche-1-2026-08-22/)：Phase B tranche 1 / repetition 1 的完整脱敏证据与云端协作交接；
+- [`evidence/assurance-v2-phase-b-tranche-2-2026-08-23/`](evidence/assurance-v2-phase-b-tranche-2-2026-08-23/) / [`evidence/assurance-v2-phase-b-tranche-2-complete-2026-08-23/`](evidence/assurance-v2-phase-b-tranche-2-complete-2026-08-23/)：Phase B repetitions 2–3 的阻断前缀与不可变续跑完成证据；
+- [`assurance-v2-phase-b-interpretation.md`](assurance-v2-phase-b-interpretation.md)：Phase B repetitions 1–3 的联合解释归档，记录已支持结论、grader/成本边界及明确未决事项，不选择下一实验或实现架构；
 - [`assurance-v2-stage3-grader-capability.md`](assurance-v2-stage3-grader-capability.md)：不含秘密的 grader 隔离、复现、成本与隐私能力边界；
 - [`assurance-v2-grader-packet-bridge.md`](assurance-v2-grader-packet-bridge.md) / [`assurance-v2-grader-contract-compatibility-fixture.json`](assurance-v2-grader-contract-compatibility-fixture.json)：grader 的 packet-only export/import 证据边界、隔离审计与未执行的 p004 合成 fixture；
 - [`assurance-v2-direct-grader-compatibility-smoke.json`](assurance-v2-direct-grader-compatibility-smoke.json)：已完成、不可执行的历史 `qwen3.7-max` grader 兼容性配置；
 - [`assurance-v2-thinking-compatibility-smoke.json`](assurance-v2-thinking-compatibility-smoke.json)：已完成、不可执行的历史 thinking-enabled 兼容性配置。
 
-v2 当前已完成 Phase A 的**结构性基线**、重配置 compatibility smoke 和 Phase B tranche 1（repetition 1）的正式执行。统一 harness 和 [`assurance-v2-phase-b.recipe.json`](assurance-v2-phase-b.recipe.json) 是当前唯一活动执行路径。tranche-1 原始证据已脱敏发布供人类与云端 Agent 共同审查，但 derived cases 的强制人工裁决、分层盲抽查及 repetitions 2–3 尚未完成，因此当前仍不能形成 B0/B1/B2 的稳定效果结论。
+v2 当前已完成 Phase A 的**结构性基线**以及 Phase B 的三次 counterbalanced repetitions。tranche 1、tranche 2 阻断前缀与续跑完成证据均已脱敏发布；Phase B 的联合解释也已归档到 [`assurance-v2-phase-b-interpretation.md`](assurance-v2-phase-b-interpretation.md)。当前阶段不再处于 Phase B 结果解读或 tranche 2 决策状态；归档解释明确区分已支持结论与未决事项，并且**没有选择下一实验、保障架构或运行载体**。
 
 实验正文保留试点发生时的若干旧目录名和文件名，以维持历史语境；它们不再是当前入口。旧结构到当前位置的对应关系见 [`../archive/README.md`](../archive/README.md)，当前规格与研究入口分别见 [`../spec/README.md`](../spec/README.md) 和 [`../research/README.md`](../research/README.md)。
