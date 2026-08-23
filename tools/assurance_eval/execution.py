@@ -20,7 +20,9 @@ from .planning import public_roles, verify_resolved_plan
 from .policy import NetworkGate, git_provenance, validate_private_output
 from .renderers import get_renderer
 from .retry import DEFAULT_BACKOFF_SECONDS, DEFAULT_MAX_ATTEMPTS, classify_retryability, invoke_logical_call
-from .semantics import execution_policy_report, require_compatible_treatment
+from .semantics import (
+    capture_treatment_content, execution_policy_report, require_compatible_treatment,
+)
 from .transport import OpenAIChatCompletionsProvider, urllib_transport
 
 
@@ -68,6 +70,11 @@ def _verify_captured_binding(
     plan = envelope["plan"]
     if experiment.recipe_sha256 != plan["recipe"]["sha256"] or experiment.sources != plan["sources"]:
         raise ValueError("captured experiment differs from the resolved plan")
+    expected_content = capture_treatment_content(
+        plan, experiment.generation, experiment.variants, experiment.rubrics
+    )
+    if plan.get("treatment_content_snapshot") not in (None, expected_content):
+        raise ValueError("captured treatment content differs from the resolved plan")
     if public_roles(resolved, envelope) != plan["roles"]:
         raise ValueError("captured model assignments differ from the resolved plan")
     recipe = experiment.recipe
@@ -343,7 +350,10 @@ def execute_resolved_plan(
         prior_plan = verify_resolved_plan(
             loads_exact((prior_run / "resolved_plan.json").read_bytes(), prior_run / "resolved_plan.json")
         )
-        require_compatible_treatment(plan, prior_plan["plan"], prior_label=f"{expected_prior} prior run")
+        require_compatible_treatment(
+            plan, prior_plan["plan"], prior_label=f"{expected_prior} prior run",
+            repo_root=repo_root,
+        )
         if (
             prior_report["execution_scope"].get("tranche_id") != expected_prior
             or prior_report["operational_status"] != "completed"
@@ -358,7 +368,7 @@ def execute_resolved_plan(
     if resume_from is not None:
         prior_episode = _load_prior_episode_state(resume_from)
         compatibility = require_compatible_treatment(
-            plan, prior_episode["plan"], prior_label="resume episode"
+            plan, prior_episode["plan"], prior_label="resume episode", repo_root=repo_root
         )
         if tranche_id is not None and prior_episode["report"]["execution_scope"].get("tranche_id") != tranche_id:
             raise ValueError("resume episode tranche does not match the requested tranche")
@@ -397,13 +407,11 @@ def execute_resolved_plan(
         before_call, catalog.private_scan_values,
         planned_logical_calls=remaining_logical,
     )
-    providers = {
-        role: OpenAIChatCompletionsProvider(
+    def provider_for(role: str) -> OpenAIChatCompletionsProvider:
+        return OpenAIChatCompletionsProvider(
             resolved[role], get_renderer(plan["roles"][role]["renderer"]["id"]),
             transport=gate, timeout_seconds=plan["timeouts_seconds"][role],
         )
-        for role in ("generator", "grader")
-    }
 
     def private_values() -> tuple[str, ...]:
         return catalog.private_scan_values
@@ -459,8 +467,16 @@ def execute_resolved_plan(
             "attempt_evidence_paths": attempt_paths,
         })
         persist(f"call_evidence/{stem}__{role}.json", logical_call)
-        gate.completed_logical_calls += 1
+        gate.mark_logical_call_completed()
         return logical_call
+
+    def retry_counts(role: str, attempts: list[dict[str, Any]]) -> Counter[str]:
+        return Counter(
+            f"{role}:{attempt.get('error', {}).get('type', 'unknown')}"
+            for attempt in attempts[:-1]
+            if attempt.get("retryability") == "retryable"
+            and attempt["invocation_status"] == "failed"
+        )
 
     execution_episodes: list[dict[str, Any]] = []
     if prior_evidence is not None:
@@ -485,7 +501,9 @@ def execute_resolved_plan(
         "path": str(run_dir),
     })
     compatibility_report = (
-        require_compatible_treatment(plan, prior_episode["plan"], prior_label="resume episode")
+        require_compatible_treatment(
+            plan, prior_episode["plan"], prior_label="resume episode", repo_root=repo_root
+        )
         if prior_episode is not None else None
     )
     policy_report = execution_policy_report(plan, prior_episode["plan"] if prior_episode else None)
@@ -545,14 +563,12 @@ def execute_resolved_plan(
             "packet": {"case_id": case_id, "pre_context": packet["pre_context"], "user_message": packet["user_message"]},
         }
         logical_call, attempts = invoke_logical_call(
-            providers["generator"], generator_request, now=now,
+            provider_for("generator"), generator_request, now=now,
             max_attempts=policy["max_attempts"],
             backoff_seconds=policy["backoff_seconds"],
             sleep=sleep,
         )
-        for attempt in attempts:
-            if attempt.get("retryability") == "retryable" and attempt["invocation_status"] == "failed":
-                retry_counter[f"generator:{attempt.get('error', {}).get('type', 'unknown')}"] += 1
+        retry_counter.update(retry_counts("generator", attempts))
         generator_call = persist_logical_call(stem, "generator", logical_call, attempts)
         generator_by_stem[stem] = generator_call
         generator_context_by_stem[stem] = context_id
@@ -582,7 +598,9 @@ def execute_resolved_plan(
                 prior_episode["run_dir"], stem, "grader", prior_record
             )
 
-    def grade_one(job: tuple[dict[str, Any], str, dict[str, Any], str | None]) -> tuple[str, dict[str, Any]]:
+    def grade_one(
+        job: tuple[dict[str, Any], str, dict[str, Any], str | None]
+    ) -> tuple[str, dict[str, Any], Counter[str]]:
         scheduled, stem, generator_call, prior_context_id = job
         grader_request = {
             "call_kind": "grader", "context_id": new_id(),
@@ -592,14 +610,12 @@ def execute_resolved_plan(
             ),
         }
         logical_call, attempts = invoke_logical_call(
-            providers["grader"], grader_request, now=now,
+            provider_for("grader"), grader_request, now=now,
             max_attempts=policy["max_attempts"],
             backoff_seconds=policy["backoff_seconds"],
             sleep=sleep,
         )
-        for attempt in attempts:
-            if attempt.get("retryability") == "retryable" and attempt["invocation_status"] == "failed":
-                retry_counter[f"grader:{attempt.get('error', {}).get('type', 'unknown')}"] += 1
+        local_retry_counts = retry_counts("grader", attempts)
         if logical_call["invocation_status"] == "succeeded":
             try:
                 logical_call["axis_results"] = parse_grade(logical_call["raw_output"], plan["grading"])
@@ -610,20 +626,22 @@ def execute_resolved_plan(
         else:
             logical_call["grade_parse_status"] = "not_available"
         grader_call = persist_logical_call(stem, "grader", logical_call, attempts)
-        return stem, grader_call
+        return stem, grader_call, local_retry_counts
 
     if grading_jobs:
         workers = policy["grader_parallelism"]
         if workers <= 1:
             for job in grading_jobs:
-                stem, grader_call = grade_one(job)
+                stem, grader_call, local_retry_counts = grade_one(job)
                 grader_results[stem] = grader_call
+                retry_counter.update(local_retry_counts)
         else:
             with ThreadPoolExecutor(max_workers=workers) as executor:
                 futures = {executor.submit(grade_one, job): job[1] for job in grading_jobs}
                 for future in as_completed(futures):
-                    stem, grader_call = future.result()
+                    stem, grader_call, local_retry_counts = future.result()
                     grader_results[stem] = grader_call
+                    retry_counter.update(local_retry_counts)
 
     records: list[dict[str, Any]] = []
     record_statuses: list[str] = []
@@ -685,7 +703,7 @@ def execute_resolved_plan(
             "resolved_plan_sha256": digest,
             "mode": plan["mode"],
             "evidence_label": plan["evidence_label"],
-            "network_calls": gate.network_attempts,
+            "network_calls": gate.calls,
             "network_accounting": network_accounting,
             "retry_summary": retry_summary,
             "execution_scope": execution_scope,

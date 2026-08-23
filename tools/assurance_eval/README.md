@@ -87,6 +87,9 @@ Resume and tranche continuation compare experimentally relevant treatment semant
 not exact byte identity of the full resolved plan envelope. Git revision, harness
 source hash, and harmless output-root representation differences are reported but
 do not by themselves invalidate continuation when treatment semantics are equivalent.
+New plans retain a parsed snapshot of only the selected generation, variant, and
+rubric fields used in model requests. For legacy plans without that snapshot, the
+harness reconstructs those fields from the recorded Git revision and source paths.
 
 Any operational failure preserves sanitized call/record evidence in a new append-only
 run directory. Resume references prior immutable episodes without editing them.

@@ -12,6 +12,7 @@ from .experiment import Experiment, canonical_json, loads_exact, sha256_bytes
 from .models import ResolvedProvider
 from .policy import EVIDENCE_LABELS, git_provenance, require_committed_paths, validate_private_output
 from .renderers import renderer_identity
+from .semantics import capture_treatment_content
 
 
 def _execution_order(
@@ -126,6 +127,9 @@ def build_resolved_plan(
         "output_root": str(output_root),
         "provenance": provenance,
     }
+    body["treatment_content_snapshot"] = capture_treatment_content(
+        body, experiment.generation, experiment.variants, experiment.rubrics
+    )
     digest = sha256_bytes(canonical_json(body))
     envelope = {"schema_version": 1, "resolved_plan_sha256": digest, "plan": body}
     if contains_private_value(envelope, catalog.private_scan_values):
