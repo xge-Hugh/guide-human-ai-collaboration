@@ -3,9 +3,9 @@
   "task_id": "human-ai-collaboration",
   "title": "轻量人机协作规范与保障系统",
   "status": "active",
-  "phase": "assurance_phase_b_tranche_1_joint_review",
+  "phase": "assurance_phase_b_completed_interpretation_archived",
   "current_actor": "human_ai_collaboration",
-  "next_action": "重配置 compatibility smoke 与正式 tranche 1 已零重试完成。下一步由人类与云端 Agent 审查已发布的完整脱敏证据，强制裁决 p008/p012 的 6 条 derived records，并按协议确定分层盲抽样；在共同决定是否继续 tranche 2 前，不根据表现修改 cases、rubrics、variants、grader 规则或 budgets。若继续，必须从原实验提交 4c805561e0d3d73613291133e9bed6b5b786a484 的干净独立 worktree 复现同一 plan hash。",
+  "next_action": "Phase B repetitions 1–3 与联合解释均已完成并归档。当前未选择下一实验、保障架构或运行载体；后续工作应从现行规范与 Phase B 归档解释重新判断，不把任何尚未验证的候选方向视为已决。",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -34,6 +34,9 @@
     "assurance_v2_direct_grader_compatibility_smoke": "../../docs/experiments/assurance-v2-direct-grader-compatibility-smoke.json",
     "assurance_v2_thinking_compatibility_smoke": "../../docs/experiments/assurance-v2-thinking-compatibility-smoke.json",
     "assurance_v2_phase_b_tranche_1_evidence": "../../docs/experiments/evidence/assurance-v2-phase-b-tranche-1-2026-08-22/README.md",
+    "assurance_v2_phase_b_tranche_2_prefix_evidence": "../../docs/experiments/evidence/assurance-v2-phase-b-tranche-2-2026-08-23/README.md",
+    "assurance_v2_phase_b_tranche_2_complete_evidence": "../../docs/experiments/evidence/assurance-v2-phase-b-tranche-2-complete-2026-08-23/README.md",
+    "assurance_v2_phase_b_interpretation": "../../docs/experiments/assurance-v2-phase-b-interpretation.md",
     "micro_cognitive_friction": "../../insights/2026-08-11-micro-cognitive-friction.md",
     "action_grounding": "../../insights/2026-08-11-action-grounding.md",
     "shared_conversational_initiative": "../../insights/2026-08-12-shared-conversational-initiative.md",
@@ -46,11 +49,11 @@
   "notes": {
     "batch1": "可读雏形已验收",
     "batch2": "reference-study 与 v1-implementation 已规范化导航与试点/现状分层",
-    "assurance_v2": "Phase A 已覆盖 FM-01～FM-20；Phase B 已形成 generation/rubric/variant 语义包。预运行定位到原 60 秒 timeout 与 reasoning completion budget 不足；随后 flash/64K generator 与 plus/thinking/32K grader 的 3-call compatibility smoke 成功，正式 tranche 1 的 30 generator + 30 grader 调用也全部完成。当前证据仅覆盖 repetition 1，且 p008/p012 derived records 与协议盲样仍待人类裁决；不得据此形成稳定效果结论或改变 tranche 2 实验条件。",
+    "assurance_v2": "Phase A 已覆盖 FM-01～FM-20。Phase B 已完成 10 cases × B0/B1/B2 × 3 counterbalanced repetitions，并发布 tranche 1、tranche 2 阻断前缀与不可变续跑证据。联合解释已归档：B1-like stable semantic boundaries 在部分承重案例中显示可靠性稳定化价值；always-on B2 八项判断框架未证明相对 B1 的稳定增量收益；B0 多次成功表明基础模型已有显著但随机的相关语义能力；latency/reasoning 成本与 candidate grader 的测量不稳定性必须保留为解释边界。该解释不选择下一实验、架构或载体。",
     "three_way_collaboration": "人负责实验方向、成本/隐私与规范性裁决；本地 Agent 负责 runner 实现与本地执行；云端审查 Agent 负责对照当前规范/协议审查实现和证据。三方结构本身不自动构成 grader 独立性。",
     "experiment_owner_capability": "实验负责人不需要承担 Python 操作责任，但需要能判断 variant 唯一变化、模型可见输入、隐藏 rubric、模型/参数不确定性、evidence 链和 grader 独立性；统一 harness 提供 validate/plan/run/report 与 case-level evidence inspection 支持直接参与。",
     "external_reference_policy": "外部 harness/prompt/agent 项目优先作为变量控制、消融方法、provenance 和候选机制来源；任务分数或轨迹改善不能直接外推为本项目的人机协作保障证据。",
-    "deferred": "Issue #2 的建构路径已作为 D-062 写入规范并通过独立审查；A 层常驻底线不再按历史清单直接重启，先由 Phase B 的 B1/B2 对照检验其实际边际价值。",
+    "deferred": "Issue #2 的建构路径已作为 D-062 写入规范并通过独立审查；A 层常驻底线不再按历史清单直接重启，Phase B 已完成 B1/B2 对照并形成归档解释；任何后续机制判断均不得把历史候选方案误写成已验证结论。",
     "open_issues": [
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/1",
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/2"
