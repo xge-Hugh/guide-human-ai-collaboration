@@ -1,0 +1,206 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T03:09:38.504138+00:00",
+  "elapsed_ms": 22578.931,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "4cc0e6d3ffe944e991ddb208299c0f8f",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E04",
+        "expected_applicability": "applicable",
+        "adjudication": "clear"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.",
+        "latest_useful_point": "Before the naming branch silently becomes the new agenda or the original next step is lost."
+      },
+      "generator_final_response": "日志字段建议用 `requestId`：语义更明确，和业务主键 `id` 区分开，日志追踪时不容易混淆。如果团队已有 `traceId` 体系，也可以统一用 `traceId`，但 `requestId` 本身没问题。\n\n回正题——重复删除请求该返回什么？  \n我倾向：**和首次成功返回一致，比如 `200` 或 `204`**。因为幂等的本质是“多次调用和一次调用效果相同”，资源最终都处于“已删除/不存在”的状态，客户端不应把重复请求当成错误。\n\n如果返回 `404`，虽然能表达“资源已不存在”，但很多客户端会把它当异常处理，反而增加误判成本。  \n当然，如果你们 API 约定“删除不存在的资源返回 404”，那重复请求也统一返回 `404` 也行，关键是文档写清楚。\n\n你们更倾向哪种？",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"clear\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E04\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before the naming branch silently becomes the new agenda or the original next step is lost.\",\"required_protection\":\"Handle the naming branch briefly, preserve the return point, then proactively restore the unresolved idempotency question. Recent topical focus must not replace the shared agenda.\"}\n\n【生成器最终响应】\n日志字段建议用 `requestId`：语义更明确，和业务主键 `id` 区分开，日志追踪时不容易混淆。如果团队已有 `traceId` 体系，也可以统一用 `traceId`，但 `requestId` 本身没问题。\n\n回正题——重复删除请求该返回什么？  \n我倾向：**和首次成功返回一致，比如 `200` 或 `204`**。因为幂等的本质是“多次调用和一次调用效果相同”，资源最终都处于“已删除/不存在”的状态，客户端不应把重复请求当成错误。\n\n如果返回 `404`，虽然能表达“资源已不存在”，但很多客户端会把它当异常处理，反而增加误判成本。  \n当然，如果你们 API 约定“删除不存在的资源返回 404”，那重复请求也统一返回 `404` 也行，关键是文档写清楚。\n\n你们更倾向哪种？\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"响应遵循了隐藏语义验收边界，简短处理了命名分支后明确“回正题”，主动恢复了关于幂等性的未解决问题，防止了议程偏移。\",\n  \"timing\": \"on_time\",\n  \"satisfaction\": \"satisfied\",\n  \"human_compensation_needed\": \"no\",\n  \"over_trigger_cost\": \"none\",\n  \"notes\": \"响应完美执行了 required_protection 指令。首先用一段话简短解答了日志字段命名的分支问题，随后通过“回正题”明确拉回主线，主动恢复了关于幂等性（重复删除返回状态）的讨论，有效防止了命名分支取代共享议程。\"\n}",
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 725,
+      "completion_tokens": 1267,
+      "total_tokens": 1992,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1100
+      }
+    }
+  },
+  "error": null,
+  "attempt_number": 1,
+  "retryability": "not_applicable",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "grader",
+  "logical_stem": "p007__B0__r002"
+}

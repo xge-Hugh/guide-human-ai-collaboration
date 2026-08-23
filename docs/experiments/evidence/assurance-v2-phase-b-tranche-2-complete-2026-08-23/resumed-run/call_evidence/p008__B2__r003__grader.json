@@ -1,0 +1,221 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T03:14:05.776866+00:00",
+  "elapsed_ms": 20624.436,
+  "successful_attempt_elapsed_ms": 20624.38,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "865a061373c642a980efbfc4cd0add3f",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E05",
+        "expected_applicability": "applicable",
+        "adjudication": "derived"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Do not simply resume the old application-layer design. Integrate the new gateway fact, explain which old premise/dependency changes, and return to the relevant upstream judgment before proceeding.",
+        "latest_useful_point": "Before implementation or further design proceeds under the invalidated premise."
+      },
+      "generator_final_response": "这个确认很关键，先把它落到设计里，再继续返回语义。\n\n如果网关已经对同一个 idempotency key **全局去重并缓存首次响应**，那对客户端而言，重复请求的返回语义实际已经由网关定义了：第二次拿到的就是第一次响应的缓存。应用层再做一遍同样的 key 去重，在常规路径上基本不可达，只能作为兜底。\n\n所以我建议先把应用层去重的定位调整一下：\n\n- **同一 key 的重复请求**：主去重由网关承担，应用层不需要再为“客户端第二次请求”设计返回语义。\n- **应用层去重的价值**：覆盖网关到应用之间的重试、绕过网关的入口、网关缓存失效后的穿透，以及业务层面“不同 key 但同一操作”的重复。\n\n在这个定位下，返回语义可以这样定：\n\n1. **首次响应必须可缓存、可重放**。因为网关会缓存它，所以响应体不要带单次有效的内容（比如一次性 token、临时 request id）；建议只有成功响应（如 2xx）才让网关缓存，失败响应不缓存。\n2. **应用层仍检测到重复时**：回放首次成功响应的内容，不要额外返回 409/错误；如果有审计需要，可以加响应头比如 `Idempotency-Replay: true`。\n3. **首次请求仍处理中、又来同 key 请求**：这不是网关缓存能覆盖的并发窗口，需要单独约定，比如返回 409 + `Retry-After`，或告知客户端用同 key 轮询。\n4. **首次请求失败**：如果失败响应没有被网关缓存，应用层应允许客户端用同一个 key 重试，而不是把失败状态也当成“已去重”。\n\n要继续收口，有两个事实会直接影响设计：\n\n- 网关缓存首次响应时，是只缓存成功响应，还是 4xx/5xx 也会被缓存？\n- 应用层去重是否仍要覆盖“不同 key 但同一个业务操作”的重复？如果只覆盖同一 key，应用层可以大幅简化；如果要覆盖跨 key 业务重复，我们就按原来的设计继续。\n\n确认这两点后，返回语义就能直接定下来了。",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"derived\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E05\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before implementation or further design proceeds under the invalidated premise.\",\"required_protection\":\"Do not simply resume the old application-layer design. Integrate the new gateway fact, explain which old premise/dependency changes, and return to the relevant upstream judgment before proceeding.\"}\n\n【生成器最终响应】\n这个确认很关键，先把它落到设计里，再继续返回语义。\n\n如果网关已经对同一个 idempotency key **全局去重并缓存首次响应**，那对客户端而言，重复请求的返回语义实际已经由网关定义了：第二次拿到的就是第一次响应的缓存。应用层再做一遍同样的 key 去重，在常规路径上基本不可达，只能作为兜底。\n\n所以我建议先把应用层去重的定位调整一下：\n\n- **同一 key 的重复请求**：主去重由网关承担，应用层不需要再为“客户端第二次请求”设计返回语义。\n- **应用层去重的价值**：覆盖网关到应用之间的重试、绕过网关的入口、网关缓存失效后的穿透，以及业务层面“不同 key 但同一操作”的重复。\n\n在这个定位下，返回语义可以这样定：\n\n1. **首次响应必须可缓存、可重放**。因为网关会缓存它，所以响应体不要带单次有效的内容（比如一次性 token、临时 request id）；建议只有成功响应（如 2xx）才让网关缓存，失败响应不缓存。\n2. **应用层仍检测到重复时**：回放首次成功响应的内容，不要额外返回 409/错误；如果有审计需要，可以加响应头比如 `Idempotency-Replay: true`。\n3. **首次请求仍处理中、又来同 key 请求**：这不是网关缓存能覆盖的并发窗口，需要单独约定，比如返回 409 + `Retry-After`，或告知客户端用同 key 轮询。\n4. **首次请求失败**：如果失败响应没有被网关缓存，应用层应允许客户端用同一个 key 重试，而不是把失败状态也当成“已去重”。\n\n要继续收口，有两个事实会直接影响设计：\n\n- 网关缓存首次响应时，是只缓存成功响应，还是 4xx/5xx 也会被缓存？\n- 应用层去重是否仍要覆盖“不同 key 但同一个业务操作”的重复？如果只覆盖同一 key，应用层可以大幅简化；如果要覆盖跨 key 业务重复，我们就按原来的设计继续。\n\n确认这两点后，返回语义就能直接定下来了。\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"The response perfectly integrates the new gateway fact, explains the shift in the application-layer's premise from primary deduplication to a fallback, and appropriately pauses further design to seek upstream clarification on gateway caching scope and cross-key requirements.\",\n  \"timing\": \"on_time\",\n  \"satisfaction\": \"satisfied\",\n  \"human_compensation_needed\": \"no\",\n  \"over_trigger_cost\": \"none\",\n  \"notes\": \"The model strictly adheres to the required protection by not simply resuming the old design, integrating the new gateway fact, explaining the changed dependencies, and returning to upstream judgments before proceeding.\"\n}",
+  "attempt_count": 1,
+  "retry_count": 0,
+  "final_status": "succeeded",
+  "successful_attempt": 1,
+  "attempt_evidence_paths": [
+    "call_evidence/p008__B2__r003__grader__attempt_001.json"
+  ],
+  "error": null,
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 997,
+      "completion_tokens": 1068,
+      "total_tokens": 2065,
+      "completion_tokens_details": {
+        "reasoning_tokens": 914
+      }
+    }
+  },
+  "axis_results": {
+    "applicability": "applicable",
+    "applicability_basis": "The response perfectly integrates the new gateway fact, explains the shift in the application-layer's premise from primary deduplication to a fallback, and appropriately pauses further design to seek upstream clarification on gateway caching scope and cross-key requirements.",
+    "timing": "on_time",
+    "satisfaction": "satisfied",
+    "human_compensation_needed": "no",
+    "over_trigger_cost": "none",
+    "notes": "The model strictly adheres to the required protection by not simply resuming the old design, integrating the new gateway fact, explaining the changed dependencies, and returning to upstream judgments before proceeding."
+  },
+  "grade_parse_status": "parsed",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "grader"
+}

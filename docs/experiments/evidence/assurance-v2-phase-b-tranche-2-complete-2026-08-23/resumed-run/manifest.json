@@ -1,0 +1,128 @@
+{
+  "schema_version": 2,
+  "run_id": "7864a41436e74f0884aca79b88a619df",
+  "started_at": "2026-08-23T02:50:23.134747+00:00",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "mode": "formal",
+  "evidence_label": "phase_b_controlled_replay_raw_evidence_pending_adjudication",
+  "runner_provenance": {
+    "available": true,
+    "git_revision": "918648adc82bb9b256b1e7049af60b8209d148d6",
+    "clean": true,
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "harness_source_sha256": "bf18d1352e12c20671a5a74781965f8cff5c3b8fafa7eef77db13b9e12c2fdd5"
+  },
+  "roles": {
+    "generator": {
+      "provider": "custom",
+      "model": "deepseek-v4-flash",
+      "family": "DeepSeek",
+      "declared_snapshot": null,
+      "parameters": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "max_tokens": 65536,
+        "stream": false
+      },
+      "renderer": {
+        "id": "phase-b-formal-generator-zh-cn-v1",
+        "sha256": "36120904f6fb0d96425c2e7e4427641a9ff39d1500821492cfc07dc6f58f21c6"
+      },
+      "context_mode": "standalone"
+    },
+    "grader": {
+      "provider": "custom",
+      "model": "qwen3.7-plus",
+      "family": "Qwen",
+      "declared_snapshot": null,
+      "parameters": {
+        "thinking": {
+          "type": "enabled"
+        },
+        "max_tokens": 32768,
+        "stream": false
+      },
+      "renderer": {
+        "id": "phase-b-direct-grader-zh-cn-v1-candidate",
+        "sha256": "1ab3bc2f63a877c3585bb84f644d2c553552e40f89926c9c1e0c63e1270a5dd8"
+      },
+      "context_mode": "standalone"
+    }
+  },
+  "sources": {
+    "generation": {
+      "path": "docs/experiments/assurance-v2-phase-b-generation.json",
+      "sha256": "b83a56690615b0bf59f87103170637064756b08a9e4295d29fe1d421302f6372"
+    },
+    "variants": {
+      "path": "docs/experiments/assurance-v2-phase-b-variants.zh-CN.json",
+      "sha256": "b37fd9ac52d74b930af6a87eba20afb79931eeba692699a43a513e2071653360"
+    },
+    "rubrics": {
+      "path": "docs/experiments/assurance-v2-phase-b-rubrics.json",
+      "sha256": "ed6ecd528f50ecdf37db4029979ca0aabbc0b331512dbce5774276ccf2fe6bae"
+    }
+  },
+  "execution_scope": {
+    "tranche_id": "tranche_2",
+    "record_count": 60
+  },
+  "prior_tranche_evidence": {
+    "run_id": "40098907d5c5452a81d8677b26a4e33c",
+    "resolved_plan_sha256": "c9ddc1d82f5c9b7a45481443f71ee08fb185c942638b7815e61068a62efa9a52",
+    "tranche_id": "tranche_1",
+    "treatment_semantics": "equivalent"
+  },
+  "execution_episodes": [
+    {
+      "episode": 1,
+      "run_id": "40098907d5c5452a81d8677b26a4e33c",
+      "role": "prior_tranche",
+      "path": null
+    },
+    {
+      "episode": 2,
+      "run_id": "ed2c0c99bfa64fcea316b0deb1e9c6f3",
+      "role": "resumed_prefix",
+      "path": "/home/xge/.local/share/guide-human-ai-collaboration/assurance-eval-results/ed2c0c99bfa64fcea316b0deb1e9c6f3",
+      "operational_status": "blocked"
+    },
+    {
+      "episode": 3,
+      "run_id": "7864a41436e74f0884aca79b88a619df",
+      "role": "current",
+      "path": "/home/xge/.local/share/guide-human-ai-collaboration/assurance-eval-results/7864a41436e74f0884aca79b88a619df"
+    }
+  ],
+  "resume_from": {
+    "run_id": "ed2c0c99bfa64fcea316b0deb1e9c6f3",
+    "path": "/home/xge/.local/share/guide-human-ai-collaboration/assurance-eval-results/ed2c0c99bfa64fcea316b0deb1e9c6f3",
+    "treatment_semantics": "equivalent",
+    "execution_policy": {
+      "execution_policy": "amended",
+      "reason": "transient transport resilience and resumability",
+      "current": {
+        "network_authorization_required": true,
+        "automatic_retries": 2,
+        "max_attempts_per_logical_call": 3,
+        "retry_backoff_seconds": [
+          1.0,
+          2.0
+        ],
+        "grader_parallelism": 3,
+        "decoupled_stages": true,
+        "exact_requests_and_raw_final_outputs": true,
+        "reasoning_content_retained": false,
+        "standalone_grader": true
+      },
+      "prior": {
+        "network_authorization_required": true,
+        "automatic_retries": 0,
+        "exact_requests_and_raw_final_outputs": true,
+        "reasoning_content_retained": false,
+        "standalone_grader": true
+      }
+    }
+  }
+}

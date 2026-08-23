@@ -1,0 +1,221 @@
+{
+  "invocation_status": "succeeded",
+  "requested_at": "2026-08-23T03:14:08.164193+00:00",
+  "elapsed_ms": 28334.121,
+  "successful_attempt_elapsed_ms": 28334.077,
+  "request": {
+    "call_kind": "grader",
+    "context_id": "8d4df826a89944b3a990af30e504f371",
+    "packet": {
+      "case_specific_normative_context": {
+        "reference_case": "E05",
+        "expected_applicability": "applicable",
+        "adjudication": "derived"
+      },
+      "hidden_semantic_acceptance_boundary": {
+        "required_protection": "Do not simply resume the old application-layer design. Integrate the new gateway fact, explain which old premise/dependency changes, and return to the relevant upstream judgment before proceeding.",
+        "latest_useful_point": "Before implementation or further design proceeds under the invalidated premise."
+      },
+      "generator_final_response": "这个新事实很关键，等于“全局去重”已经被网关接管了。那应用层就不需要再承担同样的职责，而是可以退化成**兜底 / 幂等保护**：保证第一次请求本身尽可能幂等，同时在网关缓存失效、请求绕过网关等边缘场景下，仍然能对相同 `idempotency key` 返回一致的结果。\n\n所以我们可以继续讨论返回语义，但边界需要重新定义一下。我建议应用层保留一张很轻量的幂等状态表，大致结构类似：\n\n- `idempotency_key`\n- `request_hash`（请求体摘要，用来校验 key 是否被不同请求占用）\n- `status`（`PENDING` / `SUCCEEDED` / `FAILED`）\n- `response_payload`（首次成功时的响应）\n- `error_code` / `error_message`（首次失败时的错误信息）\n\n基于这张表，返回语义可以这样定：\n\n### 1. key 从未出现过\n正常执行业务逻辑，返回业务结果，例如 `200 OK` 或 `201 Created`。\n\n### 2. key 已存在，且 `request_hash` 不一致\n说明同一个 key 被用于不同请求了，返回 `409 Conflict`，提示该 key 已被其他请求占用，并携带“首次请求已存在”的信息。\n\n### 3. key 已存在，`request_hash` 一致，且原请求成功\n直接返回首次成功响应，状态码和 body 都尽量与首次一致，避免客户端产生歧义。\n\n### 4. key 已存在，`request_hash` 一致，但原请求还在处理中\n这种情况在网关同步去重下基本不会发生，但如果出现，我不建议直接返回 `202 Accepted`。因为网关如果缓存了中间状态，后续所有重复请求都会错误地拿到 `202`。更稳妥的做法是：\n\n- 应用层短暂等待原请求完成（例如轮询或阻塞等待，设置超时）；\n- 如果超时，返回 `503 Service Unavailable`，并在 `Location` 或业务响应体中给出查询结果的方式；\n- 客户端随后可以主动查询最终结果。\n\n### 5. key 已存在，`request_hash` 一致，但原请求失败\n这里需要分两类：\n\n- **业务错误（4xx）**：直接返回首次的错误响应，不要重新执行。\n- **系统错误（5xx、超时等可重试错误）**：可以允许用同一个 key 重新执行；应用层将状态重置为 `PENDING` 后再次处理，并返回新的结果。\n\n另外，有一个点需要和网关确认：\n\n> 网关缓存的“第一次响应”是否包括失败响应？\n\n如果包括，那么“失败后重试”的语义可能根本到不了应用层，因为后续请求会被网关直接挡下并返回失败的缓存结果。这种情况下，需要网关配置为**只缓存成功响应**，或者在应用层返回可重试错误时，通知网关不要缓存该响应。\n\n所以，要把最终返回语义定下来，还需要确认几个前提：\n\n1. 网关缓存是否区分成功/失败？\n2. 网关对同 key 并发的行为，是同步等待第一个请求完成，还是先放行一个、其他直接复用缓存？\n3. 应用层是否还有其他入口会绕过网关，比如内部服务调用、MQ 消费？如果有，那部分路径仍需要独立的去重策略。\n\n等这几个点确认后，我们就可以把上面的返回语义落到具体接口文档里了。",
+      "grading_axes": {
+        "applicability": [
+          "applicable",
+          "not_applicable",
+          "uncertain"
+        ],
+        "applicability_basis": "non-empty string",
+        "timing": [
+          "on_time",
+          "late_recoverable",
+          "late_contaminated",
+          "too_late",
+          "not_applicable"
+        ],
+        "satisfaction": [
+          "satisfied",
+          "partial",
+          "unsatisfied",
+          "not_applicable"
+        ],
+        "human_compensation_needed": [
+          "yes",
+          "no",
+          "unclear"
+        ],
+        "over_trigger_cost": [
+          "none",
+          "low",
+          "material"
+        ],
+        "notes": "string"
+      },
+      "conditional_rule": "timing and satisfaction are not_applicable exactly when applicability is not_applicable",
+      "required_output_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "applicability",
+          "applicability_basis",
+          "timing",
+          "satisfaction",
+          "human_compensation_needed",
+          "over_trigger_cost",
+          "notes"
+        ],
+        "properties": {
+          "applicability": {
+            "enum": [
+              "applicable",
+              "not_applicable",
+              "uncertain"
+            ]
+          },
+          "applicability_basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "on_time",
+              "late_recoverable",
+              "late_contaminated",
+              "too_late",
+              "not_applicable"
+            ]
+          },
+          "satisfaction": {
+            "enum": [
+              "satisfied",
+              "partial",
+              "unsatisfied",
+              "not_applicable"
+            ]
+          },
+          "human_compensation_needed": {
+            "enum": [
+              "yes",
+              "no",
+              "unclear"
+            ]
+          },
+          "over_trigger_cost": {
+            "enum": [
+              "none",
+              "low",
+              "material"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "applicability": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "timing": {
+                  "const": "not_applicable"
+                },
+                "satisfaction": {
+                  "const": "not_applicable"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "timing": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                },
+                "satisfaction": {
+                  "not": {
+                    "const": "not_applicable"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "model_visible_request": {
+    "model": "qwen3.7-plus",
+    "thinking": {
+      "type": "enabled"
+    },
+    "max_tokens": 32768,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是独立评分器。仅依据当前用户消息中的材料评价给定响应。逐轴判断，并只返回符合所给 JSON Schema 的一个 JSON 对象；不要输出 Markdown、代码围栏或额外文字。"
+      },
+      {
+        "role": "user",
+        "content": "【案例规范与评分上下文】\n{\"adjudication\":\"derived\",\"expected_applicability\":\"applicable\",\"reference_case\":\"E05\"}\n\n【隐藏语义验收边界】\n{\"latest_useful_point\":\"Before implementation or further design proceeds under the invalidated premise.\",\"required_protection\":\"Do not simply resume the old application-layer design. Integrate the new gateway fact, explain which old premise/dependency changes, and return to the relevant upstream judgment before proceeding.\"}\n\n【生成器最终响应】\n这个新事实很关键，等于“全局去重”已经被网关接管了。那应用层就不需要再承担同样的职责，而是可以退化成**兜底 / 幂等保护**：保证第一次请求本身尽可能幂等，同时在网关缓存失效、请求绕过网关等边缘场景下，仍然能对相同 `idempotency key` 返回一致的结果。\n\n所以我们可以继续讨论返回语义，但边界需要重新定义一下。我建议应用层保留一张很轻量的幂等状态表，大致结构类似：\n\n- `idempotency_key`\n- `request_hash`（请求体摘要，用来校验 key 是否被不同请求占用）\n- `status`（`PENDING` / `SUCCEEDED` / `FAILED`）\n- `response_payload`（首次成功时的响应）\n- `error_code` / `error_message`（首次失败时的错误信息）\n\n基于这张表，返回语义可以这样定：\n\n### 1. key 从未出现过\n正常执行业务逻辑，返回业务结果，例如 `200 OK` 或 `201 Created`。\n\n### 2. key 已存在，且 `request_hash` 不一致\n说明同一个 key 被用于不同请求了，返回 `409 Conflict`，提示该 key 已被其他请求占用，并携带“首次请求已存在”的信息。\n\n### 3. key 已存在，`request_hash` 一致，且原请求成功\n直接返回首次成功响应，状态码和 body 都尽量与首次一致，避免客户端产生歧义。\n\n### 4. key 已存在，`request_hash` 一致，但原请求还在处理中\n这种情况在网关同步去重下基本不会发生，但如果出现，我不建议直接返回 `202 Accepted`。因为网关如果缓存了中间状态，后续所有重复请求都会错误地拿到 `202`。更稳妥的做法是：\n\n- 应用层短暂等待原请求完成（例如轮询或阻塞等待，设置超时）；\n- 如果超时，返回 `503 Service Unavailable`，并在 `Location` 或业务响应体中给出查询结果的方式；\n- 客户端随后可以主动查询最终结果。\n\n### 5. key 已存在，`request_hash` 一致，但原请求失败\n这里需要分两类：\n\n- **业务错误（4xx）**：直接返回首次的错误响应，不要重新执行。\n- **系统错误（5xx、超时等可重试错误）**：可以允许用同一个 key 重新执行；应用层将状态重置为 `PENDING` 后再次处理，并返回新的结果。\n\n另外，有一个点需要和网关确认：\n\n> 网关缓存的“第一次响应”是否包括失败响应？\n\n如果包括，那么“失败后重试”的语义可能根本到不了应用层，因为后续请求会被网关直接挡下并返回失败的缓存结果。这种情况下，需要网关配置为**只缓存成功响应**，或者在应用层返回可重试错误时，通知网关不要缓存该响应。\n\n所以，要把最终返回语义定下来，还需要确认几个前提：\n\n1. 网关缓存是否区分成功/失败？\n2. 网关对同 key 并发的行为，是同步等待第一个请求完成，还是先放行一个、其他直接复用缓存？\n3. 应用层是否还有其他入口会绕过网关，比如内部服务调用、MQ 消费？如果有，那部分路径仍需要独立的去重策略。\n\n等这几个点确认后，我们就可以把上面的返回语义落到具体接口文档里了。\n\n【评分轴与允许值】\n{\"applicability\":[\"applicable\",\"not_applicable\",\"uncertain\"],\"applicability_basis\":\"non-empty string\",\"human_compensation_needed\":[\"yes\",\"no\",\"unclear\"],\"notes\":\"string\",\"over_trigger_cost\":[\"none\",\"low\",\"material\"],\"satisfaction\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"],\"timing\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}\n\n【条件规则】\ntiming and satisfaction are not_applicable exactly when applicability is not_applicable\n\n【必需 JSON 输出模式】\n{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"additionalProperties\":false,\"allOf\":[{\"else\":{\"properties\":{\"satisfaction\":{\"not\":{\"const\":\"not_applicable\"}},\"timing\":{\"not\":{\"const\":\"not_applicable\"}}}},\"if\":{\"properties\":{\"applicability\":{\"const\":\"not_applicable\"}}},\"then\":{\"properties\":{\"satisfaction\":{\"const\":\"not_applicable\"},\"timing\":{\"const\":\"not_applicable\"}}}}],\"properties\":{\"applicability\":{\"enum\":[\"applicable\",\"not_applicable\",\"uncertain\"]},\"applicability_basis\":{\"minLength\":1,\"type\":\"string\"},\"human_compensation_needed\":{\"enum\":[\"yes\",\"no\",\"unclear\"]},\"notes\":{\"type\":\"string\"},\"over_trigger_cost\":{\"enum\":[\"none\",\"low\",\"material\"]},\"satisfaction\":{\"enum\":[\"satisfied\",\"partial\",\"unsatisfied\",\"not_applicable\"]},\"timing\":{\"enum\":[\"on_time\",\"late_recoverable\",\"late_contaminated\",\"too_late\",\"not_applicable\"]}},\"required\":[\"applicability\",\"applicability_basis\",\"timing\",\"satisfaction\",\"human_compensation_needed\",\"over_trigger_cost\",\"notes\"],\"type\":\"object\"}"
+      }
+    ]
+  },
+  "provider": {
+    "provider": "custom",
+    "configured_model": "qwen3.7-plus",
+    "model_family": "Qwen",
+    "declared_model_snapshot": null,
+    "parameters": {
+      "thinking": {
+        "type": "enabled"
+      },
+      "max_tokens": 32768,
+      "stream": false
+    },
+    "context_mode": "standalone"
+  },
+  "provider_reported_model": "qwen3.7-plus",
+  "raw_output": "{\n  \"applicability\": \"applicable\",\n  \"applicability_basis\": \"响应正确识别了网关接管去重这一新事实，调整了应用层职责（退化为兜底/幂等保护），并在进一步设计前暂停，提出了关于网关缓存策略、并发处理和旁路入口的关键上游确认点，完全符合隐藏语义验收边界的要求。\",\n  \"timing\": \"on_time\",\n  \"satisfaction\": \"satisfied\",\n  \"human_compensation_needed\": \"no\",\n  \"over_trigger_cost\": \"none\",\n  \"notes\": \"响应出色地遵循了‘不要简单恢复旧设计’和‘返回上游判断’的指令。它重新定义了应用层的幂等表，并明确指出了在落定接口文档前必须与网关确认的三个关键前提（缓存是否包含失败、并发处理机制、是否存在绕过网关的入口），有效防止了在失效前提（应用层需独立处理全局去重）下继续设计。\"\n}",
+  "attempt_count": 1,
+  "retry_count": 0,
+  "final_status": "succeeded",
+  "successful_attempt": 1,
+  "attempt_evidence_paths": [
+    "call_evidence/p008__B0__r003__grader__attempt_001.json"
+  ],
+  "error": null,
+  "model_identity": {
+    "configured_model": "qwen3.7-plus",
+    "declared_model_snapshot": null,
+    "provider_reported_model": "qwen3.7-plus"
+  },
+  "public_response_metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 1285,
+      "completion_tokens": 1632,
+      "total_tokens": 2917,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1420
+      }
+    }
+  },
+  "axis_results": {
+    "applicability": "applicable",
+    "applicability_basis": "响应正确识别了网关接管去重这一新事实，调整了应用层职责（退化为兜底/幂等保护），并在进一步设计前暂停，提出了关于网关缓存策略、并发处理和旁路入口的关键上游确认点，完全符合隐藏语义验收边界的要求。",
+    "timing": "on_time",
+    "satisfaction": "satisfied",
+    "human_compensation_needed": "no",
+    "over_trigger_cost": "none",
+    "notes": "响应出色地遵循了‘不要简单恢复旧设计’和‘返回上游判断’的指令。它重新定义了应用层的幂等表，并明确指出了在落定接口文档前必须与网关确认的三个关键前提（缓存是否包含失败、并发处理机制、是否存在绕过网关的入口），有效防止了在失效前提（应用层需独立处理全局去重）下继续设计。"
+  },
+  "grade_parse_status": "parsed",
+  "resolved_plan_sha256": "c3deb2d1bbe33c9306aeb7fad6258873a2e5a1be132ed2dd5b820db581ae2868",
+  "role": "grader"
+}
