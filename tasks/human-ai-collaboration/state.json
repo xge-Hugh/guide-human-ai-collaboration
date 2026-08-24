@@ -3,9 +3,9 @@
   "task_id": "human-ai-collaboration",
   "title": "轻量人机协作规范与保障系统",
   "status": "active",
-  "phase": "assurance_phase_b_completed_interpretation_archived",
+  "phase": "cognitive_coordination_candidate_externalized",
   "current_actor": "human_ai_collaboration",
-  "next_action": "Phase B repetitions 1–3 与联合解释均已完成并归档。当前未选择下一实验、保障架构或运行载体；后续工作应从现行规范与 Phase B 归档解释重新判断，不把任何尚未验证的候选方向视为已决。",
+  "next_action": "认知协调候选模型已完成 A（现行规则推导）、B（反例/边界压力测试）与 C（新后果审计），并作为非权威 insight 外部化。下一步优先让该模型离开本次对话的同源闭环：用既有真实 Issue/feedback/历史协作证据与更直接的外部研究独立检验重建性、策略性接触、生产性分歧等候选后果；必要时再由会改变真实项目决定的问题驱动实验。当前不批量改写 docs/spec、Skill、assurance architecture，也不把候选模型视为已验证结论。",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -41,6 +41,7 @@
     "action_grounding": "../../insights/2026-08-11-action-grounding.md",
     "shared_conversational_initiative": "../../insights/2026-08-12-shared-conversational-initiative.md",
     "cross_conversation_learning": "../../insights/2026-08-13-cross-conversation-learning-layer.md",
+    "cognitive_coordination_candidate": "../../insights/2026-08-25-cognitive-coordination-model.md",
     "if073_assurance_gap": "../../insights/2026-08-15-expert-supervised-pilot-and-assurance-gap.md",
     "workflow_snapshot": "../../docs/archive/workflow-v0.15.md",
     "assurance_notes": "../../docs/archive/assurance-and-pilot-notes-from-workflow-v0.15.md"
@@ -50,6 +51,7 @@
     "batch1": "可读雏形已验收",
     "batch2": "reference-study 与 v1-implementation 已规范化导航与试点/现状分层",
     "assurance_v2": "Phase A 已覆盖 FM-01～FM-20。Phase B 已完成 10 cases × B0/B1/B2 × 3 counterbalanced repetitions，并发布 tranche 1、tranche 2 阻断前缀与不可变续跑证据。联合解释已归档：B1-like stable semantic boundaries 在部分承重案例中显示可靠性稳定化价值；always-on B2 八项判断框架未证明相对 B1 的稳定增量收益；B0 多次成功表明基础模型已有显著但随机的相关语义能力；latency/reasoning 成本与 candidate grader 的测量不稳定性必须保留为解释边界。该解释不选择下一实验、架构或载体。",
+    "cognitive_coordination_candidate": "2026-08-24～25 的项目讨论提出并压力测试了一个候选机制层：人和 AI 持有局部、可修正的任务模型；在承重处通过最低成本的判别性交互/外部证据暴露模型差异并修正，同时按即时与长期价值分配人的稀缺认知资源。A/B/C 审计后保留的强候选新概念包括重建性、策略性接触与生产性分歧；同时明确 shared understanding 不等于完全收敛、预测不是普遍首步、低抽象层不等于低价值、重建不能脱离来源/边界、模型自应用必须按信息价值有界。当前仅为 insight，不是 spec/norm。",
     "three_way_collaboration": "人负责实验方向、成本/隐私与规范性裁决；本地 Agent 负责 runner 实现与本地执行；云端审查 Agent 负责对照当前规范/协议审查实现和证据。三方结构本身不自动构成 grader 独立性。",
     "experiment_owner_capability": "实验负责人不需要承担 Python 操作责任，但需要能判断 variant 唯一变化、模型可见输入、隐藏 rubric、模型/参数不确定性、evidence 链和 grader 独立性；统一 harness 提供 validate/plan/run/report 与 case-level evidence inspection 支持直接参与。",
     "external_reference_policy": "外部 harness/prompt/agent 项目优先作为变量控制、消融方法、provenance 和候选机制来源；任务分数或轨迹改善不能直接外推为本项目的人机协作保障证据。",
