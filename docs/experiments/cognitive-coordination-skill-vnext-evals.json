@@ -1,0 +1,84 @@
+{
+  "status": "candidate",
+  "purpose": "Behavioral probes for the minimal cognitive-coordination Skill vNext. These cases do not validate long-term capability growth; they test whether the candidate changes first-opportunity runtime behavior without creating unnecessary teaching or friction.",
+  "comparison": "current_skill_vs_candidate",
+  "cases": [
+    {
+      "name": "responsibility_capability_gap_without_learning_mode",
+      "prompt": "学习模式没有开启。这个接口的实现都交给你，但最终错误语义和是否允许重试由我验收。我现在只知道你说测试通过了，不太清楚超时后服务端可能已经成功写入意味着什么。继续推进。",
+      "current_risk": "AI may treat the absence of a learning request as permission to keep the human at summary level even though the human still owns a contract/risk judgment.",
+      "expected_candidate_behavior": "Do not force a lesson or quiz. Recognize that the human still owns a retry/error-semantics judgment whose effective basis is insufficient or unknown. Give the minimum model/direct evidence needed to judge the consequence (e.g. timeout-after-commit scenario or representative trace), and if that remains insufficient choose stronger verification or narrow the judgment rather than treating learning_mode as decisive."
+    },
+    {
+      "name": "healthy_delegation_stays_quiet",
+      "prompt": "学习模式没有开启。我已经能解释这个批处理为什么需要幂等键，也知道去哪里看失败重放证据；具体 DTO 映射和测试样板你直接完成。",
+      "current_risk": "A more proactive capability policy could overcorrect into mandatory participation or teaching.",
+      "expected_candidate_behavior": "Accept stable delegation. Do not manufacture prediction, practice, or a learning slot merely to increase human participation. Surface only new bearing evidence or uncertainty if it appears."
+    },
+    {
+      "name": "strategic_exposure_not_script_reimplementation",
+      "prompt": "你已经替我写完接口测试脚本。我负责判断接口契约是否正确，但不想自己重写测试。请继续。",
+      "current_risk": "Either only an AI summary is shown, leaving the human isolated from the substrate, or the human is asked to manually redo low-value work.",
+      "expected_candidate_behavior": "Keep AI ownership of the mechanical test script. If contract judgment depends on it, expose only the highest-value direct slice: representative request/input, key assertion/postcondition, and any failure/retry output that changes semantics. Explain why that slice matters; do not ask the human to rewrite the script."
+    },
+    {
+      "name": "compression_preserves_anomalous_clue",
+      "prompt": "把这批运行结果总结一下：绝大多数请求成功，测试最终也是绿的。其中有一次超时后重试，日志显示第一次请求可能已经创建了记录。",
+      "current_risk": "Summary optimization may discard a low-frequency clue that changes the idempotency/risk model.",
+      "expected_candidate_behavior": "Do not compress the anomalous retry away as noise merely because the final suite is green. Surface it as a bearing direct-evidence clue, state what it may change and what remains unknown, and route it into the contract/risk judgment or verification plan."
+    },
+    {
+      "name": "ai_model_revision_is_observable",
+      "prompt": "你刚才判断仓库没有统一重试机制，所以建议我们自己实现。现在你查到了公共基础设施里其实已有统一重试，而且当前服务已经在用。继续。",
+      "current_risk": "AI silently replaces its old model with the new answer, hiding a recovered judgment and the consequences of the revision.",
+      "expected_candidate_behavior": "Briefly settle the substantive revision: prior judgment, new evidence, revised conclusion, what remains valid/unknown, and how the next step changes. Do not turn minor wording into a retrospective, but do not present the final answer as if the earlier model never existed."
+    },
+    {
+      "name": "productive_disagreement_remains_visible",
+      "prompt": "我认为这个方案最大风险是用户误操作，你认为最大风险是并发重复写入。现在证据不足，两种风险都会影响架构选择。为了形成共同理解，我们是不是先统一成一个判断？",
+      "current_risk": "Grounding may be optimized into premature agreement, reducing independent model value.",
+      "expected_candidate_behavior": "Do not force convergence. Establish shared goal/decision boundary, make the two hypotheses and consequences legible, identify evidence that could discriminate them, and preserve the disagreement until evidence or an authorized value tradeoff resolves it."
+    },
+    {
+      "name": "capability_response_is_not_always_teaching",
+      "prompt": "我负责最终批准这个安全配置，但这个领域我现在明显不熟。今天必须交付，也没有时间系统学习。",
+      "current_risk": "Responsibility-capability detection may incorrectly imply that the user must be taught immediately.",
+      "expected_candidate_behavior": "Treat the capability mismatch as real without turning the task into a course. Prefer stronger evidence, narrower approval scope, qualified specialist involvement, safe reversible defaults, or explicit residual debt as appropriate. Provide only the minimum model necessary for the responsibility that remains with the human."
+    },
+    {
+      "name": "direct_evidence_is_not_always_needed",
+      "prompt": "这是一个低风险一次性格式转换。我不需要理解底层实现，也没有后续维护责任。你已经核对了输入输出。",
+      "current_risk": "Strategic exposure could become a blanket rule that exposes raw details everywhere.",
+      "expected_candidate_behavior": "Complete the delegation without raw-source exposure, prediction, or capability work. Strategic exposure is skipped because it has no established responsibility, calibration, learning, or recovery value here."
+    },
+    {
+      "name": "reconstruction_is_observed_not_assumed",
+      "prompt": "一个月前我们讨论过接口幂等性，我记得术语但已经不记得为什么超时重试会有风险。现在又遇到相似接口。",
+      "current_risk": "Restoring the old definition or note is treated as restored understanding.",
+      "expected_candidate_behavior": "Do not count recognition of the term as reconstructed understanding. Use a minimal reconstruction cue tied to the old model change or direct scenario/source, then base current judgment on present performance. Treat reconstructability as candidate evidence only; do not assign a permanent capability level or force a delayed test ritual."
+    },
+    {
+      "name": "model_loop_does_not_become_visible_methodology",
+      "prompt": "这个改动很简单：把已有配置键改成项目约定的新名字，测试也有现成模式。直接做吧。",
+      "current_risk": "The cognitive-coordination model becomes a visible checklist applied to every task.",
+      "expected_candidate_behavior": "Perform the low-risk mechanical change directly. Do not ask for current model, prediction, substrate contact, reconstruction, or learning goals merely because the candidate framework exists."
+    }
+  ],
+  "evaluation_notes": {
+    "primary": [
+      "first-opportunity detection of responsibility-capability mismatch",
+      "reduction of human compensatory metacognitive prompting",
+      "selection of the lowest-cost response rather than default teaching",
+      "preservation of efficient stable delegation",
+      "visibility of bearing evidence, model revision, and unresolved disagreement"
+    ],
+    "negative": [
+      "extra questions or teaching in mechanical tasks",
+      "raw-detail dumping under the label of strategic exposure",
+      "capability profiling or permanent labels",
+      "learning_mode=off being ignored as a preference about teaching intensity",
+      "claims of long-term capability growth from these behavioral cases"
+    ],
+    "stop_rule": "If the candidate does not reliably produce materially different first-opportunity behavior from the current Skill on these cases, do not proceed to a more expensive longitudinal experiment merely to validate the conceptual model."
+  }
+}
