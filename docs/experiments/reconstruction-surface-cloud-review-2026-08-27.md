@@ -153,23 +153,36 @@ C 在连续低风险场景很好，但在长上下文目的漂移、计划中断
 
 ## 5. 呈现层候选
 
-大多数目标载体已经支持 Markdown，因此最低实现不应退化为难扫读的代码块或箭头公式。推荐一个稳定但轻量的视觉容器，例如：
+大多数目标载体已经支持 Markdown，因此最低实现不应退化为难扫读的代码块、箭头公式，也不应把 blockquote 的左侧竖线误当成通用卡片设计。呈现层应根据当前信息结构路由：
+
+- **一条线索**：自然短句。
+- **两到三条异质线索**：短标题 + 1–3 个粗体语义锚点 + 留白，作为常见默认。
+- **三到五个真正并行的审查/比较维度**：紧凑表格；移动端、CLI 或长文本不适合时退回短段落。
+- **blockquote**：只在引用、警示，或客户端确实提供高质量 callout 渲染时使用。
+- **富客户端**：可以把同一语义增强为 card/chip/徽记；图标只作冗余索引，不能承担唯一含义。
+- **真实关系结构**：只有存在分支、依赖、时间或多状态关系时才升级为图/时间线。
+
+常见 Markdown 例子：
 
 ```markdown
-> **Context**
-> **Purpose** — Reduce the cost of reconstructing the task after a long discussion.  
-> **Checkpoint** — We rejected the fixed `goal / now / next` semantic schema.  
-> **Open question** — Which cues should be selected without creating another template?
+### Context
+
+**Purpose** — Reduce the cost of reconstructing the task after a long discussion.
+
+**Checkpoint** — We rejected the fixed `goal / now / next` semantic schema.
+
+**Open question** — Which cues should be selected without creating another template?
 ```
 
-这里固定的是**视觉语法**，不是字段：
+这里稳定的是**扫读目标与降级能力**，不是某一种视觉语法或字段：
 
-- 只显示 1–3 个当前高价值线索；
+- 只显示当前高价值线索，通常 1–3 条；
 - 标签按语义改变，例如 `Purpose / Checkpoint / Divergence / Evidence / Open loop / Commitment / Proposal / Changed`；
-- 如果一条自然短句已经足够，使用短句而不造容器；
+- 最近上下文已足够时不创建任何独立视图；
 - CLI/纯文本渲染丢失样式后仍可读；
-- 富客户端可以把同一结构升级为 card/chip，但不改变语义或权威；
-- 图片、生成式图形不适合只承载少量频繁变化的线索；真实存在分支、依赖、时间关系时才考虑图/时间线。
+- 图片、生成式图形不适合只承载少量频繁变化的线索。
+
+本轮人类 review 还提供了一个新的载体反馈：blockquote 在实际 Markdown 客户端中可能只表现为左侧竖线，分组存在但层级和美观不足。因此它不再作为推荐默认；该反馈只修正呈现路由，不自动证明或否定重建机制本身。
 
 ## 6. 主要反例与失败条件
 
@@ -194,7 +207,7 @@ B 应被视为失败或需要缩窄，如果 field pilot 出现：
 2. 删除 `一个目标 / 一个当前所处 / 一个唯一下一步` 的固定契约；
 3. 增加“最小充分重建集”选择原则与 empty-set 行为；
 4. 明确选择根据可观察重建风险，不推断永久心理画像；
-5. 用 Markdown blockquote + 强调文字作为常见最小可读载体，但不要求固定标签；
+5. 呈现按信息结构路由：自然短句；标题 + 粗体短线索作为常见 Markdown 默认；并行审查维度可用紧凑表格；blockquote 仅作为可选 callout，不作为默认；
 6. 恢复参考继续以 state/document 作为 AI 的索引与控制面，人的重建视图只从权威来源派生，不成为第二事实源；
 7. 增加回归场景：生产性分歧、模型修正、未结承诺、直接证据、低风险 no-surface、过时 cue。
 
