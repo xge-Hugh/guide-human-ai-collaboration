@@ -509,7 +509,79 @@ handwriting 与 typing 在速度、sensorimotor involvement、编码方式和学
 
 ---
 
-## 14. 与当前 cognitive coordination 模型的候选关系
+## 14. 新候选：punctuated oversight，而不是 continuous monitoring / complete disengagement 二选一
+
+新的 field hypothesis 是一个看似反直觉但可被外部研究约束的方向：
+
+> **在人机协作中，人未必应持续观看 AI 的每一步执行；低价值执行期间释放注意，可能比持续监督更能保护后续理解与判断所需的认知资源。**
+
+但该命题不能直接写成“只看最终结果”。
+
+### 14.1 continuous monitoring 的已知成本
+
+human–automation 研究长期发现，持续监控本身会受到 vigilance decrement 影响，而且监督自动化并不是零负荷任务。监控者可能在持续努力的同时降低异常检测能力。
+
+- Parasuraman (1987), *Human-Computer Monitoring*
+- DOI: https://doi.org/10.1177/001872088702900609
+- Gouraud et al. (2017), *Autopilot, Mind Wandering, and the Out of the Loop Performance Problem*
+- DOI: https://doi.org/10.3389/fnins.2017.00541
+
+这支持一个项目级边界：
+
+> `human is watching` ≠ `human judgment is being protected`
+
+持续 watching 可能消耗 attention，却没有增加有区分力的 evidence contact。
+
+### 14.2 rest / low-interference window 的相邻支持
+
+wakeful-rest 研究显示，学习后的安静清醒休息相对干扰任务可改善后续记忆保持；micro-break meta-analysis 也发现短休息对 vigor / fatigue 有小而稳定的改善。
+
+- Weng et al. (2025), DOI: https://doi.org/10.3758/s13423-025-02665-x
+- Albulescu et al. (2022), PMID: https://pubmed.ncbi.nlm.nih.gov/36044424/
+
+这些证据不能直接证明“AI 等待会恢复 working memory”，也不能说明所有 mind wandering 有益。更谨慎的候选解释是：
+
+- 低干扰窗口可能减少新的 retroactive interference；
+- 短休息可以降低部分主观疲劳；
+- 不持续监看可以避免把 attention 继续锁定在低价值执行上。
+
+### 14.3 complete disengagement 的反向风险
+
+automation literature 同时存在 out-of-the-loop performance problem：如果人长期只作为末端接管者，却没有足够 situation / system understanding，异常发生时可能更慢发现问题、更难诊断或接管。
+
+因此：
+
+> `continuous monitoring is costly` ≠ `end-only review is always sufficient`
+
+### 14.4 候选中间机制：punctuated oversight
+
+当前更合理的候选是**punctuated oversight / checkpointed engagement**：
+
+```text
+承重方向 / 输入契约
+→ 人形成必要模型与判断
+→ AI 承担低价值批量执行
+→ 人可以释放持续监控
+→ 在 evidence-bearing checkpoint 重新进入
+→ 查看一个最高价值直接证据 / 状态变化 / 异常
+→ 作出下一承重判断
+→ 再次释放
+→ 最终验收
+```
+
+它与现有 strategic exposure 很接近：人的价值不在于观察每一步，而在于**在会改变模型、风险或责任的地方接触足够直接证据**。
+
+因此后续 field observation 应区分：
+
+- continuous thinking-trace monitoring；
+- complete leave-and-return；
+- punctuated checkpoint review。
+
+真正要比较的是后两种方式能否在降低 fatigue / monitoring burden 的同时，保持或改善 judgment readiness、异常检测与结果理解。
+
+---
+
+## 15. 与当前 cognitive coordination 模型的候选关系
 
 如果后续证据支持，该 insight 可能不是独立大理论，而是对现有 cognitive allocation + reconstruction 的一个时间维扩展：
 
