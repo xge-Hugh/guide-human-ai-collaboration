@@ -47,6 +47,23 @@
 
 如果为了消灭“闲置”而持续塞入第二任务，可能把模型优化成**人类利用率最大化**，而不是**总协作认知成本最小化**。
 
+### 2.1 新的 field observation：等待期间并非只有“做 / 不做”两种状态
+
+进一步观察显示，等待期间实际存在更多可观察的人类行为：
+
+- **手机低门槛切换**：手机通常就在手边；无输出和无明确动作对象时，人容易打开社交媒体或回复消息；
+- **过程监看**：有可见 thinking / reasoning trace 时，人会观看 AI 的思考过程，并比较它是否符合自己的预期；
+- **纸笔外化**：人有时会用纸笔记录未来线索或整理思路；书写较慢、字迹凌乱时会产生“数字时代却还在用纸”的不协调感，但当能够稳定、整洁书写时，主观上反而更平静；
+- **side chat 解释性分支**：side chat 较少用于“填等待”，更多发生在主线程输出已经出现但理解不足时，用另一个对话解释、追问或建立对主线程内容的预测；
+- **流式阅读**：AI 一旦开始 streaming，人可能从“等待”切换为边生成边阅读、预测和判断，而不是等完整答案结束后再统一处理；
+- **意图输入**：人在发送 prompt 前的打字、修改、删改、组织语言，本身也是协作中的认知活动，而不是中性的输入通道。
+
+这使问题从“等待期如何利用”扩展为一个更一般的观察：
+
+> **人机协作不是离散的 user turn → AI turn → user turn。每个语义话轮内部都可能包含输入构造、悬置、监看、流式阅读、预测、记录、分支探索、整合和恢复等不同认知状态。**
+
+因此，AI waiting 可能只是暴露了一个更大的**turn-level abstraction gap**：项目过去主要建模“讨论了什么、谁判断什么、何时进入下一关注点”，却较少建模**人和 AI 在一个话轮内部实际怎样占用、释放和重新配置认知资源**。
+
 ---
 
 ## 3. 当前项目为什么能够容纳它，但尚未真正描述它
@@ -185,29 +202,33 @@ Tan, Messerschmidt, Yin & Nov (CHI 2026) 控制 Human–LLM 交互中的 time-to
 
 ---
 
-## 6. 一个更具体的候选失效：human-as-polling-loop
+## 6. 修正后的候选失效：blocked-progression polling
 
-如果系统无法可靠说明 AI 是否仍在工作、何时需要人回来，人的行为可能退化为：
+新的 field observation 修正了一个先前过强的解释：现代 agent 工具往往**已经有 completion notification**（弹窗、声音或系统通知），但人仍可能主动检查 AI 是否完成。因此 polling 不能主要归因于“系统没有通知”。
+
+更符合观察的候选序列是：
 
 ```text
-提交请求
-→ 尝试做别的事
-→ 想起 AI 可能完成
-→ 检查
-→ 没完成
-→ 回到另一任务
-→ 又想起
-→ 再检查
-→ ...
+当前推进依赖 AI 返回
+→ 人暂时没有可继续的主任务动作
+→ 又不确定这段空档是否值得投入另一件事
+→ 尝试低门槛替代活动 / 保持部分任务激活
+→ 想尽快恢复主线
+→ 主动检查 AI 是否已经足够接近完成
+→ 未完成则重新进入等待/替代活动
 ```
 
-这时，人实际承担了一个系统本可承担的 completion-detection loop。
+候选失效暂改称：
 
-候选失效名：
+> **blocked-progression polling：当下一步依赖对方返回，而等待时长和可安全投入的替代活动不明确时，人因为“继续等待还是切走”的协调冲突而反复检查进展，即使完成通知本身已经存在。**
 
-> **Human-as-polling-loop：系统把“检测 AI 是否已完成”的持续责任隐式转嫁给人，使一个本可外置的未来意图持续占用注意与元认知监控。**
+这更接近现实世界等待一个会决定自己下一步的人：最终消息可能会通知，但等待者仍会反复看邮件、消息或状态，因为真正未解决的是**行动依赖 + 时间不确定性 + 注意分配冲突**。
 
-这与普通“等待太久”不同：即使总 latency 不变，只要有可靠 completion cue、任务安全悬置与低成本恢复，人的体验和认知负担可能已经显著不同。
+等待不确定消息的心理研究提供相邻证据：等待本身可产生焦虑、分心和 expectation volatility；但这些研究多针对重要现实结果，不能直接外推为 Human–LLM polling 机制。它们至少提醒项目：
+
+> `知道最终会收到通知` ≠ `等待期间可以完全释放认知承诺`
+
+因此 completion cue 仍可能有价值，但它不再被视为这一问题的充分解法。
 
 ---
 
@@ -253,6 +274,17 @@ side chat 的吸引力在于它似乎“仍留在同一 working-memory context�
 更好的问题是：
 
 > **这个等待活动会降低还是增加主任务稍后恢复时的 reconstruction / interference cost？**
+
+进一步的 field observation 还要求区分两类 side chat：
+
+1. **latency-filling branch**：主线程还没有输出，只因为等待而另开对话；
+2. **comprehension branch**：主线程已经给出内容，但人尚未形成足够理解，于是用 side chat 解释、追问、举例或预测主线程后续。
+
+第二类更可能具有认知价值，因为它的目的不是填满空闲，而是建立对主线程的可用模型。但也可能造成额外负担：两个线程的术语、假设或解释若不一致，人需要承担跨线程 reconciliation。
+
+现阶段最有区分力的研究问题不是“side chat 好不好”，而是：
+
+> **side chat 是否提高了人对主线程的解释、预测、判断和错误检测能力；其收益是否超过额外线程带来的工作记忆、冲突消解和恢复成本？**
 
 ---
 
@@ -328,7 +360,12 @@ side chat 的价值取决于它是否产生独立可保留价值及是否引入�
 - 是否需要重新问“我们刚才在做什么”；
 - side chat 是否产生帮助、冲突还是新未闭合分支；
 - 等待结束后主观疲劳、烦躁或上下文丢失；
-- 若有 completion notification / 外置 return cue，行为是否改变。
+- 即使已有 completion notification，人是否仍主动轮询，以及轮询发生在什么心理/任务条件下；
+- 有可见 thinking trace 时，人是否用它做预测/校准，还是被它持续占据注意；
+- 人是等完整答案后阅读，还是在 streaming 中边读边形成判断；
+- 手写/键入/仅在脑中思考分别怎样影响主观平静、线索保留和恢复；
+- side chat 属于 latency-filling 还是 comprehension branch，以及它是否产生跨线程冲突；
+- 若有外置 return cue、进度状态或更明确的 safe-to-leave signal，行为是否改变。
 
 不要求人工填写固定等待日志；只在自然出现高价值 observation 时保留。
 
@@ -343,7 +380,68 @@ side chat 的价值取决于它是否产生独立可保留价值及是否引入�
 
 ---
 
-## 12. 与当前 cognitive coordination 模型的候选关系
+## 12. 更大的候选：从 turn-taking 模型到 interaction-state 模型
+
+AI waiting 的价值可能在于暴露了一个比 temporal coordination 更大的建模缺口。
+
+传统对话表示容易把一次协作压缩为：
+
+```text
+human message
+→ AI response
+→ human message
+→ AI response
+```
+
+但真实协作更可能是：
+
+```text
+形成意图
+→ 输入/修改表达
+→ 提交
+→ 等待
+→ 监看/漂移/记录/切换
+→ AI 开始 streaming
+→ 边读边预测/判断
+→ 暂停理解
+→ 可能 side branch
+→ 回主线程整合
+→ 形成下一行动
+```
+
+这些不是必须变成新 workflow phases。它们更像**interaction microstates / cognitive states**：可跨任何业务关注点出现，而且只有在它们会改变认知负担、判断质量、可恢复性或系统设计时才值得显式建模。
+
+因此目前有两个层级不同的候选：
+
+- **temporal coordination**：处理双方不同步、等待、悬置与恢复；
+- **interaction-state model**：更广泛描述一个协作话轮内部，人如何输入、等待、观察、阅读、外化、分支、整合与恢复。
+
+当前不应急于把第二个候选扩展成完整 taxonomy。AI waiting 只是第一个明确暴露该 gap 的 field clue；未来只有其他真实观察（例如 streaming 阅读、prompt 构造、thinking-trace 监看、side-chat comprehension）反复显示它们能解释现有模型解释不了的失效，才值得进一步抽象。
+
+---
+
+## 13. 手写与手机：先保留现象，不做神经故事
+
+“拿起手机”与“拿起纸笔”在等待期形成了有意义的行为对照，但当前应谨慎解释。
+
+### 手机
+
+研究支持 boredom、habitual checking、内部 mental cues 与 spontaneous smartphone checking 有关；数字内容快速切换还可能增加 attentional failure 和 boredom。这里更稳妥的语言是**低摩擦、习惯化、即时可获得的注意替代**，而不是简单归因于“dopamine”。多巴胺参与 reward learning，但“因为多巴胺所以刷手机”对本项目而言过于粗糙，无法产生可判别设计。
+
+### 纸笔
+
+handwriting 与 typing 在速度、sensorimotor involvement、编码方式和学习结果上确有研究差异，但现有证据主要来自教育/记忆任务。当前 field observation 更直接：纸笔虽然慢、字迹会造成摩擦，却有时让人主观更平静，并形成不受屏幕信息流干扰的外部思考表面。
+
+因此目前不主张“等待时应该手写”，只保留两个待区分的解释：
+
+- **externalization hypothesis**：把未闭合想法写到外部介质上，降低 working-memory maintenance；
+- **pace / attentional-boundary hypothesis**：更慢且单一的物理交互减少信息切换，使人更容易稳定在一个认知对象上。
+
+如果以后发现数字笔记也能产生同样效果，则“手写”本身可能不是机制；如果只有纸笔稳定出现，则再研究载体差异。
+
+---
+
+## 14. 与当前 cognitive coordination 模型的候选关系
 
 如果后续证据支持，该 insight 可能不是独立大理论，而是对现有 cognitive allocation + reconstruction 的一个时间维扩展：
 
