@@ -5,7 +5,7 @@
   "status": "active",
   "phase": "cognitive_coordination_skill_field_pilot_started",
   "current_actor": "human_ai_collaboration",
-  "next_action": "已完成第一轮 cloud 语义回放，并据此收窄候选增量：旧 Skill 并非完全依赖 explicit learning mode，真正值得试跑的是责任—能力的非教学响应、战略性直接证据切片、AI 实质模型修正可观察、生产性分歧。上述机制已以最小修改写入 live pilot Skill，并建立日常生态试跑说明。下一步由本地 Agent 在真实日常任务中使用该 Skill，自然收集首次机会行为、人的补偿性元认知劳动、线索发现与 over-trigger；cloud 侧在出现高价值 field observation 时做诊断，runner 只在 competing explanations 会改变机制/carrier 判断时进行小规模 native / old-or-current carrier / candidate 对照。当前不启动新的大规模 Phase B 式实验，也不把 pilot Skill 视为最终保障架构。 同时已捕获 AI 等待期的 temporal-coordination field clue：先在真实生态中自然观察 suspension / polling / resumption，不把“等待”立即升格为新阶段或 live norm；仅当该线索开始改变机制或 carrier 决定时再进入独立校准。",
+  "next_action": "已完成第一轮 cloud 语义回放，并据此收窄候选增量：旧 Skill 并非完全依赖 explicit learning mode，真正值得试跑的是责任—能力的非教学响应、战略性直接证据切片、AI 实质模型修正可观察、生产性分歧。上述机制已以最小修改写入 live pilot Skill，并建立日常生态试跑说明。下一步由本地 Agent 在真实日常任务中使用该 Skill，自然收集首次机会行为、人的补偿性元认知劳动、线索发现与 over-trigger；cloud 侧在出现高价值 field observation 时做诊断，runner 只在 competing explanations 会改变机制/carrier 判断时进行小规模 native / old-or-current carrier / candidate 对照。当前不启动新的大规模 Phase B 式实验，也不把 pilot Skill 视为最终保障架构。 同时已捕获 AI 等待期的 temporal-coordination field clue：先在真实生态中自然观察 suspension / polling / resumption，不把“等待”立即升格为新阶段或 live norm；仅当该线索开始改变机制或 carrier 决定时再进入独立校准。 Temporal-coordination clue 已进一步收窄：后续 field observation 将 side chat 与独立 second chat 分开，并优先检验 rejoin collision 与低交互 cognitive-sidecar 支援是否减少 branch-management burden，同时保持 judgment readiness；除非这些观察开始改变机制/carrier 决策，不升级为新 norm 或独立大型实验。",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -72,6 +72,6 @@
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/1",
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/2"
     ],
-    "temporal_coordination_waiting": "2026-08-28 日常协作发现 AI 长响应等待可能形成 temporal-coordination 盲点，随后进一步观察修正了初版解释：现代 agent 已有完成通知，人仍会轮询，说明问题不主要是 completion detection 缺失，而更像下一步被 AI 返回阻塞时“继续等待还是切走”的注意分配冲突（blocked-progression polling）。同时出现 thinking-trace 监看、纸笔外化、streaming 阅读、prompt 输入/修改、side-chat comprehension 等话轮内行为，暴露可能更大的 turn-level abstraction gap：真实协作并非离散 human turn / AI turn，而包含多个 interaction microstates。候选 insight 已扩展，但不建立完整 taxonomy、不改 live Skill/spec。手机行为先按 boredom / habitual low-friction checking 解释，避免粗暴 dopamine 单因果；纸笔平静感保留 externalization / pace / attentional-boundary competing explanations；side chat 重点区分 latency-filling 与 comprehension branch。"
+    "temporal_coordination_waiting": "2026-08-28 日常协作发现 AI 长响应等待可能形成 temporal-coordination 盲点；后续观察进一步修正并扩展模型。现代 agent 已有完成通知，人仍会轮询，因此问题更像 blocked-progression polling：下一步依赖 AI 返回时，人陷入“继续等待还是切走”的注意分配冲突。进一步明确 side chat ≠ second separate chat：second chat 是独立会话、注意分裂风险更典型且真实使用较少；side chat 是附着于主线程/材料的辅助交互，但当主线程在 side prompt/response 尚未闭合时先返回，会发生 rejoin collision，使人同时承担主线恢复、旁支收束和跨线程 reconciliation。候选设计已收窄为 support without branch ownership / cognitive sidecar：理解修复、memory chunking、上下文压缩和局部解释尽量原位、低交互、可忽略，不要求人先写高密度 prompt 或管理第二线程。CHI 2026 proactive-support 研究提示 aligned timing 可能有益，而 2023 human-AI explanation 实验提示 explanation 本身也可能增加 task complexity；因此不主张更多解释或高侵入自动帮助。当前不改 live Skill/spec、不建完整 microstate taxonomy；优先自然观察 rejoin collision、streaming reading、waiting、prompt construction 与低摩擦支援的实际价值。"
   }
 }
