@@ -72,6 +72,6 @@
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/1",
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/2"
     ],
-    "temporal_coordination_waiting": "2026-08-28 日常协作发现 AI 长响应等待可能形成独立的 temporal-coordination 盲点：人既未获得可用输出，又可能持续承担 completion monitoring，导致刷手机/任务切换/side chat、attention residue、恢复成本与疲劳。已将原始观察写入 feedback，并建立 candidate insight，把问题暂时表述为 suspended cognitive commitment、human-as-polling-loop，以及 suspension / release / resumption 的时间协调；相邻 interruption/resumption、prospective-memory offloading 与 CHI 2026 Human–LLM latency 研究提供校准，但不足以推出统一等待策略或固定阈值。当前不改 live Skill/spec；优先在生态试跑中自然观察轮询、切换、恢复和 completion cue 的作用，若 competing explanations 会改变机制或 carrier 判断，再进入最小判别证据。"
+    "temporal_coordination_waiting": "2026-08-28 日常协作发现 AI 长响应等待可能形成 temporal-coordination 盲点，随后进一步观察修正了初版解释：现代 agent 已有完成通知，人仍会轮询，说明问题不主要是 completion detection 缺失，而更像下一步被 AI 返回阻塞时“继续等待还是切走”的注意分配冲突（blocked-progression polling）。同时出现 thinking-trace 监看、纸笔外化、streaming 阅读、prompt 输入/修改、side-chat comprehension 等话轮内行为，暴露可能更大的 turn-level abstraction gap：真实协作并非离散 human turn / AI turn，而包含多个 interaction microstates。候选 insight 已扩展，但不建立完整 taxonomy、不改 live Skill/spec。手机行为先按 boredom / habitual low-friction checking 解释，避免粗暴 dopamine 单因果；纸笔平静感保留 externalization / pace / attentional-boundary competing explanations；side chat 重点区分 latency-filling 与 comprehension branch。"
   }
 }
