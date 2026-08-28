@@ -5,7 +5,7 @@
   "status": "active",
   "phase": "cognitive_coordination_skill_field_pilot_started",
   "current_actor": "human_ai_collaboration",
-  "next_action": "已完成第一轮 cloud 语义回放，并据此收窄候选增量：旧 Skill 并非完全依赖 explicit learning mode，真正值得试跑的是责任—能力的非教学响应、战略性直接证据切片、AI 实质模型修正可观察、生产性分歧。上述机制已以最小修改写入 live pilot Skill，并建立日常生态试跑说明。下一步由本地 Agent 在真实日常任务中使用该 Skill，自然收集首次机会行为、人的补偿性元认知劳动、线索发现与 over-trigger；cloud 侧在出现高价值 field observation 时做诊断，runner 只在 competing explanations 会改变机制/carrier 判断时进行小规模 native / old-or-current carrier / candidate 对照。当前不启动新的大规模 Phase B 式实验，也不把 pilot Skill 视为最终保障架构。",
+  "next_action": "已完成第一轮 cloud 语义回放，并据此收窄候选增量：旧 Skill 并非完全依赖 explicit learning mode，真正值得试跑的是责任—能力的非教学响应、战略性直接证据切片、AI 实质模型修正可观察、生产性分歧。上述机制已以最小修改写入 live pilot Skill，并建立日常生态试跑说明。下一步由本地 Agent 在真实日常任务中使用该 Skill，自然收集首次机会行为、人的补偿性元认知劳动、线索发现与 over-trigger；cloud 侧在出现高价值 field observation 时做诊断，runner 只在 competing explanations 会改变机制/carrier 判断时进行小规模 native / old-or-current carrier / candidate 对照。当前不启动新的大规模 Phase B 式实验，也不把 pilot Skill 视为最终保障架构。 同时已捕获 AI 等待期的 temporal-coordination field clue：先在真实生态中自然观察 suspension / polling / resumption，不把“等待”立即升格为新阶段或 live norm；仅当该线索开始改变机制或 carrier 决定时再进入独立校准。",
   "pressure_mode": "standard",
   "learning_mode": "guided",
   "documents": {
@@ -51,7 +51,8 @@
     "cognitive_coordination_skill_gap": "../../insights/2026-08-26-skill-learning-capability-gap.md",
     "if073_assurance_gap": "../../insights/2026-08-15-expert-supervised-pilot-and-assurance-gap.md",
     "workflow_snapshot": "../../docs/archive/workflow-v0.15.md",
-    "assurance_notes": "../../docs/archive/assurance-and-pilot-notes-from-workflow-v0.15.md"
+    "assurance_notes": "../../docs/archive/assurance-and-pilot-notes-from-workflow-v0.15.md",
+    "temporal_coordination_waiting": "../../insights/2026-08-28-temporal-coordination-and-ai-waiting.md"
   },
   "validation_debt_refs": [],
   "notes": {
@@ -70,6 +71,7 @@
     "open_issues": [
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/1",
       "https://github.com/xge-Hugh/guide-human-ai-collaboration/issues/2"
-    ]
+    ],
+    "temporal_coordination_waiting": "2026-08-28 日常协作发现 AI 长响应等待可能形成独立的 temporal-coordination 盲点：人既未获得可用输出，又可能持续承担 completion monitoring，导致刷手机/任务切换/side chat、attention residue、恢复成本与疲劳。已将原始观察写入 feedback，并建立 candidate insight，把问题暂时表述为 suspended cognitive commitment、human-as-polling-loop，以及 suspension / release / resumption 的时间协调；相邻 interruption/resumption、prospective-memory offloading 与 CHI 2026 Human–LLM latency 研究提供校准，但不足以推出统一等待策略或固定阈值。当前不改 live Skill/spec；优先在生态试跑中自然观察轮询、切换、恢复和 completion cue 的作用，若 competing explanations 会改变机制或 carrier 判断，再进入最小判别证据。"
   }
 }
