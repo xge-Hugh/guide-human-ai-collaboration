@@ -2,6 +2,8 @@
 
 > Status: field observation / discovery only. This is not a controlled experiment, not a new collaboration norm, and not a requirement to log every wait.
 
+**Quick field reference:** [AI Waiting Practice Card](temporal-coordination-practice-card.md)
+
 ## 1. Decision this observation may inform
 
 The current candidate model proposes that AI latency can create suspended cognitive commitment, blocked-progression polling, and interaction-state conflicts. A newer field clue distinguishes side chat from a second independent chat and proposes rejoin collision: the main thread becomes actionable while an auxiliary side interaction is still unfinished.
