@@ -25,7 +25,7 @@
 - 什么都不做，但持续盯着是否完成；
 - 打开手机、社交媒体或其他高新奇输入；
 - 切到另一项实质任务；
-- 开 side chat 继续问同一主题；
+- 使用附着于主线程的 side chat 做局部解释/追问，或较少情况下另开一个独立聊天；
 - 在当前任务内继续思考；
 - 离开屏幕、喝水、走动或短暂休息。
 
@@ -34,7 +34,7 @@
 - 切到其他任务后需要在两个未完成目标之间来回恢复；
 - 手机/新任务占据注意力后，AI 输出返回时很难立即进入阅读与判断；
 - 人会反复检查“AI 是否已经完成”，形成额外监控负担；
-- side chat 虽然主题相关，却可能引入新的子目标、解释模型或未闭合问题；
+- side chat 虽然仍附着于主线程，却可能在主线程恢复前形成尚未闭合的辅助认知义务；另开独立聊天则具有更明显的注意分裂风险；
 - 最终出现疲劳、无法跟上 AI 输出、协作质量下降，以及对等待是否结束的持续焦虑。
 
 这说明：
@@ -54,7 +54,7 @@
 - **手机低门槛切换**：手机通常就在手边；无输出和无明确动作对象时，人容易打开社交媒体或回复消息；
 - **过程监看**：有可见 thinking / reasoning trace 时，人会观看 AI 的思考过程，并比较它是否符合自己的预期；
 - **纸笔外化**：人有时会用纸笔记录未来线索或整理思路；书写较慢、字迹凌乱时会产生“数字时代却还在用纸”的不协调感，但当能够稳定、整洁书写时，主观上反而更平静；
-- **side chat 解释性分支**：side chat 较少用于“填等待”，更多发生在主线程输出已经出现但理解不足时，用另一个对话解释、追问或建立对主线程内容的预测；
+- **side chat 辅助分支**：side chat 与另开独立聊天不同，它附着于当前主线程/材料；等待时可能被用来做局部解释、追问或整理疑问，但若主线程先返回，人会同时承担主线恢复与旁支收束；
 - **流式阅读**：AI 一旦开始 streaming，人可能从“等待”切换为边生成边阅读、预测和判断，而不是等完整答案结束后再统一处理；
 - **意图输入**：人在发送 prompt 前的打字、修改、删改、组织语言，本身也是协作中的认知活动，而不是中性的输入通道。
 
@@ -146,6 +146,21 @@ Tan, Messerschmidt, Yin & Nov (CHI 2026) 控制 Human–LLM 交互中的 time-to
 这项研究的重要性不是证明“9 秒最好”，而是直接支持：
 
 > **Human–LLM latency 可以改变交互意义与用户行为，因此不应只被建模为越短越好的系统性能指标。**
+
+
+### 4.6 主动理解支援的相反边界：timing 有价值，但 explanation 也会增加复杂度
+
+Liu et al. (CHI 2026) 在知识密集型数字任务中发现，与错位或随机触发相比，时机与用户困难更对齐的 adaptive LLM clarification / explanation 可以改善准确率并减少 missed-help。
+
+- DOI: https://doi.org/10.1145/3772318.3791191
+
+但 Westphal et al. (2023) 的 human–AI decision experiments 发现，额外 explanation 也可能提高 perceived task complexity，并使部分用户结果变差。
+
+- DOI: https://doi.org/10.1016/j.chb.2023.107714
+
+对本项目的含义不是“AI 应主动讲更多”，而是：
+
+> **理解支援的价值取决于时机、强度、表示和交互成本；如果支援要求人维护第二条对话义务，或者 explanation 本身继续增加信息密度，它可能抵消原本想减少的认知负担。**
 
 ---
 
@@ -261,30 +276,55 @@ Tan, Messerschmidt, Yin & Nov (CHI 2026) 控制 Human–LLM 交互中的 time-to
 
 ---
 
-## 8. side chat 不是天然正确答案
+## 8. side chat 必须与 second separate chat 分开建模
 
-side chat 的吸引力在于它似乎“仍留在同一 working-memory context”。但至少存在三个 competing explanations：
+新的 field clarification 修正了先前一个重要混淆。
 
-1. **context-preserving hypothesis**：同主题继续思考帮助维持任务激活并产生新线索；
-2. **goal-interference hypothesis**：第二对话生成新的解释、子问题和未闭合目标，反而增加恢复干扰；
-3. **conditional hypothesis**：只有独立价值高、边界清晰、不会改变主线程输入假设的 side task 才有净收益。
+### 8.1 second separate chat：真正的并行会话
 
-因此不宜把“等待时开 side chat”写成默认 norm。
+second separate chat 指另开一个完整、独立的聊天窗口/会话。它有自己的未闭合目标、上下文和返回点，因此更接近传统 task switching / attention splitting。
 
-更好的问题是：
+真实使用中，这种行为相对少见，尤其在需要集中注意的高认知项目里会被主动避免，因为人已经预期到同时维护两个完整聊天会让两边质量下降。
 
-> **这个等待活动会降低还是增加主任务稍后恢复时的 reconstruction / interference cost？**
+### 8.2 side chat：附着于主线程的辅助交互
 
-进一步的 field observation 还要求区分两类 side chat：
+side chat 不等于第二个独立聊天。它更像附着于当前主线程或当前材料的 auxiliary surface，目的通常不是开启另一项业务任务，而是：
 
-1. **latency-filling branch**：主线程还没有输出，只因为等待而另开对话；
-2. **comprehension branch**：主线程已经给出内容，但人尚未形成足够理解，于是用 side chat 解释、追问、举例或预测主线程后续。
+- 解释当前段落/术语；
+- 追问一个局部关系；
+- 暂存一个疑问；
+- 生成一个例子或预测；
+- 在不污染主线的情况下检查一个局部理解。
 
-第二类更可能具有认知价值，因为它的目的不是填满空闲，而是建立对主线程的可用模型。但也可能造成额外负担：两个线程的术语、假设或解释若不一致，人需要承担跨线程 reconciliation。
+因此不能把 side chat 的成本简单写成“切到另一个任务”。
 
-现阶段最有区分力的研究问题不是“side chat 好不好”，而是：
+但它仍会产生自己的 interaction obligation：人需要组织问题、等待、阅读、决定是否继续，并把结果重新接回主线。
 
-> **side chat 是否提高了人对主线程的解释、预测、判断和错误检测能力；其收益是否超过额外线程带来的工作记忆、冲突消解和恢复成本？**
+### 8.3 候选失效：rejoin collision
+
+等待期间使用 side chat 时可能出现：
+
+~~~text
+主线程仍在等待
+→ 人开始组织 side-chat 问题
+→ side prompt 尚未发送 / side response 尚未闭合
+→ 主线程先返回并开始 streaming
+→ 人突然同时拥有两个待处理认知对象
+~~~
+
+这里真正的负担不是主题切换，而是 interaction-state concurrency。
+
+候选失效名：
+
+> **rejoin collision：辅助分支尚未闭合时，主线程重新变得可行动，使人同时承担主线恢复、旁支收束和跨线程整合。**
+
+这可以解释一个看似矛盾的现象：side chat 与主线程高度相关，本来是为了降低理解负担，却可能因为返回时机冲突而增加 working-memory maintenance。
+
+因此当前最有区分力的问题是：
+
+> **side chat 提供的理解/预测价值，是否足以抵消 branch management、rejoin collision 和 reconciliation 的成本？**
+
+这与 second separate chat 是两个不同研究问题。
 
 ---
 
@@ -336,9 +376,9 @@ side chat 的吸引力在于它似乎“仍留在同一 working-memory context�
 
 即使 latency 总时长相同，需要人主动检查完成状态的条件会增加主观负担、检查次数、恢复成本或对后续输出的跟随困难。
 
-### H5 — side-chat conditionality
+### H5 — side-chat rejoin cost
 
-side chat 的价值取决于它是否产生独立可保留价值及是否引入竞争目标；“主题相同”本身不足以预测它是否有益。
+side chat 即使与主线程共享主题，也可能因为辅助分支尚未闭合而与主线程返回发生 rejoin collision；其净价值取决于理解/预测收益是否超过 branch management 与 reconciliation 成本。
 
 ### H6 — carrier boundary
 
@@ -364,7 +404,7 @@ side chat 的价值取决于它是否产生独立可保留价值及是否引入�
 - 有可见 thinking trace 时，人是否用它做预测/校准，还是被它持续占据注意；
 - 人是等完整答案后阅读，还是在 streaming 中边读边形成判断；
 - 手写/键入/仅在脑中思考分别怎样影响主观平静、线索保留和恢复；
-- side chat 属于 latency-filling 还是 comprehension branch，以及它是否产生跨线程冲突；
+- side chat 与 second separate chat 分开记录；side chat 重点观察是否出现主线程先返回造成的 rejoin collision，以及辅助支援是否真的改善理解/预测；
 - 若有外置 return cue、进度状态或更明确的 safe-to-leave signal，行为是否改变。
 
 不要求人工填写固定等待日志；只在自然出现高价值 observation 时保留。
@@ -417,6 +457,34 @@ human message
 - **interaction-state model**：更广泛描述一个协作话轮内部，人如何输入、等待、观察、阅读、外化、分支、整合与恢复。
 
 当前不应急于把第二个候选扩展成完整 taxonomy。AI waiting 只是第一个明确暴露该 gap 的 field clue；未来只有其他真实观察（例如 streaming 阅读、prompt 构造、thinking-trace 监看、side-chat comprehension）反复显示它们能解释现有模型解释不了的失效，才值得进一步抽象。
+
+
+### 12.1 候选设计方向：support without branch ownership
+
+新的 side-chat 观察提出一个比“是否保留 side chat”更有价值的设计问题：
+
+> **能否提供理解修复、memory chunking、上下文压缩和局部解释，同时不要求人创建并管理一个新的对话义务？**
+
+这里暂称为 cognitive sidecar。它不是固定 UI，也不是“再放一个 AI 在旁边”。它描述一种功能边界：
+
+- 支援尽量原位、低交互、可忽略；
+- 默认不要求人先诊断自己的理解断点并写高密度 prompt；
+- 一个局部解释不自动变成必须继续的第二线程；
+- 支援结束后应自然回到 parent locus；
+- explanation 采用 progressive disclosure，而不是一次性增加更多复杂内容。
+
+低风险候选载体可能包括：
+
+- 选中一句后的“一键解释 / 举例 / 为什么重要 / 记忆块”；
+- 长输出附近极少量 chunk anchor；
+- 主线从长等待恢复时的一句 reconstruction cue；
+- ephemeral scratchpad：辅助解释默认不进入永久会话；
+- 不要求回复的被动式理解提示；
+- 只有在证据较强时才出现的可关闭 proactive clarification。
+
+这与项目已有的 shared conversational initiative 和 companion-learning 候选相邻：支援不应长期依赖人自己发现机会、再用高成本输入请求。但新的约束是**支援本身不能制造新的 branch-management 负担**。
+
+当前不建立产品需求，也不认为 proactive support 天然更好；4.6 的研究边界提示，解释和主动介入本身也可能增加 task complexity。
 
 ---
 
