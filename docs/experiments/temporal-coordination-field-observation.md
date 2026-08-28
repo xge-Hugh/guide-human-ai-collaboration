@@ -12,7 +12,62 @@ The next project decision is not whether to redesign the UI immediately. It is n
 
 If not, keep the insight as a bounded observation and do not add mechanism complexity.
 
-## 2. Observation targets
+## 2. Current default: practice-first field use
+
+Do not ask the human to memorize event labels or reconstruct every wait. The current preferred discovery method is to try a few low-burden waiting practices during ordinary collaboration and notice their practical effects.
+
+The practices are not norms. They are research-informed probes that create concrete experiences from which useful clues may emerge.
+
+### Practice A — quiet micro-break
+
+When the wait becomes noticeable and there is no specific evidence the human needs to inspect, stop consuming new information for a moment: look away from the screen, stand, stretch, walk a few steps, drink water, or simply sit without opening another information stream.
+
+Why try it: micro-break research shows small but reliable benefits for vigor/fatigue, while wakeful-rest research suggests low-interference periods can sometimes support memory retention. Neither result proves that AI waiting restores working-memory capacity.
+
+### Practice B — park one return question, then release
+
+Before disengaging, externalize only one thing:
+
+> When the AI returns, what do I need to understand, verify, or decide?
+
+This can be paper or a minimal digital scratch note. Avoid writing a full summary.
+
+Why try it: interruption research shows that preparing a resumption goal before switching can speed later recovery; prospective-memory research shows that external reminders are especially useful under higher cognitive load.
+
+### Practice C — checkpoint review instead of continuous watching
+
+When the AI is doing low-value execution, do not watch every intermediate step by default. Re-enter when there is a meaningful evidence-bearing state: a result, failed test, changed assumption, uncertainty, comparison, or point that requires human judgment.
+
+Why try it: sustained monitoring carries vigilance costs, but complete disengagement can create out-of-the-loop problems. This practice probes a middle ground: punctuated oversight.
+
+### Practice D — defer side chat during pure waiting
+
+If a side-chat question appears while the main thread is still working, first put the question in a scratch line rather than immediately opening an auxiliary conversation. When the main thread returns, check whether the question is still needed.
+
+If the question is needed to understand already-returned material, side chat remains available.
+
+Why try it: this directly probes whether rejoin collision is a meaningful cost without assuming side chat is inherently harmful.
+
+### Optional environment change — increase phone friction
+
+During a focused human–AI session, move the phone out of immediate reach or silence nonessential notifications while preserving the agent-completion cue through an allowed channel.
+
+Why try it: phone notifications alone can disrupt attention, and field research finds that reducing communication-notification interruptions can improve performance and reduce strain.
+
+### What to notice afterward
+
+No scores or event codes are required. After a noticeably good or bad wait, ask only:
+
+- Was it easy to re-enter the task?
+- Did I understand and judge the returned result well?
+- Did I feel calmer or more depleted?
+- Did anything I did during the wait actually change a decision?
+
+A one-sentence note is enough when an experience feels informative. Strong positive cases and counterexamples are equally valuable.
+
+---
+
+## 3. Observation targets
 
 Only retain events that arise naturally and appear informative.
 
@@ -30,7 +85,7 @@ High-value opportunities include:
 
 Do not manufacture these cases.
 
-## 3. Minimal observation record
+## 4. Minimal observation record
 
 When a high-value event occurs, preserve only enough information to discriminate mechanisms:
 
@@ -46,7 +101,7 @@ When a high-value event occurs, preserve only enough information to discriminate
 
 Avoid continuous screen surveillance, physiological sensing, or personality/capability inference.
 
-## 4. Candidate interpretations
+## 5. Candidate interpretations
 
 ### A. Temporal suspension dominates
 
@@ -72,7 +127,7 @@ Auxiliary interactions usually help and rejoin collisions are rare or easy to re
 
 Prediction: observed burden remains small; no dedicated mechanism is justified.
 
-## 5. What would justify a small prototype
+## 6. What would justify a small prototype
 
 Consider a minimal interaction prototype only if repeated field observations show both:
 
@@ -89,7 +144,7 @@ Prefer the lowest-risk prototype first:
 
 Do not start with automatic cognitive-state inference.
 
-## 6. Stop / downgrade rule
+## 7. Stop / downgrade rule
 
 Do not continue collecting evidence merely because the topic is interesting.
 
@@ -104,7 +159,9 @@ Downgrade or park the candidate if:
 The purpose of this field pass is discovery and discrimination, not confirmation.
 
 
-## 7. Event-contingent "cue now, reflect later" protocol
+## 8. Optional secondary method: event-contingent "cue now, reflect later"
+
+This method is optional. Use it only if practice-first observation is not producing enough discriminating evidence; the human should not need to memorize labels during ordinary collaboration.
 
 The observation should not depend on sudden inspiration or memory at the end of the week.
 
@@ -166,7 +223,7 @@ Capture positive cases as well as friction:
 
 The purpose is to discriminate, not accumulate complaints.
 
-## 8. Promotion path for interaction-substrate candidates
+## 9. Promotion path for interaction-substrate candidates
 
 This class of candidate should not be forced through a Skill pilot when the Skill cannot observe or instantiate the mechanism.
 
@@ -197,7 +254,7 @@ Examples:
 
 A Skill can still participate when the candidate concerns model behavior, such as when to expose a direct evidence slice. It should not be treated as the mandatory carrier for phenomena that occur while the model is silent or that depend on UI-level branch/rejoin behavior.
 
-## 9. Small within-person discrimination when field clues repeat
+## 10. Small within-person discrimination when field clues repeat
 
 If natural observations repeatedly support a specific competing pair, a small self-comparison can reduce reliance on intuition.
 
@@ -218,7 +275,7 @@ Compare only practical outcomes:
 
 This is an N-of-1 discovery method, not population evidence. Do not randomize or manipulate high-risk tasks merely for the study.
 
-## 10. Evidence threshold for the next decision
+## 11. Evidence threshold for the next decision
 
 Move from observation to a prototype only when there is at least:
 
