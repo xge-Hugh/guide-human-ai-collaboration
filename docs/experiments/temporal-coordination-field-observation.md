@@ -102,3 +102,129 @@ Downgrade or park the candidate if:
 - proposed support adds more explanation or UI state than the burden it removes.
 
 The purpose of this field pass is discovery and discrimination, not confirmation.
+
+
+## 7. Event-contingent "cue now, reflect later" protocol
+
+The observation should not depend on sudden inspiration or memory at the end of the week.
+
+Use a small set of predefined **event triggers**. When one happens naturally, capture only a minimal cue. Do not stop the collaboration to write a full diary entry.
+
+### 7.1 Trigger set
+
+A capture opportunity exists when any of the following becomes consciously noticeable:
+
+- **P — Poll**: an urge to check whether the AI has progressed/completed;
+- **M — Monitor**: choosing to watch thinking/status/streaming mainly to stay coupled rather than because a specific evidence-bearing detail is needed;
+- **F — Phone / low-friction switch**: reaching for social media/messages/another low-threshold activity during the wait;
+- **S — Side chat**: opening or composing an attached side interaction;
+- **C — Collision**: the main thread becomes actionable while the side interaction or alternative activity is still cognitively unfinished;
+- **R — Release / rest**: deliberately letting go, resting, walking away, or waiting without new input;
+- **K — Checkpoint**: deliberately re-entering only at a meaningful review/evidence checkpoint instead of monitoring continuously;
+- **X — Unexpected**: another interaction-state event that appears important and is not covered above.
+
+These are observation labels, not diagnoses.
+
+### 7.2 Immediate capture
+
+At the moment of the event, preserve only:
+
+`code + optional 3–10 word cue`
+
+Examples:
+
+- `P — next step blocked`
+- `C — main returned before side prompt`
+- `R — looked away; no phone`
+- `K — reviewed test failure only`
+
+A timestamp may be added automatically by the capture tool, but exact latency measurement is not required for discovery.
+
+The cue should take less cognitive effort than reconstructing the event later. If recording the cue itself feels disruptive, skip it.
+
+### 7.3 Delayed reflection
+
+At a natural task checkpoint or retrospective, expand only the cues that still appear decision-relevant:
+
+1. **What was I waiting for / trying to understand?**
+2. **What did I do with my attention?**
+3. **What happened when the main thread became actionable again?**
+4. **Did this help or hurt understanding, judgment, fatigue, or recovery?**
+5. **What competing explanation fits this event?**
+
+Do not fill missing detail from imagination. "Unknown / cannot reconstruct" is valid evidence about observability.
+
+### 7.4 Counterexamples matter
+
+Capture positive cases as well as friction:
+
+- monitoring caught a real error early;
+- resting made re-entry easier;
+- resting made the human too out-of-loop to judge;
+- side chat closed cleanly and substantially improved understanding;
+- a checkpoint review preserved judgment without continuous monitoring.
+
+The purpose is to discriminate, not accumulate complaints.
+
+## 8. Promotion path for interaction-substrate candidates
+
+This class of candidate should not be forced through a Skill pilot when the Skill cannot observe or instantiate the mechanism.
+
+A provisional evidence route is:
+
+```text
+field clue
+→ cloud conceptual / research calibration
+→ event-contingent field sampling
+→ recurring mechanism + counterexamples
+→ lowest-risk interaction/substrate prototype
+→ naturalistic within-person comparison / field pilot
+→ independent evidence review
+→ classify outcome:
+     conceptual model / failure model / guidance /
+     UI-substrate requirement / norm / parked
+```
+
+The prototype is the **pilot carrier**, but for this class it may be an interaction affordance rather than a Skill.
+
+Examples:
+
+- a one-action inline explanation;
+- a reconstruction cue after long execution;
+- a checkpoint-only review surface;
+- an ephemeral sidecar;
+- a passive/optional progress or cognitive anchor.
+
+A Skill can still participate when the candidate concerns model behavior, such as when to expose a direct evidence slice. It should not be treated as the mandatory carrier for phenomena that occur while the model is silent or that depend on UI-level branch/rejoin behavior.
+
+## 9. Small within-person discrimination when field clues repeat
+
+If natural observations repeatedly support a specific competing pair, a small self-comparison can reduce reliance on intuition.
+
+For example, on naturally similar low-risk waits:
+
+- **continuous-monitor condition**: watch thinking/progress as normally done;
+- **release condition**: deliberately disengage until completion/checkpoint;
+- **punctuated-oversight condition**: disengage from execution but re-enter at a selected evidence-bearing checkpoint.
+
+Compare only practical outcomes:
+
+- subjective fatigue / agitation;
+- ease of resumption;
+- ability to explain what the AI did;
+- ability to detect a real issue or ask a discriminating question;
+- rereading / reconstruction needed;
+- whether the monitoring information actually changed a decision.
+
+This is an N-of-1 discovery method, not population evidence. Do not randomize or manipulate high-risk tasks merely for the study.
+
+## 10. Evidence threshold for the next decision
+
+Move from observation to a prototype only when there is at least:
+
+- recurrence across more than one real task/context;
+- at least one meaningful counterexample or boundary case;
+- a plausible mechanism that predicts a different design;
+- a concrete human cost or judgment benefit that the candidate mechanism could change.
+
+If the only evidence remains "this feels interesting," keep the candidate preserved but do not escalate.
