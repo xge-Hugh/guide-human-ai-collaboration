@@ -53,7 +53,8 @@
     "workflow_snapshot": "../../docs/archive/workflow-v0.15.md",
     "assurance_notes": "../../docs/archive/assurance-and-pilot-notes-from-workflow-v0.15.md",
     "temporal_coordination_waiting": "../../insights/2026-08-28-temporal-coordination-and-ai-waiting.md",
-    "temporal_coordination_field_observation": "../../docs/experiments/temporal-coordination-field-observation.md"
+    "temporal_coordination_field_observation": "../../docs/experiments/temporal-coordination-field-observation.md",
+    "temporal_coordination_practice_card": "../../docs/experiments/temporal-coordination-practice-card.md"
   },
   "validation_debt_refs": [],
   "notes": {
@@ -75,6 +76,7 @@
     ],
     "temporal_coordination_waiting": "2026-08-28 日常协作发现 AI 长响应等待可能形成 temporal-coordination 盲点；后续观察进一步修正并扩展模型。现代 agent 已有完成通知，人仍会轮询，因此问题更像 blocked-progression polling：下一步依赖 AI 返回时，人陷入“继续等待还是切走”的注意分配冲突。进一步明确 side chat ≠ second separate chat：second chat 是独立会话、注意分裂风险更典型且真实使用较少；side chat 是附着于主线程/材料的辅助交互，但当主线程在 side prompt/response 尚未闭合时先返回，会发生 rejoin collision，使人同时承担主线恢复、旁支收束和跨线程 reconciliation。候选设计已收窄为 support without branch ownership / cognitive sidecar：理解修复、memory chunking、上下文压缩和局部解释尽量原位、低交互、可忽略，不要求人先写高密度 prompt 或管理第二线程。CHI 2026 proactive-support 研究提示 aligned timing 可能有益，而 2023 human-AI explanation 实验提示 explanation 本身也可能增加 task complexity；因此不主张更多解释或高侵入自动帮助。当前不改 live Skill/spec、不建完整 microstate taxonomy；优先自然观察 rejoin collision、streaming reading、waiting、prompt construction 与低摩擦支援的实际价值。",
     "temporal_coordination_field_observation": "2026-08-28 field method revised after user feedback: event-code logging is no longer the default because it adds cognitive burden and is hard to remember. Current default is practice-first: try a small repertoire during natural waits—quiet micro-break, one-line return-question parking before release, checkpoint review instead of continuous monitoring, defer side chat during pure waiting, and optionally increase phone friction while preserving agent-completion notifications. After a notably good/bad wait, only notice re-entry ease, judgment/understanding, calm vs depletion, and whether the waiting behavior changed a decision. Event-contingent labels remain optional secondary methodology only if practice-first experience is insufficiently discriminating.",
-    "decision_driven_evidence_cycle": "2026-08-28 temporal-coordination clue 形成第二个与第一轮 Skill pilot 不同的 evidence-routing 实例：该候选主要发生在 model silent period、streaming consumption、branch/rejoin 和 attention release，强行走 Skill pilot 会 carrier mismatch。已在 candidate decision-driven evidence cycle 中加入该实例，支持“pilot carrier 应由待观察机制决定；Skill 只是 carrier 之一”的更一般后果。"
+    "decision_driven_evidence_cycle": "2026-08-28 temporal-coordination clue 形成第二个与第一轮 Skill pilot 不同的 evidence-routing 实例：该候选主要发生在 model silent period、streaming consumption、branch/rejoin 和 attention release，强行走 Skill pilot 会 carrier mismatch。已在 candidate decision-driven evidence cycle 中加入该实例，支持“pilot carrier 应由待观察机制决定；Skill 只是 carrier 之一”的更一般后果。",
+    "temporal_coordination_practice_card": "2026-08-28 added a one-screen quick reference for practice-first waiting probes: quiet micro-break, one-line return-question parking, checkpoint review instead of continuous monitoring, defer side chat during pure waiting, optional phone friction, plus four simple post-wait questions. Intended for rapid reconstruction during real collaboration; not a norm."
   }
 }
