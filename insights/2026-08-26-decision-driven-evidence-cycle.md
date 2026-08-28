@@ -146,7 +146,43 @@ A/B/C 可作为**候选模型本身需要系统性压力测试时**的一种后�
 
 “还能继续反思”本身不是继续的理由。
 
-## 8. 当前可支持与不可支持的结论
+## 8. 第二个独立路由实例：interaction-substrate candidate
+
+2026-08-28 的 AI waiting / temporal coordination clue 提供了与第一轮 Skill pilot 不同的第二类真实路由问题。
+
+候选现象包括 suspended cognitive commitment、blocked-progression polling、side-chat rejoin collision，以及 continuous monitoring / release / punctuated oversight 的差异。这里真正需要观察的是人的 moment-to-moment interaction state 与 UI/substrate 行为，而不是模型是否按 prompt 规则输出某句话。
+
+因此：
+
+```text
+candidate mechanism
+→ Skill pilot
+```
+
+在这里会发生 carrier mismatch。
+
+更合适的最低成本证据方法是：
+
+```text
+field clue
+→ cloud / research calibration
+→ event-contingent in-situ sampling
+→ recurring mechanism + counterexample
+→ minimal interaction prototype
+→ field comparison
+```
+
+这个实例支持候选 evidence-cycle 的一个更一般后果：
+
+> **“放入可逆 pilot carrier”中的 carrier 应由待观察机制决定；Skill 只是其中一种 carrier，不是 candidate promotion 的固定必经层。**
+
+如果机制发生在 model silent period、streaming consumption、branch/rejoin、notification、attention release 等 interaction substrate 上，pilot carrier 可以是 UI affordance、event logger、ephemeral sidecar、checkpoint review surface 或其他最小观测/干预载体。
+
+这仍不构成对 decision-driven evidence cycle 的正式验证，只是第二个来源不同、carrier 选择不同的实际实例。
+
+---
+
+## 9. 当前可支持与不可支持的结论
 
 ### 当前可支持
 
@@ -163,7 +199,7 @@ A/B/C 可作为**候选模型本身需要系统性压力测试时**的一种后�
 - 不能要求未来每项 norm 或 insight 都走此循环；
 - 不能因为方法第一次成功修正自己就认为它“自证正确”。
 
-## 9. 何时考虑晋升为当前治理方法
+## 10. 何时考虑晋升为当前治理方法
 
 至少需要未来真实维护中出现多个独立实例，证明该循环反复能够：
 
