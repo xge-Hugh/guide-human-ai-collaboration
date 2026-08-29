@@ -581,7 +581,81 @@ automation literature 同时存在 out-of-the-loop performance problem：如果�
 
 ---
 
-## 15. 与当前 cognitive coordination 模型的候选关系
+## 15. 新候选：graded disengagement / attentional downshift
+
+新的 field observation 修正了 practice-first 方法中的另一个隐含假设：休息、外置、轻活动等行为不一定彼此独立，也不一定适合被当成互斥条件。
+
+对一个已经持续高强度投入的任务，人可能很难从：
+
+```text
+高密度对话 / 预测 / 判断 / working-memory maintenance
+→ 直接静止休息
+```
+
+瞬间完成脱离。
+
+更符合真实习惯的候选序列可能是：
+
+```text
+高参与
+→ 外置一个 return cue / label
+→ 较低信息密度的桥接活动（如纸笔）
+→ quiet rest / stretch / walk
+→ checkpoint re-entry
+```
+
+这里暂称为 **graded disengagement / attentional downshift**。
+
+### 15.1 外部研究能支持什么
+
+现有证据支持该序列中的几个组成部分，但**还不能证明这个完整梯度本身是最佳方案**：
+
+- task-switching 研究显示，切换存在稳定成本，提前准备可以降低但不能完全消除 switch cost；
+- interruption/resumption 研究支持在离开前建立一个 return goal；
+- psychological-detachment 研究显示，从高要求工作中真正 mentally disengage 并不总是容易；
+- micro-break 研究支持短休息对 fatigue / vigor 的小幅平均收益；
+- wakeful-rest 研究显示低干扰休息在部分记忆任务中有益，但效应异质，尤其不能直接外推为“恢复 working-memory 容量”。
+
+因此，“高刺激 → 中刺激 → 无刺激”目前更适合作为人的**主观体验模型**。在项目中更可操作的机制语言是：
+
+> **逐步降低 task-state maintenance、信息输入与 interaction obligation，而不是要求认知系统瞬间从高度耦合切到完全 disengaged。**
+
+### 15.2 为什么纸笔可能成为 bridge，而不是单独的 note-taking 技术
+
+纸笔在这里可能具有三种不同作用：
+
+1. **externalization**：把 return cue 从 working memory 移到外部；
+2. **task closure / transition cue**：用一个可见动作标记“当前不再需要继续内部维持”；
+3. **lower-input bridge**：仍保留与任务的轻度接触，但不继续接收 streaming、通知或高密度数字信息。
+
+关于 handwriting 与 typing 的学习研究结果并不一致：2024 meta-analysis 在大学课堂笔记情境中发现 longhand 在 achievement 上有小优势而 typing 记录量更高；另一项 meta-analysis 则认为总体学习结果差异接近零，数字设备的额外 distraction 可能解释部分差异。因此不能把纸笔本身神化。
+
+当前更值得验证的是：
+
+> **纸笔是否因为“外置 + 单一表面 + 较慢节奏”而成为从高耦合 AI 交互到休息之间的有效过渡介质。**
+
+### 15.3 新的 field comparison
+
+未来不必把 practice A/B/C 当成互斥实验条件。更自然的比较是：
+
+- 直接继续监控；
+- 直接休息；
+- **先 park / paper，再休息**；
+- 先 park / paper，再做低需求身体活动；
+- 完全离开后只在 checkpoint 返回。
+
+观察重点是：
+
+- 哪种方式最容易真正停止内部 rehearsal；
+- 哪种方式 re-entry 最轻；
+- 哪种方式既减少 fatigue，又不造成 out-of-the-loop；
+- 中间 bridge 是否只是额外仪式，还是确实帮助 disengagement。
+
+如果 bridge 经常被跳过且没有损失，就应删除；如果它反复使 release 更容易，它才值得进一步抽象。
+
+---
+
+## 16. 与当前 cognitive coordination 模型的候选关系
 
 如果后续证据支持，该 insight 可能不是独立大理论，而是对现有 cognitive allocation + reconstruction 的一个时间维扩展：
 
