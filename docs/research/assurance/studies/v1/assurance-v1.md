@@ -4,7 +4,7 @@
 > 规范主张：[overview.md](../../../../overview.md) · [norm/](../../../../spec/README.md)  
 > 机制来源与取舍：[human-ai-collaboration-reference-study.md](../../mechanisms.md)  
 > 保障需求与早期观察：[archive/assurance-and-pilot-notes-from-workflow-v0.15.md](../../../../archive/assurance-and-pilot-notes-from-workflow-v0.15.md)  
-> 试点证据：[../tasks/archive/out-webapi-batch/](field-pilot/out-webapi-batch/)
+> 试点证据：[field-pilot/out-webapi-batch/](field-pilot/out-webapi-batch/)
 >
 > 状态：试点已结束；本文保留设计与修订记录，供以后决定「是否 / 如何」做成可用形式时对照。  
 > 日期：2026-08-09（试点）；2026-08-10（迁入本仓库并规范化导航）
@@ -62,7 +62,7 @@ v1 是价值验证，不是通用治理平台。
 | --- | --- |
 | 完整工作流单文件 | [norm/](../../../../spec/README.md)（正文）+ [archive/workflow-v0.15.md](../../../../archive/workflow-v0.15.md) |
 | 参考研究 / 本实施设计 | `docs/human-ai-collaboration-*.md`（本文与 study） |
-| `.agents/tasks/out-webapi-batch/` | [tasks/archive/out-webapi-batch/](field-pilot/out-webapi-batch/) |
+| `.agents/tasks/out-webapi-batch/` | [field-pilot/out-webapi-batch/](field-pilot/out-webapi-batch/) |
 | Codex 个人 Skill | 源码镜像：[skills/guide-human-ai-collaboration/](../../../../../skills/guide-human-ai-collaboration)（实验载体，非安装入口） |
 
 ## 3. 最小架构（实验栈）

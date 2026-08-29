@@ -3,7 +3,7 @@
 - **日期**：2026-08-26
 - **状态**：`candidate / design diagnosis`（不直接修改当前 Skill 或规范）
 - **触发观察**：当前真实协作中，即使 Skill 已包含伴随式导师、建构保护和能力证据规则，人仍需要主动识别学习机会、要求 AI 深挖模型、要求保留底层线索并纠正过早收敛；若人不主动做这些元认知工作，相关机制容易不发生。
-- **关联**：[`2026-08-25-cognitive-coordination-model.md`](../model.md)、[`../docs/research/cognitive-coordination-evidence-review.md`](../evidence-review.md)、[`../docs/spec/adaptation.md`](../../../spec/adaptation.md)、[`../docs/spec/evaluation.md`](../../../spec/evaluation.md)、[`../skills/guide-human-ai-collaboration/SKILL.md`](../../../../skills/guide-human-ai-collaboration/SKILL.md)、[`../skills/guide-human-ai-collaboration/references/interaction-and-learning.md`](../../../../skills/guide-human-ai-collaboration/references/interaction-and-learning.md)
+- **关联**：[`model.md`](../model.md)、[`evidence-review.md`](../evidence-review.md)、[`spec/adaptation.md`](../../../spec/adaptation.md)、[`spec/evaluation.md`](../../../spec/evaluation.md)、[`Skill`](../../../../skills/guide-human-ai-collaboration/SKILL.md)、[`interaction-and-learning.md`](../../../../skills/guide-human-ai-collaboration/references/interaction-and-learning.md)
 
 ## 1. 结论先行
 

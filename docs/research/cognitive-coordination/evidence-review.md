@@ -1,7 +1,7 @@
 # 认知协调候选模型：独立证据与研究校准
 
 - **日期**：2026-08-26
-- **地位**：`research calibration`（用于校准 [`../../insights/2026-08-25-cognitive-coordination-model.md`](model.md)，不把候选模型自动晋升为当前规范）
+- **地位**：`research calibration`（用于校准 [`model.md`](model.md)，不把候选模型自动晋升为当前规范）
 - **目的**：让候选模型离开 2026-08-24～25 对话的同源解释闭环，检查它是否能得到更早项目观察与外部研究的独立支持、限制或反驳。
 - **证据边界**：遵守 [`../governance/evidence-policy.md`](../../governance/evidence-policy.md)。项目内部历史观察属于 `O / pilot evidence`；外部研究属于 `R / research-calibrated`；“战略性接触”“重建性”“生产性分歧”等仍是候选机制词汇，不因找到相邻研究就变成已验证事实。
 

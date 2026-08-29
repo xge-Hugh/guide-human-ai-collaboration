@@ -2,7 +2,7 @@
 
 > **状态**：实验设计草案。不是当前 Skill，不改变 `docs/spec/` 权威，也不表示认知协调候选模型已验证。
 >
-> **来源**：[`../../insights/2026-08-26-skill-learning-capability-gap.md`](../design-diagnoses/skill-learning-capability-gap.md)
+> **来源**：[`skill-learning-capability-gap.md`](../design-diagnoses/skill-learning-capability-gap.md)
 >
 > **目标**：减少人为了让 Skill 正确处理学习、能力增长、模型修正和底层证据接触而承担的补偿性元认知劳动，同时保持低风险委托效率，不把协作变成教学流程。
 
