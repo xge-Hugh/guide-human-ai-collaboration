@@ -2,7 +2,7 @@
 
 > 地位：**实验理解与审查辅助材料，不是规范正文，不改变 Phase B 协议，也不是 runner 使用手册。**  
 > 正式协议：[`assurance-v2-phase-b-protocol.md`](assurance-v2-phase-b-protocol.md)  
-> Runner：[`../../tools/assurance_eval/README.md`](../../tools/assurance_eval/README.md)
+> Runner：[`../../tools/assurance_eval/README.md`](../../../../../tools/assurance_eval/README.md)
 
 本文件面向需要批准实验设计、理解证据并裁决边界，但不需要亲自实现或操作 Python runner 的实验负责人。
 

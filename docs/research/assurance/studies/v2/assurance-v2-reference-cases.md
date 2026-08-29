@@ -2,7 +2,7 @@
 
 > 地位：**实验参考案例，不是新的规范正文。**  
 > 实验计划：[`assurance-v2.md`](assurance-v2.md)  
-> 规范来源：[`../spec/norms.md`](../spec/norms.md) · [`../spec/failure-models.md`](../spec/failure-models.md)  
+> 规范来源：[`../spec/norms.md`](../../../../spec/norms.md) · [`../spec/failure-models.md`](../../../../spec/failure-models.md)  
 >
 > 本文件描述“当前规范在代表性场景下应保护什么”，用于后续比较候选保障机制。案例答案不得被理解成必须采用某个 Skill、Hook、Agent、状态文件或 UI。
 

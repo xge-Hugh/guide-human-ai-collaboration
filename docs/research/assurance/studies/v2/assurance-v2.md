@@ -1,10 +1,10 @@
 # 执行保障实验计划（v2：语义触发与长期能力）
 
 > 地位：**执行保障实验设计，不是规范正文，也不是已选定的技术架构。**  
-> 当前规范：[`../spec/README.md`](../spec/README.md)  
-> 证据边界：[`../governance/evidence-policy.md`](../governance/evidence-policy.md)  
-> 历史试点：[`assurance-v1.md`](assurance-v1.md)  
-> 候选机制研究：[`../research/assurance-mechanisms.md`](../research/assurance-mechanisms.md)
+> 当前规范：[`../spec/README.md`](../../../../spec/README.md)  
+> 证据边界：[`../governance/evidence-policy.md`](../../../../governance/evidence-policy.md)  
+> 历史试点：[`assurance-v1.md`](../v1/assurance-v1.md)  
+> 候选机制研究：[`../research/assurance-mechanisms.md`](../../mechanisms.md)
 >
 > 状态：v2 设计基线。先建立可判定的保障对象、参考案例与验收轴，再比较载体；本文不预设 Skill、Agent、Hook、状态机、UI、记忆服务或外部评测器是最终方案。
 

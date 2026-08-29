@@ -18,9 +18,9 @@ Phase B 的核心问题是：在相同模型与任务信息下，加入稳定的
 
 证据：
 
-- [`evidence/assurance-v2-phase-b-tranche-1-2026-08-22/`](evidence/assurance-v2-phase-b-tranche-1-2026-08-22/)：repetition 1；
-- [`evidence/assurance-v2-phase-b-tranche-2-2026-08-23/`](evidence/assurance-v2-phase-b-tranche-2-2026-08-23/)：repetition 2 的阻断前缀；
-- [`evidence/assurance-v2-phase-b-tranche-2-complete-2026-08-23/`](evidence/assurance-v2-phase-b-tranche-2-complete-2026-08-23/)：通过不可变续跑完成 repetitions 2–3 的逻辑 tranche。
+- [`evidence/assurance-v2-phase-b-tranche-1-2026-08-22/`](evidence/assurance-v2-phase-b-tranche-1-2026-08-22)：repetition 1；
+- [`evidence/assurance-v2-phase-b-tranche-2-2026-08-23/`](evidence/assurance-v2-phase-b-tranche-2-2026-08-23)：repetition 2 的阻断前缀；
+- [`evidence/assurance-v2-phase-b-tranche-2-complete-2026-08-23/`](evidence/assurance-v2-phase-b-tranche-2-complete-2026-08-23)：通过不可变续跑完成 repetitions 2–3 的逻辑 tranche。
 
 tranche 2 中执行器增加了有界 transport retry、不可变 resume episode、generator / grader 解耦与 grader bounded parallelism。续跑前已离线确认 model-visible treatment 语义等价；这些改动属于实验执行可靠性修订，不作为 B0/B1/B2 treatment 变化。
 
