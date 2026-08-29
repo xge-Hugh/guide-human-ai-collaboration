@@ -31,7 +31,7 @@ from tools.assurance_eval.semantics import (
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-RECIPE = REPO_ROOT / "docs" / "experiments" / "assurance-v2-phase-b.recipe.json"
+RECIPE = REPO_ROOT / "docs" / "research" / "assurance" / "studies" / "v2" / "assurance-v2-phase-b.recipe.json"
 
 
 def grade_json() -> str:
@@ -90,7 +90,7 @@ class HarnessTest(unittest.TestCase):
         formal_execution_enabled: bool = False,
     ):
         recipe = json.loads(RECIPE.read_text(encoding="utf-8"))
-        experiment_dir = REPO_ROOT / "docs" / "experiments"
+        experiment_dir = REPO_ROOT / "docs" / "research" / "assurance" / "studies" / "v2"
         recipe["sources"] = {
             "generation": str(experiment_dir / "assurance-v2-phase-b-generation.json"),
             "variants": str(experiment_dir / "assurance-v2-phase-b-variants.zh-CN.json"),
