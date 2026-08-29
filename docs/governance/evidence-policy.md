@@ -8,14 +8,17 @@
 
 | 类型 | 含义 |
 | --- | --- |
-| 观察 / pilot evidence | 在具体任务、用户、模型、载体和环境中实际发生了什么 |
-| 研究证据 | 外部研究或成熟实践在其样本与方法边界内支持什么 |
-| 设计推断 / hypothesis | 基于观察、理论或工程经验提出的可验证解释/机制 |
-| 规范选择 | 项目决定希望保护什么人机关系、权威或认识论边界 |
-| 实验性实现 | 为检验价值或运行方式而采用的具体 Skill、模板、状态或工具 |
-| 当前未知 | 证据不足，不能合理升级为更强结论的部分 |
+| field / observational evidence | 在具体真实任务、用户、模型、载体和环境中实际发生了什么；包括自然 field observation 与 pilot observation |
+| project study / experimental evidence | 本项目通过 controlled replay、runner、structured study 或其他预先界定方法得到什么结果 |
+| external research evidence | 外部研究或成熟实践在其样本、任务、方法与媒介边界内支持什么 |
+| design inference / hypothesis | 基于 observation、project study、external research、理论或工程经验提出的可检验解释/机制 |
+| normative choice | 项目决定希望保护什么人机关系、权威或认识论边界 |
+| experimental implementation | 为检验价值或运行方式而采用的具体 Skill、模板、状态、UI 或工具 |
+| current unknown | 证据不足，不能合理升级为更强结论的部分 |
 
-规范选择可以参考经验和研究，但不能伪装成“科学已经证明的唯一正确价值”。反过来，经验机制或科学假设也不能仅因写入规范目录就获得事实权威。
+这些类别描述 claim/evidence role，不等于目录名。`docs/research/` 是 active inquiry context，其中可以同时出现 field observation、project study evidence、external research evidence、hypothesis 与 implementation analysis；“位于 research”不是更高 evidence level。
+
+规范选择可以参考经验和研究，但不能伪装成“科学已经证明的唯一正确价值”。反过来，经验机制或科学假设也不能仅因写入规格或研究目录就获得事实或规范权威。
 
 ## 2. 主张强度不能超过证据
 

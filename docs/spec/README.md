@@ -18,7 +18,7 @@
 | [`failure-models.md`](failure-models.md) | 哪些条件/机制会使协作违反规范或失去预期价值，包括责任—能力失配与长期可避免依赖 | 当前失效模型目录；不是反模式的机械反转 |
 | [`domains/software-development.md`](domains/software-development.md) | 软件开发中角色、抽象层、五阶段与证据实践如何专项化 | 当前软件开发领域专项 |
 
-可替换的交互、表示与模板做法见 [`../guidance/`](../guidance/README.md)。项目自身的科学/经验主张边界与历史决策见 [`../governance/`](../governance/README.md)；研究依据与历史保障实验分别位于 [`../research/`](../research/README.md) 与 [`../experiments/`](../experiments/README.md)。
+可替换的交互、表示与模板做法见 [`../guidance/`](../guidance/README.md)。项目自身的科学/经验主张边界与历史决策见 [`../governance/`](../governance/README.md)；候选模型、外部证据、project studies 与历史/当前 pilots 位于 [`../research/`](../research/README.md)。
 
 旧 `docs/norm/` 等历史拓扑已从当前树移除。原始正文、旧章节快照以及旧结构到当前结构的对应关系保存在 [`../archive/`](../archive/README.md)；Git 历史仍可恢复旧路径本身。旧表述若与当前规格冲突，以本目录当前正文及明确的缩窄/取代关系为准。
 

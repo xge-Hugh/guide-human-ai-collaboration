@@ -2,14 +2,17 @@
 
 > 地位：**当前项目治理方法**。本文件说明如何把观察、候选主张、研究、规范、失效模型、实现与证据组织成可维护的项目知识。它不直接增加人机协作规范。
 
-## 1. 两个基本问题
+## 1. 三个基本问题
 
-维护新内容时，先区分：
+维护新内容时，区分三个相互关联但不等价的问题：
 
-1. **它是什么？** —— 语义问题，例如规范、概念模型、评估、工作流、指导、失效模型、观察、研究或实现。
-2. **它现在处于什么地位？** —— 认识论/生命周期问题，例如候选、当前、已取代、历史、搁置，或某项验证仍待完成。
+1. **它是什么？** —— 语义问题，例如规范、概念模型、评估、工作流、指导、失效模型、观察、hypothesis、study result 或 implementation。
+2. **它现在处于什么地位？** —— 认识论/生命周期问题，例如 candidate、current、superseded、historical、parked，或某项 validation 仍待完成。
+3. **它主要在哪个维护 / inquiry context 中可被理解？** —— 例如 current specification、cognitive-coordination research、assurance research、executable carrier。
 
-语义类型与当前地位是正交的。一个候选规范与一个当前规范可以具有相同语义类型；`feedback` 与 `insight` 更接近来源/生命周期位置，而不是知识的最终语义类型。
+语义类型、当前地位与主要维护上下文不是同一维度。第三项通常由目录和 program README 隐含表达，不要求每个文件重复写 metadata。
+
+一个 candidate norm 与 current norm 可以具有相同语义类型；一个 current research model 也不会因此取得 norm authority。`feedback` 与 `insights` 更接近低成本输入/lineage 位置，而不是知识的最终语义类型。
 
 ## 2. 最小维护模型
 
@@ -77,7 +80,7 @@
   ├─→ 工作流或领域专项
   ├─→ 指导/配方
   ├─→ 失效模型
-  ├─→ 研究或实验
+  ├─→ research question / hypothesis / model / study
   ├─→ 行为 eval
   └─→ 搁置 / 否定
 ```
@@ -129,21 +132,22 @@
 
 载体结构健康、测试定义存在或最终任务成功，都不能自动证明运行时保障可靠。
 
-## 5. 物理目录与权威
+## 5. 物理目录、主要上下文与权威
 
-目录提供**主要位置与默认地位**，但不是完整语义图。
+项目知识本质上是 graph-like；目录只是一个**可替换的 materialized projection**。目录表达主要维护/检索上下文，并可能在该上下文中提供合理的默认 authority/status 线索，但不是完整语义图，也不能单独决定 truth、evidence strength、normative authority 或永久 conceptual ownership。
+
+不同主要目录可以使用不同分类轴：spec 主要按 semantic/authority responsibility，research 主要按 inquiry cohesion，feedback 主要按 chronological intake，skills/tools 主要按 executable responsibility，archive 主要按 historical lifecycle。
 
 当前约定：
 
 - `docs/spec/`：当前维护的人机协作规格；
 - `docs/guidance/`：可替换的交互、表示与模板方法；
 - `docs/governance/`：项目自身的分类、演进与证据治理；
-- `docs/research/`：外部研究与机制依据；
-- `docs/experiments/`：实验性保障实现与历史试点；
-- `feedback/`：观察与实战摩擦入口；
-- `insights/`：候选主张与设计解释；
-- `skills/`：实验性载体与可执行行为探针；
-- `tasks/`：项目工作状态与试点任务证据；
+- `docs/research/`：主动 inquiry；按 coherent research program 维护 hypothesis、model、external evidence、project study、field observation、interpretation 等；不自动取得规范权威；
+- `feedback/`：观察与实战摩擦的低成本入口；
+- `insights/`：尚未形成独立 inquiry context 的小型 candidate、design intuition 与 lineage；
+- `skills/`：实验性 executable carrier 与行为探针；
+- `tools/` / `tests/`：研究/工程使用的可执行基础设施与其代码验证；
 - `docs/archive/`：历史与已迁出材料。
 
 历史目录结构和旧兼容路径不作为当前架构的一部分长期保留。若没有已识别的兼容消费者，迁移完成后应由 `docs/archive/`、必要的当前关系链接和 Git 历史承担追溯，而不是继续维护无权威的旧拓扑。
@@ -152,7 +156,11 @@
 
 不要为了对称或完整而增加目录。
 
-只有当一个重复出现或足够重要的内容类别回答了**现有分类无法无失真表达的不同建筑问题**，才引入新语义类别；只有当该类别已有足够当前内容、独立维护价值和明确责任边界时，才进一步给它单独物理目录。
+只有当一个重复出现或足够重要的内容类别回答了**现有分类无法无失真表达的不同建筑问题**，才引入新语义类别。
+
+Research program 也遵守同样规则：一个小 hypothesis 不需要独立目录；只有当某个 inquiry 出现 coherent question/model、多个相关对象、独立 evidence/studies、持续 revision 或 downstream consumers，才值得 materialize 成 program directory。
+
+只有当已有足够当前内容、独立维护价值和清楚的 primary context 时，才进一步给对象或 program 单独物理目录。
 
 新的发现若暂时无合适位置，先保留来源并解释为什么现有分类失真；必要时允许修改分类本身。
 
