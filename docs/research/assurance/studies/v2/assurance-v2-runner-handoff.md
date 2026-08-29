@@ -56,7 +56,7 @@ tools/assurance_eval/
 
 具体 Python 包布局可由实现者按仓库实际情况选择；若要改为其他顶层位置，应说明它为什么能降低维护/权威混淆，而不是仅因个人偏好。
 
-Runner 应直接读取 `docs/experiments/` 中已有的 generation / rubric / variant 文件，不复制其中的实验语义为另一套硬编码真相。
+Runner 应直接读取 `docs/research/assurance/studies/v2/` 中已有的 generation / rubric / variant 文件，不复制其中的实验语义为另一套硬编码真相。
 
 第一版明确**不做**：
 

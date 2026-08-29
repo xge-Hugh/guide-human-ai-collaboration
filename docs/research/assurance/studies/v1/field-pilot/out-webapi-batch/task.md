@@ -46,7 +46,7 @@
 
 ## 历史上下文
 
-- [历史 Changeset 任务定义](../../../../../../../tasks/out-webapi-transaction-task.md)
-- [历史 Changeset 实施设计](../../../../../../../tasks/out-webapi-changeset-impl.md)
+- 历史 Changeset 任务定义：原 CRM 试点资产，未随本 pilot 证据迁入当前仓库；按原仓库 / Git 历史追溯。
+- 历史 Changeset 实施设计：原 CRM 试点资产，未随本 pilot 证据迁入当前仓库；按原仓库 / Git 历史追溯。
 
 历史文档保留协议语义、已有约束和历史取舍，但其中“仅完善 Changeset”及“已进入代码实施”的状态已被当前任务取代。

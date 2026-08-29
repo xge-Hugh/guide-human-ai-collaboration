@@ -1,10 +1,10 @@
 # 保障形式实验笔记（v1）
 
 > 地位：**保障形式实验，不是规范正文。**  
-> 规范主张：[overview.md](../../../../experiments/overview.md) · [norm/](../../../../experiments/norm/README.md)  
-> 机制来源与取舍：[human-ai-collaboration-reference-study.md](../../../../experiments/human-ai-collaboration-reference-study.md)  
-> 保障需求与早期观察：[archive/assurance-and-pilot-notes-from-workflow-v0.15.md](../../../../experiments/archive/assurance-and-pilot-notes-from-workflow-v0.15.md)  
-> 试点证据：[../tasks/archive/out-webapi-batch/](../../../../tasks/archive/out-webapi-batch)
+> 规范主张：[overview.md](../../../../overview.md) · [norm/](../../../../spec/README.md)  
+> 机制来源与取舍：[human-ai-collaboration-reference-study.md](../../mechanisms.md)  
+> 保障需求与早期观察：[archive/assurance-and-pilot-notes-from-workflow-v0.15.md](../../../../archive/assurance-and-pilot-notes-from-workflow-v0.15.md)  
+> 试点证据：[../tasks/archive/out-webapi-batch/](field-pilot/out-webapi-batch/)
 >
 > 状态：试点已结束；本文保留设计与修订记录，供以后决定「是否 / 如何」做成可用形式时对照。  
 > 日期：2026-08-09（试点）；2026-08-10（迁入本仓库并规范化导航）
@@ -15,11 +15,11 @@
 
 | 你想了解 | 去哪 |
 | --- | --- |
-| 规范本身主张什么 | [norm/](../../../../experiments/norm/README.md) |
-| 为什么要做保障、早期问题清单 | [assurance 笔记](../../../../experiments/archive/assurance-and-pilot-notes-from-workflow-v0.15.md) |
-| 社区机制怎么筛、哪些自研 | [reference-study](../../../../experiments/human-ai-collaboration-reference-study.md) |
+| 规范本身主张什么 | [norm/](../../../../spec/README.md) |
+| 为什么要做保障、早期问题清单 | [assurance 笔记](../../../../archive/assurance-and-pilot-notes-from-workflow-v0.15.md) |
+| 社区机制怎么筛、哪些自研 | [reference-study](../../mechanisms.md) |
 | 试点里试了什么栈、结果如何 | **本文**（先看下方结论表，再按需下钻） |
-| Skill 源码（实验载体） | [../skills/](../../../../skills/README.md) |
+| Skill 源码（实验载体） | [../skills/](../../../../../skills/README.md) |
 
 ## 试点结论速览
 
@@ -60,10 +60,10 @@ v1 是价值验证，不是通用治理平台。
 
 | 试点期位置 | 本仓库当前位置 |
 | --- | --- |
-| 完整工作流单文件 | [norm/](../../../../experiments/norm/README.md)（正文）+ [archive/workflow-v0.15.md](../../../../experiments/archive/workflow-v0.15.md) |
+| 完整工作流单文件 | [norm/](../../../../spec/README.md)（正文）+ [archive/workflow-v0.15.md](../../../../archive/workflow-v0.15.md) |
 | 参考研究 / 本实施设计 | `docs/human-ai-collaboration-*.md`（本文与 study） |
-| `.agents/tasks/out-webapi-batch/` | [tasks/archive/out-webapi-batch/](../../../../tasks/archive/out-webapi-batch) |
-| Codex 个人 Skill | 源码镜像：[skills/guide-human-ai-collaboration/](../../../../skills/guide-human-ai-collaboration)（实验载体，非安装入口） |
+| `.agents/tasks/out-webapi-batch/` | [tasks/archive/out-webapi-batch/](field-pilot/out-webapi-batch/) |
+| Codex 个人 Skill | 源码镜像：[skills/guide-human-ai-collaboration/](../../../../../skills/guide-human-ai-collaboration)（实验载体，非安装入口） |
 
 ## 3. 最小架构（实验栈）
 
@@ -118,7 +118,7 @@ AGENTS 入口片段
 
 ### 4.2 本仓库布局（规范优先雏形）
 
-见根 [README.md](../../../../README.md)。规范正文在 `docs/norm/`；Skill 与任务胶囊降级为实验/证据，**不是**当前产品入口。
+见根 [README.md](../../../../../README.md)。规范正文当前位于 `docs/spec/`；Skill 与历史任务胶囊只作为 carrier / pilot evidence，**不是**当前产品入口。
 
 ## 5. AGENTS 入口（实验设计）
 
@@ -181,7 +181,7 @@ AGENTS 入口片段
 | `state-conflict-and-recovery.md` | 恢复、压缩、目标冲突、优先级分叉时 | 权威层次、冲突协调、航标与胶囊更新 |
 | `review-and-retrospective.md` | 独立审查、设计验证、人审代码或复盘时 | Reviewer 隔离、风险—证据、审查脚手架、交互式复盘 |
 
-源码见 [../skills/guide-human-ai-collaboration/](../../../../skills/guide-human-ai-collaboration)。
+源码见 [../skills/guide-human-ai-collaboration/](../../../../../skills/guide-human-ai-collaboration)。
 
 ## 7. 文档受众与人类审查面
 
@@ -189,11 +189,11 @@ AGENTS 入口片段
 
 人的默认审查面只含：目的与不变量；本轮承重决定；重大风险/未知；待裁决事项；唯一下一步及正文链接。优先作为对话视图或权威文档小节，**不**另建会漂移的摘要事实源。
 
-规范正文中的对应原则见 [横切机制 · 文档受众与审查面](../../../../experiments/norm/03-cognitive-mechanisms.md#文档受众与审查面)。
+规范正文中的对应原则见 [横切机制 · 文档受众与审查面](../../../../spec/norms.md)。
 
 ## 8. 任务目录与控制状态
 
-试点目录：`.agents/tasks/out-webapi-batch/`（现已归档至本仓库 `tasks/archive/out-webapi-batch/`）。
+试点目录：`.agents/tasks/out-webapi-batch/`（该历史 pilot 的实质材料现保存在本目录下的 `field-pilot/out-webapi-batch/`；旧 task-state 路径不再作为当前仓库结构保留）。
 
 - `state.json`：标识、生命周期、阶段、行动者、唯一下一步、模式、文档/债务引用；
 - `task.md`：目的、范围、不变量、成功观察、学习目标；
