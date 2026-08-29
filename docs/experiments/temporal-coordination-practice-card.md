@@ -2,9 +2,35 @@
 
 > Status: quick field-use reference for the temporal-coordination candidate. These are research-informed probes, not current norms.
 
-When AI waiting becomes noticeable, pick **one** move. Do not try to optimize every wait.
+When AI waiting becomes noticeable, the moves below can be used **alone or in sequence**. Do not treat them as mutually exclusive conditions.
 
-## 1. Quiet micro-break
+A useful candidate sequence is:
+
+```text
+high-engagement AI interaction
+→ park one return cue
+→ lower-stimulation bridge (paper / simple note)
+→ quiet micro-break or light movement
+→ re-enter at a meaningful checkpoint
+```
+
+This is a **graded-disengagement probe**, not a required ritual. If you can rest immediately, there is no need to add steps.
+
+## 1. Park → downshift → rest (candidate default)
+
+If you have been deeply engaged and stopping immediately feels unnatural:
+
+1. write one short return cue or label;
+2. optionally spend a moment with a calmer, single-purpose medium such as paper;
+3. then look away, stretch, walk, get water, or rest.
+
+The point is not to produce notes. The note is a **bridge out of active task maintenance**.
+
+**Question afterward:** did the intermediate step make it easier to let go than trying to jump straight from intense interaction into rest?
+
+---
+
+## 2. Quiet micro-break
 
 If there is nothing judgment-relevant to inspect right now:
 
@@ -16,7 +42,7 @@ If there is nothing judgment-relevant to inspect right now:
 
 ---
 
-## 2. Park one return question
+## 3. Park one return question
 
 Before mentally letting go, write only:
 
@@ -28,7 +54,7 @@ Use paper or a tiny digital scratch note. Do **not** write a full summary.
 
 ---
 
-## 3. Checkpoint review, not continuous monitoring
+## 4. Checkpoint review, not continuous monitoring
 
 Do not watch routine AI execution by default.
 
@@ -46,7 +72,7 @@ Re-enter when there is something worth human judgment:
 
 ---
 
-## 4. Defer side chat during pure waiting
+## 5. Defer side chat during pure waiting
 
 If a side-chat question appears while the main thread is still working:
 
@@ -60,7 +86,7 @@ If the main output has already returned and you genuinely need help understandin
 
 ---
 
-## 5. Add phone friction
+## 6. Add phone friction
 
 During focused collaboration:
 
