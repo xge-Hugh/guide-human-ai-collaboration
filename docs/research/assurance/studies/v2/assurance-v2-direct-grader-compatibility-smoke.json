@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "status": "historical_completed",
+  "execution_enabled": false,
+  "superseded_by": "docs/research/assurance/studies/v2/assurance-v2-phase-b.recipe.json via tools.assurance_eval",
+  "approval_scope": "one_qwen_grader_compatibility_call_only_no_formal_replay",
+  "run_mode": "direct_grader_compatibility_smoke",
+  "evidence_use": "direct_grader_transport_contract_only_not_phase_b_effect_evidence",
+  "source_fixture": {
+    "path": "docs/research/assurance/studies/v2/assurance-v2-grader-contract-compatibility-fixture.json",
+    "sha256": "38571e67c0bdb4275db11f1c19e5e6ec11a3b0312a9ec4fbb7a0d583266660e1"
+  },
+  "packet_id": "grader-contract-p004-synthetic-v1",
+  "provider_provenance": {
+    "transport_provider": "custom_isolated_provider",
+    "model_family": "Qwen",
+    "model_family_basis": "human_declared_distinct_family_provider_route_not_api_verified",
+    "configured_model": "qwen3.7-max",
+    "declared_snapshot": null,
+    "official_model_vendor_api_claimed": false,
+    "uncontrolled_factors": [
+      "backend_identity",
+      "custom_provider_routing",
+      "server_side_model_alias_resolution",
+      "provider_retention"
+    ]
+  },
+  "renderer": {
+    "id": "phase-b-direct-grader-zh-cn-v1-candidate",
+    "sha256": "3394fd70e1e938e0e7f4b97129dedb9c9e1d30c4eb0a901e3e3ecf88a968d6fd",
+    "language": "zh-CN",
+    "exact_model_visible_request_required": true
+  },
+  "model_settings": {
+    "thinking": {"type": "disabled"},
+    "reasoning_effort": "not_sent",
+    "temperature": "not_sent",
+    "top_p": "not_sent",
+    "max_tokens": 1024,
+    "stream": false,
+    "tools": "not_sent",
+    "max_retries": 0
+  },
+  "isolation_contract": {
+    "context_mode": "standalone_single_request",
+    "generator_reasoning_visible": false,
+    "other_variants_visible": false,
+    "other_repetitions_visible": false,
+    "expected_variant_ordering_visible": false,
+    "repository_or_workspace_access": "not_applicable_direct_api",
+    "external_packet_bridge_remains_evidence_boundary": true
+  },
+  "network_gate": {
+    "explicit_flag": "--confirm-network",
+    "approval_state_directory_required": true,
+    "maximum_grader_network_calls": 1,
+    "one_shot_transport_guard_required": true,
+    "formal_replay_authorized": false
+  },
+  "required_local_artifacts": [
+    "exact_secret_free_model_visible_request",
+    "raw_grader_json",
+    "configured_declared_and_provider_reported_model_identity",
+    "elapsed_ms",
+    "ordinary_usage_when_returned",
+    "numeric_reasoning_tokens_when_returned",
+    "scorer_provenance",
+    "strict_import_result"
+  ],
+  "forbidden_artifacts": [
+    "reasoning_content",
+    "api_key",
+    "endpoint",
+    "provider_response_id"
+  ]
+}

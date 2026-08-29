@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "status": "historical_completed",
+  "execution_enabled": false,
+  "superseded_by": "docs/research/assurance/studies/v2/assurance-v2-phase-b.recipe.json via tools.assurance_eval",
+  "approval_scope": "one_generator_call_only_no_formal_replay_or_real_grader",
+  "run_mode": "thinking_compatibility_smoke",
+  "evidence_use": "thinking_compatibility_only_not_phase_b_effect_evidence",
+  "case_id": "p002",
+  "variant_id": "B0",
+  "repetitions": 1,
+  "maximum_generator_network_calls": 1,
+  "grader": "deterministic_fake_no_network",
+  "provider_provenance": {
+    "transport_provider": "custom_isolated_provider",
+    "model_family": "DeepSeek",
+    "configured_model": "deepseek-v4-flash",
+    "declared_snapshot": null,
+    "official_deepseek_api_claimed": false,
+    "uncontrolled_factors": [
+      "custom_provider_routing",
+      "backend_identity",
+      "backend_seed",
+      "server_side_model_alias_resolution",
+      "provider_retention"
+    ]
+  },
+  "renderer": {
+    "id": "phase-b-thinking-compat-smoke-generator-zh-cn-v1",
+    "sha256": "39f6b30731e3cdd9c28896655a7ff255e3fabb73efa69d3b353d5d4532e97e3c",
+    "language": "zh-CN"
+  },
+  "generator_model": {
+    "configured_model": "deepseek-v4-flash",
+    "declared_snapshot": null,
+    "thinking": {"type": "enabled"},
+    "reasoning_effort": "not_sent_provider_support_unverified",
+    "temperature": "not_sent_effect_under_thinking_unverified",
+    "top_p": "not_sent_effect_under_thinking_unverified",
+    "max_tokens": 4096,
+    "output_budget_status": "provisional_pending_smoke_and_human_cost_limit",
+    "stream": false,
+    "max_retries": 0
+  },
+  "required_artifacts": [
+    "exact_secret_free_model_visible_request",
+    "final_content_without_reasoning_content",
+    "finish_reason",
+    "numeric_usage_including_reasoning_tokens_when_returned",
+    "elapsed_ms",
+    "configured_declared_and_provider_reported_model_identity"
+  ],
+  "blocking_outcomes": [
+    "thinking_parameter_rejected",
+    "finish_reason_length",
+    "reasoning_content_retained",
+    "secret_scan_match",
+    "unexpected_provider_response"
+  ]
+}

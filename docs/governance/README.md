@@ -1,14 +1,12 @@
-# 项目治理与演进
+# 项目治理
 
-本目录描述**这个项目如何形成、分类、验证、迁移和修订自己的知识**。它不定义理想的人机协作本身；后者见 [`../spec/`](../spec/README.md)。
+本目录描述**项目如何维护自己**：如何分类知识、限制证据外推、解释目录与关系、记录重要决定，以及在新证据出现后重分类或迁移。
 
-当前文件：
+治理不是人机协作规范本身，也不会因处于 meta-level 自动获得更高事实权威。
 
-- [`project-evolution.md`](project-evolution.md)：知识对象、地位、关系、演进与物理归档的最小方法；
-- [`evidence-policy.md`](evidence-policy.md)：观察、研究、设计推断、规范选择、实验实现与运行证据分别能支持多强的项目主张；
-- [`decisions.md`](decisions.md)：当前如何解释历史 D-### 决策及其地位变化；
-- [`decision-log-v0.16.md`](decision-log-v0.16.md)：迁移时保留的旧决策表原貌，用于追溯，不是当前规范正文。
+- [`project-evolution.md`](project-evolution.md)：知识对象、状态、主要维护上下文、关系、目录投影与演进；
+- [`evidence-policy.md`](evidence-policy.md)：field observation、project study、external research、hypothesis、normative choice、implementation 与 outcome 分别能支持多强的主张；
+- [`decisions.md`](decisions.md)：历史决策如何解释、缩窄、重分类和追溯；
+- [`decision-log-v0.16.md`](decision-log-v0.16.md)：旧混合决策记录的历史保留。
 
-历史条目的“已采纳”只说明当时的项目决定；当前地位仍应结合现行 `spec/`、`guidance/`、本治理层和明确的缩窄/取代关系判断。
-
-治理方法本身不是不可质疑的上层权威。若真实维护暴露分类错误、关系成本过高或新的重要问题，应把这些方法当作可修订的项目知识，而不是要求新内容适配旧分类。
+治理方法本身可被真实维护经验挑战。若分类或目录开始制造错误权威、重复维护、过高关系成本或强迫概念归属，应修改治理而不是要求新知识服从旧框架。

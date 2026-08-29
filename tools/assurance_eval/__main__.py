@@ -14,7 +14,7 @@ from .reporting import inspect_case, load_report
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_RECIPE = REPO_ROOT / "docs" / "experiments" / "assurance-v2-phase-b.recipe.json"
+DEFAULT_RECIPE = REPO_ROOT / "docs" / "research" / "assurance" / "studies" / "v2" / "assurance-v2-phase-b.recipe.json"
 
 
 def _common_recipe(parser: argparse.ArgumentParser) -> None:

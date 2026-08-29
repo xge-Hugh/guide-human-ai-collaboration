@@ -45,11 +45,11 @@
 ## 仓库里的其他材料
 
 - [`feedback/`](../feedback/)：实战观察与摩擦入口；
-- [`insights/`](../insights/)：候选主张和设计解释；
+- [`insights/`](../insights/)：轻量候选、设计直觉与 reasoning lineage；
 - [`skills/`](../skills/)：实验性 Skill 载体与行为 eval；
 - [`guidance/`](guidance/README.md)：可替换的交互、表示与模板方法；
 - [`research/`](research/README.md)：保障机制研究与外部依据；
-- [`experiments/`](experiments/README.md)：历史保障形式实验与试点；
+- [`research/`](research/README.md)：主动 inquiry，包括候选模型、external evidence、project studies 与历史/当前 pilots；
 - [`governance/`](governance/README.md)：项目演进、证据政策与历史决策；
 - [`archive/`](archive/README.md)：旧版本正文、历史快照以及旧结构到当前结构的对应关系。
 
@@ -75,5 +75,5 @@
 - 需要任务推进结构时读 [`spec/workflows.md`](spec/workflows.md)，软件开发再读 [`spec/domains/software-development.md`](spec/domains/software-development.md)；
 - 需要识别已知失效时读 [`spec/failure-models.md`](spec/failure-models.md)；
 - 需要维护项目或理解反馈如何进入规格时读 [`governance/project-evolution.md`](governance/project-evolution.md)；
-- 需要研究依据或历史保障实验时读 [`research/`](research/README.md) 与 [`experiments/`](experiments/README.md)；
+- 需要理解候选机制、外部证据、study 设计或历史 pilot 时读 [`research/`](research/README.md)；
 - 需要核对旧版本表述或旧结构去向时读 [`archive/`](archive/README.md)。
