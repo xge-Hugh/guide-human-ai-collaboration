@@ -1,15 +1,15 @@
-# 反馈怎么记
+# feedback/
 
-**不变的是反馈内容；载体可以换。**
+**Feedback content is invariant; carrier can change.**
 
-- 权威入口：本目录按年滚动的日志（先写这里）
-- GitHub Issue：要讨论、排期或关单时再提升；Issue 不是唯一真相
-- 已写入规范 / 决策记录后：日志里收成一行链接，不堆长文
-- **候选主张 / 设计灵感**：正文放 [`insights/`](../insights/)，日志只留一行指针；默认不升 Issue
+本目录用于最低成本保存真实任务中的 observation、friction、unexpected success 与其他 field signal。先记录发生了什么和来源，再决定它是否需要进入 Issue、insight、research、spec、guidance 或 implementation。
 
-每条最少：日期、场景一句话、发现或灵感、状态（`inbox` / `issue` / `insight` / `norm` / `parked`）。
+年度 rolling log 是主要入口；不要因为一个现象看起来像某个已有模型，就在记录时把 explanation 当成事实。
 
-| 类型 | 放哪 | 常见下一步 |
+| 内容 | 主要位置 | 可能后续 |
 | --- | --- | --- |
-| 实战摩擦 | 本日志（可升 Issue） | 修呈现 / Skill / 开 Issue |
-| 候选主张 | [`insights/`](../insights/) + 日志指针 | 试跑、进规范或搁置 |
+| 真实 observation / friction | `feedback/` | Issue、research question、failure model、直接修复或 parked |
+| 小型 candidate / design intuition | `insights/` + 必要 feedback pointer | 继续推导、进入 research、spec/guidance 或 parked |
+| 已形成 coherent inquiry 的 model / hypothesis / study | `docs/research/` | evidence calibration、study、revision、downstream implication |
+
+最小记录可只包含：日期、场景、观察到的事实/线索、当前状态和必要追溯入口。不要为了进入项目而填写完整研究模板。

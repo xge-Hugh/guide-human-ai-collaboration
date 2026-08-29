@@ -1,15 +1,9 @@
-# 灵感与候选主张
+# 灵感、轻量候选与 lineage
 
-**这里不是当前规格正文，也不是 Issue 队列。**
+**这里不是当前规格，也不是成熟 research program 的默认位置。**
 
-存放尚未钉死、但值得保留的重要发现、候选原则、机制假设与设计想法。正文写在独立笔记里；本 README 只说明目录角色。
+本目录用于低成本保存仍值得继续考虑、但尚未形成足够独立维护结构的内容，例如小型候选主张、设计直觉、部分处理过的灵感、尚不能确定 inquiry context 的候选，以及已被下游吸收但仍有来源追溯价值的 reasoning lineage。
 
-| 路径 | 放什么 |
-| --- | --- |
-| `docs/spec/` | 当前维护的人机协作规格、模型、工作流与失效模型 |
-| `docs/guidance/` | 已采用但可替换的操作方法与载体做法 |
-| `docs/governance/` | 项目演进、证据与决策治理 |
-| `feedback/` | 实战观察与摩擦入口 |
-| `insights/` | 候选主张 / 机制假设 / 设计灵感 |
+当一个候选逐渐形成 coherent question/model、多个相关 hypotheses、独立 evidence calibration、studies、revision history 或持续 downstream consumers 时，应考虑把其**主动维护面**迁入 [`../docs/research/`](../docs/research/README.md)，而不是继续让 `insights/` 承担完整研究生命周期。
 
-笔记建议包含：日期、主张一句话、为何重要、尚未解决的问题、关联证据或 Issue。消化后不要求统一“升格为规范”：可以进入概念模型、规范、自适应/评估模型、工作流或领域专项、失效模型、指导、研究/实验，也可以标记搁置或拒绝，并留下当前结论链接。具体分类与状态变化见 [`../docs/governance/project-evolution.md`](../docs/governance/project-evolution.md)。
+迁移不等于“晋升为真”。下游 adoption 通常是 derivation/distillation，而不是把上游对象改名成 norm。具体分类、状态与关系见 [`../docs/governance/project-evolution.md`](../docs/governance/project-evolution.md)。

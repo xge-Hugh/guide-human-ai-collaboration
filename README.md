@@ -1,47 +1,50 @@
-# 人机协作规格与演进实验
+# 人机协作研究与工程
 
-本仓库探索一套可跨软件开发、研究、学习、数据分析等领域使用、以提升**长期人机协作整体能力**为目标的**通用人机协作规格**，并用真实任务持续校准其工作流、指导与执行保障方式。
+本仓库探索长期人机协作中的规范、模型、证据、指导与工程机制，目标是在软件开发、研究、学习、数据分析等任务中，同时改善任务结果、人的实质判断与责任相关能力，以及人和 AI 作为组合系统的可靠性。
 
-这里的“通用”指规范试图提供可跨领域复用的上层约束，不表示项目要中立描述所有可能接受的人机委托关系。项目关心的不只是当前任务能否完成，还包括人在其持续承担的责任上能否形成实质判断、协作能力能否随重复工作得到保持或发展，以及 AI、人的能力、协调与保障能否形成更强的组合。
+项目现在被维护为一个**研究导向的工程知识系统**：真实协作产生观察和线索；项目据此形成候选模型、假设和研究问题，通过外部研究、project study、field observation 与工程 pilot 持续校准；当前被采用的语义与规范独立维护在规格中；Skill、工具和其他 carrier 负责可执行试跑，但不会因被实现就取得规范或事实权威。
 
 ## 不变量
 
-**规格内容是根本。** Agent 入口、Skill、任务状态、模板、UI 或其他技术只是可选的体现、检验或保障形式；具体载体不能自动取得规范权威。
+**规格内容是根本，但规格不是全部知识。** 当前规范回答“项目现在要求什么”；研究回答“什么机制似乎能解释、预测或区分协作现象”；指导回答“当前有哪些可替换做法”；工程 carrier 回答“怎样把候选或当前要求运行起来”。
 
-仓库同时保留观察、候选主张、研究、实验和历史，用来解释当前知识从何而来、还缺什么证据以及如何继续修订。
+任何目录、Skill、工具、study 或实验结果都不能仅凭物理位置自动取得更强权威。
 
 ## 建议阅读顺序
 
-1. [`docs/spec/README.md`](docs/spec/README.md) — 当前维护的人机协作规格
-2. [`docs/spec/norms.md`](docs/spec/norms.md) — 当前跨领域通用规范
-3. [`docs/spec/model.md`](docs/spec/model.md) — 参与者、角色、权威、协作状态、证据、表示、独立性等概念区分
-4. [`docs/spec/adaptation.md`](docs/spec/adaptation.md) / [`evaluation.md`](docs/spec/evaluation.md) / [`workflows.md`](docs/spec/workflows.md) — 自适应、评估与任务推进模型
+1. [`docs/overview.md`](docs/overview.md) — 当前项目导读
+2. [`docs/spec/README.md`](docs/spec/README.md) — 当前维护的人机协作规格
+3. [`docs/spec/norms.md`](docs/spec/norms.md) — 当前跨领域通用规范
+4. [`docs/research/README.md`](docs/research/README.md) — 当前研究问题、候选模型、证据与 studies
 5. [`docs/guidance/`](docs/guidance/README.md) — 可替换的交互、表示与模板做法
-6. [`docs/governance/`](docs/governance/README.md) — 项目演进、证据边界与决策历史
-7. （按需）[`docs/research/`](docs/research/README.md) / [`docs/experiments/`](docs/experiments/README.md) — 研究依据与历史保障实验
-8. （历史追溯）[`docs/archive/`](docs/archive/README.md) — 历史全文、旧版本快照与迁出材料
+6. [`docs/governance/`](docs/governance/README.md) — 项目分类、证据边界、演进与决策历史
+7. [`feedback/`](feedback/README.md) / [`insights/`](insights/README.md) — 低成本观察入口与轻量候选/lineage
+8. [`docs/archive/`](docs/archive/README.md) — 历史全文、旧版本快照与已退出当前维护面的材料
 
 ## 目录角色
 
 | 路径 | 角色 |
 | --- | --- |
 | `docs/spec/` | **当前维护的人机协作规格** |
-| `docs/guidance/` | 可替换的交互、表示和模板方法；不是通用合规条件 |
-| `docs/governance/` | 项目自身的分类、关系、演进、证据治理与决策历史 |
-| `docs/research/` | 外部研究与成熟实践的证据/机制研究；不自动取得规范权威 |
-| `docs/experiments/` | 项目曾运行的实验性保障实现与试点记录 |
-| `docs/overview.md` | 当前导读，非第二事实源 |
-| `docs/archive/` | 历史全文、旧版本快照与迁出材料 |
-| `feedback/` | 实战观察与摩擦入口；内容先保真，再决定去向 |
-| `insights/` | 候选主张与设计解释，非当前规格 |
-| `skills/` | 实验性 Skill 载体与行为 eval；非规范权威 |
-| `tasks/` | 本项目演进任务状态与历史试点证据 |
+| `docs/research/` | 主动 inquiry：问题、假设、模型、外部证据、project studies、field observation 与解释 |
+| `docs/guidance/` | 已采用但可替换的交互、表示和模板方法 |
+| `docs/governance/` | 项目自身的分类、关系、证据治理、演进与决策历史 |
+| `feedback/` | 实战观察与摩擦的低成本入口；先保真，再决定去向 |
+| `insights/` | 小型候选、设计直觉、lineage 与尚未形成独立 inquiry context 的推理 |
+| `skills/` | 实验性可执行 Skill carrier 与行为 eval；非规范权威 |
+| `tools/` / `tests/` | 研究或工程使用的可执行基础设施及代码验证 |
+| `docs/archive/` | 历史全文、旧版本快照与已退出当前维护面的材料 |
+
+## 目录不是本体
+
+项目知识本质上是图状关系。目录只提供一个**可替换的主要维护/检索投影**：规格按权威与语义职责组织，研究按 inquiry cohesion 组织，feedback 按时间低成本捕获，Skill/工具按可执行责任组织。
+
+因此目录可以在项目知识结构变化后再次迁移；迁移的目标是降低重建、权威判断和维护成本，而不是追求永久分类。
 
 ## 本仓库现在不是什么
 
-- 不是 IDE 插件、工作流引擎或强制门禁；
+- 不是 IDE 插件、固定工作流引擎或强制门禁；
 - 不是已定型的 Skill / `AGENTS.md` 产品包；
-- 不是“克隆即可在任意项目启用”的安装说明；
-- 也不把当前分类体系视为不可修改的封闭本体。
-
-当前处于规格持续校准与执行保障探索阶段。新发现可以被吸收、缩窄、重分类或搁置；只有当前维护的规格内容应被当作项目现行立场。
+- 不是科研论文仓库，也不把外部研究包装成对具体实现的自动证明；
+- 不是所有知识必须按 `feedback → insight → research → spec` 晋升的流水线；
+- 不把当前目录结构视为不可修改的封闭本体。
