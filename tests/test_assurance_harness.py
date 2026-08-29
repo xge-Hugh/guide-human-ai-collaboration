@@ -889,8 +889,8 @@ class HarnessTest(unittest.TestCase):
     def test_current_phase_b_is_semantically_compatible_with_legacy_runs(self) -> None:
         experiment = load_experiment(REPO_ROOT, RECIPE)
         legacy_paths = (
-            REPO_ROOT / "docs/experiments/evidence/assurance-v2-phase-b-tranche-1-2026-08-22/formal-run/resolved_plan.json",
-            REPO_ROOT / "docs/experiments/evidence/assurance-v2-phase-b-tranche-2-2026-08-23/blocked-run/resolved_plan.json",
+            REPO_ROOT / "docs/research/assurance/studies/v2/evidence/assurance-v2-phase-b-tranche-1-2026-08-22/formal-run/resolved_plan.json",
+            REPO_ROOT / "docs/research/assurance/studies/v2/evidence/assurance-v2-phase-b-tranche-2-2026-08-23/blocked-run/resolved_plan.json",
         )
         current_policy = build_resolved_plan(
             repo_root=REPO_ROOT,

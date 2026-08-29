@@ -4,7 +4,7 @@
   "language": "zh-CN",
   "rendering_status": "candidate_for_human_cloud_review",
   "semantic_source": {
-    "path": "docs/experiments/assurance-v2-phase-b-variants.json",
+    "path": "docs/research/assurance/studies/v2/assurance-v2-phase-b-variants.json",
     "language": "en",
     "sha256": "9366d5cfdc6081a3bd166d77e1ea559e14f2bf07c706ee3b430664a8b0745907"
   },

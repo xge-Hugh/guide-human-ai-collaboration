@@ -91,5 +91,5 @@
       "automatic_variant_winner_or_pass_fail": false
     }
   },
-  "output_root": "../../../.assurance-eval-results"
+  "output_root": "../../../../../../.assurance-eval-results"
 }

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "status": "historical_completed",
   "execution_enabled": false,
-  "superseded_by": "docs/experiments/assurance-v2-phase-b.recipe.json via tools.assurance_eval",
+  "superseded_by": "docs/research/assurance/studies/v2/assurance-v2-phase-b.recipe.json via tools.assurance_eval",
   "approval_scope": "one_generator_call_only_no_formal_replay_or_real_grader",
   "run_mode": "thinking_compatibility_smoke",
   "evidence_use": "thinking_compatibility_only_not_phase_b_effect_evidence",

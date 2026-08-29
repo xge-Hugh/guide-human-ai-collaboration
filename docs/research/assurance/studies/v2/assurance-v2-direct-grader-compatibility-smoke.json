@@ -2,12 +2,12 @@
   "schema_version": 1,
   "status": "historical_completed",
   "execution_enabled": false,
-  "superseded_by": "docs/experiments/assurance-v2-phase-b.recipe.json via tools.assurance_eval",
+  "superseded_by": "docs/research/assurance/studies/v2/assurance-v2-phase-b.recipe.json via tools.assurance_eval",
   "approval_scope": "one_qwen_grader_compatibility_call_only_no_formal_replay",
   "run_mode": "direct_grader_compatibility_smoke",
   "evidence_use": "direct_grader_transport_contract_only_not_phase_b_effect_evidence",
   "source_fixture": {
-    "path": "docs/experiments/assurance-v2-grader-contract-compatibility-fixture.json",
+    "path": "docs/research/assurance/studies/v2/assurance-v2-grader-contract-compatibility-fixture.json",
     "sha256": "38571e67c0bdb4275db11f1c19e5e6ec11a3b0312a9ec4fbb7a0d583266660e1"
   },
   "packet_id": "grader-contract-p004-synthetic-v1",

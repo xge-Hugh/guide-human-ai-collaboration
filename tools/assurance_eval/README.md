@@ -1,7 +1,7 @@
 # Assurance Phase B harness
 
 This is a small, human-operated semantic evaluation harness for the controlled
-replay described in `docs/experiments/assurance-v2-phase-b-protocol.md`. It is
+replay described in `docs/research/assurance/studies/v2/assurance-v2-phase-b-protocol.md`. It is
 not a general eval platform. `validate`, `plan`, and `report` are offline; only
 `run --authorize-network` can call a provider.
 
@@ -32,7 +32,7 @@ once at run start, records exact hashes and dirty-tree provenance, and is perman
 
 ```bash
 python3 -m tools.assurance_eval run \
-  --recipe docs/experiments/assurance-v2-phase-b.recipe.json \
+  --recipe docs/research/assurance/studies/v2/assurance-v2-phase-b.recipe.json \
   --settings /absolute/private/setting.json \
   --profile phase-b-stage3 \
   --mode exploratory \
@@ -47,7 +47,7 @@ already exist outside the repository with mode `0700`:
 
 ```bash
 python3 -m tools.assurance_eval run \
-  --recipe docs/experiments/assurance-v2-phase-b.recipe.json \
+  --recipe docs/research/assurance/studies/v2/assurance-v2-phase-b.recipe.json \
   --settings /absolute/private/setting.json \
   --profile phase-b-stage3 \
   --mode formal \
@@ -100,7 +100,7 @@ and secret-scan status before continuation:
 
 ```bash
 python3 -m tools.assurance_eval run \
-  --recipe docs/experiments/assurance-v2-phase-b.recipe.json \
+  --recipe docs/research/assurance/studies/v2/assurance-v2-phase-b.recipe.json \
   --settings /absolute/private/setting.json \
   --profile phase-b-stage3 \
   --mode formal \
@@ -113,7 +113,7 @@ Resume a paused tranche-2 episode without mutating prior evidence:
 
 ```bash
 python3 -m tools.assurance_eval run \
-  --recipe docs/experiments/assurance-v2-phase-b.recipe.json \
+  --recipe docs/research/assurance/studies/v2/assurance-v2-phase-b.recipe.json \
   --settings /absolute/private/setting.json \
   --profile phase-b-stage3 \
   --mode formal \

@@ -3,7 +3,7 @@
   "status": "prepared_not_executed",
   "evidence_use": "grader_contract_compatibility_fixture_not_phase_b_evidence",
   "source_rubric": {
-    "path": "docs/experiments/assurance-v2-phase-b-rubrics.json",
+    "path": "docs/research/assurance/studies/v2/assurance-v2-phase-b-rubrics.json",
     "sha256": "ed6ecd528f50ecdf37db4029979ca0aabbc0b331512dbce5774276ccf2fe6bae"
   },
   "grader_packet": {
