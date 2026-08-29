@@ -1,9 +1,9 @@
 # 认知协调候选模型：独立证据与研究校准
 
 - **日期**：2026-08-26
-- **地位**：`research calibration`（用于校准 [`../../insights/2026-08-25-cognitive-coordination-model.md`](../../insights/2026-08-25-cognitive-coordination-model.md)，不把候选模型自动晋升为当前规范）
+- **地位**：`research calibration`（用于校准 [`../../insights/2026-08-25-cognitive-coordination-model.md`](model.md)，不把候选模型自动晋升为当前规范）
 - **目的**：让候选模型离开 2026-08-24～25 对话的同源解释闭环，检查它是否能得到更早项目观察与外部研究的独立支持、限制或反驳。
-- **证据边界**：遵守 [`../governance/evidence-policy.md`](../governance/evidence-policy.md)。项目内部历史观察属于 `O / pilot evidence`；外部研究属于 `R / research-calibrated`；“战略性接触”“重建性”“生产性分歧”等仍是候选机制词汇，不因找到相邻研究就变成已验证事实。
+- **证据边界**：遵守 [`../governance/evidence-policy.md`](../../governance/evidence-policy.md)。项目内部历史观察属于 `O / pilot evidence`；外部研究属于 `R / research-calibrated`；“战略性接触”“重建性”“生产性分歧”等仍是候选机制词汇，不因找到相邻研究就变成已验证事实。
 
 ## 1. 本轮问题
 
@@ -26,7 +26,7 @@
 
 ### 2.1 行动锚定：代理压缩真实因果链
 
-[`../../insights/2026-08-11-action-grounding.md`](../../insights/2026-08-11-action-grounding.md) 已提出：AI 代理可能把“意图—操作—环境反馈—纠偏—结果”压缩成“说话—得到结果”；当目的包含理解、控制或独立能力时，应按需保留与真实系统相连的观察、预测、验证或动手锚点。它还明确指出阅读、观察、diff、日志、测试都可能形成真实联系，并不要求固定人工比例。
+[`../../insights/2026-08-11-action-grounding.md`](../../../insights/2026-08-11-action-grounding.md) 已提出：AI 代理可能把“意图—操作—环境反馈—纠偏—结果”压缩成“说话—得到结果”；当目的包含理解、控制或独立能力时，应按需保留与真实系统相连的观察、预测、验证或动手锚点。它还明确指出阅读、观察、diff、日志、测试都可能形成真实联系，并不要求固定人工比例。
 
 这与后来的“战略性接触 / substrate contact”高度同构，但来源更早。它支持以下较窄主张：
 

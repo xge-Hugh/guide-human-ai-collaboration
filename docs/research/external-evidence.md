@@ -2,7 +2,7 @@
 
 > 地位：**研究资料索引**。本文件集中保存当前规格与指导曾用于校准设计边界的外部研究入口；它不表示每条规范、指导或工程做法都已被这些研究直接验证。
 >
-> 项目如何解释研究证据、设计推断与规范选择的边界，见 [`../governance/evidence-policy.md`](../governance/evidence-policy.md)。保障机制与社区实践研究见 [`assurance-mechanisms.md`](assurance-mechanisms.md)。
+> 项目如何解释研究证据、设计推断与规范选择的边界，见 [`../governance/evidence-policy.md`](../governance/evidence-policy.md)。保障机制与社区实践研究见 [`assurance-mechanisms.md`](assurance/mechanisms.md)。
 
 ## 当前使用边界
 

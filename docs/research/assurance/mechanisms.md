@@ -1,9 +1,9 @@
 # 人机协作保障机制参考研究
 
 > 地位：**研究与取舍笔记，不是规范正文。**  
-> 规范主张：[overview.md](overview.md) · [norm/](norm/README.md)  
-> 实验设计与试点结论：[human-ai-collaboration-v1-implementation.md](human-ai-collaboration-v1-implementation.md)  
-> 保障需求草稿：[archive/assurance-and-pilot-notes-from-workflow-v0.15.md](archive/assurance-and-pilot-notes-from-workflow-v0.15.md)
+> 规范主张：[overview.md](../overview.md) · [norm/](../norm/README.md)  
+> 实验设计与试点结论：[human-ai-collaboration-v1-implementation.md](../human-ai-collaboration-v1-implementation.md)  
+> 保障需求草稿：[archive/assurance-and-pilot-notes-from-workflow-v0.15.md](../archive/assurance-and-pilot-notes-from-workflow-v0.15.md)
 >
 > 状态：探索结论（已支撑过一次试点；仍可作为以后选型的筛子）  
 > 日期：2026-08-09；导航修订 2026-08-10；定向研究补充 2026-08-12
@@ -16,7 +16,7 @@
 2. 需要比对来源时再读 §3 机制卡（M1–M7）  
 3. 关心「现有框架缺什么」读 §4  
 4. 试点后补强的审查/复盘/先例/共同理解依据读 §7
-5. 具体实验栈与结果读 [v1 实施笔记](human-ai-collaboration-v1-implementation.md)，不要把本文当成安装说明
+5. 具体实验栈与结果读 [v1 实施笔记](../human-ai-collaboration-v1-implementation.md)，不要把本文当成安装说明
 
 ## 1. 结论
 
@@ -61,7 +61,7 @@
 - **可直接借鉴**：元数据负责发现，`SKILL.md` 负责核心过程，`references/` 按阶段读取，脚本无需全文进入上下文。
 - **需要改造**：实验期只保留一个协作 Skill，不提前拆出大量角色和子 Skill。
 - **主要风险**：重复内容散落在入口、Skill 和参考文档中，形成多个权威来源。
-- **实验用途**：`SKILL.md` 只保存路由和最低充分规则；完整规范作为按需参考（现为 [docs/norm/](norm/README.md)）。
+- **实验用途**：`SKILL.md` 只保存路由和最低充分规则；完整规范作为按需参考（现为 [docs/norm/](../norm/README.md)）。
 
 ### M3：轻量协议与可回退探索
 
@@ -120,7 +120,7 @@
 - 怎样在时间压力下保护业务底线，并允许把学习债务延后偿还；
 - 怎样识别双方优先级漂移并低摩擦恢复共同议程。
 
-这些内容构成保障形式实验区别于现有「提高 Agent 交付率」框架的核心假设；规范正文中的原则与机制见 [docs/norm/](norm/README.md)。
+这些内容构成保障形式实验区别于现有「提高 Agent 交付率」框架的核心假设；规范正文中的原则与机制见 [docs/norm/](../norm/README.md)。
 
 ## 5. 对实验设计的约束
 
@@ -150,7 +150,7 @@
 
 它不是每阶段强制搜索。只在承重、陌生、高风险或已有明显成熟模式的问题上触发，并输出「直接借鉴、约束适配、自行设计/明确舍弃」三类取舍。研究表明，比较具有共同结构的案例比孤立阅读案例更有利于抽取可迁移原则，但先例也可能造成错误锚定，因此仍由当前业务不变量和证据裁剪。[Gentner、Loewenstein 与 Thompson 的类比编码研究](https://groups.psych.northwestern.edu/gentner/papers/GentnerLoewensteinThompson03.pdf)；[National Academies 的学习迁移综述](https://www.nationalacademies.org/read/9853/chapter/15)。
 
-规范对应：[五阶段](norm/02-five-phases.md) 与原则中的先例条款；Skill：`references` 中的阶段检查。
+规范对应：[五阶段](../norm/02-five-phases.md) 与原则中的先例条款；Skill：`references` 中的阶段检查。
 
 ### 7.2 复盘应是共同 debrief，而非 AI 总结
 
@@ -163,7 +163,7 @@
 
 据此并结合本项目的实战失效，作出以下工程化适配（不是论文直接验证的通用定律）：不采用固定长问卷或 AI 自动结算，而以基于真实经历的共同模型修正为核心；事实只在恢复或对齐需要时简述；AI 公开自己的观察与可质疑解释，人通过真实场景、后果比较、反例和迁移参与检验；前序预约作为延迟分析承诺逐项处置；最后才收敛极少数真正执行的重点行动。一个开放问题用于避免开场问卷，不是追问上限；若复盘属于约定范围，人未参与或明确跳过前不得单方面关单。
 
-规范对应：[复盘阶段](norm/02-five-phases.md)；Skill：`review-and-retrospective.md`。
+规范对应：[复盘阶段](../norm/02-five-phases.md)；Skill：`review-and-retrospective.md`。
 
 ### 7.3 审查应匹配风险与证据，而非堆测试
 
@@ -178,7 +178,7 @@ Batch 试点中「数百个单元测试通过，真实请求仍失败」并不�
 
 由此采用「变化 → 失效模式 → 业务后果 → 证据缺口」模型，再选成本最低但相关性、保真度和判别力足够的证据。编译、静态审查、针对性单测、集成/功能测试、真实请求重放、人工验收和运行观测分别回答不同问题。N+1 等性能怀疑先测量代表数据和业务影响；没有证据或收益时不做优化。真实缺陷也不强制补单测，而是先定位逃逸原因，再决定自动回归、人工验证、发布 smoke 或监控中哪种最耐久。
 
-规范对应：[风险、验证与回退](norm/03-cognitive-mechanisms.md#612-风险验证与回退)；Skill：`review-and-retrospective.md`。
+规范对应：[风险、验证与回退](../norm/03-cognitive-mechanisms.md#612-风险验证与回退)；Skill：`review-and-retrospective.md`。
 
 ### 7.4 自然语言协作需要目的充分的共同理解
 
@@ -194,4 +194,4 @@ Batch 试点中「数百个单元测试通过，真实请求仍失败」并不�
 
 以上研究共同为“共同理解由双方逐步建立”“含混时应控制猜错成本”“表示转换既有收益也有协调成本”提供理论或经验依据，但不直接验证本规范的整套工程行为。把 `继续/暂停/插话` 做成快捷控制、让 AI 自动判断停滞，以及跨多种协作模式的接棒阈值，仍是本项目的工程化候选，需要真实文本任务比较打断、返工、阅读负担、错误接受和恢复成本。
 
-规范对应：[自然对话、共同理解与表示路由](norm/03-cognitive-mechanisms.md#67-自然对话输出预算与理解修复)；候选动态：[共同推进](../insights/2026-08-12-shared-conversational-initiative.md)；Skill：`interaction-and-learning.md`。
+规范对应：[自然对话、共同理解与表示路由](../norm/03-cognitive-mechanisms.md#67-自然对话输出预算与理解修复)；候选动态：[共同推进](../../insights/2026-08-12-shared-conversational-initiative.md)；Skill：`interaction-and-learning.md`。

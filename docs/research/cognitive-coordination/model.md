@@ -3,7 +3,7 @@
 - **日期**：2026-08-25
 - **状态**：`candidate / conceptual model`（不是当前规范，不自动改变 Skill、工作流、保障架构或实验路线）
 - **来源**：2026-08-24～25 项目讨论中的学习案例、现行规范/失效模型/工作流逐项推导、反例压力测试，以及外部研究校准
-- **关联**：[`docs/spec/model.md`](../docs/spec/model.md)、[`docs/spec/norms.md`](../docs/spec/norms.md)、[`docs/spec/adaptation.md`](../docs/spec/adaptation.md)、[`docs/spec/workflows.md`](../docs/spec/workflows.md)、[`docs/spec/evaluation.md`](../docs/spec/evaluation.md)、[`docs/spec/failure-models.md`](../docs/spec/failure-models.md)、[`docs/governance/project-evolution.md`](../docs/governance/project-evolution.md)、[`2026-08-13-cross-conversation-learning-layer.md`](2026-08-13-cross-conversation-learning-layer.md)
+- **关联**：[`docs/spec/model.md`](../../spec/model.md)、[`docs/spec/norms.md`](../../spec/norms.md)、[`docs/spec/adaptation.md`](../../spec/adaptation.md)、[`docs/spec/workflows.md`](../../spec/workflows.md)、[`docs/spec/evaluation.md`](../../spec/evaluation.md)、[`docs/spec/failure-models.md`](../../spec/failure-models.md)、[`docs/governance/project-evolution.md`](../../governance/project-evolution.md)、[`2026-08-13-cross-conversation-learning-layer.md`](../../../insights/2026-08-13-cross-conversation-learning-layer.md)
 
 ## 一句话主张
 

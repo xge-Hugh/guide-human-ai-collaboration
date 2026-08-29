@@ -4,7 +4,7 @@
 >
 > 目的：在继续修改 Issue #1 的 Skill 实现前，比较固定航标、按重建风险选择线索、以及默认不提供独立视图三种策略，判断“按需选择重建线索”是否产生当前实现没有的实际行为增量，以及它最容易怎样失效。
 >
-> 依据：[`../spec/workflows.md`](../spec/workflows.md) 的非瀑布工作流语义、[`../../insights/2026-08-25-cognitive-coordination-model.md`](../../insights/2026-08-25-cognitive-coordination-model.md) 的激活 / 修正 / 重建 / 生产性分歧 / 认知分配候选机制，以及 [`../../insights/2026-08-26-decision-driven-evidence-cycle.md`](../../insights/2026-08-26-decision-driven-evidence-cycle.md) 的最低成本判别原则。
+> 依据：[`../spec/workflows.md`](../../../spec/workflows.md) 的非瀑布工作流语义、[`../../insights/2026-08-25-cognitive-coordination-model.md`](../model.md) 的激活 / 修正 / 重建 / 生产性分歧 / 认知分配候选机制，以及 [`../../insights/2026-08-26-decision-driven-evidence-cycle.md`](../../../../insights/2026-08-26-decision-driven-evidence-cycle.md) 的最低成本判别原则。
 
 ## 1. 当前 decision-relevant uncertainty
 
