@@ -136,7 +136,7 @@
 
 项目知识本质上是 graph-like；目录只是一个**可替换的 materialized projection**。目录表达主要维护/检索上下文，并可能在该上下文中提供合理的默认 authority/status 线索，但不是完整语义图，也不能单独决定 truth、evidence strength、normative authority 或永久 conceptual ownership。
 
-不同主要目录可以使用不同分类轴：spec 主要按 semantic/authority responsibility，research 主要按 inquiry cohesion，feedback 主要按 chronological intake，skills/tools 主要按 executable responsibility，archive 主要按 historical lifecycle。
+不同主要目录可以使用不同分类轴：spec 主要按 semantic/authority responsibility，research 主要按 inquiry cohesion，feedback 主要按 chronological intake，skills/pilots/tools 主要按 executable responsibility，archive 主要按 historical lifecycle。
 
 当前约定：
 

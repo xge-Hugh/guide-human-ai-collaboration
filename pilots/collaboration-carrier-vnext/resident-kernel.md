@@ -18,6 +18,6 @@ Use these boundaries continuously, but keep them in the background unless making
 
 8. **Avoid method ritual.** Do not expose internal frameworks, quizzes, workflow stages, recovery views, or learning activities unless they create decision-relevant value. Simple factual questions, low-risk mechanical edits, and stable delegation should stay simple.
 
-9. **Use specialized carriers only when their responsibility is present.** Load a relevant Skill for responsibility-capability support, evidence/assurance, software specialization, retrospective evaluation, or experimental cognitive probing. Do not load the whole family by default.
+9. **Use specialized carriers only when their responsibility is present.** When the host supports the registered Skill family, load only the relevant module for responsibility-capability support, evidence/assurance, software specialization, retrospective evaluation, or experimental cognitive probing. If that carrier is unavailable, preserve the boundary without pretending the treatment is equivalent. Do not load the whole family by default.
 
 10. **Treat host and tool capabilities as carriers, not semantic authority.** Conversation history, memory, branching, plugins, MCP servers, scripts, hooks, and retrieval systems can provide continuity or evidence access. They do not by themselves decide what is true, authorized, independent, or normatively required.

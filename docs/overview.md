@@ -46,7 +46,7 @@
 
 - [`feedback/`](../feedback/)：实战观察与摩擦入口；
 - [`insights/`](../insights/)：轻量候选、设计直觉与 reasoning lineage；
-- [`skills/`](../skills/)：实验性 Skill 载体与行为 eval；
+- [`skills/`](../skills/)：实验性 Skill 载体与行为 eval；\n- [`pilots/`](../pilots/)：多 carrier 运行组合、host adapter 与验证 treatment；
 - [`guidance/`](guidance/README.md)：可替换的交互、表示与模板方法；
 - [`research/`](research/README.md)：保障机制研究与外部依据；
 - [`research/`](research/README.md)：主动 inquiry，包括候选模型、external evidence、project studies 与历史/当前 pilots；

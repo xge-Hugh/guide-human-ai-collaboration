@@ -19,7 +19,7 @@
 5. [`docs/guidance/`](docs/guidance/README.md) — 可替换的交互、表示与模板做法
 6. [`docs/governance/`](docs/governance/README.md) — 项目分类、证据边界、演进与决策历史
 7. [`feedback/`](feedback/README.md) / [`insights/`](insights/README.md) — 低成本观察入口与轻量候选/lineage
-8. [`docs/archive/`](docs/archive/README.md) — 历史全文、旧版本快照与已退出当前维护面的材料
+8. [`pilots/`](pilots/README.md) — 多 carrier 运行组合与验证试点\n9. [`docs/archive/`](docs/archive/README.md) — 历史全文、旧版本快照与已退出当前维护面的材料
 
 ## 目录角色
 
