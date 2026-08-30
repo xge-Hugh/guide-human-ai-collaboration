@@ -1,0 +1,58 @@
+{
+  "name": "collaboration-carrier-vnext",
+  "status": "experimental",
+  "issue": 31,
+  "runtime_language": "en",
+  "resident": {
+    "source": "pilots/collaboration-carrier-vnext/resident-kernel.md",
+    "carriers": [
+      "system-or-developer-prompt",
+      "AGENTS.md"
+    ],
+    "codex_adapter": "pilots/collaboration-carrier-vnext/adapters/codex/AGENTS.md",
+    "semantic_status": "current-spec-projection"
+  },
+  "skills": [
+    {
+      "path": "skills/human-ai-responsibility-capability",
+      "semantic_status": "current-spec-projection"
+    },
+    {
+      "path": "skills/human-ai-evidence-assurance",
+      "semantic_status": "current-spec-projection"
+    },
+    {
+      "path": "skills/human-ai-software-collaboration",
+      "semantic_status": "current-domain-specialization"
+    },
+    {
+      "path": "skills/human-ai-reflection",
+      "semantic_status": "current-spec-projection"
+    },
+    {
+      "path": "skills/human-ai-cognitive-probing",
+      "semantic_status": "research-candidate"
+    }
+  ],
+  "delegated_to_host": [
+    "conversation-history",
+    "task-context-continuity",
+    "branch-restoration",
+    "memory-and-retrieval"
+  ],
+  "capability_only": [
+    "plugins",
+    "mcp",
+    "native-tools"
+  ],
+  "excluded_in_first_bundle": [
+    "universal-state-json-protocol",
+    "semantic-enforcement-hooks",
+    "umbrella-router-skill"
+  ],
+  "evaluation": {
+    "routing": "pilots/collaboration-carrier-vnext/evals/routing.json",
+    "behavior": "pilots/collaboration-carrier-vnext/evals/behavior.json",
+    "legacy_regression": "skills/guide-human-ai-collaboration/evals/evals.json"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "status": "experimental",
+  "purpose": "Test Skill discovery/activation independently from behavior quality. Empty expected_skills is a valid result.",
+  "cases": [
+    {
+      "name": "simple_fact_en",
+      "language": "en",
+      "prompt": "In one sentence, what is the main difference between IReadOnlyList and List in C#?",
+      "expected_skills": []
+    },
+    {
+      "name": "simple_fact_zh",
+      "language": "zh-CN",
+      "prompt": "只用一句话说明 C# 的 IReadOnlyList 和 List 最关键的区别。",
+      "expected_skills": []
+    },
+    {
+      "name": "responsibility_gap_en",
+      "language": "en",
+      "prompt": "You can implement the retry logic, but I still own the final decision on timeout semantics. I only know that the tests are green and I do not understand what happens if the server commits before the client times out.",
+      "expected_skills": [
+        "human-ai-responsibility-capability"
+      ]
+    },
+    {
+      "name": "responsibility_gap_zh",
+      "language": "zh-CN",
+      "prompt": "实现都交给你，但超时后的错误语义由我最终验收。我现在只知道测试通过了，不清楚服务端已经写入但客户端超时意味着什么。",
+      "expected_skills": [
+        "human-ai-responsibility-capability"
+      ]
+    },
+    {
+      "name": "evidence_conflict_en",
+      "language": "en",
+      "prompt": "The architecture note says retries are local, but the running service configuration and shared library suggest there is already a centralized retry policy. Which source should we trust before changing production behavior?",
+      "expected_skills": [
+        "human-ai-evidence-assurance"
+      ]
+    },
+    {
+      "name": "software_contract_en",
+      "language": "en",
+      "prompt": "We can discuss task framing and implementation together, but the request contract and entity pairing are still unresolved. Can you start coding the provider now?",
+      "expected_skills": [
+        "human-ai-software-collaboration"
+      ]
+    },
+    {
+      "name": "retrospective_en",
+      "language": "en",
+      "prompt": "Implementation and independent review are done. Let's retrospect on the task, our collaboration, and the workflow before closing.",
+      "expected_skills": [
+        "human-ai-reflection"
+      ]
+    },
+    {
+      "name": "cross_level_probe_positive_en",
+      "language": "en",
+      "prompt": "We are still trying to understand whether retries are safe. More architecture prose is not resolving the disagreement. A single real request/response trace might expose whether timeout can happen after commit, but I do not want to start implementation.",
+      "expected_skills": [
+        "human-ai-cognitive-probing"
+      ]
+    },
+    {
+      "name": "cross_level_probe_positive_zh",
+      "language": "zh-CN",
+      "prompt": "我们仍在理解重试是否安全，继续补架构文字已经无法区分两种解释。看一条真实请求/响应可能能暴露超时是否发生在提交之后，但现在不准备进入实现。",
+      "expected_skills": [
+        "human-ai-cognitive-probing"
+      ]
+    },
+    {
+      "name": "cross_level_probe_negative_en",
+      "language": "en",
+      "prompt": "Rename this private local variable to match the existing convention. It is low risk, reversible, and the repository already has examples.",
+      "expected_skills": []
+    },
+    {
+      "name": "host_continuity_is_not_a_skill_en",
+      "language": "en",
+      "prompt": "Resume the task from the conversation and project history. There is no project-specific state.json file.",
+      "expected_skills": [],
+      "note": "The host should provide continuity. A project Skill should not activate merely to recreate generic chat/task recovery."
+    }
+  ]
+}
