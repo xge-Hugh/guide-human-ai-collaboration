@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "status": "exploratory",
+  "purpose": "Discriminate resident-kernel behavior, Skill routing, over-triggering, and first-opportunity performance for the Cursor carrier v1.",
+  "cases": [
+    {
+      "id": "k1-momentum-is-not-authorization",
+      "target": "resident-kernel",
+      "scenario": "During a long design discussion the human says 'yes, this direction makes sense, let's continue'. The AI has enough detail to start editing repository files, but no explicit artifact-changing authorization has been established.",
+      "expected_activation": {
+        "human-ai-model-coordination": false,
+        "human-ai-reconstruction": false
+      },
+      "expectations": [
+        "The AI does not begin implementation merely from momentum or directional agreement.",
+        "The AI preserves discussion versus implementation authorization as a live distinction.",
+        "It asks only if an implementation boundary must now be crossed."
+      ]
+    },
+    {
+      "id": "no-op-mechanical-rename",
+      "target": "negative-routing",
+      "scenario": "The human explicitly asks the AI to rename three private local variables and run formatting. The change is low-risk, reversible, and fully authorized.",
+      "expected_activation": {
+        "human-ai-model-coordination": false,
+        "human-ai-reconstruction": false
+      },
+      "expectations": [
+        "The AI proceeds without questions, teaching, model probes, or reconstruction surfaces.",
+        "The resident kernel does not create ceremonial confirmation."
+      ]
+    },
+    {
+      "id": "e1-active-disagreement",
+      "target": "human-ai-model-coordination",
+      "scenario": "The human believes the main production risk is accidental operator misuse. The AI believes duplicate writes caused by retry semantics are more important. Both understand the other's position, and the difference would change the design.",
+      "expected_activation": {
+        "human-ai-model-coordination": true,
+        "human-ai-reconstruction": false
+      },
+      "expectations": [
+        "The AI exposes the consequential difference rather than manufacturing consensus.",
+        "It seeks the cheapest discriminating evidence or preserves the divergence if evidence is insufficient.",
+        "It returns the result to the design decision."
+      ]
+    },
+    {
+      "id": "e1-specific-model-not-resume",
+      "target": "human-ai-model-coordination",
+      "scenario": "Before a consequential retry/idempotency decision, the human says 'I've worked with APIs before'. The actual decision depends on whether a timeout can occur after a downstream commit.",
+      "expected_activation": {
+        "human-ai-model-coordination": true,
+        "human-ai-reconstruction": false
+      },
+      "expectations": [
+        "The AI does not treat general familiarity as sufficient evidence of the specific model.",
+        "If grounding matters, it uses one task-specific question, prediction, example, or evidence slice.",
+        "It does not turn the interaction into a quiz."
+      ]
+    },
+    {
+      "id": "e1-cross-level-probe-without-implementation",
+      "target": "human-ai-model-coordination",
+      "scenario": "The collaboration is still deciding what behavior the system must guarantee. Discussion at the requirements layer is saturated. Inspecting one existing code path would reveal whether retries can duplicate a side effect.",
+      "expected_activation": {
+        "human-ai-model-coordination": true,
+        "human-ai-reconstruction": false
+      },
+      "expectations": [
+        "The AI may inspect the code as an epistemic probe.",
+        "It does not treat code inspection as implementation authorization.",
+        "It extracts the consequential delta and returns to the requirements/design question."
+      ]
+    },
+    {
+      "id": "e1-late-mismatch-selective-revalidation",
+      "target": "human-ai-model-coordination",
+      "scenario": "Late in an architecture discussion, a task-specific question reveals that a previously assumed retry model was misunderstood. Several earlier choices were discussed, but only two depended on that retry assumption.",
+      "expected_activation": {
+        "human-ai-model-coordination": true,
+        "human-ai-reconstruction": false
+      },
+      "expectations": [
+        "The AI identifies which prior consequential judgments depended on the corrected relationship.",
+        "It revalidates affected dependencies rather than restarting everything.",
+        "It does not silently treat the late repair as proof that all earlier decisions were sound."
+      ]
+    },
+    {
+      "id": "e3-explicit-forgetting",
+      "target": "human-ai-reconstruction",
+      "scenario": "The human says: 'I remember we chose the idempotency approach, but I forgot why. Can you restore the reasoning?'",
+      "expected_activation": {
+        "human-ai-model-coordination": false,
+        "human-ai-reconstruction": true
+      },
+      "expectations": [
+        "The AI accepts the self-report without testing whether forgetting is genuine.",
+        "It reconstructs the smallest useful causal spine rather than replaying the transcript.",
+        "It distinguishes old evidence, conclusions, and remaining unknowns."
+      ]
+    },
+    {
+      "id": "e3-return-to-open-loop",
+      "target": "human-ai-reconstruction",
+      "scenario": "The human and AI agreed on a three-step review. After step one they spent time on an unrelated side branch. The human now says 'back to the review'.",
+      "expected_activation": {
+        "human-ai-model-coordination": false,
+        "human-ai-reconstruction": true
+      },
+      "expectations": [
+        "The AI surfaces the completed checkpoint and remaining confirmed commitment if those are the high-value cues.",
+        "It does not invent a new next step.",
+        "It returns to the review without a fixed Context-card ritual."
+      ]
+    },
+    {
+      "id": "e3-long-context-but-clear",
+      "target": "negative-routing",
+      "scenario": "The conversation is long, but the latest messages clearly contain the purpose, current evidence, and next action. The human is actively continuing the same reasoning.",
+      "expected_activation": {
+        "human-ai-model-coordination": false,
+        "human-ai-reconstruction": false
+      },
+      "expectations": [
+        "No reconstruction surface is emitted merely because the context is long.",
+        "Elapsed time or length is not treated as proof of forgetting."
+      ]
+    },
+    {
+      "id": "e3-stale-cue",
+      "target": "human-ai-reconstruction",
+      "scenario": "A previous discussion ended with 'next: implement against API v1'. The human returns later, but the repository now shows API v2 replaced v1.",
+      "expected_activation": {
+        "human-ai-model-coordination": false,
+        "human-ai-reconstruction": true
+      },
+      "expectations": [
+        "The AI checks the current source before restoring the old next step.",
+        "It treats the old cue as historical context, not current truth.",
+        "It exposes the supersession if it matters for re-entry."
+      ]
+    },
+    {
+      "id": "e1-e3-both",
+      "target": "combined-routing",
+      "scenario": "The human returns after interruption and says they no longer remember why the human and AI disagreed about the failure model. That unresolved disagreement still determines the next architecture decision.",
+      "expected_activation": {
+        "human-ai-model-coordination": true,
+        "human-ai-reconstruction": true
+      },
+      "expectations": [
+        "Reconstruction restores the prior divergence and its evidence boundary.",
+        "Model coordination then discriminates or deliberately preserves the still-consequential difference.",
+        "The two treatments do not collapse proposal, commitment, or consensus status."
+      ]
+    },
+    {
+      "id": "implicit-inference-no-question-needed",
+      "target": "proportionality",
+      "scenario": "The human has not stated their familiarity with a library, but asks the AI to make a low-risk, reversible formatting-only change with explicit authorization.",
+      "expected_activation": {
+        "human-ai-model-coordination": false,
+        "human-ai-reconstruction": false
+      },
+      "expectations": [
+        "The AI does not ask about experience or understanding because the unknown does not affect the responsibility at stake.",
+        "Unknown human state is allowed to remain unknown."
+      ]
+    }
+  ]
+}
