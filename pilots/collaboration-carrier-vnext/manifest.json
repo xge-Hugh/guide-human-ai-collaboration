@@ -48,11 +48,21 @@
   "excluded_in_first_bundle": [
     "universal-state-json-protocol",
     "semantic-enforcement-hooks",
-    "umbrella-router-skill"
+    "umbrella-router-skill",
+    "temporal-coordination-as-skill"
   ],
   "evaluation": {
     "routing": "pilots/collaboration-carrier-vnext/evals/routing.json",
     "behavior": "pilots/collaboration-carrier-vnext/evals/behavior.json",
     "legacy_regression": "skills/guide-human-ai-collaboration/evals/evals.json"
-  }
+  },
+  "separate_pilot_candidates": [
+    {
+      "program": "temporal-coordination",
+      "semantic_status": "research-candidate",
+      "preferred_carrier_if_promoted": "interaction-substrate",
+      "included_in_this_bundle": false,
+      "reason": "The current field study concerns waiting/silent-execution and side-chat/rejoin interaction states that a model Skill cannot reliably observe or instantiate."
+    }
+  ]
 }

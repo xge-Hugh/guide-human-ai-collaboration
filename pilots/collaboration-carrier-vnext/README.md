@@ -53,12 +53,18 @@ AI / task-context continuity 交给 host/product 的 conversation history、proj
 - `docs/governance/project-evolution.md`
 - `docs/research/assurance/studies/v2/assurance-v2-phase-b-interpretation.md`
 
-### Research candidate included experimentally
+### Research candidates and carrier decisions
 
 - `docs/research/cognitive-coordination/model.md`
 - `docs/research/cognitive-coordination/studies/cross-level-epistemic-probing-replay-2026-08-30.md`
+- `docs/research/temporal-coordination/model.md`
+- `docs/research/temporal-coordination/studies/temporal-coordination-field-observation.md`
 
-Only **selective cross-level epistemic probing** is implemented as an explicitly candidate Skill in this first bundle. Reconstruction, strategic exposure, productive divergence, and other cognitive-coordination candidates remain research concepts unless a current-spec rule independently implies the same local behavior.
+Only **selective cross-level epistemic probing** is implemented as an explicitly candidate Skill in this first bundle.
+
+**Temporal coordination is deliberately not implemented as a Skill.** Its current field-study boundary says that waiting, silent execution, side-chat/rejoin collision, and similar interaction-state phenomena may require an interaction/substrate carrier that can observe or instantiate the relevant state. Forcing those phenomena through a model Skill would test the wrong carrier. If that research branch reaches prototype threshold, it should become a separate interaction/substrate pilot and return evidence to the temporal-coordination model.
+
+Reconstruction, strategic exposure, productive divergence, and other cognitive-coordination candidates remain research concepts unless a current-spec rule independently implies the same local behavior. This is intentional: the pilot tests carrier selection, not maximal conversion of research vocabulary into runtime instructions.
 
 ## 3. Carrier architecture
 
@@ -70,6 +76,7 @@ Only **selective cross-level epistemic probing** is implemented as an explicitly
 | Software workflow specialization | `human-ai-software-collaboration` Skill | current domain specialization | Software semantics should not occupy cross-domain resident context |
 | Retrospective / collaboration evaluation | `human-ai-reflection` Skill | current-spec projection | End-of-task reflection is conditional and should not become a universal closeout ritual |
 | Selective cross-level epistemic probing | `human-ai-cognitive-probing` Skill | **research candidate** | Provides a discriminating runtime test without promoting the mechanism to a norm |
+| Temporal waiting / side-chat / rejoin coordination | separate interaction/substrate pilot if evidence threshold is met | **research candidate; excluded here** | The phenomenon can occur while the model is silent or at UI-level state boundaries, so a Skill is not an adequate primary carrier |
 | Conversation history / task continuity / branch restoration | host/product capability | delegated | Not a distinctive project collaboration mechanism |
 | External repository / web / system evidence | MCP / plugin / native tools when available | capability only | Tools provide access; they do not decide semantic authority |
 | Deterministic carrier validation | `scripts/validate_bundle.py` | maintenance support | Good use of scripts: syntax/integrity, not semantic judgment |
