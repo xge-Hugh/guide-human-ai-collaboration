@@ -7,7 +7,8 @@
 - [`model.md`](model.md)：认知协调候选模型；
 - [`evidence-review.md`](evidence-review.md)：项目内观察与外部研究的独立校准；
 - [`design-diagnoses/`](design-diagnoses/)：由候选模型导出的运行/设计缺口诊断；
-- [`studies/`](studies/)：cloud semantic replay、Skill field pilot、reconstruction-surface 等 study。
+- [`studies/`](studies/)：cloud semantic replay、Skill field pilot、reconstruction-surface 等 study；
+  - [`cross-level-epistemic-probing-replay-2026-08-30.md`](studies/cross-level-epistemic-probing-replay-2026-08-30.md)：选择性跨层认知探针的历史证据回放、反例与边界测试。
 
 ## Authority boundary
 
