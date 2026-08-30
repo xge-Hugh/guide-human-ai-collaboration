@@ -162,6 +162,45 @@
 
 尤其要避免一个反向失效：为了只让人处理“高价值判断”，把所有底层现象都经 AI 过滤后再呈现，最终使高层判断本身失去与现实校准的来源。
 
+### 3.10 选择性跨层认知探针（selective cross-level epistemic probing）
+
+**候选扩展机制。** 2026-08-30 的历史证据回放表明，现有“按需下潜 / 适度展开”虽然方向正确，但仍可能留下一个运行歧义：什么时候应该离开当前表示去构造另一种表示、是否必须逐级下降、进入更低层是否意味着 workflow phase 已改变，以及探索何时必须返回。
+
+该候选把 task understanding 视为多个局部、可修正表示之间的图状协调，而不是要求沿单一抽象阶梯逐层完成。软件开发 L0–L4 仍可作为 domain routing heuristic，但认知探针可以选择相邻或非相邻表示，只要该表示预计能以更低总认知成本暴露一个会改变当前模型的关系。
+
+最小语义：
+
+~~~
+focal model M0
+    ↓
+decision-relevant uncertainty U
+    ↓
+select minimal probe P
+    ↓
+externalize / discriminate / contact evidence
+    ↓
+consequential delta Δ
+    ↓
+return Δ to M0
+    ↓
+revise / bound / restructure / preserve unknown
+    ↓
+M1
+~~~
+
+这里的关键边界是：
+
+- **workflow focus 与 representational depth 正交**：任务理解阶段可以临时检查架构、代码、形式结构或直接证据，只要这些动作仍服务于理解目的、范围、不变量或其他当前焦点；
+- **probe 不等于 implementation commitment**：构造一个低层表示本身不授权修改真实系统，也不意味着阶段自动切换；
+- **深度由判别价值决定，不由 adjacency 决定**：选择哪个抽象层、domain model 或 representation，要看它能否暴露当前重要未知，而不是机械“下一层”；
+- **supporting excursion 需要 epistemic return edge**：进入另一表示前，应能说明它预计回答当前哪个问题；得到 consequential delta 后带回 focal model。若探索形成独立目标，应单独路由；若既无返回价值也无新目标，则更像 agenda drift；
+- **probe 应保持最小充分**：完整 lower-level 草案、过多表示或连续多层转换会增加 integration burden、fixation 与 working-memory load；带回一次 Δ 后重新判断是否需要下一次 probe；
+- **允许 no-probe**：低风险机械事项、简单事实、已有清楚 grounding 或另一表示没有新增判别价值时，直接继续当前表示是正确行为。
+
+该机制不是新的用户可见流程，也不要求每次协作都显式执行。它更像 cognitive allocation、externalization、discrimination、evidence contact、revision 与 reconstruction 的一个组合控制：认知分配选择是否值得探针，外显/判别产生 Δ，修正把 Δ 带回当前模型；若某条跨表示关系具有较高未来价值，还可以保留为 bridge cue，支持后续 activation、external knowledge retrieval 或 human reconstruction。
+
+历史回放、反例与当前证据边界见 [选择性跨层认知探针：历史证据回放与边界测试](studies/cross-level-epistemic-probing-replay-2026-08-30.md)。当前证据支持它作为 research candidate control mechanism，**不能**证明其运行时效果、延迟重建价值或学习迁移已经成立。
+
 ---
 
 ## 4. 与现有项目结构的候选关系
@@ -177,7 +216,7 @@
         ↓
 认知协调候选模型
 激活、外显、判别、证据接触、修正、重建、
-策略性接触、生产性分歧、认知分配
+策略性接触、生产性分歧、认知分配、选择性跨层探针
         ↓
 自适应控制
 风险、可逆性、不确定性、熟悉度、能力需求、压力、目的
