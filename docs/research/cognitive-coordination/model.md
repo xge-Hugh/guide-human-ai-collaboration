@@ -2,8 +2,8 @@
 
 - **日期**：2026-08-25
 - **状态**：`candidate / conceptual model`（不是当前规范，不自动改变 Skill、工作流、保障架构或实验路线）
-- **来源**：2026-08-24～25 项目讨论中的学习案例、现行规范/失效模型/工作流逐项推导、反例压力测试，以及外部研究校准
-- **关联**：[`docs/spec/model.md`](../../spec/model.md)、[`docs/spec/norms.md`](../../spec/norms.md)、[`docs/spec/adaptation.md`](../../spec/adaptation.md)、[`docs/spec/workflows.md`](../../spec/workflows.md)、[`docs/spec/evaluation.md`](../../spec/evaluation.md)、[`docs/spec/failure-models.md`](../../spec/failure-models.md)、[`docs/governance/project-evolution.md`](../../governance/project-evolution.md)、[`2026-08-13-cross-conversation-learning-layer.md`](../../../insights/2026-08-13-cross-conversation-learning-layer.md)
+- **来源**：2026-08-24～25 项目讨论中的学习案例、现行规范/失效模型/工作流逐项推导、反例压力测试，以及外部研究校准；2026-08-30 加入选择性跨层认知探针；2026-09-06 进一步把该机制明确扩展为可向上、向下、横向与跨领域移动的跨表示探针
+- **关联**：[`docs/spec/model.md`](../../spec/model.md)、[`docs/spec/norms.md`](../../spec/norms.md)、[`docs/spec/adaptation.md`](../../spec/adaptation.md)、[`docs/spec/workflows.md`](../../spec/workflows.md)、[`docs/spec/evaluation.md`](../../spec/evaluation.md)、[`docs/spec/failure-models.md`](../../spec/failure-models.md)、[`docs/governance/project-evolution.md`](../../governance/project-evolution.md)、[`2026-08-13-cross-conversation-learning-layer.md`](../../../insights/2026-08-13-cross-conversation-learning-layer.md)、[`../runtime-capability/model.md`](../runtime-capability/model.md)
 
 ## 一句话主张
 
@@ -162,44 +162,53 @@
 
 尤其要避免一个反向失效：为了只让人处理“高价值判断”，把所有底层现象都经 AI 过滤后再呈现，最终使高层判断本身失去与现实校准的来源。
 
-### 3.10 选择性跨层认知探针（selective cross-level epistemic probing）
+### 3.10 选择性跨表示认知探针（selective cross-representation epistemic probing）
 
-**候选扩展机制。** 2026-08-30 的历史证据回放表明，现有“按需下潜 / 适度展开”虽然方向正确，但仍可能留下一个运行歧义：什么时候应该离开当前表示去构造另一种表示、是否必须逐级下降、进入更低层是否意味着 workflow phase 已改变，以及探索何时必须返回。
+**候选扩展机制。** 2026-08-30 的历史证据回放最初以“选择性跨层认知探针”描述一个运行歧义：什么时候应该离开当前表示去构造另一种表示、是否必须逐级下降、进入更低层是否意味着 workflow phase 已改变，以及探索何时必须返回。
 
-该候选把 task understanding 视为多个局部、可修正表示之间的图状协调，而不是要求沿单一抽象阶梯逐层完成。软件开发 L0–L4 仍可作为 domain routing heuristic，但认知探针可以选择相邻或非相邻表示，只要该表示预计能以更低总认知成本暴露一个会改变当前模型的关系。
+2026-09-06 的进一步讨论显示，**“跨层”仍容易让人误解为只有向下钻取才产生增量**。实际有价值的 probe 可以：
+
+- **向下**：从架构/需求进入代码、日志、真实请求、底层证据；
+- **向上**：从局部技术问题抽取更高层 business model、incentive、system architecture、governance relation，以改变当前判断；
+- **横向**：进入另一个 representation、stakeholder model、alternative formulation 或同层但不同视角；
+- **跨领域**：借 apparently unrelated precedent、analogy 或外部理论形成可返回当前任务的新关系。
+
+因此 task understanding 更适合被视为多个局部、可修正表示之间的**图状协调**，而不是沿单一抽象阶梯向下完成。软件开发 L0–L4 仍可作为 domain routing heuristic，但认知探针可以选择相邻或非相邻、上/下/横向或跨领域表示，只要该 representation 预计能以较低总认知成本暴露一个会改变当前模型的关系。
 
 最小语义：
 
 ~~~
 focal model M0
     ↓
-decision-relevant uncertainty U
+decision-relevant uncertainty / weak relation U
     ↓
-select minimal probe P
+select minimal probe P into representation R
     ↓
-externalize / discriminate / contact evidence
+externalize / discriminate / synthesize / contact evidence
     ↓
 consequential delta Δ
     ↓
 return Δ to M0
     ↓
-revise / bound / restructure / preserve unknown
+revise / bound / restructure / reweight / preserve unknown
     ↓
 M1
 ~~~
 
-这里的关键边界是：
+这里的 **Δ 不限于新增事实**。一个新抽象、business relation、structural analogy 或此前看似无关的连接，只要能改变 focal model 中某个关系的权重、边界、优先级或可解释性，就可能具有 epistemic return value。
 
-- **workflow focus 与 representational depth 正交**：任务理解阶段可以临时检查架构、代码、形式结构或直接证据，只要这些动作仍服务于理解目的、范围、不变量或其他当前焦点；
-- **probe 不等于 implementation commitment**：构造一个低层表示本身不授权修改真实系统，也不意味着阶段自动切换；
-- **深度由判别价值决定，不由 adjacency 决定**：选择哪个抽象层、domain model 或 representation，要看它能否暴露当前重要未知，而不是机械“下一层”；
-- **supporting excursion 需要 epistemic return edge**：进入另一表示前，应能说明它预计回答当前哪个问题；得到 consequential delta 后带回 focal model。若探索形成独立目标，应单独路由；若既无返回价值也无新目标，则更像 agenda drift；
-- **probe 应保持最小充分**：完整 lower-level 草案、过多表示或连续多层转换会增加 integration burden、fixation 与 working-memory load；带回一次 Δ 后重新判断是否需要下一次 probe；
+关键边界是：
+
+- **workflow focus 与 representational direction 正交**：任务理解阶段可以临时进入更低、更高、横向或跨领域 representation，只要仍服务于当前目的、范围、不变量、判断或未知；
+- **probe 不等于 implementation commitment**：构造另一表示本身不授权修改真实系统，也不意味着阶段自动切换；
+- **方向由判别/重构价值决定，不由 adjacency 或“越底层越真实”决定**：一个 business model 可能比更多代码细节更能解释架构取舍；一个真实日志也可能比高层抽象更能暴露错误；
+- **supporting excursion 需要 epistemic return edge**：进入另一表示前，应能说明它预计回答/重构当前哪个问题；得到 consequential delta 后带回 focal model。若探索形成独立目标，应单独路由；若既无返回价值也无新目标，则更像 agenda drift；
+- **probe 应保持最小充分**：完整 lower-level 草案、无边界的 abstraction hopping 或连续多表示转换都会增加 integration burden、fixation 与 working-memory load；带回一次 Δ 后重新判断是否需要下一次 probe；
 - **允许 no-probe**：低风险机械事项、简单事实、已有清楚 grounding 或另一表示没有新增判别价值时，直接继续当前表示是正确行为。
 
-该机制不是新的用户可见流程，也不要求每次协作都显式执行。它更像 cognitive allocation、externalization、discrimination、evidence contact、revision 与 reconstruction 的一个组合控制：认知分配选择是否值得探针，外显/判别产生 Δ，修正把 Δ 带回当前模型；若某条跨表示关系具有较高未来价值，还可以保留为 bridge cue，支持后续 activation、external knowledge retrieval 或 human reconstruction。
+该机制不是新的用户可见流程，也不要求每次协作都显式执行。它更像 cognitive allocation、activation、externalization、discrimination、evidence contact、revision 与 reconstruction 的组合控制：认知分配决定是否值得离开 focal model，probe 构造/接触另一 representation，Δ 被带回并修正当前模型；若某条跨表示关系具有较高未来价值，还可以保留为 bridge cue，支持后续 activation、external knowledge retrieval 或 human reconstruction。
 
-历史回放、反例与当前证据边界见 [选择性跨层认知探针：历史证据回放与边界测试](studies/cross-level-epistemic-probing-replay-2026-08-30.md)。当前证据支持它作为 research candidate control mechanism，**不能**证明其运行时效果、延迟重建价值或学习迁移已经成立。
+2026-08-30 的历史回放主要检验原“cross-level”版本，见 [选择性跨层认知探针：历史证据回放与边界测试](studies/cross-level-epistemic-probing-replay-2026-08-30.md)。当前 2026-09-06 的“cross-representation”扩展**尚未经过同等历史回放与行为实验**，因此是对候选模型的语义扩展，不应把旧 study 当成完整验证。
 
 ---
 
@@ -216,7 +225,7 @@ M1
         ↓
 认知协调候选模型
 激活、外显、判别、证据接触、修正、重建、
-策略性接触、生产性分歧、认知分配、选择性跨层探针
+策略性接触、生产性分歧、认知分配、选择性跨表示探针
         ↓
 自适应控制
 风险、可逆性、不确定性、熟悉度、能力需求、压力、目的
@@ -234,6 +243,7 @@ Skill、提示、状态、Agent、Hook、eval、检索等
 - **证据、来源与独立性**是更上层的认识论边界；双方模型一致不等于真，两个参与者同意也不等于两份独立证据。
 - **风险/压力/可逆性**决定认知协调值得投入多少，而不是由认知模型本身产生。
 - 交互方法应尽量保持在后台：不能把“激活→预测→反例→修正→重建”机械展开为人的固定作业，否则会复现项目已有的问卷/方法仪式失效。
+- **runtime capability formation 是相邻但不同的问题**：本模型描述什么认知函数可能有价值；[`../runtime-capability/`](../runtime-capability/README.md) 研究什么 context、retrieval、Skill、guidance 或外部 state 能让真实模型可靠激活这些函数。
 
 ---
 
@@ -257,192 +267,11 @@ Skill、提示、状态、Agent、Hook、eval、检索等
 
 只保留现有规范不能干净表达、且通过 A/B 后仍有区分价值的候选后果。
 
-当前最强的三个新候选是：
+当前最强的候选后果包括：
 
-1. **重建性**：即时理解与延迟后可重建使用不是同一证据；
-2. **策略性接触**：选择性接触底层证据/现象本身可能具有校准和模型发现价值；
-3. **生产性分歧**：高质量 grounding 可能以“双方知道自己为何不同”结束，而不是强制收敛。
+1. **重建性**：即时理解与未来可恢复判断不是同一性质；
+2. **策略性接触**：为了保留高层判断能力，有时需要选择性接触高信息价值 substrate，而不是让 AI 永久过滤全部底层现象；
+3. **生产性分歧**：协调不等于模型收敛，重要差异可以在可辨识、可检验条件下保留；
+4. **选择性跨表示认知探针**：有效认知增量不只来自向下钻取，也可能来自向上抽象、横向重构或跨领域连接；关键是能否把 consequential delta 带回 focal task model，而不是 probe 的方向本身。
 
-认知分配、双向挑战、模型充分性等更多是对现有规范的统一解释，暂不宜重复添加新规则。
-
-### 与科学方法的关系（仅作校准，不声称等同）
-
-A/B/C 不是已知的标准三步科学方法，但与以下传统有结构相似性：
-
-- **Peirce**：abduction（提出解释性假设）→ deduction（推导应观察到的后果）→ induction（以观察/实验检验）；并强调 *economy of research*，即研究资源有限，应选择信息价值高的调查。
-- **Popper**：候选理论应暴露可能使其失败的观察条件，而不是只累计支持案例；同时高层理论面对异常时还需考虑测量与辅助假设，不能把单一异常机械等同于理论已被推翻。
-- **Reflective equilibrium**：案例、原则和背景理论可相互修正；但仅有内部一致性不足以保证真，也可能产生信息负担和不同参与者无法收敛的问题。
-
-因此 A/B/C 更适合作为本项目的**候选模型发展工具**，而不是新的用户面对流程。
-
----
-
-## 6. 递归与元认知：有界自应用
-
-该方法及其上层模型具有递归倾向：A/B/C 本身也能接受 A/B/C 检查，项目演进方法也能成为项目观察对象。这种自应用说明结构可能具有一致性，但：
-
-> `能应用于自身` ≠ `模型正确`。
-
-若每次自应用都自动产生一层必须处理的元分析，会形成无限认识论税：
-
-```text
-方法 M
-→ 评估 M 的方法
-→ 评估该评估的方法
-→ ...
-```
-
-当前候选停止原则：
-
-> **只有当上升一个元层级会暴露新的承重差异、反例、未知、预测、证据解释或项目决定时，才继续自应用；逻辑上还能继续反思，不构成继续反思的理由。**
-
-元层级应是**事件触发**而不是层级驱动。保持“方法本身也可成为普通知识对象并被修订”的能力即可，不预先建设 meta / meta-meta 方法体系。
-
-一个需要警惕的候选失效是**元递归过处理**：理论可以解释自己、反例又被理论吸收、每个分析都要求新分析，最终形成认知成本、行动拖延、复杂度与虚假严谨，甚至使理论变得自封闭、不可挑战。
-
----
-
-## 7. 两个直接学习观察（支持性观察，不是实验）
-
-### 7.1 interface / API
-
-旧模型近似：`interface = Java interface`。
-
-区分性案例：删除 Java `interface` 声明，但调用者仍通过相同方法、输入/输出和行为边界交互；接口并未随语法声明一起消失。再改变幂等性/失败重试语义，即使方法签名不变，调用者的可靠交互预期会受影响。
-
-模型修正：Java `interface` 是接口的一种显式类型系统表示；更深层概念是跨边界提供给消费者的交互契约/可依赖行为抽象。Oracle Java API 文档将 API specification 描述为 caller 与 implementation 之间的 contract，并要求方法规范描述调用者可依赖的行为，而不是实现细节。
-
-进一步观察：在模型形成后，“Hyrum's Law”等术语更容易成为检索/压缩索引；若先只给术语或正式定义，可能只保存名称而没有形成可用于判断的新关系。
-
-### 7.2 regression toward the mean
-
-初始回答把现实世界的异常值视为可能揭示系统稳定性边界，因此不愿机械预测下一周回到长期平均水平。随后案例明确假设底层过程稳定、每周只是同一分布的噪声采样；在此条件下，极端观测之后的下次观测期望更接近底层均值。
-
-该案例同时修正了过强教学规则：如果稳定过程本身未知，异常可能是结构变化或模型边界的线索，不能机械套用“回归均值”。一个生动的“5% 回到 20%”记忆线索也可能错误暗示存在物理恢复力，因此重建材料必须保留**真正判别关系和适用边界**，不能只追求生动。
-
-两例主题差异较大，但都出现：
-
-```text
-已有模型
-→ 产生预测/解释
-→ 区分性案例暴露隐藏假设
-→ 修正关系与边界
-→ 名称/正式定义压缩已经形成的结构
-```
-
-这只说明这种互动形式能够促进本轮模型生成与新推论；延迟重建、迁移和减少支援仍未验证。
-
----
-
-## 8. 外部研究校准
-
-以下研究只提供相邻机制与边界，不证明本项目模型整体正确。
-
-1. **Human–AI mental models**：Bodamer et al. (2026) 的系统范围综述指出，HAI 中的 mental model 概念与测量仍高度碎片化，现有研究多为短期与性能导向，并建议加强情境化、定性与纵向研究。这支持“不要把 mental model 当静态、单一可测对象”的谨慎态度。  
-   https://doi.org/10.1007/s00146-026-03038-1
-
-2. **Common ground / grounding**：Anikina, Leippert & Ostermann (2025) 对 448 篇论文的综述强调 common ground 在对话中的动态、多维性质及 human–LM grounding 问题。这与“共同理解需要互动证据，而不是 AI 输出即成立”相邻。  
-   https://aclanthology.org/2025.luhme-1.2/
-
-3. **Generation effect**：McCurdy et al. (2020) 的 meta-analysis（126 articles / 310 experiments）支持自生成相对阅读在记忆上的总体优势，同时显示 generation constraint 会显著调节效果。这反对把“让人自己生成”当成无条件规则。  
-   https://pubmed.ncbi.nlm.nih.gov/32671573/
-
-4. **Desirable difficulties**：相关学习研究强调 spacing、retrieval、interleaving 等困难有时能改善长期学习，但困难本身不是价值；学习者缺乏所需先验知识时，生成等操作可变成不良负担。这与本项目“认知摩擦必须服务具体认知动作，不能把困难当教学价值”一致。  
-   https://pubmed.ncbi.nlm.nih.gov/35950522/
-
-5. **Predictive processing**：2026 Annual Review 对 predictive processing/predictive coding 的综述指出，该框架影响广泛，但定义、证据和解释范围并不一致。项目因此不应把“理解=预测误差最小化”提升为脑科学事实；预测在这里主要是暴露模型后果的一种协作操作。  
-   https://doi.org/10.1146/annurev-neuro-102124-031410
-
-6. **科学方法与有界反思**：Peirce 的 abduction/deduction/induction 与 economy of research、Popper 的 attempted refutation，以及 reflective equilibrium 对案例/原则/背景理论的可修正关系，为 A/B/C 和元层停止条件提供方法学参照；它们并非本项目方法的权威证明。  
-   https://plato.stanford.edu/entries/peirce/  
-   https://plato.stanford.edu/entries/popper/  
-   https://plato.stanford.edu/entries/reflective-equilibrium/
-
----
-
-## 9. 已知边界与明确不主张
-
-当前模型**不主张**：
-
-- 人脑或 AI 的真实内部计算就是这里描述的“模型操作”；
-- 理解可以被完整定义为预测；
-- 双方模型越一致越好；
-- 人每次都应先预测、解释或独立求解；
-- 低层细节天然有学习价值；
-- AI 能可靠读取人的隐性认知状态；
-- 一次高质量互动证明学习已经稳定；
-- 重建旧模型本身就是长期能力；
-- 共同 grounding 可以替代外部证据、来源权威或独立审查；
-- 该模型能够推出人的最终决策权或价值选择；
-- 当前已有足够证据据此重写所有规范、Skill 或 assurance architecture。
-
-特别需要避免：
-
-1. **模型仪式化**：把内部机制写成每轮必跑的显式步骤；
-2. **过度收敛**：把分歧当成必须消除的问题；
-3. **高层隔离**：为了节省认知，把人永久隔离在 AI 二次过滤的摘要层；
-4. **认知过载**：用“学习/思考”之名要求疲劳、应急或低价值任务额外推理；
-5. **自封闭理论**：任何反例都被模型重新命名后吸收，导致没有可能挑战它的证据；
-6. **心理画像漂移**：把局部任务模型推断成人的稳定人格/能力属性。
-
----
-
-## 10. 什么证据会削弱或推翻关键部分
-
-应主动寻找以下反证/边界，而不是只积累支持案例：
-
-- 在有模型差异风险的任务中，区分性 grounding 长期不能比更简单交互更早暴露误解，或其成本持续高于收益；
-- 重建导向材料不能改善延迟后的模型恢复、边界判断或迁移，或者反而更容易恢复过时/错误模型；
-- 策略性接触底层证据并不改善校准、异常发现或能力，而主要增加负担；
-- 独立模型重建在审查中不能增加新的风险发现/证据判别，反而降低准确性或成本效率；
-- 生产性分歧在适合的开放/审查任务中并不保留有价值的独立信息，或协作成本显著超过收益；
-- 认知分配模型反复把真正有价值的“低层”线索错误委托掉，且无法通过适应/反馈修正；
-- 该模型只能事后给任何项目规则换一种语言，却不能产生可被否定的新预测或设计选择；
-- 不同独立来源/任务无法复现本轮观察到的模型修正、重建或策略性接触价值。
-
-如果上述结果系统出现，应缩窄、拆分或放弃相应概念，而不是为保持统一性继续加补丁。
-
----
-
-## 11. 候选下游影响（尚未采用）
-
-只有经过进一步独立证据、研究或实际协作观察后，才考虑以下方向：
-
-### 概念/评估
-
-- 在 capability evidence 中增加“延迟后能否在给定支援下重建并重新判断”的维度，而不是把即时解释等同稳定掌握；
-- 将 shared understanding 更精确地解释成“当前任务需要的模型可辨识/协调状态”，允许明确的生产性分歧；
-- 区分 `信息恢复`、`状态恢复` 与 `理解/判断模型重建`。
-
-### 工作流
-
-- task framing 可能需要显式容纳“问题/世界模型充分性”，而不是只确认目的、范围、不变量和 blocker 是否关闭；
-- phase readiness 应更多依赖下游所需模型/证据是否足够，而不是问题数量或文档完成度。
-
-### 学习
-
-- 术语命名更像对已部分 grounded 结构的压缩/检索索引，而不是教学本体；
-- 学习支持可按“当前可用模型”调节：无模型先给最小结构，部分模型用区分性案例，较稳模型用边界/迁移挑战；
-- 学习结算不应只看即时预测/解释，还要保留未来重建与迁移的不确定性。
-
-### 审查/保障
-
-- 代表性代码、原始证据或运行样本不仅是审查 ergonomics，也可能承担策略性接触与校准作用；
-- assurance carrier 设计应保护必要的模型差异、来源接触与重建路径，而不是只保证固定话术或步骤出现；
-- AI 的任务级判断应允许与人不同并暴露证据差异，但这不自动赋予 AI 议程权或最终价值裁决权。
-
-这些目前都是 `candidate implication`，不是需要立即实现的 backlog。
-
----
-
-## 12. 下一步：让该模型离开本次对话的闭环
-
-本轮 A/B/C 已经足以把模型保存下来，但不足以把它升级为当前项目语义模型。下一步优先级应是取得**不同来源和不同失败模式**的证据，而不是继续在同一对话里递归完善：
-
-1. 用现有真实 Issue、field feedback 与历史协作记录重新检验，而不是只使用本轮学习案例；
-2. 针对重建、策略性接触、生产性分歧分别查找更直接的认知科学、团队认知、HCI/HAI 与教育研究；
-3. 如需要行为试验，先指出它要改变的真实项目决定，再定义对立假设、触发/跳过条件、可观察结果和停止规则；
-4. 允许独立 reviewer 从现行规范与原始观察先构建自己的解释，再阅读本候选模型，以避免只做同源确认；
-5. 在出现足够独立支持或明确反例之前，不批量重写 `docs/spec/`、Skill 或 assurance 架构。
-
-该模型当前的价值，是成为一个**可被攻击、缩窄、重分类或取代的外部知识对象**，而不是成为本项目新的不可见公理。
+这些仍是候选研究对象；是否进入 specification、guidance 或 carrier，需要独立 evidence 与 downstream decision。
