@@ -8,7 +8,9 @@
 - [`evidence-review.md`](evidence-review.md)：项目内观察与外部研究的独立校准；
 - [`design-diagnoses/`](design-diagnoses/)：由候选模型导出的运行/设计缺口诊断；
 - [`studies/`](studies/)：cloud semantic replay、Skill field pilot、reconstruction-surface 等 study；
-  - [`cross-level-epistemic-probing-replay-2026-08-30.md`](studies/cross-level-epistemic-probing-replay-2026-08-30.md)：选择性跨层认知探针的历史证据回放、反例与边界测试。
+  - [`cross-level-epistemic-probing-replay-2026-08-30.md`](studies/cross-level-epistemic-probing-replay-2026-08-30.md)：选择性跨层认知探针的历史证据回放、反例与边界测试；当前模型已进一步提出向上、横向与跨领域的 `cross-representation` 扩展，但该 study 不自动验证扩展后的全部语义。
+
+相邻的 [`../runtime-capability/`](../runtime-capability/README.md) 不研究新的认知操作本身，而研究这些项目理论/候选机制如何通过模型内在能力、上下文、检索、Skill、guidance 与外部持久化结构在真实 carrier 中被可靠激活和积累。
 
 ## Authority boundary
 
