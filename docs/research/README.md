@@ -8,6 +8,7 @@
 
 - [`assurance/`](assurance/README.md)：执行保障、carrier reliability、运行证据与相关 study；
 - [`cognitive-coordination/`](cognitive-coordination/README.md)：任务模型、认知分配、修正、重建、战略性接触与相关候选机制；
+- [`collaborative-relations/`](collaborative-relations/README.md)：人机协作中的非对称、依赖/相关性、责任与委托、分布式参与者状态、自我/他者模型、表示与状态协调、分配成本及其纵向反馈；
 - [`runtime-capability/`](runtime-capability/README.md)：研究项目理论如何在不假定修改模型权重的前提下，经由模型内在能力、上下文构造、检索、提示/Skill、经验与外部持久化结构转化为可靠运行时能力；
 - [`temporal-coordination/`](temporal-coordination/README.md)：AI waiting、任务悬置/恢复、rejoin collision 与 interaction timing；
 - [`external-evidence.md`](external-evidence.md)：跨 program 使用的外部研究入口与科学表述边界。
