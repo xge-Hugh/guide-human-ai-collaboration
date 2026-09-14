@@ -7,6 +7,10 @@ This program studies the relational structure of human-AI collaboration: asymmet
 
 It began as an inquiry into human-AI asymmetry and expanded after the inquiry showed that asymmetry is important but insufficient as a complete theory of collaboration.
 
+## Current studies
+
+- [`studies/cognitive-placement-bridge-2026-09-15.md`](studies/cognitive-placement-bridge-2026-09-15.md): candidate bridge between human capability formation and AI runtime capability; distinguishes cognitive proximity, reasoning dependency, recognition dependency, addressable knowledge, and participant-specific persistence/learning dynamics.
+
 ## Evidence and authority boundary
 
 This program follows [`../../governance/evidence-policy.md`](../../governance/evidence-policy.md). Field observations, external research, project studies, design hypotheses and normative choices remain distinct.
