@@ -25,22 +25,19 @@ Primary target: A2; secondary relation to dependence/error-correlation structure
 
 ### γ — bidirectional state settlement
 
-Current highest-priority empirical candidate.
+Current highest-priority empirical candidate. Detailed candidate protocol: [`gamma-bidirectional-state-settlement-protocol-2026-09-16.md`](gamma-bidirectional-state-settlement-protocol-2026-09-16.md).
 
-Compare:
+The protocol separates variables that the earlier six-condition sketch conflated:
 
-1. final-state summary;
-2. full chronological trace;
-3. executor-selected consequential delta;
-4. selected delta plus source/audit return edge;
-5. shared-artifact access plus minimal semantic delta;
-6. indexed/addressable state with retrieval when a dependency arises.
+- **γ-I — settlement form**: final-state only vs full chronological trace vs selective consequential delta, with a common audit return path;
+- **γ-II — evidence-access architecture**: surface only vs direct shared artifacts vs indexed/on-demand retrieval, while holding the semantic delta surface constant;
+- **γ-III — selector stress test**: oracle-selected delta vs executor-selected delta with and without auditability, conditional on selective settlement showing value in γ-I.
 
-Run in both directions: AI executes → human regains usable state, and human executes → AI regains usable state.
+Run in both directions: AI executes → human regains usable state, and human executes → AI regains usable state. Begin with frozen replay fixtures so settlement architecture changes while the underlying execution episode remains constant.
 
-Measure time to action-sufficient alignment, missed consequential evidence, unnecessary information consumed, recipient assimilation cost, executor reporting cost, clarification turns, verification/calibration, later evidence location, and reconstruction of why confidence changed.
+Measure consequential-state reconstruction, accept/inspect/repair/escalate judgment, confidence calibration, validation-path reconstruction, missed/noisy evidence, recipient and executor coordination cost, clarification/retrieval actions, later evidence location, and reconstruction of why confidence changed.
 
-Primary targets: A3, A3a, A3b, A9, A10, A12, A14.
+Primary targets: A3, A3a, A3b, A10, A12, A14. γ estimates state-coordination costs relevant to A9 but does not itself establish the allocation claim.
 
 ### δ — adaptive representation trajectory
 
