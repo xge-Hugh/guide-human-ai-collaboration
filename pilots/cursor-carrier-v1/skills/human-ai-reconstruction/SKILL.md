@@ -60,6 +60,10 @@ These are a vocabulary, not a fixed schema or required card.
 
 Prefer cues that restore many useful relationships with little reading.
 
+Distinguish a recognition cue from usable reasoning. A remembered label may only identify which source to retrieve. When subsequent reasoning repeatedly depends on a relationship, restore that causal structure or keep a useful diagram/example visible; a link alone may be insufficient. Exact, infrequent details can stay in a reliably retrievable source.
+
+Include enough orientation to recognize when retrieval is needed and a concrete return path when a cue depends on external evidence. If access is unavailable, say what remains unverified and recover what the task needs through available evidence; never imply that a link was inspected. Recheck volatile facts at use time.
+
 ## 5. Preserve semantic and epistemic status
 
 Do not reconstruct:
@@ -99,10 +103,14 @@ If the human reports that reconstruction is sufficient and the next action is lo
 
 If a consequential judgment still depends on whether the reconstructed relation is actually usable, obtain one proportionate task-specific externalization or invoke the model-coordination treatment.
 
-Do not require reproduction of the whole model.
+Do not require reproduction of the whole model. If a partial concept is reactivated by a new anomaly, connect the old cue to current evidence and revise it as needed; do not merely repeat the old explanation or treat recognition as mastery.
 
 ## 9. Return to the original task
 
 Reconstruction is support for re-entry, not a new workflow phase.
 
 Keep the surface temporary, correctable, and subordinate to its sources.
+
+## Research return path
+
+These procedures are experimental. If a boundary needs deeper interpretation, consult the [candidate source](https://github.com/xge-Hugh/guide-human-ai-collaboration/blob/62d3b6dff2f5112f35513cfc63fa18f06075347b/docs/research/collaborative-relations/studies/cognitive-placement-bridge-2026-09-15.md) and its related material, when accessible. This pinned source explains provenance, not current task state. Do not load it for routine use or treat retrieval failure as evidence.

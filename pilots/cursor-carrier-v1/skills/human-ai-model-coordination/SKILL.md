@@ -1,6 +1,6 @@
 ---
 name: human-ai-model-coordination
-description: Use when a consequential decision or action depends on a task-model relationship that is materially uncertain, differently understood by the human and AI, insufficiently externalized, contradicted by new evidence, or stuck in the current representation. Also use when a consequential human judgment depends on a task model whose adequacy is materially unknown and resolving that uncertainty matters. Do not use merely because a task is difficult, technical, or contains ordinary uncertainty; skip simple fact retrieval, routine implementation, already-grounded judgments, and cases where another representation would add no discriminating value.
+description: Coordinate consequential task-model uncertainty, disagreement, changed evidence after delegated work, or source-view mismatches. Also use for a human-raised concept connection or a low-cost transferable distinction grounded in a live responsibility-relevant task. Skip routine implementation, simple retrieval, settled judgments, and repaired execution noise without remaining implications.
 ---
 
 # Human–AI Model Coordination
@@ -13,7 +13,9 @@ Identify the current decision, action, risk, verification question, responsibili
 
 Do not make model coordination itself the new agenda.
 
-If resolving the uncertainty would not change a meaningful action or judgment, leave it unresolved and continue.
+Seek enough shared structure for the next action: intent, load-bearing constraints, delegation boundary, and acceptance evidence where they matter. Do not require identical models or complete pre-action consensus. Within established authorization, a reversible artifact, preview, or test may settle residual differences more cheaply than more discussion.
+
+If resolving the uncertainty would not change a meaningful action or judgment, leave it unresolved. A compact exposure may still have future value under section 7; enough to act now is not enough for every requested review or learning goal.
 
 ## 2. Use exposed evidence before requesting more
 
@@ -41,6 +43,8 @@ If it does matter, obtain the cheapest useful evidence.
 A direct question is legitimate when it is sufficient. Do not prefer indirect Socratic questioning for its own sake.
 
 Questions about general experience or familiarity may help choose support depth, but they are weak evidence of a specific load-bearing task model. When the actual relation matters, prefer a task-specific externalization such as one consequence, prediction, comparison, or explanation.
+
+Treat your own model and your model of the human as fallible. Use task evidence to revise either; do not make capability or authority assignments from a general human-versus-AI ranking.
 
 Do not create a permanent profile of the human.
 
@@ -88,9 +92,31 @@ Examples include one code path, assertion, diff, source passage, request/respons
 
 Explain why the slice matters and what it does not prove.
 
+Prefer the representation that makes the relevant relation inspectable: a source slice, diagram, contrast, or worked example may help more than a longer explanation. Preserve a return path to the richer source and identify important omissions. Shared access alone does not establish shared meaning.
+
+When independent human evidence would materially improve review, preserve a small prediction, concern, or criterion before exposing your conclusion if it is not already available. Do not require a complete independent solution or delay requested help. A second reviewer using the same framing is not automatically independent.
+
+If your selection may hide your own mistaken assumptions, provide a broader inspectable artifact or a different verification path; do not make your summary the only audit surface. If production exceeds available review capacity, reduce the review unit or improve verification before treating approval as assurance.
+
 Do not dump raw material merely to increase human participation.
 
-## 7. Revise, bound, or preserve divergence
+## 7. Support a useful concept connection
+
+When a live example clearly exposes a transferable structure relevant to recurring responsibility, a brief name → relation to this case → boundary can be useful even if it does not change today's action. Skip trivia, repeated labels, and unsolicited lessons whose attention cost exceeds likely value.
+
+When the human notices an anomaly, recalls a partial concept, or asks how representations connect, use that expressed curiosity as a starting point. Bind the connection to current evidence and supply missing prerequisites only as needed. Do not force a fixed curriculum or cut off requested exploration merely because implementation can continue. Respect a request to skip or pause it.
+
+A concept name is a retrieval cue, not evidence of mastery. Later natural prediction, correction, or transfer may supply new evidence; do not manufacture quizzes or infer growth from one successful exchange.
+
+## 8. Settle consequential changes after delegated work
+
+Compare what execution revealed with the last grounded shared state. Surface what changes acceptance, confidence, risk, or the next judgment: new assumptions, boundary choices, anomalies, and validation performed, skipped, weakened, substituted, or still unresolved. Explain the implication and point to the relevant evidence, rather than just restating the plan.
+
+A repaired typo or compile failure can stay compressed when understood, resolved, and without remaining implications. Reusing old code instead of expected metadata validation must remain visible even if compilation passes. Do not defer a consequential change until the final report if it affects an action now.
+
+Use artifacts for recoverable detail; expose consequential rationale or uncertainty that the artifact does not carry. Keep other detail addressable when useful. Apply section 6's audit path when selection itself is uncertain.
+
+## 9. Revise, bound, or preserve divergence
 
 When new evidence changes a consequential model, make the material change visible:
 
@@ -108,7 +134,7 @@ Human and AI models do not need to become identical. If an important difference 
 
 Do not use productive divergence to avoid a decision that actually must be made.
 
-## 8. Revalidate affected dependencies, not the whole conversation
+## 10. Revalidate affected dependencies, not the whole conversation
 
 If new evidence reveals that an earlier human or AI task model was materially wrong or unknown, determine which prior consequential judgments actually depended on that relationship.
 
@@ -116,10 +142,14 @@ Revalidate those dependencies proportionately.
 
 Do not automatically restart all prior discussion, and do not silently assume that late repair validates every earlier judgment.
 
-## 9. Return to the task
+## 11. Return to the task
 
 Once a consequential delta has been obtained, integrate it into the focal judgment and continue.
 
 Exploration without an epistemic return edge is agenda drift unless it is explicitly promoted into a new goal.
 
 No probe, no question, and no additional coordination is a valid result when existing grounding is sufficient.
+
+## Research return path
+
+These procedures are experimental. If a boundary needs deeper interpretation, consult the [candidate source](https://github.com/xge-Hugh/guide-human-ai-collaboration/blob/62d3b6dff2f5112f35513cfc63fa18f06075347b/docs/research/cognitive-coordination/studies/action-sufficient-alignment-and-epistemic-delta-2026-09-10.md) for action boundaries and reporting; consult [progressive schema formation](https://github.com/xge-Hugh/guide-human-ai-collaboration/blob/62d3b6dff2f5112f35513cfc63fa18f06075347b/docs/research/cognitive-coordination/studies/progressive-schema-formation-through-strategic-exposure-2026-09-11.md) for concept connections and [collaborative relations](https://github.com/xge-Hugh/guide-human-ai-collaboration/blob/62d3b6dff2f5112f35513cfc63fa18f06075347b/docs/research/collaborative-relations/model.md) for selection and review cost, when accessible. This pinned source explains provenance, not current task state. Do not load it for routine use or treat retrieval failure as evidence.
