@@ -68,11 +68,14 @@ Each fixture contains:
 S0 = last action-sufficient grounded state
 E  = complete execution evidence record after S0
 F  = final artifact/result state
-D+ = consequential execution deltas
-D- = non-consequential / locally resolved execution noise
-J  = downstream judgments/actions that D+ should affect
-R  = authoritative return paths to supporting evidence
+D_now+ = deltas that can change the current accept/inspect/repair/escalate judgment
+D_now0 = events not decision-critical for the current judgment
+L      = possible longitudinal model/capability value of an event
+J      = downstream judgments/actions that D_now+ should affect
+R      = authoritative return paths to supporting evidence
 ```
+
+The previous binary `D+ / D-` notation proved too coarse in pilot H2. An event can be non-decision-critical now yet still have longitudinal learning/model value. Current-decision consequence and longitudinal value must therefore be annotated separately rather than treating compressed events as cognitively worthless.
 
 The fixture is frozen before settlement packages are generated.
 
@@ -101,12 +104,14 @@ At least one fixture should favor shared-artifact inspection, and at least one s
 Before producing condition materials, annotate each fixture with:
 
 - every candidate event;
-- `D+` / `D-` classification;
-- why a `D+` event can alter a downstream judgment;
+- current-decision classification: `D_now+`, `D_now0`, or ambiguous;
+- possible longitudinal model/capability value `L` separately from current-decision consequence;
+- why a `D_now+` event can alter a downstream judgment;
 - which judgment(s) it affects;
 - evidence/source location;
 - expected confidence direction if discovered;
-- whether it requires semantic explanation beyond artifact inspection.
+- whether it requires semantic explanation beyond artifact inspection;
+- evidence-coverage semantics: whether reported validation actually covers the grounded invariant rather than merely reporting that a command/test suite passed.
 
 The acting AI must not be the sole authority for these labels. Where possible, use observable task invariants, tests, source evidence, and predeclared acceptance criteria. Ambiguous annotations remain marked ambiguous rather than forced into `D+` or `D-`.
 
@@ -119,11 +124,14 @@ After receiving the condition-specific settlement surface, the recipient must ma
 Required outputs:
 
 1. **acceptance state** — accept / inspect further / reject or repair / escalate or re-ground;
-2. **confidence** — calibrated probability that the result satisfies the agreed intent/evidence threshold;
-3. **evidence model** — what validation was performed, skipped, weakened, or substituted;
-4. **dependency update** — which earlier assumptions or downstream decisions, if any, need revalidation;
-5. **unknowns** — consequential unresolved uncertainty;
-6. **evidence retrieval task** — locate supporting evidence when the condition permits retrieval.
+2. **implementation confidence** — calibrated probability that the result actually satisfies the agreed intent;
+3. **acceptance-evidence sufficiency** — whether currently available evidence is sufficient to accept now; this is scored separately from implementation confidence;
+4. **evidence model** — what validation was performed, skipped, weakened, substituted, and which grounded cases it actually covered;
+5. **dependency update** — which earlier assumptions or downstream decisions, if any, need revalidation;
+6. **unknowns** — consequential unresolved uncertainty;
+7. **evidence retrieval task** — locate supporting evidence when the condition permits retrieval.
+
+Broader engineering-quality observations (architecture, naming, reuse, maintainability) may be recorded as secondary naturalistic behavior, but the primary γ judgment concerns satisfaction of the grounded intent/evidence threshold. This avoids scoring legitimate scope expansion as a settlement failure.
 
 A delayed probe should test whether the recipient can later locate the decisive evidence and reconstruct why confidence changed.
 
