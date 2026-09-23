@@ -36,6 +36,14 @@ Hold a canonical audit return path constant and compare:
 2. **full trace** — chronological execution events including routine noise;
 3. **selective consequential delta** — only oracle-identified state changes capable of altering downstream belief/action, with concise source pointers.
 
+Pilot H3 showed that a selective-delta surface can accidentally bundle three mechanisms:
+
+- **fact selection** — which new facts are surfaced;
+- **consequence linkage** — how those facts connect to a grounded invariant, evidence threshold, or downstream judgment;
+- **verification guidance** — what evidence/action could discriminate the remaining uncertainty.
+
+Confirmatory γ-I should hold consequence-linkage and verification affordances as equivalent as possible across conditions, or explicitly factorialize them. Otherwise a selective-delta condition may win because it receives stronger reasoning support rather than because selective settlement itself is superior.
+
 This primarily discriminates A3/A3a.
 
 ### γ-II — evidence-access architecture test
@@ -129,9 +137,22 @@ Required outputs:
 4. **evidence model** — what validation was performed, skipped, weakened, substituted, and which grounded cases it actually covered;
 5. **dependency update** — which earlier assumptions or downstream decisions, if any, need revalidation;
 6. **unknowns** — consequential unresolved uncertainty;
-7. **evidence retrieval task** — locate supporting evidence when the condition permits retrieval.
+7. **evidence retrieval task** — locate supporting evidence when the condition permits retrieval;
+8. **verification policy** — identify what evidence/reviewer/search/action would actually discriminate the live uncertainty and in what order.
 
 Broader engineering-quality observations (architecture, naming, reuse, maintainability) may be recorded as secondary naturalistic behavior, but the primary γ judgment concerns satisfaction of the grounded intent/evidence threshold. This avoids scoring legitimate scope expansion as a settlement failure.
+
+Recipient-directed verification is treated as a candidate coordination operation rather than assumed away:
+
+```text
+settlement surface
+→ identify threatened invariant / uncertainty
+→ choose evidence source, artifact, search, or reviewer
+→ inspect / retrieve / ask
+→ update confidence and next action
+```
+
+The recipient's selector can itself fail. A second reviewer given only a human-curated subset may inherit the human's omissions or framing. When independent review value matters, measure whether the reviewer retains an independent return path to source evidence.
 
 A delayed probe should test whether the recipient can later locate the decisive evidence and reconstruct why confidence changed.
 
@@ -167,7 +188,9 @@ Avoid one opaque aggregate score. Report an efficiency frontier across at least:
 - time to locate decisive evidence;
 - unnecessary evidence opened;
 - delayed evidence-location success;
-- ability to reconstruct why confidence or next action should change.
+- ability to reconstruct why confidence or next action should change;
+- quality of the verification policy: whether requested evidence can discriminate the actual live uncertainty;
+- dependence of a second reviewer on recipient-selected/framed evidence versus independent source access.
 
 ## 8. Bidirectional implementation
 
@@ -191,7 +214,9 @@ Use repeated independent AI runs per cell rather than treating one stochastic ru
 - use deterministic/rule-based scoring for objective fields when possible;
 - treat model/version/tool state as part of the experimental context, not as a permanent property of AI.
 
-The first pilot estimates variance, ceiling/floor effects, and fixture validity. Confirmatory sample size should be chosen only after pilot variance is known rather than invented in advance.
+The first pilot estimates variance, ceiling/floor effects, fixture validity, and whether recipient capability/methodology creates strong moderator effects. Confirmatory sample size should be chosen only after pilot variance is known rather than invented in advance.
+
+Pilot calibration should also record recipient-side interpretation competence. Full-trace information can be present without the recipient deriving the consequential relation. Possible supports include consequence-linked guidance, verification methodology, or domain/representation competence; these should be modeled as context/moderators rather than silently assuming a universally capable selector/understander.
 
 ## 10. Stage-specific predictions and failure conditions
 
