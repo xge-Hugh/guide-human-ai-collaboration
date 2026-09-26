@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "created": "2026-09-27",
   "evidence_role": "field_observational_candidates",
   "experiment_definition": "../README.md#γ--bidirectional-state-settlement",
@@ -353,7 +353,7 @@
     {
       "id": "GAMMA-007",
       "title": "Post-PR review request recovers package rationale and stale code",
-      "status": "candidate_pending_review",
+      "status": "source_review_defer",
       "priority": "high",
       "direction": "AI→human→AI",
       "source": {
@@ -409,7 +409,14 @@
         "later_evidence_location": null,
         "confidence_change_reconstruction": null
       },
-      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost.",
+      "source_review": {
+        "case_id": "SR-3",
+        "decision": "defer",
+        "scope": "Keep source-grounded field case and possible γ-II/secondary engineering-review case; not yet a primary γ-I omission fixture.",
+        "reason": "Historical head, file placement and stale-code removal are verifiable. However, preexisting human review and broader architecture interest complicate attributing later package/cleanup questions to a consequential omission in the PR-status report. The acceptance threshold for these maintainability items is not grounded enough to freeze a primary D_now+.",
+        "ledger": "../gamma-source-review-2026-09-27/fact-ledger.json"
+      }
     },
     {
       "id": "GAMMA-008",
@@ -587,7 +594,7 @@
     {
       "id": "GAMMA-011",
       "title": "Human repairs a missed field and asks for read-only reconciliation",
-      "status": "candidate_pending_review",
+      "status": "source_review_defer",
       "priority": "high",
       "direction": "human→AI→human",
       "source": {
@@ -642,7 +649,14 @@
         "later_evidence_location": null,
         "confidence_change_reconstruction": null
       },
-      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost.",
+      "source_review": {
+        "case_id": "SR-2",
+        "decision": "defer",
+        "scope": "Retain as reciprocal observational case; do not fabricate exact pre/post fixture snapshots.",
+        "reason": "The human edit and read-only inspection are evidenced, but the exact immediate pre/post artifact boundary is not frozen. Neighboring tool outputs also show restored PAYMENT_TERM_TEXT state outside the named CreateField edit. Earlier/later Git commits cannot isolate which changes occurred in the human interval.",
+        "ledger": "../gamma-source-review-2026-09-27/fact-ledger.json"
+      }
     },
     {
       "id": "GAMMA-012",
@@ -707,7 +721,7 @@
     {
       "id": "GAMMA-013",
       "title": "Implementation delta distinguishes an inferred boundary from a confirmed rule",
-      "status": "candidate_pending_review",
+      "status": "source_review_include",
       "priority": "high",
       "direction": "AI→human→AI",
       "source": {
@@ -777,7 +791,14 @@
           "evidence_role": "author_self_report_or_reflection_not_independent_replication",
           "timezone": "not supplied by MCP"
         }
-      ]
+      ],
+      "source_review": {
+        "case_id": "SR-1",
+        "decision": "include",
+        "scope": "Source-review eligibility for γ-I fixture construction only; not a frozen renderer, runtime correctness verdict, independent oracle approval or treatment result.",
+        "reason": "S0 and interval are bounded; immutable code matches pre-settlement cached edit content; actual tool outcomes and a distinguishable inferred behavior/report concern are available. Business-rule ambiguity remains explicit rather than forcing one correct acceptance verdict.",
+        "ledger": "../gamma-source-review-2026-09-27/fact-ledger.json"
+      }
     },
     {
       "id": "GAMMA-014",
@@ -1074,5 +1095,6 @@
     }
   ],
   "updated": "2026-09-27",
-  "enrichment_note": "Five flomo-guided transcript candidates added; supplementary_sources is optional. Original twelve preserved."
+  "enrichment_note": "Five flomo-guided transcript candidates added; supplementary_sources is optional. Original twelve preserved.",
+  "condition_analogue_note": "Legacy flat-six discovery tags, not current staged experimental assignments. Governing protocol: ../gamma-bidirectional-state-settlement-protocol-2026-09-16.md"
 }

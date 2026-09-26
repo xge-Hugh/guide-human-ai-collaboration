@@ -2,13 +2,15 @@
 
 **Status:** 17 observational candidates for review, not experiment results. Prepared 2026-09-27.
 
-The [study definition](../README.md#γ--bidirectional-state-settlement) compares final summaries (1), full traces (2), selected consequential deltas (3), deltas with source/audit return edges (4), shared artifacts with minimal semantic deltas (5), and indexed state retrieved on demand (6). Both human→AI and AI→human settlement matter. Here those numbers describe possible analogues and replay opportunities, not assigned treatments. No complete full-trace comparison was established.
+The numeric analogue tags below retain the **historical six-condition discovery vocabulary**: final summaries (1), full traces (2), selected deltas (3), deltas with audit edges (4), shared artifacts with minimal deltas (5), and indexed retrieval (6). They are not current experimental conditions. The [staged protocol](../gamma-bidirectional-state-settlement-protocol-2026-09-16.md) governs: γ-I varies reporting form with common audit access; γ-II varies evidence access with a fixed semantic delta; γ-III stresses selection. Both directions remain in scope.
 
 The [claim ledger](../../claim-ledger.md) and [evidence policy](../../../../governance/evidence-policy.md) govern interpretation. The relevant difference is between artifact state, private rationale/uncertainty, and execution noise. Completion alone does not demonstrate action-sufficient alignment.
 
 Use [registry.json](registry.json) for structured review and [source-inventory.json](source-inventory.json) for coverage. Local source links require access to this machine; transcript bytes were not copied into the repository. Exact line ranges, file/window SHA-256 hashes and short evidence anchors support return to evidence. Timestamps retain their source timezone and do not measure active work.
 
 The [flomo enrichment and replay outline](flomo-enrichment.md) adds five candidates discovered through six notes. [flomo-evidence.json](flomo-evidence.json) separates exact excerpts, timestamps, linkage strength and interpretation.
+
+[Assigned source review is complete](../gamma-source-review-2026-09-27/README.md): GAMMA-013 is included for fixture construction; GAMMA-011 and GAMMA-007 are deferred with specific reasons. Remaining candidates are not adjudicated. One eligible case does not meet the three-fixture replay gate.
 
 ## Candidate index
 

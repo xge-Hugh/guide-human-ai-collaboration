@@ -1,6 +1,8 @@
 # Experiment γ — flomo enrichment and first replay outline
 
-**Status:** observational enrichment and proposed study design, 2026-09-27. No controlled replay has been run and no treatment effect is estimated.
+**Status:** observational enrichment and proposed study design, 2026-09-27. No controlled replay of these mined episodes has been run by this enrichment, and no treatment effect is estimated.
+
+**Protocol reconciliation:** the original flat six-way replay proposal below has been retired. The [staged protocol](../gamma-bidirectional-state-settlement-protocol-2026-09-16.md) and [source-review gate](../gamma-source-review-gate-2026-09-27.md) govern. See the [completed three-case source review](../gamma-source-review-2026-09-27/README.md). Observational flomo links remain valid at their stated evidence strength.
 
 ## What flomo contributed
 
@@ -42,29 +44,13 @@ Source review must preserve the executor's potentially mistaken interpretation. 
 
 Flomo can identify a candidate fact or perceived difficulty. It cannot reconstruct every unspoken thought, prove what the recipient knew beforehand, or replace the historical artifact. If a required historical source cannot be recovered, keep the case observational or label a reconstruction explicitly; do not manufacture ground truth.
 
-## Proposed bounded replay
+## Current replay route (supersedes the original six-way outline)
 
-Start with two reviewed cases: GAMMA-013 (AI executor, human recipient) and GAMMA-011 (human executor, AI recipient). This is a feasibility pilot, not a powered claim-discrimination study. Keep the two directions separate in reporting.
+Complete the assigned source-review set before rendering condition materials. The first completed review includes GAMMA-013 and defers GAMMA-011 and GAMMA-007; fewer than three eligible fixtures means no γ-I run yet. GAMMA-014 remains a diagnostic pre-implementation case, and GAMMA-016/017 a linked failure/recovery cluster.
 
-After source review, construct a common pre-task brief, a reference fact ledger and a fixed next-action probe for each case. The recipient must not see the ledger or future corrective turns before answering. Use all six conditions from the study map; the descriptions below define packet boundaries, not completed packets.
+Once at least three fixtures pass, γ-I compares final-state-only, full chronological trace and selective consequential delta with the **same permitted audit return path**. Freeze source-reviewed selection before recipient evaluation. Keep consequence linkage and verification affordances comparable or explicitly record them as additional manipulations. The original six analogue tags remain useful discovery labels, but must not become a six-way winner comparison.
 
-| Condition | Recipient receives | Access boundary |
-| --- | --- | --- |
-| 1. Final-state summary | What was delivered and its reported status | No additional source access during the initial probe |
-| 2. Full chronological trace | The bounded execution record through the settlement point | Exclude future recipient reactions and answer-revealing corrections |
-| 3. Selected consequential delta | Executor-selected changes in behavior, rationale and uncertainty | No audit return edge during the initial probe |
-| 4. Delta plus audit edge | The same selected delta as condition 3, plus source addresses | Source retrieval permitted and recorded |
-| 5. Shared artifact plus minimal delta | Historical artifact access plus what the artifact cannot convey | Record inspection and clarification requests |
-| 6. Indexed state | A compact index of available state and where to retrieve it | Retrieval permitted when the next-action dependency is recognized |
-
-The common task, pre-state and historical source pool stay fixed. These conditions intentionally differ in representation and access; word count should be recorded, not forced equal at the expense of treatment meaning. Condition 3 and 4 must use the same selected text to isolate the audit-edge addition. Don't quietly optimize the selected delta using the answer key. Freeze and document executor selection before evaluating recipients; the historical report is a useful first selector baseline.
-
-Possible next-action probes, subject to source verification:
-
-- **GAMMA-013:** explain behavior when a ZCRM02 row contains a customer; separate implemented behavior from confirmed business intent; identify which reported concern requires evidence or clarification before accepting it.
-- **GAMMA-011:** identify what the human changed, locate the option-label transformation, and explain whether the inspected state warrants moving to the next review task without unauthorized edits.
-
-Use observable action or a small discriminating explanation, not “do you understand?” alone. First score next-action adequacy; then request a cited evidence location and reconstruction of any confidence change. Future-turn facts stay withheld until the corresponding follow-up stage.
+γ-II then holds the semantic delta constant while varying surface-only, direct artifacts and indexed retrieval. γ-III compares oracle/executor selection and auditability only if γ-I establishes useful selective-settlement value. See the governing protocol for the recipient task, assignment and calibrated scoring.
 
 ## Measurements and interpretation
 
@@ -72,6 +58,6 @@ Record time to the first answer meeting the reviewed action-sufficiency rubric; 
 
 Mark action sufficiency as met, recovered after correction, not met, or unobservable, with a reason and evidence. A useful rubric must allow justified uncertainty and requests for missing evidence. Unwarranted confidence in an inferred business rule is not success merely because the final code matches it.
 
-The original human already knows these episodes. Replaying all six conditions to that person on the same case would confound reporting quality with memory and practice. For a mechanics pilot, acknowledge that limitation; for stronger inference, use matched unfamiliar cases or fresh recipients and counterbalance condition allocation. AI-recipient runs require fresh contexts per condition. Do not use an AI proxy as evidence of human assimilation. Keep case clusters together when reporting sample counts, and separate prompted from unprompted reporting.
+The original human already knows these episodes. Replaying multiple conditions to that person on the same case would confound reporting quality with memory and practice. For a mechanics pilot, acknowledge that limitation; for stronger inference, use matched unfamiliar cases or fresh recipients and counterbalance condition allocation. AI-recipient runs require fresh contexts per condition. Do not use an AI proxy as evidence of human assimilation. Keep case clusters together when reporting sample counts, and separate prompted from unprompted reporting.
 
-No alignment times, costs, effect sizes or comparative rankings have been filled in. All registry measurement fields remain null. The next concrete artifact is a source-reviewed case packet and its reference fact ledger; replay execution follows that preparation.
+No alignment times, costs, effect sizes or comparative rankings have been filled in. All registry measurement fields remain null. The assigned source-review ledgers are now available in the linked review. Resolve or replace deferred cases before reaching the three-fixture gate; no replay execution is authorized by a candidate count alone.

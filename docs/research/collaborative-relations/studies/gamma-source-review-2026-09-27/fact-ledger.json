@@ -1,0 +1,815 @@
+{
+  "schema_version": "1.0",
+  "reviewed_on": "2026-09-27",
+  "governing_protocol": "../gamma-bidirectional-state-settlement-protocol-2026-09-16.md",
+  "governing_gate": "../gamma-source-review-gate-2026-09-27.md",
+  "annotation_status": "Single-agent source review; provisional labels, no independent oracle adjudication.",
+  "decisions": [
+    {
+      "case_id": "SR-1",
+      "candidate_id": "GAMMA-013",
+      "direction": "AI executor → human recipient",
+      "decision": "include",
+      "decision_scope": "Source-review eligibility for γ-I fixture construction only; not a frozen renderer, runtime correctness verdict, independent oracle approval or treatment result.",
+      "reason": "S0 and interval are bounded; immutable code matches pre-settlement cached edit content; actual tool outcomes and a distinguishable inferred behavior/report concern are available. Business-rule ambiguity remains explicit rather than forcing one correct acceptance verdict.",
+      "source_snapshot": [
+        "T1",
+        "G1",
+        "G2",
+        "G3",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "B5",
+        "B6",
+        "B7",
+        "C1",
+        "C2"
+      ],
+      "S0": [
+        {
+          "proposition_id": "S1",
+          "proposition": "Change IF-058 posting fields only, preserving one header-derived funding row plus allocation rows, leaving reversal and IF-097 unchanged.",
+          "evidence_that_shared": [
+            "T1:10",
+            "T1:19-21"
+          ],
+          "who_knew_it": [
+            "human",
+            "AI"
+          ],
+          "epistemic_status": "human-provided scope plus acknowledged AI plan",
+          "annotator_uncertainty": "none identified for this bounded proposition"
+        },
+        {
+          "proposition_id": "S2",
+          "proposition": "User relays consultant confirmation: customer rule also applies to ZUONR fallback; ticket/business number uses the same source with mutually exclusive keys; XBLNR_ALT uses new_name.",
+          "evidence_that_shared": [
+            "T1:19"
+          ],
+          "who_knew_it": [
+            "human",
+            "AI"
+          ],
+          "epistemic_status": "human-provided; attributed to consultant, not independently contacted",
+          "annotator_uncertainty": "none identified for this bounded proposition"
+        },
+        {
+          "proposition_id": "S3",
+          "proposition": "Pre-work plan already explicitly says ZCRM02 KUNNR is not sent and empty mutually exclusive keys are omitted via PutNonEmpty.",
+          "evidence_that_shared": [
+            "T1:20-21"
+          ],
+          "who_knew_it": [
+            "AI explicitly stated",
+            "human authorized plan"
+          ],
+          "epistemic_status": "observed shared plan",
+          "annotator_uncertainty": "Do not score these as wholly new findings. Human assent is not proof of exhaustive comprehension."
+        },
+        {
+          "proposition_id": "S4",
+          "proposition": "Human reports rebase complete and explicitly asks for valuable implementation deltas and hidden rework risks.",
+          "evidence_that_shared": [
+            "T1:21",
+            "B1"
+          ],
+          "who_knew_it": [
+            "human",
+            "AI"
+          ],
+          "epistemic_status": "human-provided intent; observed clean starting repository",
+          "annotator_uncertainty": "none identified for this bounded proposition"
+        }
+      ],
+      "execution_interval": {
+        "start": "After T1:21 / clean HEAD 97965853; implementation/tool inspection T1:22-27",
+        "end": "Before T1:28 settlement report; final cached edit B3 at 2026-09-14T06:04:17.850Z",
+        "settlement": "T1:28",
+        "future": "T1:29 onward; commit G2 was made later but C2 proves same normalized pre-settlement source content"
+      },
+      "execution_events": [
+        {
+          "event_id": "E1",
+          "fact": "Initial shell invocation fails due to unavailable sandbox backend; later git status/log succeeds on clean expected branch.",
+          "source_addresses": [
+            "T1:22-24",
+            "B1",
+            "B2"
+          ],
+          "status": "observed",
+          "artifact_visible": "no",
+          "semantic_explanation_needed": "no",
+          "classification": {
+            "current_decision": "D_now0",
+            "L": "low",
+            "affected_downstream_judgment": "J1",
+            "rationale": "Recovered tooling noise does not itself change the mapping decision.",
+            "annotator_uncertainty": "Single source-review annotator; no independent adjudication."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E2",
+          "fact": "Historical code unconditionally suppresses a populated ZCRM02 customer and therefore also suppresses customer fallback for ZUONR; a present order remains the priority.",
+          "source_addresses": [
+            "G1:2338-2349",
+            "G2:2343-2357",
+            "T1:25",
+            "B3",
+            "C2"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "D_now+",
+            "L": "high",
+            "affected_downstream_judgment": "J1",
+            "rationale": "The populated-customer boundary determines externally sent data; recipient must separate actual behavior from proven business intent.",
+            "annotator_uncertainty": "KUNNR suppression was already in S0. Whether broader ZUONR force-empty is a new unauthorized assumption is ambiguous; accept-with-explicit-interpretation and re-ground are both potentially justified."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E3",
+          "fact": "Omission of empty ZZDJH/ZZPJH keys rather than empty strings is visible in code and was already in the acknowledged plan.",
+          "source_addresses": [
+            "T1:20",
+            "G2:2330-2334"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "D_now0",
+            "L": "medium",
+            "affected_downstream_judgment": "J1",
+            "rationale": "A relevant invariant to preserve, but not a new surprise in this episode.",
+            "annotator_uncertainty": "Do not conflate repeated important baseline information with an execution delta."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E4",
+          "fact": "Metadata response identifies the bank-serial text field; ticket search returns broader lexical matches.",
+          "source_addresses": [
+            "B5",
+            "B6"
+          ],
+          "status": "observed",
+          "artifact_visible": "partial",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "ambiguous",
+            "L": "medium",
+            "affected_downstream_judgment": "J1",
+            "rationale": "Field metadata supports field identity, not the business meaning of ticket navigation.",
+            "annotator_uncertainty": "No inference from unrelated lexical matches to authoritative mapping."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E5",
+          "fact": "Agent report elevates a possible alternate ticket source based partly on portal navigation.",
+          "source_addresses": [
+            "T1:28"
+          ],
+          "status": "AI-reported",
+          "artifact_visible": "partial",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "D_now+",
+            "L": "medium",
+            "affected_downstream_judgment": "J1",
+            "rationale": "A stated hidden rework risk can change accept/inspect behavior; its provenance must remain visible.",
+            "annotator_uncertainty": "This is a reported concern, not oracle truth. Its later withdrawal cannot be leaked into initial settlement."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E6",
+          "fact": "ReadLints has completed status with result {}; recorded interval shows read/search/edit/metadata checks, not a build or integration-test result.",
+          "source_addresses": [
+            "T1:22-27",
+            "B4"
+          ],
+          "status": "observed",
+          "artifact_visible": "partial",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "ambiguous",
+            "L": "medium",
+            "affected_downstream_judgment": "J1",
+            "rationale": "Evidence sufficiency cannot be inferred from implementation completion or lint invocation.",
+            "annotator_uncertainty": "No claim that agreed tests were skipped: no mandatory build/test threshold was established in reviewed S0. Absence is limited to inspected recorded interval."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E7",
+          "fact": "Agent changes an amount-validation message from DMBTR to WRBTR, matching the amount key used.",
+          "source_addresses": [
+            "T1:25",
+            "G1:2284-2288",
+            "G2:2284-2288"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "no",
+          "classification": {
+            "current_decision": "D_now0",
+            "L": "low",
+            "affected_downstream_judgment": "J1",
+            "rationale": "Diagnostic wording repair, not a new mapping/acceptance failure.",
+            "annotator_uncertainty": "Single source-review annotator; no independent adjudication."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "F1",
+          "fact": "Human questions ticket risk; agent retracts the navigation interpretation and states that force-empty is its implementation inference, not fresh consultant confirmation.",
+          "source_addresses": [
+            "T1:29-32",
+            "G3:113-124"
+          ],
+          "status": "withdrawn",
+          "artifact_visible": "partial",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "D_now+",
+            "L": "high",
+            "affected_downstream_judgment": "J1",
+            "rationale": "Reviewer-only outcome checks provenance/calibration, not a retrospective initial answer key.",
+            "annotator_uncertainty": "Historical method corroborates bounce handling; no independent SAP business acceptance."
+          },
+          "phase": "future_holdout"
+        }
+      ],
+      "J": {
+        "id": "J1",
+        "bounded_next_action": "At T1:28, decide whether to accept the bounded mapping change for the next commit/review step, inspect its behavior/evidence, or re-ground an unresolved semantic boundary. Do not substitute production deployment acceptance.",
+        "acceptable_justified_uncertainty": [
+          "Request evidence for populated-customer ZUONR handling or explicitly acknowledge the adopted interpretation before acceptance.",
+          "Inspect the portal/field evidence behind the ticket concern rather than accepting it as a confirmed requirement.",
+          "State that static source inspection is available and runtime/integration acceptance remains unobserved."
+        ],
+        "evidence_threshold": "Distinguish implemented behavior, already-agreed rules, human-relayed consultant statements and unconfirmed executor interpretation; link an uncertainty to a relevant next inspection. No single forced accept/reject answer or numeric confidence target."
+      },
+      "R": [
+        "T1:1-28 bounded transcript",
+        "G1/G2 historical code, normalized matched C1/C2",
+        "G3 historical portal source may be inspected through common R without exposing T1:29-32 explanation/retraction",
+        "B1-B6 historical tool records; no unrestricted full transcript/DB in replay"
+      ],
+      "gate": [
+        {
+          "criterion": 1,
+          "name": "defensible_S0",
+          "assessment": "met"
+        },
+        {
+          "criterion": 2,
+          "name": "bounded_work_interval",
+          "assessment": "met"
+        },
+        {
+          "criterion": 3,
+          "name": "current_decision_relevant_delta",
+          "assessment": "met, with provenance ambiguity preserved"
+        },
+        {
+          "criterion": 4,
+          "name": "concrete_J",
+          "assessment": "met, bounded to next commit/review"
+        },
+        {
+          "criterion": 5,
+          "name": "evidence_return_paths",
+          "assessment": "met"
+        },
+        {
+          "criterion": 6,
+          "name": "historical_artifact_vs_interpretation",
+          "assessment": "met for source-review scope; some search/read bodies pruned"
+        },
+        {
+          "criterion": 7,
+          "name": "future_turn_leakage_control",
+          "assessment": "met by declared cutoff; packets not yet built"
+        }
+      ],
+      "limitations": [
+        "Explicitly prompted delta reporting, not spontaneous selector behavior.",
+        "Flomo repeats the event, not independent evidence; no timing inference needed.",
+        "One annotator; D_now labels are provisional.",
+        "No controlled replay or implementation tests run in this review."
+      ]
+    },
+    {
+      "case_id": "SR-2",
+      "candidate_id": "GAMMA-011",
+      "direction": "human executor → AI recipient",
+      "decision": "defer",
+      "decision_scope": "Retain as reciprocal observational case; do not fabricate exact pre/post fixture snapshots.",
+      "reason": "The human edit and read-only inspection are evidenced, but the exact immediate pre/post artifact boundary is not frozen. Neighboring tool outputs also show restored PAYMENT_TERM_TEXT state outside the named CreateField edit. Earlier/later Git commits cannot isolate which changes occurred in the human interval.",
+      "source_snapshot": [
+        "T2",
+        "G9",
+        "G10"
+      ],
+      "S0": [
+        {
+          "proposition_id": "S1",
+          "proposition": "Payment-term UI label should display code(description), while the submitted value is code; user approves binding directly to PAYMENT_TERM while preserving non-KR disabled behavior.",
+          "evidence_that_shared": [
+            "T2:4414",
+            "T2:4422"
+          ],
+          "who_knew_it": [
+            "human",
+            "AI"
+          ],
+          "epistemic_status": "human-provided and acknowledged design",
+          "annotator_uncertainty": "none identified for this bounded proposition"
+        },
+        {
+          "proposition_id": "S2",
+          "proposition": "Agent says it switched binding and removed PAYMENT_TERM_TEXT from schema/refill, with matching contemporaneous search output.",
+          "evidence_that_shared": [
+            "T2:4430",
+            "T2:4439",
+            "T2:4443"
+          ],
+          "who_knew_it": [
+            "AI executed/reported",
+            "human received report"
+          ],
+          "epistemic_status": "observed patch/search plus AI-reported completion",
+          "annotator_uncertainty": "Does not establish complete UI correctness or configuration coverage."
+        }
+      ],
+      "execution_interval": {
+        "start": "After agent report T2:4443 and before human report T2:4450; exact edit times unknown",
+        "end": "Human report T2:4450; first captured read outputs at T2:4458-4461",
+        "settlement": "T2:4450",
+        "future": "AI inspection T2:4454 onward is the historical recipient response; later closeout T2:4483 onward is a separate broader J"
+      },
+      "execution_events": [
+        {
+          "event_id": "E1",
+          "fact": "Earlier observed field config has PAYMENT_TERM hidden and PAYMENT_TERM_TEXT visible; later read shows PAYMENT_TERM uses getFieldEditProps and TEXT hidden.",
+          "source_addresses": [
+            "T2:4212",
+            "T2:4458"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "D_now+",
+            "L": "medium",
+            "affected_downstream_judgment": "J2",
+            "rationale": "Visibility and editability determine whether the agreed binding is usable.",
+            "annotator_uncertainty": "Before excerpt is 02:29Z; human report is 04:01Z. This is not an exact whole-file immediate before snapshot."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E2",
+          "fact": "Human states it repaired the forgotten CreateField config and explicitly requires inspection without edits.",
+          "source_addresses": [
+            "T2:4450"
+          ],
+          "status": "human-provided",
+          "artifact_visible": "partial",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "D_now+",
+            "L": "high",
+            "affected_downstream_judgment": "J2",
+            "rationale": "Supplies attribution, review intent and a no-write boundary that source code cannot encode.",
+            "annotator_uncertainty": "Exact full human diff is not captured."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E3",
+          "fact": "Recipient reads show ApiSelect binding to PAYMENT_TERM and API option mapping label=paymentName(paymentDesc), value=paymentName.",
+          "source_addresses": [
+            "T2:4459-4460"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "no",
+          "classification": {
+            "current_decision": "D_now+",
+            "L": "medium",
+            "affected_downstream_judgment": "J2",
+            "rationale": "Direct source evidence distinguishes UI label from submitted value.",
+            "annotator_uncertainty": "Historical read results establish snippets, not a runtime UI demonstration."
+          },
+          "phase": "recipient_inspection"
+        },
+        {
+          "event_id": "E4",
+          "fact": "PAYMENT_TERM_TEXT refill and hidden schema are present in post-human reads even though previous agent patch/search reported removal.",
+          "source_addresses": [
+            "T2:4430",
+            "T2:4439",
+            "T2:4461",
+            "T2:4465"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "ambiguous",
+            "L": "medium",
+            "affected_downstream_judgment": "J2",
+            "rationale": "Unexplained adjacent state change prevents clean single-edit attribution and exact snapshot freezing.",
+            "annotator_uncertainty": "Could be human restoration, editor undo or concurrent edits; source review does not choose among them."
+          },
+          "phase": "recipient_inspection"
+        },
+        {
+          "event_id": "E5",
+          "fact": "AI says residual hidden field is nonblocking; user asks about retaining it and then broader SO closeout.",
+          "source_addresses": [
+            "T2:4468",
+            "T2:4475-4484"
+          ],
+          "status": "AI-reported",
+          "artifact_visible": "partial",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "ambiguous",
+            "L": "medium",
+            "affected_downstream_judgment": "J2",
+            "rationale": "A review opinion and later expanded task do not independently prove correctness or initial evidence sufficiency.",
+            "annotator_uncertainty": "Do not replace J2 with later whole-header closeout."
+          },
+          "phase": "future_holdout"
+        }
+      ],
+      "J": {
+        "id": "J2",
+        "bounded_next_action": "Check the human patch without changing code and locate the code(description) display mapping; report what source inspection does and does not establish.",
+        "acceptable_justified_uncertainty": [
+          "Identify binding/label locations and request a complete historical diff before claiming the full human change is safe.",
+          "Flag restored TEXT entries without guessing who restored them.",
+          "Respect no-write scope; do not silently repair."
+        ],
+        "evidence_threshold": "Exact reviewed source snippets plus an attributable before/after artifact boundary are required for a controlled execution replay; UI/tenant correctness needs additional evidence if claimed."
+      },
+      "R": [
+        "T2:4212 pre excerpt; T2:4458-4465 post inspection outputs with call IDs",
+        "G9/G10 historical bracketing commits, expressly not exact snapshots"
+      ],
+      "gate": [
+        {
+          "criterion": 1,
+          "name": "defensible_S0",
+          "assessment": "met for narrow J2"
+        },
+        {
+          "criterion": 2,
+          "name": "bounded_work_interval",
+          "assessment": "partial: bracketed, exact edit state unresolved"
+        },
+        {
+          "criterion": 3,
+          "name": "current_decision_relevant_delta",
+          "assessment": "met at observed-snippet level"
+        },
+        {
+          "criterion": 4,
+          "name": "concrete_J",
+          "assessment": "met"
+        },
+        {
+          "criterion": 5,
+          "name": "evidence_return_paths",
+          "assessment": "partial: snippet returns, full artifact freeze missing"
+        },
+        {
+          "criterion": 6,
+          "name": "historical_artifact_vs_interpretation",
+          "assessment": "unresolved: exact human delta and restored fields"
+        },
+        {
+          "criterion": 7,
+          "name": "future_turn_leakage_control",
+          "assessment": "designable, but no packet eligible"
+        }
+      ],
+      "recovery_searches": [
+        "Inspected Codex tool-call/output pairs and preceding binding patch/search.",
+        "Inspected local Git history around May 21–25 and the May 23/24 field-file versions.",
+        "Searched Cursor and VS Code local History entries.json for FtsCustomerOrderCreateField; no matching entry located."
+      ],
+      "unblock": [
+        "Recover an exact editor/checkpoint snapshot or attributable full diff spanning the human edit, including adjacent schema/refill files.",
+        "If unavailable, keep observational; a deliberately reconstructed snippet fixture must be labeled reconstruction and separately reviewed."
+      ],
+      "limitations": [
+        "No exact human action trace or immediate whole-file snapshots.",
+        "Assistant approval is not independent correctness evidence.",
+        "No build/UI test rerun; current working tree is not substituted for historical evidence."
+      ]
+    },
+    {
+      "case_id": "SR-3",
+      "candidate_id": "GAMMA-007",
+      "direction": "AI executor → human recipient → AI",
+      "decision": "defer",
+      "decision_scope": "Keep source-grounded field case and possible γ-II/secondary engineering-review case; not yet a primary γ-I omission fixture.",
+      "reason": "Historical head, file placement and stale-code removal are verifiable. However, preexisting human review and broader architecture interest complicate attributing later package/cleanup questions to a consequential omission in the PR-status report. The acceptance threshold for these maintainability items is not grounded enough to freeze a primary D_now+.",
+      "source_snapshot": [
+        "T3",
+        "G4",
+        "G5",
+        "G6",
+        "G7",
+        "G8",
+        "B8",
+        "B9",
+        "B10",
+        "B11",
+        "B12",
+        "B13",
+        "B14"
+      ],
+      "S0": [
+        {
+          "proposition_id": "S1",
+          "proposition": "Human values architecture but prioritizes a working reversal of the sync path and defers broader authentication redesign.",
+          "evidence_that_shared": [
+            "T3:35",
+            "T3:49"
+          ],
+          "who_knew_it": [
+            "human",
+            "AI"
+          ],
+          "epistemic_status": "human-provided priorities",
+          "annotator_uncertainty": "General preference is not a specific package-placement acceptance rule."
+        },
+        {
+          "proposition_id": "S2",
+          "proposition": "Human had already read most code, requested class-role explanation, then reported no issues and authorized the first commit.",
+          "evidence_that_shared": [
+            "T3:178-181"
+          ],
+          "who_knew_it": [
+            "human",
+            "AI"
+          ],
+          "epistemic_status": "human-provided review report plus AI class explanation",
+          "annotator_uncertainty": "This contradicts treating the recipient as wholly uninformed before the later PR report."
+        },
+        {
+          "proposition_id": "S3",
+          "proposition": "Later repair separates raw-body caching from legacy signing behavior; user requests testing and then removal of ineffective duplicate Shiro registration.",
+          "evidence_that_shared": [
+            "T3:288-305",
+            "T3:307",
+            "T3:324",
+            "T3:337-341"
+          ],
+          "who_knew_it": [
+            "human",
+            "AI"
+          ],
+          "epistemic_status": "human-provided scope and AI-reported outcomes",
+          "annotator_uncertainty": "Actual test success is not established by the reports alone; package/cleanup items are distinct from raw-byte correctness."
+        },
+        {
+          "proposition_id": "S4",
+          "proposition": "At the selected settlement, user requests a draft PR after relevant commits; historical branch is clean at 0c18c93 against develop.",
+          "evidence_that_shared": [
+            "T3:351",
+            "B8",
+            "B9"
+          ],
+          "who_knew_it": [
+            "human",
+            "AI"
+          ],
+          "epistemic_status": "observed PR/task record",
+          "annotator_uncertainty": "none identified for this bounded proposition"
+        }
+      ],
+      "execution_interval": {
+        "start": "Relevant latest repair: T3:292 through 349; original implementation and human review T3:29-181 are prerequisite context",
+        "end": "Draft-PR report T3:356 at historical head 0c18c93",
+        "settlement": "T3:349 / 356; these are two related completion surfaces, not one isolated minimal report",
+        "future": "T3:359-372 questions, search and cleanup; repeated 359/361/363 are one request cluster"
+      },
+      "execution_events": [
+        {
+          "event_id": "E1",
+          "fact": "Replacement cache preserves raw bytes while legacy signing wrapper retains a getCachedBody accessor with a misleading raw-byte/idempotency comment.",
+          "source_addresses": [
+            "G4:26-31",
+            "G6:20-40",
+            "T3:301-305"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "ambiguous",
+            "L": "medium",
+            "affected_downstream_judgment": "J3",
+            "rationale": "Artifact can mislead future maintenance; whether it changes current functional acceptance is unresolved.",
+            "annotator_uncertainty": "Do not score dead public code as a proven active idempotency bug."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E2",
+          "fact": "HSQ_JOB_APPLICATION remains declared but the historical tracked-Java search finds no use.",
+          "source_addresses": [
+            "G5:53-55",
+            "B12"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "no",
+          "classification": {
+            "current_decision": "D_now0",
+            "L": "low",
+            "affected_downstream_judgment": "J3",
+            "rationale": "Unused declaration alone does not change the grounded endpoint behavior.",
+            "annotator_uncertainty": "Search scope is tracked Java; external/reflection uses not ruled out."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E3",
+          "fact": "Draft-PR command returns a URL; a full added-file-list tool result later exposes package placement.",
+          "source_addresses": [
+            "B9",
+            "B10",
+            "T3:356"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "ambiguous",
+            "L": "medium",
+            "affected_downstream_judgment": "J3",
+            "rationale": "Status completion and artifact addressability are evidenced; adequacy depends on what review the human next intended.",
+            "annotator_uncertainty": "Single source-review annotator; no independent adjudication."
+          },
+          "phase": "execution"
+        },
+        {
+          "event_id": "E4",
+          "fact": "Human asks about packages and points to the old accessor, agent inspects and explains, then human authorizes removal.",
+          "source_addresses": [
+            "T3:359-369",
+            "B10",
+            "B11",
+            "B12"
+          ],
+          "status": "human-provided",
+          "artifact_visible": "partial",
+          "semantic_explanation_needed": "yes",
+          "classification": {
+            "current_decision": "ambiguous",
+            "L": "high",
+            "affected_downstream_judgment": "J3",
+            "rationale": "This is active human review but may be resumed/broadened review rather than failure to regain state needed for a previously agreed next action.",
+            "annotator_uncertainty": "Prior review at 178-181 and explicit architecture interest must both be retained."
+          },
+          "phase": "future_holdout"
+        },
+        {
+          "event_id": "E5",
+          "fact": "Post-question commit deletes exactly the old accessor and constant; replacement cache is separate.",
+          "source_addresses": [
+            "G4",
+            "G5",
+            "G7",
+            "G8",
+            "B13",
+            "B14",
+            "T3:372"
+          ],
+          "status": "observed",
+          "artifact_visible": "yes",
+          "semantic_explanation_needed": "no",
+          "classification": {
+            "current_decision": "D_now0",
+            "L": "medium",
+            "affected_downstream_judgment": "J3",
+            "rationale": "Confirms cleanup occurred, not that omission caused a prior correctness failure.",
+            "annotator_uncertainty": "Removal is later evidence and cannot be given to the initial recipient."
+          },
+          "phase": "future_holdout"
+        }
+      ],
+      "J": {
+        "id": "J3",
+        "bounded_next_action": "At draft-PR completion, determine whether the previously agreed implementation is ready for its intended review; distinguish functional invariants from a renewed package/maintainability review.",
+        "acceptable_justified_uncertainty": [
+          "Request a package index for inspection without implying that the current implementation is incorrect.",
+          "Treat stale accessor/constant as cleanup candidates unless an actual functional dependency is demonstrated.",
+          "Acknowledge that the prior review and reports already supplied some class-role/rationale information."
+        ],
+        "evidence_threshold": "Need a source-grounded current acceptance/review criterion that the omitted fact changes; later preference for cleanup alone is insufficient to declare a primary settlement failure."
+      },
+      "R": [
+        "B8 historical PR head; G4-G6 immutable artifacts",
+        "B10 added files; B11/B12 pruned historical searches; independent git grep over 0c18c93 recorded in sources.json",
+        "G7/G8 reviewer-only future cleanup"
+      ],
+      "gate": [
+        {
+          "criterion": 1,
+          "name": "defensible_S0",
+          "assessment": "met for implementation scope; review threshold partial"
+        },
+        {
+          "criterion": 2,
+          "name": "bounded_work_interval",
+          "assessment": "met for latest repair, with prerequisite review context"
+        },
+        {
+          "criterion": 3,
+          "name": "current_decision_relevant_delta",
+          "assessment": "unresolved for primary acceptance; architectural value evident"
+        },
+        {
+          "criterion": 4,
+          "name": "concrete_J",
+          "assessment": "partial: later package-review aim may be expanded"
+        },
+        {
+          "criterion": 5,
+          "name": "evidence_return_paths",
+          "assessment": "met"
+        },
+        {
+          "criterion": 6,
+          "name": "historical_artifact_vs_interpretation",
+          "assessment": "met for stale artifacts; original search bodies pruned"
+        },
+        {
+          "criterion": 7,
+          "name": "future_turn_leakage_control",
+          "assessment": "designable by cutoff; no packet yet"
+        }
+      ],
+      "unblock": [
+        "Find a pre-work grounded criterion showing the stale/package detail changes the selected current judgment, or choose a different genuine functional delta and re-review its sources.",
+        "Alternatively define a prospective maintainability-review/γ-II question explicitly; do not retroactively call it the original primary γ-I judgment."
+      ],
+      "limitations": [
+        "Repeated user messages count once.",
+        "Historical f075582 and PR-head 0c18c93 have identical trees but distinct commits; B8 supplies authoritative head for this window.",
+        "No live backend/Redis/CRM rerun; no current-state substitution."
+      ]
+    }
+  ],
+  "replay_gate": {
+    "required_included_fixtures": 3,
+    "included_source_review_cases": 1,
+    "frozen_rendered_fixtures": 0,
+    "may_run": false,
+    "reason": "Only SR-1 meets source-review eligibility; SR-2 and SR-3 deferred. No condition packets or recipient runs generated."
+  },
+  "scoring_contract": {
+    "confidence_separation": [
+      "implementation_confidence",
+      "acceptance_evidence_sufficiency"
+    ],
+    "event_axes": [
+      "D_now+ / D_now0 / ambiguous",
+      "L: none / low / medium / high / unknown"
+    ],
+    "required_outcomes": [
+      "recognition of D_now+",
+      "false elevation of D_now0",
+      "correct threatened-invariant linkage",
+      "verification-policy quality",
+      "evidence actually retrieved",
+      "unjustified confidence",
+      "provenance mistakes",
+      "recipient information volume",
+      "clarification actions"
+    ],
+    "measurements": "All remain unscored. Source review is not a recipient run."
+  },
+  "renderer_constraints": [
+    "γ-I only initially: final-state, full-trace, selective consequential delta with identical permitted audit return paths.",
+    "Freeze source-reviewed fact selection before recipient evaluation; future reactions cannot optimize selective content.",
+    "Hold consequence linkage and verification affordances comparable or declare an additional manipulation.",
+    "Future-turn holdouts, including retractions and acceptance, remain unavailable in initial surfaces and initial R.",
+    "Never expose this ledger as a recipient packet: it contains future reviewer-only information."
+  ]
+}

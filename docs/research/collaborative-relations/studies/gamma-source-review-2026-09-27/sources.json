@@ -1,0 +1,306 @@
+{
+  "inspected_on": "2026-09-27",
+  "repository_handoff_commit": "339a513",
+  "sources": [
+    {
+      "id": "T1",
+      "kind": "file",
+      "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/d3f95340-666e-4198-ae2d-048202438a55/d3f95340-666e-4198-ae2d-048202438a55.jsonl",
+      "sha256": "54e80a745ed5b7822b35650dae24f30e5c24353dcaa8e0ed669c5b580c577e24",
+      "line_count": 128,
+      "description": "GAMMA-013 full historical transcript; access is bounded by each fact reference, not a replay permission to inspect the whole file."
+    },
+    {
+      "id": "T2",
+      "kind": "file",
+      "path": "/home/xge/.codex/sessions/2026/05/21/rollout-2026-05-21T14-19-53-019e4930-c347-7ec3-ae5c-7e0ae617d89a.jsonl",
+      "sha256": "925949efa71317dd67392572091d98be882098be32b3572232c0650950000c03",
+      "line_count": 5542,
+      "description": "GAMMA-011 full historical transcript; access is bounded by each fact reference, not a replay permission to inspect the whole file."
+    },
+    {
+      "id": "T3",
+      "kind": "file",
+      "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/8dade695-86fa-4d58-bafa-531bf086919b/8dade695-86fa-4d58-bafa-531bf086919b.jsonl",
+      "sha256": "a78760e0c38d24e5fbfdf295b08e83e1f9a657059d17e28df97b82c239277a3e",
+      "line_count": 403,
+      "description": "GAMMA-007 full historical transcript; access is bounded by each fact reference, not a replay permission to inspect the whole file."
+    },
+    {
+      "id": "G1",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/SUNWARD-CRM",
+      "commit": "97965853be60bef1873b38ea4945c26fc1b8cee9",
+      "path": "Common/SapServiceProvider.cs",
+      "blob_oid": "537c5635fc25931308d90d4423e83a202f44ea4e",
+      "sha256": "a26ad00d3d33edd00df1bb9138d771194e14a801568d80eed75b14155b601a5e",
+      "line_count": 3837,
+      "description": "Historical pre-implementation artifact; clean starting HEAD confirmed by B1."
+    },
+    {
+      "id": "G2",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/SUNWARD-CRM",
+      "commit": "11cd405662d4cc7ffe65a1883c04b52b75a8b0d2",
+      "path": "Common/SapServiceProvider.cs",
+      "blob_oid": "817b0d6f5f210739cd4e961e822326a3431182e2",
+      "sha256": "2e92e26965d44606c537ad32125bce6ef882fad4d044cf24b6c82e5b35f1cdb9",
+      "line_count": 3844,
+      "description": "Post-implementation artifact committed after the settlement; independently matched to pre-settlement edit-cache content C2."
+    },
+    {
+      "id": "G3",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/SUNWARD-CRM",
+      "commit": "11cd405662d4cc7ffe65a1883c04b52b75a8b0d2",
+      "path": "Interfaces/SunWard.Crm.WebApi/Modules/PaymentClaimManagement/Services/PaymentClaimManagementService.Operations.cs",
+      "blob_oid": "0972a56af07b7890ef6b268e745939725ab50892",
+      "sha256": "6fda40a3255712da45344397a0408600060474f773d9038451c1bc5cbfcd1b65",
+      "line_count": 426,
+      "description": "Frozen historical portal source, available through a common artifact audit path; later transcript explanation/retraction is held out."
+    },
+    {
+      "id": "G4",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/FTS-FinePartner",
+      "commit": "0c18c9389e99898991b9d9fb59bb95e5bef94163",
+      "path": "fts-dms/jeecg-boot-base/jeecg-boot-base-core/src/main/java/org/jeecg/config/sign/util/BodyReaderHttpServletRequestWrapper.java",
+      "blob_oid": "d756947a80120c8fb1237f1fe624a1f3ae805ec4",
+      "sha256": "a2fd3f6789f865a78b5fdabfd2951c75be15f53c4cfb0f9d6362d6b134f5555a",
+      "line_count": 112,
+      "description": "Legacy wrapper at draft-PR head, before cleanup."
+    },
+    {
+      "id": "G5",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/FTS-FinePartner",
+      "commit": "0c18c9389e99898991b9d9fb59bb95e5bef94163",
+      "path": "fts-dms/jeecg-boot-module-system/src/main/java/org/jeecg/modules/datahub/constant/DataSyncConstants.java",
+      "blob_oid": "c44235d580d8b43019f773b3c7d56022f380b3c3",
+      "sha256": "4781a39dec13f179a0b4b9e437a2df3e9f85bd0c0bf9078a62799067fb883d3d",
+      "line_count": 57,
+      "description": "Constants at draft-PR head, before cleanup."
+    },
+    {
+      "id": "G6",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/FTS-FinePartner",
+      "commit": "0c18c9389e99898991b9d9fb59bb95e5bef94163",
+      "path": "fts-dms/jeecg-boot-module-system/src/main/java/org/jeecg/config/idempotency/CachedBodyHttpServletRequest.java",
+      "blob_oid": "34d2ffe4a688fcaa50676ce552d28f9541251e17",
+      "sha256": "3373e095c7de875f59277cfb279e3f6dd9681daaa5b1b59c943153afc07790e8",
+      "line_count": 95,
+      "description": "Replacement byte-preserving cache at draft-PR head."
+    },
+    {
+      "id": "G7",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/FTS-FinePartner",
+      "commit": "a061e8c824dced28dc4b23525631ea492df161b0",
+      "path": "fts-dms/jeecg-boot-base/jeecg-boot-base-core/src/main/java/org/jeecg/config/sign/util/BodyReaderHttpServletRequestWrapper.java",
+      "blob_oid": "db42935f70eee7a464f131afd2a5d3a09244b1e3",
+      "sha256": "0112e692eb98caf388c38e5e2893ed30196902c6f7471286ac0c6d807bc5fd52",
+      "line_count": 107,
+      "description": "Post-question cleanup; future outcome, not initial replay input."
+    },
+    {
+      "id": "G8",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/FTS-FinePartner",
+      "commit": "a061e8c824dced28dc4b23525631ea492df161b0",
+      "path": "fts-dms/jeecg-boot-module-system/src/main/java/org/jeecg/modules/datahub/constant/DataSyncConstants.java",
+      "blob_oid": "9efaafd3b86101ec72173be5753aedf42da13963",
+      "sha256": "18bafb18d2876954b159e5571c99ca5f1a95274499d84dc2688996c002938477",
+      "line_count": 54,
+      "description": "Post-question cleanup; future outcome, not initial replay input."
+    },
+    {
+      "id": "G9",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/FTS-APAC-FineOrder",
+      "commit": "95d9c5b68ee042121d8b30a528fc0942a191767d",
+      "path": "jeecgboot-vue3/src/views/order/ordercreate/FtsCustomerOrderCreateField.ts",
+      "blob_oid": "af1806ca4b0ee17af7dc2e20c26f61214c8214a4",
+      "sha256": "65d937305635975aa674ebc3bc8efb3f5bcdf104cfaf5974d9dfcaa98a6e9397",
+      "line_count": 670,
+      "description": "Earlier committed file, NOT the immediate pre-human-edit state."
+    },
+    {
+      "id": "G10",
+      "kind": "git_blob",
+      "repository": "/mnt/c/Projects/FTS-APAC-FineOrder",
+      "commit": "321be85696ec3aed811e71b2bdcf1b804cf54a6c",
+      "path": "jeecgboot-vue3/src/views/order/ordercreate/FtsCustomerOrderCreateField.ts",
+      "blob_oid": "bd505ff95d6bf3e0b38261a07bd04595798f35e0",
+      "sha256": "1565701435420cd51b1c25d1f68be1da6b144024cd938b3330cca27b4fcf6cbf",
+      "line_count": 664,
+      "description": "Later committed file, NOT an exact freeze of the human edit at 04:01Z."
+    },
+    {
+      "id": "B1",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:d3f95340-666e-4198-ae2d-048202438a55:3c5afaac-6d8a-4818-9f36-1507c09c6dcc",
+      "sha256": "abc9f74a6d90aea8af25b95d14074c1a38173cb457cc22dabe8853a886ead30c",
+      "description": "Successful pre-work git status/log: clean fix/if-058 at 97965853."
+    },
+    {
+      "id": "B2",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:d3f95340-666e-4198-ae2d-048202438a55:78c6cb23-d65d-4d09-8029-185b437f277c",
+      "sha256": "8214dbce0c9f1001052da4ae3d516d86cc3252c3f84124f6a605ea0f85373ae7",
+      "description": "Initial shell call failed because sandbox backend was unavailable; recovered by B1."
+    },
+    {
+      "id": "B3",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:d3f95340-666e-4198-ae2d-048202438a55:18cf4329-3423-4bf5-a2bc-67d1dcb655c2",
+      "sha256": "09c95b090238d192025cc506b4be1fbf66819324f01b11254324b0055a032348",
+      "description": "Completed implementation edit at 2026-09-14T06:04:17.850Z; points to C2 as afterContentId."
+    },
+    {
+      "id": "B4",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:d3f95340-666e-4198-ae2d-048202438a55:997448a7-0d7d-4025-8038-552954426bb3",
+      "sha256": "3addc371717212b3ccf2c087170ddb2aded397fb01a54efe548b63df57376ae3",
+      "description": "ReadLints completed with stored result {}; no detailed lint, build or test evidence supplied by this record."
+    },
+    {
+      "id": "B5",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:d3f95340-666e-4198-ae2d-048202438a55:d4201cd3-887e-4604-bd86-afde69c20662",
+      "sha256": "6458d367a23383c7874a502096321346012a25a51693cf38b077140de8f53dbc",
+      "description": "Metadata tool result labels new_bankserialno as 银行流水号, String; no business acceptance proof."
+    },
+    {
+      "id": "B6",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:d3f95340-666e-4198-ae2d-048202438a55:b0a6755f-d296-41a1-8c60-1e41e2de0f80",
+      "sha256": "adab8aa50d77e663e337529d120469db9fae122ddfb1f5e0f5ee1532fa4d57db",
+      "description": "Ticket keyword search has 3 results with scope=all, including an unrelated entity; not proof of an alternate ticket-number mapping."
+    },
+    {
+      "id": "B7",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:d3f95340-666e-4198-ae2d-048202438a55:68dbffef-da9b-4eb8-9b30-3259afc39f88",
+      "sha256": "2ccdcded0357b6e2d264a495a74c2744709eaa4a837ea87b03b81012a0501da0",
+      "description": "Later commit command outcome confirms 11cd4056, 1 changed file and clean tree; reviewer-only."
+    },
+    {
+      "id": "C1",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "composer.content.d36ff9d79d4af461646caf164aa6224b660d239dab3ee7fc3dd91d42a10fb98a",
+      "sha256": "d36ff9d79d4af461646caf164aa6224b660d239dab3ee7fc3dd91d42a10fb98a",
+      "description": "Cached before-content of first implementation edit."
+    },
+    {
+      "id": "C2",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "composer.content.43b71990ddba90baf1d6c148beda92839295738440e16a331433cfe1776e50df",
+      "sha256": "43b71990ddba90baf1d6c148beda92839295738440e16a331433cfe1776e50df",
+      "description": "Cached after-content of final implementation edit; created before settlement report."
+    },
+    {
+      "id": "B8",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:8dade695-86fa-4d58-bafa-531bf086919b:535d5dc4-714e-4252-a248-74a22d188f46",
+      "sha256": "63ddeaad6fa4de9b9e306ac309badcf600dfd94db3d3d44f4e0f666aead7d23f",
+      "description": "Historical branch/log output confirms PR head 0c18c93 and base fea733d."
+    },
+    {
+      "id": "B9",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:8dade695-86fa-4d58-bafa-531bf086919b:9226f441-4bcf-40d3-a733-0ab8e7b61875",
+      "sha256": "6b4667dc1c31f9fd9b34b35bb2b1fe77cbccfc7e824fcd53ff874b296168bd46",
+      "description": "Historical gh pr create command and returned PR 69 URL. Body is an authored report, not test results."
+    },
+    {
+      "id": "B10",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:8dade695-86fa-4d58-bafa-531bf086919b:5f90fec3-e3de-4517-a6d3-a2a935bf028f",
+      "sha256": "21c54085a891620706d52f7fa6a73e1def6caacb7c53ee71ebadc87af9898520",
+      "description": "Actual added-file-list output following the human review request."
+    },
+    {
+      "id": "B11",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:8dade695-86fa-4d58-bafa-531bf086919b:ea6f1597-2bb2-4730-8e05-6c4e065eeb9b",
+      "sha256": "1a9388127e966e0f818ebb54b49096a508ca2eedd95292b960e055566b148738",
+      "description": "Historical wrapper/reference search metadata; isPruned=true, full matching lines not retained here."
+    },
+    {
+      "id": "B12",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:8dade695-86fa-4d58-bafa-531bf086919b:6828c4a3-a58a-4552-b030-dd8d785f2ca8",
+      "sha256": "394bdc5cbdca8f7d1dc1e4bee2c04667b4f1969fd65d243f6fe9f83d8b9b3e06",
+      "description": "Historical constant/reference search metadata; isPruned=true."
+    },
+    {
+      "id": "B13",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:8dade695-86fa-4d58-bafa-531bf086919b:4314cfa7-b979-4aa1-b026-9326810286f3",
+      "sha256": "1f9a9bf866e8b148cb45a05f03a1a6a4545468947606c65351c6451e784e2ffe",
+      "description": "Post-question cleanup edit outcome for one stale element; later than initial PR settlement."
+    },
+    {
+      "id": "B14",
+      "kind": "sqlite_value",
+      "path": "/mnt/c/Users/xge/AppData/Roaming/Cursor/User/globalStorage/state.vscdb",
+      "table": "cursorDiskKV",
+      "key": "bubbleId:8dade695-86fa-4d58-bafa-531bf086919b:9e184e84-f61e-4b98-8c78-1922210b9154",
+      "sha256": "753c3b0e9a858c704d219a49cdde9efae49b07a69f200bb8896e0c44289cd5ec",
+      "description": "Post-question cleanup edit outcome for the second stale element."
+    }
+  ],
+  "normalization_checks": [
+    {
+      "left": "C1",
+      "right": "G1",
+      "match": true
+    },
+    {
+      "left": "C2",
+      "right": "G2",
+      "match": true
+    }
+  ],
+  "normalization": "Decode UTF-8 with optional BOM removal; normalize CRLF to LF; remove trailing newline characters. Raw hashes are preserved separately; no byte-identity claim.",
+  "static_search": {
+    "repository": "/mnt/c/Projects/FTS-FinePartner",
+    "commit": "0c18c9389e99898991b9d9fb59bb95e5bef94163",
+    "command": "git grep -n -E getCachedBody|HSQ_JOB_APPLICATION <commit> -- *.java",
+    "result": "0c18c93:fts-dms/jeecg-boot-base/jeecg-boot-base-core/src/main/java/org/jeecg/config/sign/util/BodyReaderHttpServletRequestWrapper.java:29:    public byte[] getCachedBody() {\n0c18c93:fts-dms/jeecg-boot-module-system/src/main/java/org/jeecg/config/idempotency/CachedBodyHttpServletRequest.java:30:    public byte[] getCachedBody() {\r\n0c18c93:fts-dms/jeecg-boot-module-system/src/main/java/org/jeecg/config/idempotency/CachedBodyHttpServletRequest.java:38:                return ((CachedBodyHttpServletRequest) current).getCachedBody();\r\n0c18c93:fts-dms/jeecg-boot-module-system/src/main/java/org/jeecg/modules/datahub/constant/DataSyncConstants.java:54:    public static final String HSQ_JOB_APPLICATION = \"hsq-job\";\n",
+    "interpretation": "Only declarations in legacy wrapper/constant and declaration+use in replacement cache found in tracked Java. Does not prove absence of reflection, external consumers or generated code."
+  },
+  "privacy": "No full DB rows, full business-source files, secrets, customer records or screenshot payloads copied into repository. Manifest addresses private local sources; summaries and minimal excerpts are review material.",
+  "scope": "Sources read-only; no source repository checkout, build, live business API call or database mutation."
+}

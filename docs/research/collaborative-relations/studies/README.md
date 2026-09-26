@@ -43,6 +43,8 @@ Local historical-record screening: [candidate-episode registry, 2026-09-27](gamm
 
 Source-review gate: [`gamma-source-review-gate-2026-09-27.md`](gamma-source-review-gate-2026-09-27.md). It reconciles the local corpus-mining output with the calibrated staged protocol and defines the first source-review set before any controlled replay.
 
+Completed source review: [SR-1–SR-3 ledgers and decisions](gamma-source-review-2026-09-27/README.md) — one include, two defer; the three-fixture replay gate is not yet met.
+
 ### δ — adaptive representation trajectory
 
 Compare permanent familiar-language translation, native representation immediately, native representation with strong mediation that fades, and representation selected only for immediate efficiency.
