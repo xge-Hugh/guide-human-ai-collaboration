@@ -41,6 +41,8 @@ Primary targets: A3, A3a, A3b, A10, A12, A14. γ estimates state-coordination co
 
 Local historical-record screening: [candidate-episode registry, 2026-09-27](gamma-candidates-2026-09-27/README.md). This is an observational shortlist for source review and possible replay design, not a completed γ experiment.
 
+Source-review gate: [`gamma-source-review-gate-2026-09-27.md`](gamma-source-review-gate-2026-09-27.md). It reconciles the local corpus-mining output with the calibrated staged protocol and defines the first source-review set before any controlled replay.
+
 ### δ — adaptive representation trajectory
 
 Compare permanent familiar-language translation, native representation immediately, native representation with strong mediation that fades, and representation selected only for immediate efficiency.
