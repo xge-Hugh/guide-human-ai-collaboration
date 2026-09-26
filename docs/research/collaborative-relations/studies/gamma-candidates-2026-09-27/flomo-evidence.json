@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "notes": [
+    {
+      "slug": "MjU2NTU4OTQ0",
+      "created_at": "2026-09-14 14:11:39",
+      "updated_at": "2026-09-14 14:11:49",
+      "timezone": "not supplied by MCP",
+      "retrieved_on": "2026-09-27",
+      "text_sha256": "f0ca98072b7f560b6c1d231398812fd00f579a2cb048cfd6616caab5170f590a",
+      "original_excerpt": "AI的认知模型也在变化",
+      "assistant_interpretation": "The note identifies implementation-acquired semantic detail; the transcript additionally exposes a retracted risk and unconfirmed inference.",
+      "linked_candidates": [
+        "GAMMA-013"
+      ],
+      "relationship": "quote_match",
+      "evidence_role": "self_report_reflection_or_design_hypothesis"
+    },
+    {
+      "slug": "MjU3MDU5NjAy",
+      "created_at": "2026-09-17 17:15:15",
+      "updated_at": "2026-09-17 17:15:27",
+      "timezone": "not supplied by MCP",
+      "retrieved_on": "2026-09-27",
+      "text_sha256": "de1ceee65032c6d408b8113f4c7dcdff328056fa79d62594b120db3e024b447e",
+      "original_excerpt": "才让人类明白问题所在",
+      "assistant_interpretation": "The note supplies a self-report of significance; the transcript supplies the quoted sentence and a changed decision.",
+      "linked_candidates": [
+        "GAMMA-014"
+      ],
+      "relationship": "quote_match",
+      "evidence_role": "self_report_reflection_or_design_hypothesis"
+    },
+    {
+      "slug": "MjU0NzE3NDk5",
+      "created_at": "2026-09-02 13:18:53",
+      "updated_at": "2026-09-02 13:18:57",
+      "timezone": "not supplied by MCP",
+      "retrieved_on": "2026-09-27",
+      "text_sha256": "5e59382fe239c1065ae5f60aaeddc02bcebf6a8c5420bd1a5c7daffd561581f9",
+      "original_excerpt": "但是这让我轻松不少",
+      "assistant_interpretation": "The note and user turn are substantially the same text; count one report of externalization effort, not two observations.",
+      "linked_candidates": [
+        "GAMMA-015"
+      ],
+      "relationship": "substantial_text_match",
+      "evidence_role": "self_report_reflection_or_design_hypothesis"
+    },
+    {
+      "slug": "MjU2OTA5Nzk2",
+      "created_at": "2026-09-16 18:15:03",
+      "updated_at": "2026-09-23 08:50:56",
+      "timezone": "not supplied by MCP",
+      "retrieved_on": "2026-09-27",
+      "text_sha256": "a0a7b4fd1f02b08f0875b0801bff3162f1229fa31a1dab271edc0dd21e100e53",
+      "original_excerpt": "人自己独立看代码更换表征却能发现很多之前没发现的问题",
+      "assistant_interpretation": "Likely exception-refactor linkage; later edit timestamp means content cannot be assumed to be frozen at creation.",
+      "linked_candidates": [
+        "GAMMA-016"
+      ],
+      "relationship": "probable_event_match",
+      "evidence_role": "self_report_reflection_or_design_hypothesis"
+    },
+    {
+      "slug": "MjU3MTYxODE1",
+      "created_at": "2026-09-18 10:42:19",
+      "updated_at": "2026-09-18 10:42:21",
+      "timezone": "not supplied by MCP",
+      "retrieved_on": "2026-09-27",
+      "text_sha256": "84fcf2db13cc5d9b35f5bea144ec28508e725a3021649bdbfcb31ee6a60e13a0",
+      "original_excerpt": "ai不要默认人看了自己的全部输出",
+      "assistant_interpretation": "Use as a coding caution; no proven event-specific link.",
+      "linked_candidates": [
+        "GAMMA-017"
+      ],
+      "relationship": "thematic_only",
+      "evidence_role": "self_report_reflection_or_design_hypothesis"
+    },
+    {
+      "slug": "MjU2MzQ1MTc3",
+      "created_at": "2026-09-13 00:07:46",
+      "updated_at": "2026-09-13 00:08:33",
+      "timezone": "not supplied by MCP",
+      "retrieved_on": "2026-09-27",
+      "text_sha256": "cba8cfcbdbafdc270514e5a3b88bc8341d7e367aa32419c1bd510b8b9abeadfa",
+      "original_excerpt": "但我知道你读了这篇论文",
+      "assistant_interpretation": "Conceptual support for testing an index/return edge, not corroboration of the logging conversation or measured retrieval success.",
+      "linked_candidates": [
+        "GAMMA-009"
+      ],
+      "relationship": "thematic_only",
+      "evidence_role": "self_report_reflection_or_design_hypothesis"
+    }
+  ],
+  "searches": [
+    {
+      "query": "状态",
+      "total": 117,
+      "returned": 40
+    },
+    {
+      "query": "协作",
+      "total": 239,
+      "returned": 40
+    },
+    {
+      "query": "γ",
+      "total": 0,
+      "returned": 0
+    }
+  ],
+  "coverage": "Search results newest first, capped at 40 per query, overlaps not independent. Six selected memos fetched in full. Not an exhaustive flomo review. Text hashes identify retrieved full-note text; only short excerpts retained.",
+  "cross_matching": "Distinctive phrases searched in parent Cursor transcript text; selected bounded windows inspected. The efdacc8f transcript contains a later flomo summary and was excluded as circular corroboration."
+}

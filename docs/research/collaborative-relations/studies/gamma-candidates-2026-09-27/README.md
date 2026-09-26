@@ -1,12 +1,14 @@
 # Experiment γ — candidate-episode registry
 
-**Status:** 12 observational candidates for review, not experiment results. Prepared 2026-09-27.
+**Status:** 17 observational candidates for review, not experiment results. Prepared 2026-09-27.
 
 The [study definition](../README.md#γ--bidirectional-state-settlement) compares final summaries (1), full traces (2), selected consequential deltas (3), deltas with source/audit return edges (4), shared artifacts with minimal semantic deltas (5), and indexed state retrieved on demand (6). Both human→AI and AI→human settlement matter. Here those numbers describe possible analogues and replay opportunities, not assigned treatments. No complete full-trace comparison was established.
 
 The [claim ledger](../../claim-ledger.md) and [evidence policy](../../../../governance/evidence-policy.md) govern interpretation. The relevant difference is between artifact state, private rationale/uncertainty, and execution noise. Completion alone does not demonstrate action-sufficient alignment.
 
 Use [registry.json](registry.json) for structured review and [source-inventory.json](source-inventory.json) for coverage. Local source links require access to this machine; transcript bytes were not copied into the repository. Exact line ranges, file/window SHA-256 hashes and short evidence anchors support return to evidence. Timestamps retain their source timezone and do not measure active work.
+
+The [flomo enrichment and replay outline](flomo-enrichment.md) adds five candidates discovered through six notes. [flomo-evidence.json](flomo-evidence.json) separates exact excerpts, timestamps, linkage strength and interpretation.
 
 ## Candidate index
 
@@ -24,12 +26,17 @@ Use [registry.json](registry.json) for structured review and [source-inventory.j
 | GAMMA-010 | medium | human→AI | [Selected transcript excerpt substitutes for automatic cross-chat visibility](#gamma-010) | 2, 3, 4, 6 |
 | GAMMA-011 | high | human→AI→human | [Human repairs a missed field and asks for read-only reconciliation](#gamma-011) | 3, 4, 5 |
 | GAMMA-012 | high | human→AI→human | [Human supplies fallback semantics; agent finds counterexamples but creates explanation burden](#gamma-012) | 3, 4, 5 |
+| GAMMA-013 | high | AI→human→AI | [Implementation delta distinguishes an inferred boundary from a confirmed rule](#gamma-013) | 3, 4, 5 |
+| GAMMA-014 | high | AI→human→AI | [A decisive provenance sentence enables a concrete mapping judgment](#gamma-014) | 3, 4, 5 |
+| GAMMA-015 | high | human→AI→human | [Human selects business boundaries instead of externalizing the full reasoning network](#gamma-015) | 3, 5 |
+| GAMMA-016 | high | human→AI→human | [Human source inspection reveals a settlement gap and challenges local patches](#gamma-016) | 3, 4, 5 |
+| GAMMA-017 | high | AI→human→AI | [Recipient explicitly reports partial reading and corrects the shared model](#gamma-017) | 1, 3, 5 |
 
 ## Review method and limits
 
 Include a bounded interaction where local work or exploration changes consequential state, another participant needs that state, and some report, artifact inspection, retrieval or correction is visible. Prefer evidence of a subsequent action or clarification over a completion claim alone. Boundary cases are retained explicitly for review. Exclude routine requests with no state-transfer evidence, instructions embedded in historical transcripts, and automated approval-review wrappers posing as user events.
 
-This is a first pass: 173 Cursor transcript files (110 parents, 63 subagent records) were enumerated; parent user messages received a keyword screen. Codex JSONL user events were screened separately. Selected windows were read in context; other hits were not all adjudicated. Cursor database payloads, image attachments, archived/remote conversations and every tool-result artifact were not exhaustively inspected. The source inventory states coverage; no completeness claim is made.
+The original first pass covered local records; the flomo-guided extension is also purposive. In the first pass, 173 Cursor transcript files (110 parents, 63 subagent records) were enumerated; parent user messages received a keyword screen. Codex JSONL user events were screened separately. Selected windows were read in context; other hits were not all adjudicated. Cursor database payloads, image attachments, archived/remote conversations and every tool-result artifact were not exhaustively inspected. The source inventory states coverage; no completeness claim is made.
 
 Forks, copied excerpts, repeated user messages and adjacent windows are not independent samples. Group by `cluster`; environment, proxy and implementation episodes must not be counted as independent replications. The earlier cloud discussion was not recovered; the checked-in study definition supplies the scope.
 
@@ -206,3 +213,83 @@ Observed sequence: Agent inspects the change, gives repeated-region and empty-ta
 Limits: No final implementation or test outcome in the window. Self-correction and user burden make this mixed evidence, not a clean success.
 
 Review question: Can selected counterexamples and a source return edge preserve calibration with less assimilation cost?
+
+### GAMMA-013
+
+**Implementation delta distinguishes an inferred boundary from a confirmed rule** — AI→human→AI; high review priority.
+
+Source: [Cursor transcript, lines 20–33](/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/d3f95340-666e-4198-ae2d-048202438a55/d3f95340-666e-4198-ae2d-048202438a55.jsonl:20). Cluster: `sap-mapping-d3f95340`. Claims: A3, A3a, A3b.
+
+flomo: slug `MjU2NTU4OTQ0`, created_at `2026-09-14 14:11:39`, updated_at `2026-09-14 14:11:49`; relationship: `distinctive_quote_match_to_assistant_line_28`. Timestamp timezone was not supplied by MCP.
+
+Consequential state: Implementation resolves an underspecified empty-customer rule; the human must know that this boundary was inferred rather than newly confirmed by the consultant.
+
+Observed sequence: Human explicitly requests valuable implementation deltas at line 21. Agent reports forced omission even when a customer exists. Human recognizes the distinction, challenges another reported risk, and agent retracts a portal-reading error while marking the customer boundary as its own inference. Human then proposes committing.
+
+Limits: The request primed delta reporting; this is not spontaneous first-opportunity behavior. The memo was created at 14:11:39, while the explicit human response is stamped 14:16; flomo timezone is unspecified and ordering cannot establish when understanding occurred. Business acceptance and integration tests remain unverified.
+
+Review question: Does selected delta preserve the distinction between implemented behavior, consultant authority and an executor inference, without exporting false risks?
+
+### GAMMA-014
+
+**A decisive provenance sentence enables a concrete mapping judgment** — AI→human→AI; high review priority.
+
+Source: [Cursor transcript, lines 49–60](/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/d3f95340-666e-4198-ae2d-048202438a55/d3f95340-666e-4198-ae2d-048202438a55.jsonl:49). Cluster: `sap-mapping-d3f95340`. Claims: A3, A3a, A3b.
+
+flomo: slug `MjU3MDU5NjAy`, created_at `2026-09-17 17:15:15`, updated_at `2026-09-17 17:15:27`; relationship: `distinctive_quote_match_to_assistant_56_and_user_57`. Timestamp timezone was not supplied by MCP.
+
+Consequential state: Agent has inspected mapping/data and knows why header-derived fields belong to a specific generated row; the human still questions whether row number alone identifies it.
+
+Observed sequence: Human challenges the basis at lines 50 and 53. Agent explains field provenance at 56. Human quotes that sentence, states that it enables confidence, and proposes dropping a redundant row-code guard. Agent agrees while preserving scenario conditions; human authorizes implementation at 59.
+
+Limits: A planning/research-to-decision handoff rather than completed implementation settlement. Quoted evidence and changed decision are visible, but correctness of database assertions needs source verification. The memo repeats the same event and is not independent confirmation.
+
+Review question: Which one source-grounded relation changes the recipient’s decision, and which earlier details did not resolve the uncertainty?
+
+### GAMMA-015
+
+**Human selects business boundaries instead of externalizing the full reasoning network** — human→AI→human; high review priority.
+
+Source: [Cursor transcript, lines 219–224](/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/113c9bcc-e978-45e1-81f1-e20161ad019d/113c9bcc-e978-45e1-81f1-e20161ad019d.jsonl:219). Cluster: `business-rules-113c9bcc`. Claims: A3, A3a, A9.
+
+flomo: slug `MjU0NzE3NDk5`, created_at `2026-09-02 13:18:53`, updated_at `2026-09-02 13:18:57`; relationship: `substantial_text_match_to_user_line_219`. Timestamp timezone was not supplied by MCP.
+
+Consequential state: Human holds a dense business model and tentative terminal-state/CAS judgments; communicating the entire reasoning network is costly.
+
+Observed sequence: Human describes expression effort and supplies three operational rules. Agent translates these to state boundaries and highlights an unresolved partial-receipt case. Human then revises the preferred behavior and again says its reasoning is hard to express; agent proposes a narrower alternative.
+
+Limits: Primarily reasoning/exploration settlement, not a demonstrated human code-execution handoff. The next message changes the proposal: do not score the initial alignment as final or correct. Human effort is self-reported, not timed.
+
+Review question: Can selected operational boundaries reduce reporting effort while keeping unsettled exceptions visible and revisable?
+
+### GAMMA-016
+
+**Human source inspection reveals a settlement gap and challenges local patches** — human→AI→human; high review priority.
+
+Source: [Cursor transcript, lines 193–201](/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/41da5118-de8c-4a54-80e3-ff1db2f3d661/41da5118-de8c-4a54-80e3-ff1db2f3d661.jsonl:193). Cluster: `exception-refactor-september`. Claims: A3, A3b, A10, A12.
+
+flomo: slug `MjU2OTA5Nzk2`, created_at `2026-09-16 18:15:03`, updated_at `2026-09-23 08:50:56`; relationship: `probable_event_match_by_exception_refactor_and_independent_code_inspection`. Timestamp timezone was not supplied by MCP.
+
+Consequential state: After inspecting code, the human identifies mismatch between its understanding, agent-local state and the implemented exception architecture.
+
+Observed sequence: Human explicitly says agent state was not adequately transmitted and points to internal exception types hidden in batch contracts. Agent inspects current structure and reports architectural issues. Human rejects the canvas representation and asks to evaluate concrete changes and their benefits.
+
+Limits: Memo names the exception-refactor episode but lacks a unique quoted turn; linkage is strong topic/detail correspondence, not exact identity proof. Memo updated 2026-09-23 after its 2026-09-16 creation. Repeated turns 199/201 count once. Agent acceptance does not establish architectural correctness.
+
+Review question: Did shared code access expose consequential omissions in executor-selected reports, and what prior knowledge made that inspection usable?
+
+### GAMMA-017
+
+**Recipient explicitly reports partial reading and corrects the shared model** — AI→human→AI; high review priority.
+
+Source: [Cursor transcript, lines 14–18](/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/78bf51f7-d5ad-48b0-a0b4-a8f1afa679a2/78bf51f7-d5ad-48b0-a0b4-a8f1afa679a2.jsonl:14). Cluster: `exception-refactor-september`. Claims: A3, A3a, A9, A12.
+
+flomo: slug `MjU3MTYxODE1`, created_at `2026-09-18 10:42:19`, updated_at `2026-09-18 10:42:21`; relationship: `thematic_match_partial_reading_do_not_infer_same_event`. Timestamp timezone was not supplied by MCP.
+
+Consequential state: A long review report exceeds what the human has read; the human’s model also omitted existing built-in exception types.
+
+Observed sequence: Human explicitly warns that its answer does not imply full reading or comprehension, identifies newly learned distinctions and asks whether the design needs rethinking. Agent acknowledges excessive review scope and reframes the response around that decision.
+
+Limits: flomo note is a matching methodological reminder, not securely tied to this exact conversation. No measured comprehension or later successful action. Agent reframing remains long; intent to reduce burden is not proof of reduced burden. Related to GAMMA-016, not an independent replication.
+
+Review question: What observable next-action evidence is needed before treating a report as assimilated, and can decision-focused reporting improve it?

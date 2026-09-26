@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "created": "2026-09-27",
   "evidence_role": "field_observational_candidates",
   "experiment_definition": "../README.md#γ--bidirectional-state-settlement",
@@ -703,6 +703,376 @@
         "confidence_change_reconstruction": null
       },
       "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-013",
+      "title": "Implementation delta distinguishes an inferred boundary from a confirmed rule",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "AI→human→AI",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/d3f95340-666e-4198-ae2d-048202438a55/d3f95340-666e-4198-ae2d-048202438a55.jsonl",
+        "line_start": 20,
+        "line_end": 33,
+        "sha256": "54e80a745ed5b7822b35650dae24f30e5c24353dcaa8e0ed669c5b580c577e24",
+        "window_sha256": "6909105d93568b7f936d6be5881e7ffc643761cfb011912f06a667b60bfc0a92",
+        "timestamp_first": "Monday, Sep 14, 2026, 2:03 PM (UTC+8)",
+        "timestamp_last": "Monday, Sep 14, 2026, 2:19 PM (UTC+8)",
+        "timestamp_note": "Cursor embedded UTC+8 timestamps; no active-work duration inferred."
+      },
+      "cluster": "sap-mapping-d3f95340",
+      "condition_analogues": [
+        3,
+        4,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3a",
+        "A3b"
+      ],
+      "consequential_delta": "Implementation resolves an underspecified empty-customer rule; the human must know that this boundary was inferred rather than newly confirmed by the consultant.",
+      "observed": "Human explicitly requests valuable implementation deltas at line 21. Agent reports forced omission even when a customer exists. Human recognizes the distinction, challenges another reported risk, and agent retracts a portal-reading error while marking the customer boundary as its own inference. Human then proposes committing.",
+      "limitations": "The request primed delta reporting; this is not spontaneous first-opportunity behavior. The memo was created at 14:11:39, while the explicit human response is stamped 14:16; flomo timezone is unspecified and ordering cannot establish when understanding occurred. Business acceptance and integration tests remain unverified.",
+      "review_question": "Does selected delta preserve the distinction between implemented behavior, consultant authority and an executor inference, without exporting false risks?",
+      "evidence_anchors": [
+        {
+          "line": 21,
+          "quote": "新的有价值增量"
+        },
+        {
+          "line": 28,
+          "quote": "强制不传客户"
+        },
+        {
+          "line": 32,
+          "quote": "它不是顾问新确认的规则"
+        },
+        {
+          "line": 33,
+          "quote": "提交代码"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Human reports, behavioral evidence and agent claims remain distinct.",
+      "discovered_via": "flomo_mcp",
+      "supplementary_sources": [
+        {
+          "carrier": "flomo",
+          "slug": "MjU2NTU4OTQ0",
+          "created_at": "2026-09-14 14:11:39",
+          "updated_at": "2026-09-14 14:11:49",
+          "relationship": "distinctive_quote_match_to_assistant_line_28",
+          "evidence_role": "author_self_report_or_reflection_not_independent_replication",
+          "timezone": "not supplied by MCP"
+        }
+      ]
+    },
+    {
+      "id": "GAMMA-014",
+      "title": "A decisive provenance sentence enables a concrete mapping judgment",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "AI→human→AI",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/d3f95340-666e-4198-ae2d-048202438a55/d3f95340-666e-4198-ae2d-048202438a55.jsonl",
+        "line_start": 49,
+        "line_end": 60,
+        "sha256": "54e80a745ed5b7822b35650dae24f30e5c24353dcaa8e0ed669c5b580c577e24",
+        "window_sha256": "80552ff610b056d99dc2b35c60bd3f8774b2d9f15aa0aab068189959901db9e0",
+        "timestamp_first": "Thursday, Sep 17, 2026, 5:06 PM (UTC+8)",
+        "timestamp_last": "Thursday, Sep 17, 2026, 5:15 PM (UTC+8)",
+        "timestamp_note": "Cursor embedded UTC+8 timestamps; no active-work duration inferred."
+      },
+      "cluster": "sap-mapping-d3f95340",
+      "condition_analogues": [
+        3,
+        4,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3a",
+        "A3b"
+      ],
+      "consequential_delta": "Agent has inspected mapping/data and knows why header-derived fields belong to a specific generated row; the human still questions whether row number alone identifies it.",
+      "observed": "Human challenges the basis at lines 50 and 53. Agent explains field provenance at 56. Human quotes that sentence, states that it enables confidence, and proposes dropping a redundant row-code guard. Agent agrees while preserving scenario conditions; human authorizes implementation at 59.",
+      "limitations": "A planning/research-to-decision handoff rather than completed implementation settlement. Quoted evidence and changed decision are visible, but correctness of database assertions needs source verification. The memo repeats the same event and is not independent confirmation.",
+      "review_question": "Which one source-grounded relation changes the recipient’s decision, and which earlier details did not resolve the uncertainty?",
+      "evidence_anchors": [
+        {
+          "line": 50,
+          "quote": "判断有什么依据"
+        },
+        {
+          "line": 56,
+          "quote": "这些只能贴在"
+        },
+        {
+          "line": 57,
+          "quote": "要的就是这句话"
+        },
+        {
+          "line": 59,
+          "quote": "授权"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Human reports, behavioral evidence and agent claims remain distinct.",
+      "discovered_via": "flomo_mcp",
+      "supplementary_sources": [
+        {
+          "carrier": "flomo",
+          "slug": "MjU3MDU5NjAy",
+          "created_at": "2026-09-17 17:15:15",
+          "updated_at": "2026-09-17 17:15:27",
+          "relationship": "distinctive_quote_match_to_assistant_56_and_user_57",
+          "evidence_role": "author_self_report_or_reflection_not_independent_replication",
+          "timezone": "not supplied by MCP"
+        }
+      ]
+    },
+    {
+      "id": "GAMMA-015",
+      "title": "Human selects business boundaries instead of externalizing the full reasoning network",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "human→AI→human",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/113c9bcc-e978-45e1-81f1-e20161ad019d/113c9bcc-e978-45e1-81f1-e20161ad019d.jsonl",
+        "line_start": 219,
+        "line_end": 224,
+        "sha256": "18d6e0185dac731fbf20498d30337065b70f1eeee450c7c230d46178e2525b13",
+        "window_sha256": "ea4ecaa81a1f8277cbc27080017f68523a3cb5422ca5b1e7bac9d558bb9bf418",
+        "timestamp_first": "Wednesday, Sep 2, 2026, 1:18 PM (UTC+8)",
+        "timestamp_last": "Wednesday, Sep 2, 2026, 1:32 PM (UTC+8)",
+        "timestamp_note": "Cursor embedded UTC+8 timestamps; no active-work duration inferred."
+      },
+      "cluster": "business-rules-113c9bcc",
+      "condition_analogues": [
+        3,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3a",
+        "A9"
+      ],
+      "consequential_delta": "Human holds a dense business model and tentative terminal-state/CAS judgments; communicating the entire reasoning network is costly.",
+      "observed": "Human describes expression effort and supplies three operational rules. Agent translates these to state boundaries and highlights an unresolved partial-receipt case. Human then revises the preferred behavior and again says its reasoning is hard to express; agent proposes a narrower alternative.",
+      "limitations": "Primarily reasoning/exploration settlement, not a demonstrated human code-execution handoff. The next message changes the proposal: do not score the initial alignment as final or correct. Human effort is self-reported, not timed.",
+      "review_question": "Can selected operational boundaries reduce reporting effort while keeping unsettled exceptions visible and revisable?",
+      "evidence_anchors": [
+        {
+          "line": 219,
+          "quote": "网状的业务模型"
+        },
+        {
+          "line": 220,
+          "quote": "部分收货"
+        },
+        {
+          "line": 221,
+          "quote": "不过我也犹豫"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Human reports, behavioral evidence and agent claims remain distinct.",
+      "discovered_via": "flomo_mcp",
+      "supplementary_sources": [
+        {
+          "carrier": "flomo",
+          "slug": "MjU0NzE3NDk5",
+          "created_at": "2026-09-02 13:18:53",
+          "updated_at": "2026-09-02 13:18:57",
+          "relationship": "substantial_text_match_to_user_line_219",
+          "evidence_role": "author_self_report_or_reflection_not_independent_replication",
+          "timezone": "not supplied by MCP"
+        }
+      ]
+    },
+    {
+      "id": "GAMMA-016",
+      "title": "Human source inspection reveals a settlement gap and challenges local patches",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "human→AI→human",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/41da5118-de8c-4a54-80e3-ff1db2f3d661/41da5118-de8c-4a54-80e3-ff1db2f3d661.jsonl",
+        "line_start": 193,
+        "line_end": 201,
+        "sha256": "ec670a4b4f4edf4762f2764bff0380191872e711728177e3393f82a87bdc0602",
+        "window_sha256": "eff3f21752578db6bae8db54190dc2b637d0fda33ce704ddb2046372ce69f3c7",
+        "timestamp_first": "Wednesday, Sep 16, 2026, 4:20 PM (UTC+8)",
+        "timestamp_last": "Wednesday, Sep 16, 2026, 4:39 PM (UTC+8)",
+        "timestamp_note": "Cursor embedded UTC+8 timestamps; no active-work duration inferred."
+      },
+      "cluster": "exception-refactor-september",
+      "condition_analogues": [
+        3,
+        4,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3b",
+        "A10",
+        "A12"
+      ],
+      "consequential_delta": "After inspecting code, the human identifies mismatch between its understanding, agent-local state and the implemented exception architecture.",
+      "observed": "Human explicitly says agent state was not adequately transmitted and points to internal exception types hidden in batch contracts. Agent inspects current structure and reports architectural issues. Human rejects the canvas representation and asks to evaluate concrete changes and their benefits.",
+      "limitations": "Memo names the exception-refactor episode but lacks a unique quoted turn; linkage is strong topic/detail correspondence, not exact identity proof. Memo updated 2026-09-23 after its 2026-09-16 creation. Repeated turns 199/201 count once. Agent acceptance does not establish architectural correctness.",
+      "review_question": "Did shared code access expose consequential omissions in executor-selected reports, and what prior knowledge made that inspection usable?",
+      "evidence_anchors": [
+        {
+          "line": 193,
+          "quote": "你的状态没有很好的传递给我"
+        },
+        {
+          "line": 193,
+          "quote": "我自己看了一下当前的代码"
+        },
+        {
+          "line": 198,
+          "quote": "局部补丁"
+        },
+        {
+          "line": 199,
+          "quote": "没必要用canvas"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Human reports, behavioral evidence and agent claims remain distinct.",
+      "discovered_via": "flomo_mcp",
+      "supplementary_sources": [
+        {
+          "carrier": "flomo",
+          "slug": "MjU2OTA5Nzk2",
+          "created_at": "2026-09-16 18:15:03",
+          "updated_at": "2026-09-23 08:50:56",
+          "relationship": "probable_event_match_by_exception_refactor_and_independent_code_inspection",
+          "evidence_role": "author_self_report_or_reflection_not_independent_replication",
+          "timezone": "not supplied by MCP"
+        }
+      ]
+    },
+    {
+      "id": "GAMMA-017",
+      "title": "Recipient explicitly reports partial reading and corrects the shared model",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "AI→human→AI",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-SUNWARD-CRM/agent-transcripts/78bf51f7-d5ad-48b0-a0b4-a8f1afa679a2/78bf51f7-d5ad-48b0-a0b4-a8f1afa679a2.jsonl",
+        "line_start": 14,
+        "line_end": 18,
+        "sha256": "f689f7ea3074aa89b7b88bc84f57c6e3c5aba1313d94ed8e61a1c2323d96f3f1",
+        "window_sha256": "d9fd9f17f8643ba7955da19d99b587c03da655c00eb6b643c24a72576d2b7b0c",
+        "timestamp_first": "Friday, Sep 18, 2026, 11:02 AM (UTC+8)",
+        "timestamp_last": "Friday, Sep 18, 2026, 11:02 AM (UTC+8)",
+        "timestamp_note": "Cursor embedded UTC+8 timestamps; no active-work duration inferred."
+      },
+      "cluster": "exception-refactor-september",
+      "condition_analogues": [
+        1,
+        3,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3a",
+        "A9",
+        "A12"
+      ],
+      "consequential_delta": "A long review report exceeds what the human has read; the human’s model also omitted existing built-in exception types.",
+      "observed": "Human explicitly warns that its answer does not imply full reading or comprehension, identifies newly learned distinctions and asks whether the design needs rethinking. Agent acknowledges excessive review scope and reframes the response around that decision.",
+      "limitations": "flomo note is a matching methodological reminder, not securely tied to this exact conversation. No measured comprehension or later successful action. Agent reframing remains long; intent to reduce burden is not proof of reduced burden. Related to GAMMA-016, not an independent replication.",
+      "review_question": "What observable next-action evidence is needed before treating a report as assimilated, and can decision-focused reporting improve it?",
+      "evidence_anchors": [
+        {
+          "line": 16,
+          "quote": "没有全部看你的输出"
+        },
+        {
+          "line": 16,
+          "quote": "因为AI并没有暴露"
+        },
+        {
+          "line": 18,
+          "quote": "审查单元铺太大了"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Human reports, behavioral evidence and agent claims remain distinct.",
+      "discovered_via": "flomo_mcp",
+      "supplementary_sources": [
+        {
+          "carrier": "flomo",
+          "slug": "MjU3MTYxODE1",
+          "created_at": "2026-09-18 10:42:19",
+          "updated_at": "2026-09-18 10:42:21",
+          "relationship": "thematic_match_partial_reading_do_not_infer_same_event",
+          "evidence_role": "author_self_report_or_reflection_not_independent_replication",
+          "timezone": "not supplied by MCP"
+        }
+      ]
     }
-  ]
+  ],
+  "updated": "2026-09-27",
+  "enrichment_note": "Five flomo-guided transcript candidates added; supplementary_sources is optional. Original twelve preserved."
 }

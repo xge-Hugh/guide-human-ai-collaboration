@@ -26,5 +26,12 @@
     "codex_databases": "Not mined."
   },
   "cloud_context": "No prior cloud discussion explicitly defining gamma was located in the searched JSONL records. Repository study map supplies the operational definition; cloud-only details remain unavailable.",
-  "selection": "Purposive, keyword-assisted first-pass candidate set, not exhaustive or representative. Shared source/cluster IDs mark dependent episodes. No causal comparisons or treatment assignment."
+  "selection": "Purposive, keyword-assisted first-pass candidate set, not exhaustive or representative. Shared source/cluster IDs mark dependent episodes. No causal comparisons or treatment assignment.",
+  "flomo_extension": {
+    "date": "2026-09-27",
+    "notes_fetched_in_full": 6,
+    "new_candidates": 5,
+    "details": "flomo-evidence.json",
+    "note": "No source writes. Original corpus counts remain first-pass counts."
+  }
 }
