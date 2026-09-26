@@ -1,0 +1,708 @@
+{
+  "schema_version": "1.0",
+  "created": "2026-09-27",
+  "evidence_role": "field_observational_candidates",
+  "experiment_definition": "../README.md#γ--bidirectional-state-settlement",
+  "episodes": [
+    {
+      "id": "GAMMA-001",
+      "title": "Pull report preserves a return path to displaced local work",
+      "status": "candidate_pending_review",
+      "priority": "medium",
+      "direction": "AI→human",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-guide-human-ai-collaboration/agent-transcripts/f1318747-37cb-48ca-a970-9fe8721624c9/f1318747-37cb-48ca-a970-9fe8721624c9.jsonl",
+        "line_start": 1,
+        "line_end": 8,
+        "sha256": "09bfd805c4a30bba709b8f929d02f6911075040930196e37aa9907852c73276c",
+        "window_sha256": "d7272df04de3b06f58ee3c8ae7fc5c0c421cb7b7d158365663fe4124e1646ed7",
+        "timestamp_first": "Sunday, Aug 30, 2026, 7:45 PM (UTC+8)",
+        "timestamp_last": "Sunday, Aug 30, 2026, 7:45 PM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "f1318747-37cb-48ca-a970-9fe8721624c9",
+      "condition_analogues": [
+        3,
+        4,
+        6
+      ],
+      "claim_targets": [
+        "A3",
+        "A3a",
+        "A3b",
+        "A14"
+      ],
+      "consequential_delta": "A pull encountered uncommitted task state, a stash, and a deletion conflict; the final tree alone would not explain the displaced work.",
+      "observed": "Agent reports synchronization and identifies stash@{0}, including a command to recover its contents.",
+      "limitations": "Tool calls and report are present; raw command outcomes and later human retrieval are not established in this window.",
+      "review_question": "Does the stash address plus consequential delta enable recovery better than a clean-tree summary?",
+      "evidence_anchors": [
+        {
+          "line": 5,
+          "quote": "state.json"
+        },
+        {
+          "line": 8,
+          "quote": "stash@{0}"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-002",
+      "title": "Human GUI action and screenshots expose a missing extension",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "human→AI→human",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/5414aa6a-5f8d-4ab3-8a5d-ce4c2c168206/5414aa6a-5f8d-4ab3-8a5d-ce4c2c168206.jsonl",
+        "line_start": 138,
+        "line_end": 145,
+        "sha256": "5c776761c84c7572fb59bb05b01f62598467dc665ef57c476b07fb2910fb26ff",
+        "window_sha256": "4619e6867ab4abe27ec490db425d8373ee2b26e26425cba59825662f9d3b96b6",
+        "timestamp_first": "Saturday, Sep 19, 2026, 10:47 PM (UTC+8)",
+        "timestamp_last": "Saturday, Sep 19, 2026, 10:59 PM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "environment-5414aa6a",
+      "condition_analogues": [
+        3,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A10",
+        "A12"
+      ],
+      "consequential_delta": "Human cleaned the language-server workspace, then encountered a different startup obstacle outside agent observation.",
+      "observed": "Human reports execution and supplies screenshots; agent reports inspecting installed extensions and distinguishes an extension pack from a missing component.",
+      "limitations": "Screenshots were not visually reviewed in this screening; underlying tool results are not reproduced. Agent technical explanations remain claims.",
+      "review_question": "Which facts need a human semantic update and which are recoverable by inspecting the shared machine?",
+      "evidence_anchors": [
+        {
+          "line": 140,
+          "quote": "我运行了这个命令"
+        },
+        {
+          "line": 143,
+          "quote": "核对本机扩展列表"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-003",
+      "title": "Startup log plus process inspection distinguishes progress from failure",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "human→AI→human",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/5414aa6a-5f8d-4ab3-8a5d-ce4c2c168206/5414aa6a-5f8d-4ab3-8a5d-ce4c2c168206.jsonl",
+        "line_start": 146,
+        "line_end": 154,
+        "sha256": "5c776761c84c7572fb59bb05b01f62598467dc665ef57c476b07fb2910fb26ff",
+        "window_sha256": "9afff410025fb850c29d54c2bbe89624d429cd60d36cd5c6c9dd13f24225f337",
+        "timestamp_first": "Saturday, Sep 19, 2026, 11:14 PM (UTC+8)",
+        "timestamp_last": "Saturday, Sep 19, 2026, 11:18 PM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "environment-5414aa6a",
+      "condition_analogues": [
+        3,
+        4,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A9",
+        "A10",
+        "A12"
+      ],
+      "consequential_delta": "The human can launch the application, but an occupied port and later tooling error obscure what succeeded.",
+      "observed": "Human supplies a port-conflict log; agent reports inspecting a running process; human requests cleanup and later reports successful backend startup with a separate tool error.",
+      "limitations": "HTTP/process success is agent-reported here; application correctness and user understanding were not independently tested.",
+      "review_question": "Can a short semantic delta plus log/process evidence restore the next action without a full setup trace?",
+      "evidence_anchors": [
+        {
+          "line": 146,
+          "quote": "Port 8080 was already in use."
+        },
+        {
+          "line": 149,
+          "quote": "我有必要自己启动一次项目"
+        },
+        {
+          "line": 152,
+          "quote": "看起来后端启动成功了"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-004",
+      "title": "Unexpected frontend ports reveal residual execution state",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "AI→human→AI",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/5414aa6a-5f8d-4ab3-8a5d-ce4c2c168206/5414aa6a-5f8d-4ab3-8a5d-ce4c2c168206.jsonl",
+        "line_start": 155,
+        "line_end": 161,
+        "sha256": "5c776761c84c7572fb59bb05b01f62598467dc665ef57c476b07fb2910fb26ff",
+        "window_sha256": "e4dbfbe496b96ef16bff19ef36f77edccb53348cc5ea0e732b88bedc839a16d0",
+        "timestamp_first": "Saturday, Sep 19, 2026, 11:21 PM (UTC+8)",
+        "timestamp_last": "Sunday, Sep 20, 2026, 12:10 AM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "environment-5414aa6a",
+      "condition_analogues": [
+        3,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3b",
+        "A9",
+        "A12"
+      ],
+      "consequential_delta": "Multiple surviving frontend processes explain why repeated launches use incremented ports.",
+      "observed": "Human asks about 3002/3003; agent reports three old instances; human requests cleanup; agent reports freed ports; user later gives broad positive feedback.",
+      "limitations": "The origin of each process is not independently established; positive feedback does not prove port-specific verification.",
+      "review_question": "Was process state omitted from earlier reporting, or created by later human actions? Review earlier execution before attributing an omission.",
+      "evidence_anchors": [
+        {
+          "line": 155,
+          "quote": "3002"
+        },
+        {
+          "line": 158,
+          "quote": "好帮我清掉"
+        },
+        {
+          "line": 160,
+          "quote": "3000–3003"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-005",
+      "title": "Proxy mode changes require inspection before settling network state",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "human→AI→human",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/6fd23206-645c-4d07-959f-350773743323/6fd23206-645c-4d07-959f-350773743323.jsonl",
+        "line_start": 100,
+        "line_end": 121,
+        "sha256": "4bb019d48ef80ea26f36a965f13160f2ea75cc1b1b98dd0f4f53597ac14c2b21",
+        "window_sha256": "4b84a57b48415d52a9bafe372ada64e125917adefeb0af1192b2c97aac00478b",
+        "timestamp_first": "Monday, Sep 21, 2026, 11:10 PM (UTC+8)",
+        "timestamp_last": "Monday, Sep 21, 2026, 11:14 PM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "proxy-6fd23206",
+      "condition_analogues": [
+        3,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A10",
+        "A12"
+      ],
+      "consequential_delta": "The human changes proxy mode and later disables it; the agent needs actual listener and proxy state, not just the mode label.",
+      "observed": "Agent reports that rule mode still resets the proxy, then revises routing after the old upstream refuses connections; reports scope and restoration target.",
+      "limitations": "No independent network reproduction; technical assertions and restoration are historical reports.",
+      "review_question": "Which extra state was learned through inspection after the human reported a change?",
+      "evidence_anchors": [
+        {
+          "line": 106,
+          "quote": "我从全局模式改成规则了"
+        },
+        {
+          "line": 112,
+          "quote": "好了我已经关掉了"
+        },
+        {
+          "line": 117,
+          "quote": "7897 已拒绝新连接"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-006",
+      "title": "Human corrects the causal explanation of a failed capture",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "AI→human→AI",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/6fd23206-645c-4d07-959f-350773743323/6fd23206-645c-4d07-959f-350773743323.jsonl",
+        "line_start": 123,
+        "line_end": 137,
+        "sha256": "4bb019d48ef80ea26f36a965f13160f2ea75cc1b1b98dd0f4f53597ac14c2b21",
+        "window_sha256": "e461ed7e8b2ce561eb2018129ddcbedb02109d8ce734f6103c75d57ce9ee2f14",
+        "timestamp_first": "Monday, Sep 21, 2026, 11:17 PM (UTC+8)",
+        "timestamp_last": "Monday, Sep 21, 2026, 11:25 PM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "proxy-6fd23206",
+      "condition_analogues": [
+        3,
+        4,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3a",
+        "A3b"
+      ],
+      "consequential_delta": "Capture yields a failed cloud save but usable local backup; the human holds a network-access constraint missing from the agent explanation.",
+      "observed": "Agent distinguishes failed cloud persistence from local XML evidence, attributes 403 to intercepted TLS, then the human says the proxy is required for resource access; agent revises its account.",
+      "limitations": "The revised cause is not independently verified. Screenshot and captured payloads were not inspected; do not convert agent explanation into a confirmed root cause.",
+      "review_question": "Could access to the underlying evidence expose an executor-selected explanation that omits a decisive constraint?",
+      "evidence_anchors": [
+        {
+          "line": 134,
+          "quote": "这次不能当成一次成功写入"
+        },
+        {
+          "line": 136,
+          "quote": "这也是必须走0dcloud代理的原因"
+        },
+        {
+          "line": 137,
+          "quote": "403 是因为流量没走 0dcloud"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-007",
+      "title": "Post-PR review request recovers package rationale and stale code",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "AI→human→AI",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/8dade695-86fa-4d58-bafa-531bf086919b/8dade695-86fa-4d58-bafa-531bf086919b.jsonl",
+        "line_start": 351,
+        "line_end": 372,
+        "sha256": "a78760e0c38d24e5fbfdf295b08e83e1f9a657059d17e28df97b82c239277a3e",
+        "window_sha256": "df2ed3b2d081491f76344a35b6b82059668240446fd13eafe86a4df0a3887628",
+        "timestamp_first": "Wednesday, Sep 23, 2026, 5:13 PM (UTC+8)",
+        "timestamp_last": "Wednesday, Sep 23, 2026, 5:35 PM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "implementation-8dade695",
+      "condition_analogues": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3a",
+        "A3b",
+        "A9"
+      ],
+      "consequential_delta": "A completion/PR report leaves the human still needing file placement and a residual-code check for review.",
+      "observed": "Human requests package locations and points to an old accessor; agent invokes diff/search, explains placement and reports two stale elements; human authorizes removal; agent reports cleanup.",
+      "limitations": "Repeated requests at 359/361/363 are one cluster, not three independent episodes. Need preceding implementation context before declaring original reporting inadequate.",
+      "review_question": "Which consequential review details were available in the artifact but not usable from the completion report?",
+      "evidence_anchors": [
+        {
+          "line": 359,
+          "quote": "新增代码文件都放在哪个包下"
+        },
+        {
+          "line": 364,
+          "quote": "git diff develop...HEAD"
+        },
+        {
+          "line": 372,
+          "quote": "两处已删"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-008",
+      "title": "Testing dependency triggers retrieval of an actionable request contract",
+      "status": "candidate_pending_review",
+      "priority": "medium",
+      "direction": "AI→human",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/8dade695-86fa-4d58-bafa-531bf086919b/8dade695-86fa-4d58-bafa-531bf086919b.jsonl",
+        "line_start": 374,
+        "line_end": 381,
+        "sha256": "a78760e0c38d24e5fbfdf295b08e83e1f9a657059d17e28df97b82c239277a3e",
+        "window_sha256": "2e6507f520f2cad4b1dd3a050a1fa588ad659046dd964954fb76611da9653857",
+        "timestamp_first": "Thursday, Sep 24, 2026, 11:03 AM (UTC+8)",
+        "timestamp_last": "Thursday, Sep 24, 2026, 11:05 AM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "implementation-8dade695",
+      "condition_analogues": [
+        3,
+        5,
+        6
+      ],
+      "claim_targets": [
+        "A9",
+        "A10",
+        "A14"
+      ],
+      "consequential_delta": "Human needs endpoint location, headers and body to test a completed feature.",
+      "observed": "First answer supplies URL/path; user expands request to headers/body; agent consults code and gives an example contract.",
+      "limitations": "This may be ordinary incremental information demand rather than failed settlement. No test execution in this window.",
+      "review_question": "Would a discoverable contract pointer have reduced clarification without narrating the entire implementation?",
+      "evidence_anchors": [
+        {
+          "line": 374,
+          "quote": "baseurl"
+        },
+        {
+          "line": 378,
+          "quote": "请求头和请求体示例参考"
+        },
+        {
+          "line": 379,
+          "quote": "对照当前代码"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-009",
+      "title": "Conversation ID supports retrieval across workspaces",
+      "status": "candidate_pending_review",
+      "priority": "medium",
+      "direction": "human→AI",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-FTS-FinePartner/agent-transcripts/e8e64ae8-c14d-40db-ad7a-4dd6ada97228/e8e64ae8-c14d-40db-ad7a-4dd6ada97228.jsonl",
+        "line_start": 1,
+        "line_end": 10,
+        "sha256": "8a71a804456a8406b0873ff099698c57714c7bbacf327254427ad0bfd9626b60",
+        "window_sha256": "b29bf0aad6a4dbc3f6379be17e2a69ceea8d9a787bcc6b9e1d02926ffcb10352",
+        "timestamp_first": "Thursday, Sep 24, 2026, 10:27 PM (UTC+8)",
+        "timestamp_last": "Thursday, Sep 24, 2026, 10:27 PM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "e8e64ae8-c14d-40db-ad7a-4dd6ada97228",
+      "condition_analogues": [
+        4,
+        6
+      ],
+      "claim_targets": [
+        "A3",
+        "A14"
+      ],
+      "consequential_delta": "Human refers to earlier logging exploration by conversation ID and supplies current intent.",
+      "observed": "Agent searches, issues a Read for the prior transcript in another workspace, inspects current project files, then relates earlier conclusions to the new task.",
+      "limitations": "Earlier conversation substance was not independently compared in this screening; this is continuity after exploration, a boundary case rather than a clean execution handoff.",
+      "review_question": "Is the address plus intent enough, and does reconstruction preserve earlier uncertainty rather than invent consensus?",
+      "evidence_anchors": [
+        {
+          "line": 1,
+          "quote": "686316d7-3a02-4fc8-82f5-633b696334e9"
+        },
+        {
+          "line": 5,
+          "quote": "686316d7-3a02-4fc8-82f5-633b696334e9.jsonl"
+        },
+        {
+          "line": 10,
+          "quote": "上次"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-010",
+      "title": "Selected transcript excerpt substitutes for automatic cross-chat visibility",
+      "status": "candidate_pending_review",
+      "priority": "medium",
+      "direction": "human→AI",
+      "source": {
+        "carrier": "Cursor",
+        "path": "/mnt/c/Users/xge/.cursor/projects/c-Projects-guide-human-ai-collaboration/agent-transcripts/e1f51c24-d6b6-4160-b668-35647a20d7ae/e1f51c24-d6b6-4160-b668-35647a20d7ae.jsonl",
+        "line_start": 126,
+        "line_end": 135,
+        "sha256": "3add826223ebcb4798e9cf7e5b5691b1ef5386d4fb2efb54ca49a5fcac26c881",
+        "window_sha256": "62b2286ab159bd7bc058462f850c3535795418bce027b6fcc63b546281c42bc1",
+        "timestamp_first": "Monday, Aug 10, 2026, 9:47 PM (UTC+8)",
+        "timestamp_last": "Monday, Aug 10, 2026, 9:54 PM (UTC+8)",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "e1f51c24-d6b6-4160-b668-35647a20d7ae",
+      "condition_analogues": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "claim_targets": [
+        "A3",
+        "A3b",
+        "A9",
+        "A14"
+      ],
+      "consequential_delta": "Human wants to discuss another agent’s behavior without repeatedly copying context.",
+      "observed": "Agent describes retrieval limitations; human chooses transcript export and pastes a selected interaction including a completion report and review scaffolding.",
+      "limitations": "Nested conversation is second-hand selected evidence, not a new independent execution. A pasted excerpt is not a full chronological trace; no condition-2 treatment is established.",
+      "review_question": "What selection cost and omission risks arise when the human is the reporter of a separate collaboration?",
+      "evidence_anchors": [
+        {
+          "line": 126,
+          "quote": "不用复制粘贴"
+        },
+        {
+          "line": 133,
+          "quote": "选取需要反馈的片段"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-011",
+      "title": "Human repairs a missed field and asks for read-only reconciliation",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "human→AI→human",
+      "source": {
+        "carrier": "Codex",
+        "path": "/home/xge/.codex/sessions/2026/05/21/rollout-2026-05-21T14-19-53-019e4930-c347-7ec3-ae5c-7e0ae617d89a.jsonl",
+        "line_start": 4450,
+        "line_end": 4484,
+        "sha256": "925949efa71317dd67392572091d98be882098be32b3572232c0650950000c03",
+        "window_sha256": "fbd6389aaf2a43e483a1764c402f68a98d5b1369f3fb95fabc114855170f5e2a",
+        "timestamp_first": "2026-05-24T04:01:42.783Z",
+        "timestamp_last": "2026-05-24T04:04:10.701Z",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "fields-019e4930",
+      "condition_analogues": [
+        3,
+        4,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3b",
+        "A10",
+        "A12"
+      ],
+      "consequential_delta": "Human independently patches field configuration and asks the agent to reconcile implementation and display behavior without further edits.",
+      "observed": "Agent reads code and identifies configuration, binding and option-mapping locations; human asks about keeping a residual field and moving to the next task.",
+      "limitations": "Source-read tool results exist in the session but runtime UI behavior was not validated by this screening. Assistant approval is not independent correctness evidence.",
+      "review_question": "Does artifact access plus the human’s brief intent update restore enough state to review the change?",
+      "evidence_anchors": [
+        {
+          "line": 4450,
+          "quote": "目前我自己改了"
+        },
+        {
+          "line": 4468,
+          "quote": "CreateField"
+        },
+        {
+          "line": 4483,
+          "quote": "进入sr/sj"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    },
+    {
+      "id": "GAMMA-012",
+      "title": "Human supplies fallback semantics; agent finds counterexamples but creates explanation burden",
+      "status": "candidate_pending_review",
+      "priority": "high",
+      "direction": "human→AI→human",
+      "source": {
+        "carrier": "Codex",
+        "path": "/home/xge/.codex/sessions/2026/05/25/rollout-2026-05-25T14-59-05-019e5dee-1759-7823-89b9-88be5b4b8377.jsonl",
+        "line_start": 247,
+        "line_end": 268,
+        "sha256": "67aa57c98e2adab72c387a058a27828cb38e58cf71c2dcc3aac575b7bfff04f3",
+        "window_sha256": "abd443a8f48354c19446904cb7e516751074ac4c7d591a9d928b5a02fa852e96",
+        "timestamp_first": "2026-05-26T06:06:24.803Z",
+        "timestamp_last": "2026-05-26T06:10:05.793Z",
+        "timestamp_note": "Available message timestamps; not active work or assimilation duration."
+      },
+      "cluster": "fallback-019e5dee",
+      "condition_analogues": [
+        3,
+        4,
+        5
+      ],
+      "claim_targets": [
+        "A3",
+        "A3a",
+        "A9",
+        "A12"
+      ],
+      "consequential_delta": "Human changes region fallback and explains that null means all tenants, a semantic constraint not recoverable from syntax alone.",
+      "observed": "Agent inspects the change, gives repeated-region and empty-task counterexamples, includes an intermediate flawed suggestion then corrects it; user says the explanation is complex and requests a decision.",
+      "limitations": "No final implementation or test outcome in the window. Self-correction and user burden make this mixed evidence, not a clean success.",
+      "review_question": "Can selected counterexamples and a source return edge preserve calibration with less assimilation cost?",
+      "evidence_anchors": [
+        {
+          "line": 247,
+          "quote": "region - null task means all tenant task"
+        },
+        {
+          "line": 259,
+          "quote": "但这仍然有第 1 个问题"
+        },
+        {
+          "line": 267,
+          "quote": "It's complexed"
+        }
+      ],
+      "measurements": {
+        "time_to_action_sufficient_alignment": null,
+        "missed_consequential_evidence": null,
+        "unnecessary_information_consumed": null,
+        "recipient_assimilation_cost": null,
+        "executor_reporting_cost": null,
+        "clarification_turns": null,
+        "verification_calibration": null,
+        "later_evidence_location": null,
+        "confidence_change_reconstruction": null
+      },
+      "measurement_note": "Not scored. Sequence and anchors support later coding; timestamps/text volume are not cognitive cost."
+    }
+  ]
+}

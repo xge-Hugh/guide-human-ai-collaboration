@@ -1,0 +1,30 @@
+{
+  "cursor": {
+    "root": "/mnt/c/Users/xge/.cursor/projects",
+    "transcript_files": 173,
+    "parent_transcripts": 110,
+    "subagent_transcripts": 63,
+    "by_workspace": {
+      "c-Projects-guide-human-ai-collaboration": 15,
+      "c-Projects-FTS-FinePartner": 12,
+      "empty-window": 2,
+      "c-Projects-flomo-mcp": 1,
+      "c-Projects-SUNWARD-CRM": 143
+    },
+    "screening": "Parent user-message keyword screen; selected assistant/tool windows manually read. Subagents enumerated, not substantively screened.",
+    "keyword_hits": 593
+  },
+  "codex": {
+    "root": "/home/xge/.codex/sessions",
+    "files_enumerated": 604,
+    "screening": "User event keyword screen excluding 2026-09-27 to avoid current-task contamination; 3293 user_message events, 18 hits including machine-generated approval-review wrappers; wrappers excluded from candidates.",
+    "keyword_hits": 18
+  },
+  "additional_stores": {
+    "cursor_global_database": "Read-only schema inspection only: ItemTable, cursorDiskKV, composerHeaders; conversation payloads not mined.",
+    "cursor_workspace_storage": "Located, not mined.",
+    "codex_databases": "Not mined."
+  },
+  "cloud_context": "No prior cloud discussion explicitly defining gamma was located in the searched JSONL records. Repository study map supplies the operational definition; cloud-only details remain unavailable.",
+  "selection": "Purposive, keyword-assisted first-pass candidate set, not exhaustive or representative. Shared source/cluster IDs mark dependent episodes. No causal comparisons or treatment assignment."
+}

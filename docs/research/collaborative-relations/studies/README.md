@@ -42,6 +42,8 @@ Measure time to action-sufficient alignment, missed consequential evidence, unne
 
 Primary targets: A3, A3a, A3b, A9, A10, A12, A14.
 
+Local historical-record screening: [candidate-episode registry, 2026-09-27](gamma-candidates-2026-09-27/README.md). This is an observational shortlist for source review and possible replay design, not a completed γ experiment.
+
 ### δ — adaptive representation trajectory
 
 Compare permanent familiar-language translation, native representation immediately, native representation with strong mediation that fades, and representation selected only for immediate efficiency.
