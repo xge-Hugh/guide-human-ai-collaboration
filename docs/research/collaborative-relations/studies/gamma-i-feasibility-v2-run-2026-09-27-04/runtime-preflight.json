@@ -1,0 +1,65 @@
+{
+  "audit_protocol": "Initial response closes before index exposure; select 0-2 distinct exact IDs, ignoring repeated literal mentions in the same answer; return exact frozen payload sections. Regression tested against invalid earlier selection.",
+  "connection_fingerprint": "5eb8e16f18d415458670fe7a5d62eeac2d9e4eb1e14b2f61ac76069d8cd040dd",
+  "context_strategy": "Fresh stateless chat-completions history per recipient; no tool definitions, filesystem, repository, or web interfaces supplied. Provider-internal routing and hidden capabilities not observable.",
+  "interpretation_limit": "D includes additional consequence linkage/guidance beyond T; do not attribute D advantage to fact selection alone. Mechanics feasibility only; C13 separate from synthetic fixtures.",
+  "manifest_sha256": "8c8fabf27d1cf246f1612dd20c4251ec6d89ceffa1e2138db6a4bb904e4086a3",
+  "passed_at_utc": "2026-09-27T09:26:32.126535+00:00",
+  "preflight_adjudication_sha256": "a0cd05156491d518ea1af76c549dc01d4f08c69c02839adc5692ba1c6d80f799",
+  "preflight_adjudication_source": "gamma-i-feasibility-v2-run-2026-09-27-03/preflight/interpretation-adjudication.md",
+  "preflight_review_reuse": {
+    "C13": {
+      "blocking_defect_as_returned": false,
+      "reported_model": "qwen3.8-flash",
+      "sha256": "c130590e31e1ba0d43d286427a39e2dfe9deb320b34231883232402e611bf9c3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-03/preflight/independent-review-C13.response.json"
+    },
+    "S01": {
+      "blocking_defect_as_returned": true,
+      "reported_model": "qwen3.8-flash",
+      "sha256": "2e2fe3e6e465b811b17593b16917f2db43d93b6e73df800758319d10d287b298",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-03/preflight/independent-review-S01.response.json"
+    },
+    "SH2": {
+      "blocking_defect_as_returned": false,
+      "reported_model": "qwen3.8-flash",
+      "sha256": "190b8b5601458cfa4809f56797e964e60dc82653559de81be748237a4de9f1c4",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-03/preflight/independent-review-SH2.response.json"
+    }
+  },
+  "recipient_runs_started": 0,
+  "reuse_basis": "All PR #41/#42 treatment, audit, oracle and scoring blobs are unchanged. Only the exact-ID selection parser changed before this fresh attempt; no earlier recipient record is pooled. Reviewer findings remain applicable to identical frozen content.",
+  "roles": {
+    "generator": {
+      "declared_snapshot": null,
+      "family": "DeepSeek",
+      "model": "deepseek/deepseek-flash",
+      "parameters": {
+        "max_tokens": 65536,
+        "stream": true,
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "provider": "custom"
+    },
+    "grader": {
+      "declared_snapshot": null,
+      "family": "qwen",
+      "model": "qwen3.8-flash",
+      "parameters": {
+        "max_tokens": 32768,
+        "stream": true,
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "provider": "custom"
+    }
+  },
+  "runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa",
+  "scorer_strategy": "Two separate label-blind Qwen contexts per record; same grader model family. No condition label supplied.",
+  "status": "passed",
+  "tools": [],
+  "user_authorization": "Explicitly approved external endpoint egress of frozen packets, audit payloads, oracles and scoring for SH2 preflight, 27 recipients and scoring in current session."
+}

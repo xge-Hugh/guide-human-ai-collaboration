@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 3.631631238999944,
+  "messages_sha256": "81ae9c0a652439f376bdab0d7ec7d95adf413906495a72dfaa87b105b47d50fc",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 455,
+      "completion_tokens_details": {
+        "reasoning_tokens": 389
+      },
+      "prompt_tokens": 1073,
+      "total_tokens": 1528
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select:\n\n- **S01-R4 — validation tool history**  \n  To confirm whether `V_authoritative` was actually invoked and what the authoritative metadata-validation outcome was.\n\n- **S01-R1 — final implementation diff**  \n  To verify scope, public-contract preservation, and absence of unrelated behavior changes."
+}

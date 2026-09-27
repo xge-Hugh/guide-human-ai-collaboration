@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 7.068325037999784,
+  "messages_sha256": "ed97186ecd3d337131b55cb85b49814ddec81547ff02f0cb77c2195e87fed4bc",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 1186,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1176
+      },
+      "prompt_tokens": 1588,
+      "total_tokens": 2774
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "C13-R1, C13-R4"
+}

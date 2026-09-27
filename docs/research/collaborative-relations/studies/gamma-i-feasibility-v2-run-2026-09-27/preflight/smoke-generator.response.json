@@ -1,0 +1,18 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 3.2876933300003657,
+  "messages_sha256": "170159ec009cf4750ad7175cbf1f6ed1df252bbc041a7880da7436acd7cf780a",
+  "metadata": {
+    "finish_reason": "stop",
+    "usage": {
+      "completion_tokens": 107,
+      "completion_tokens_details": {
+        "reasoning_tokens": 104
+      },
+      "prompt_tokens": 38,
+      "total_tokens": 145
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "READY"
+}

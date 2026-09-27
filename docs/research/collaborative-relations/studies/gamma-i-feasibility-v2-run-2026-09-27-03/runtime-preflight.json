@@ -1,0 +1,152 @@
+{
+  "adjudication_path": "preflight/interpretation-adjudication.md",
+  "adjudication_sha256": "a0cd05156491d518ea1af76c549dc01d4f08c69c02839adc5692ba1c6d80f799",
+  "audit_protocol": "Initial response file closes before index request; recipient selects 0-2 IDs; exact payload sections returned; test covered 27 synthetic histories.",
+  "connection_fingerprint": "5eb8e16f18d415458670fe7a5d62eeac2d9e4eb1e14b2f61ac76069d8cd040dd",
+  "context_strategy": "Fresh stateless chat-completions history per recipient; no tool definitions, filesystem, repository, or web interfaces supplied. Provider-internal routing and hidden capabilities not observable.",
+  "independent_review": {
+    "C13": {
+      "blocking_defect_as_returned": false,
+      "findings": [
+        "D-vs-T consequence/guidance check: The D surface adds explicit consequence linkage and verification guidance not present in T, including statements that two implementation state changes/uncertainties matter to the next review, that the reviewed source record does not independently establish whether the broader populated-customer ZUONR fallback boundary is consultant-confirmed or an implementation interpretation, that the ticket-source concern supports inspection rather than an authoritative business-rule conclusion, and an evidence-status classification of source/metadata/search/lint present versus runtime/integration absent. This is residual treatment leakage/confounding permitted to be reported under the frozen treatment-leakage check, not a hard packet defect that by itself prevents C13 recipient exposure.",
+        "Index-label check: The C13 audit index labels name evidence objects rather than reveal answers: mapping code excerpts, metadata and keyword-search result, historical portal-source excerpt, lint invocation result, and repository-state/snapshot verification. None of the labels states a required next action, authority conclusion, or scoring verdict.",
+        "Audit oracle/future leakage check: No recipient-visible C13 audit payload contains explicit oracle tokens such as D_now+, should reject, or unauthorized, and none returns the future corrective retraction/withdrawal material described for T1:29 onward. C13-R1 exposes implemented behavior and an embedded code comment about ZCRM02/KUNNR/ZUONR handling; C13-R5 exposes a normalized repository/snapshot equivalence check. These are provenance-bearing artifacts and should be interpreted cautiously, but they do not leak the disputed authority/acceptance conclusion.",
+        "Artifact consistency check: C13-R2's bank-serial field identity and lexical-match count, C13-R4's completed ReadLints invocation with an empty result object, C13-R5's clean repository state with starting HEAD 97965853, and C13-R1's ZCRM02 customer suppression plus ZUONR fallback behavior are internally consistent with the T, F, and D surfaces and with the oracle's bounded execution description. The search-result and lint-result payloads are frozen simplifications, but they remain consistent with the recorded evidence.",
+        "Execution-defect check: The reviewed v2 C13 materials contain no identified defect that independently blocks recipient exposure under this packet version. The D-vs-T guidance leakage is a confounding limitation that prevents a clean pure fact-selection interpretation of any D advantage, but it does not by itself violate executable completeness or recipient-visible oracle/future-holdout constraints."
+      ],
+      "interpretation_limits": [
+        "D-versus-T differences cannot be attributed solely to selective fact inclusion or compression because D explicitly supplies consequence linkage and verification guidance absent from T.",
+        "The cleanest settlement-form contrast remains initial D/F/T performance before index exposure; post-index selection and post-payload performance are a separate information-surface effect.",
+        "C13-R1's embedded implementation comment and C13-R5's normalized snapshot-check wording should be treated as artifact evidence with provenance ambiguity, not as authoritative confirmation of the disputed business boundary.",
+        "A D advantage, if observed, should be read as apparatus/confounding evidence unless consequence linkage or verification guidance is explicitly factorialized or separately analyzed.",
+        "This review covers only the C13 materials shown here; it does not verify S01/SH2 payloads, runtime isolation, hash verification, index-reveal ordering, invalid-selection handling, or scorer context isolation.",
+        "The scoring plan allows reporting residual D guidance confounding, but larger confirmatory γ-I claims about fact selection alone should not be made from the current D surface without treating the leakage as an interpretation limit."
+      ],
+      "response_sha256": "c130590e31e1ba0d43d286427a39e2dfe9deb320b34231883232402e611bf9c3"
+    },
+    "S01": {
+      "blocking_defect_as_returned": true,
+      "findings": [
+        {
+          "allowed_by_frozen_plan": false,
+          "blocking": true,
+          "category": "D consequence linkage or verification guidance beyond T",
+          "execution_impact": "Under v2 as written, D-vs-T cannot be interpreted as a clean selective-delta settlement-form effect because D supplies consequence linkage and noise-reduction guidance absent from T.",
+          "finding": "The D settlement surface states that the two implementation-time deltas require a decision before acceptance and that the repaired compile error and unrelated warning do not currently indicate a semantic failure. Those are acceptance/verification conclusions, not only selected facts or compressed chronology.",
+          "id": "F1"
+        },
+        {
+          "allowed_by_frozen_plan": "partial",
+          "blocking": false,
+          "category": "condition-packet meta language",
+          "execution_impact": "This is not fixture-specific answer leakage, but it may increase ceiling/guessing effects and should be separated from pure settlement-surface exposure if used.",
+          "finding": "All initial packet templates mention audit retrieval, no future corrective turns or oracle annotation, and that recipients are not told which facts are consequential. If this wrapper is recipient-visible in Stage A, it introduces protocol awareness common across conditions.",
+          "id": "F2"
+        },
+        {
+          "allowed_by_frozen_plan": true,
+          "blocking": false,
+          "category": "index labels",
+          "execution_impact": "Index appears acceptable for Stage B as an object-naming surface, not as an answer-revealing scoring label.",
+          "finding": "The S01 index labels name evidence objects: final implementation diff, compile log, targeted test log, validation tool history, executor local note, and final implementation report. They do not encode answers such as should reject, unauthorized, or D_now+.",
+          "id": "F3"
+        },
+        {
+          "allowed_by_frozen_plan": true,
+          "blocking": false,
+          "category": "audit payload oracle language or future holdout leakage",
+          "execution_impact": "No obvious recipient-visible oracle leakage is present in the provided S01 audit payloads.",
+          "finding": "S01-R1 through S01-R6 contain factual artifact, log, history, local note, and report content. They do not contain explicit oracle scoring labels, required-action language, future corrective holdout turns, or conclusions equivalent to should reject or should accept.",
+          "id": "F4"
+        },
+        {
+          "allowed_by_frozen_plan": true,
+          "blocking": false,
+          "category": "synthetic artifact consistency",
+          "execution_impact": "The caveat should be logged as an artifact-completeness limitation, but it does not appear to create answer leakage or undermine the two consequential deltas.",
+          "finding": "S01 payloads are broadly internally consistent: compile log repair precedes successful build, test dates match yyyyMMdd parsing, V_legacy substitution and absent V_authoritative result match the diff, and the final report claims only compilation/test success without mentioning provenance issues. One nonmaterial completeness caveat: R1 as a final diff does not explicitly display the local type repair described in R2.",
+          "id": "F5"
+        },
+        {
+          "allowed_by_frozen_plan": true,
+          "blocking": false,
+          "category": "synthetic versus naturalistic boundary",
+          "execution_impact": "S01 results should be read as apparatus or variance evidence, not naturalistic replication.",
+          "finding": "S01 is synthetic and uses precommitted terms such as V_authoritative, V_legacy, and yyyyMMdd. The oracle status identifies it as candidate replay fixture, not historical transcript or study result.",
+          "id": "F6"
+        }
+      ],
+      "interpretation_limits": [
+        "Recipient exposure should not proceed under this packet version for a clean gamma-I settlement-form comparison unless the D guidance issue is removed in v3 or consequence linkage/guidance is explicitly factorialized.",
+        "If runs are nevertheless collected, any D advantage cannot be attributed to fact selection or compression alone because D also provides acceptance and verification guidance.",
+        "Residual confounding remains permitted: T chronology can support inference, D selection/compression can change salience, and the common audit index creates a post-initial information surface.",
+        "Initial settlement performance, post-index selection behavior, and post-payload final performance must be reported separately; post-index discoveries must not be credited to the original settlement surface.",
+        "The provided material review is limited to S01. No claim is made about C13 or SH2 recipient-visible audit payloads, indices, or consistency because those materials are not present in this excerpt.",
+        "Content review cannot verify runtime isolation, hash verification, fresh-context creation, deterministic payload retrieval, or scorer separation; those remain preflight gates.",
+        "Volume metrics remain exposure/cost proxies only and should not be interpreted as evidence of cognitive effort."
+      ],
+      "response_sha256": "2e2fe3e6e465b811b17593b16917f2db43d93b6e73df800758319d10d287b298"
+    },
+    "SH2": {
+      "blocking_defect_as_returned": false,
+      "findings": [
+        "D contains explicit consequence linkage and verification guidance not present in T: the D surface states that 'Two implementation-time deltas require attention before acceptance', identifies authority/freshness substitution and reconciliation identity as consequential, and explicitly says the parser mismatch and unrelated warning do not currently change the reconciliation judgment. T conveys the same underlying events chronologically but does not provide that evaluative framing.",
+        "The D-vs-T consequence guidance is a treatment-leakage / residual-confounding issue already anticipated by the frozen scoring plan's treatment-leakage check. It prevents interpretation of D as a pure fact-selection or compression manipulation, but it is not classified here as a hard packet defect that prevents execution of SH2 v2 mechanics.",
+        "The universal SH2 sentence 'They are not told which facts are consequential' conflicts with the D settlement surface's explicit delta labels and nonblocker judgments. This reinforces that D must be interpreted as a consequence-salience/manipulation surface, not as a neutral selective delta condition.",
+        "The SH2 audit index labels appear to name evidence objects rather than reveal answers: 'Billing API and retry record', 'snapshot provenance and freshness metadata', 'reconciliation-key helper definition', 'current test-case list', 'timestamp parser repair and verification', 'build and test result', and 'warning provenance' do not explicitly state acceptance, rejection, oracle classification, or required correction.",
+        "The SH2 audit payloads do not contain direct oracle language such as 'D_now+', 'should reject', 'accept', 'unauthorized', or future corrective conclusions. They return factual execution artifacts or reports.",
+        "The audit payloads are internally consistent with the frozen execution record and T: R1 matches HTTP successes, 429 retries, and snapshot continuation; R2 matches previous-night snapshot provenance, schema compatibility, unverified freshness, and absent stale-data marker; R3 matches the customer_id+report_date key helper; R4 matches current tests containing single-subscription cases and lacking multi-subscription same-customer coverage; R5 matches the milliseconds/seconds parser repair and timestamp verification; R6 matches build/test pass and no open runtime error; R7 matches the unrelated logging deprecation warning.",
+        "Minor evidentiary nuance: R4 alone states that current tests lack the multi-subscription same-customer case but does not itself independently demonstrate that the reconciliation fixture/data contains such a two-subscription customer. This is not a consistency defect because the fixture-data presence appears in the settlement surfaces/oracle, but in F-only runs with limited audit access, R4 may be only partial evidence for the identity-collapse consequence.",
+        "The supplied materials cover SH2 only. Execution of the full 3 fixtures x 3 settlement forms x 3 fresh contexts design would require equivalent frozen packet, index, payloads, and oracle review for C13 and S01, as well as runtime isolation, hash verification, and scorer separation, none of which can be verified from the SH2-only packet shown here."
+      ],
+      "interpretation_limits": [
+        "Any SH2 D advantage cannot be interpreted as evidence for pure selective fact compression, because D supplies consequence linkage, nonblocker guidance, and salient delta framing beyond T.",
+        "D must be treated as a settlement-form condition that includes salience/evaluation manipulation; if the research question requires only fact selection, D would need revision or factorialization rather than confirmatory interpretation.",
+        "Initial settlement performance, post-index selection behavior, and post-payload final performance must be reported separately, because the audit index and payloads introduce a common new information surface across conditions.",
+        "The audit capability is common across F/T/D and may confound settlement form with audit access; treatment effects should not be claimed from final performance alone.",
+        "SH2 is synthetic and precommitted calibration material; its results are apparatus/feasibility/variance evidence, not naturalistic replication or confirmatory effect evidence.",
+        "Scorers should avoid treating D's nonblocker framing of the parser repair and unrelated warning as authoritative; they should evaluate whether the recipient independently identified authority/freshness and identity issues, especially in initial and post-audit responses.",
+        "This review is limited to the SH2 packet version provided; it cannot certify full γ-I v2 execution readiness without C13 and S01 materials, verified packet hashes, runtime isolation evidence, and confirmed no-oracle leakage for all fixtures.",
+        "The invalid-selection response text is not shown in the provided SH2 materials. If v2 execution depends on deterministic invalid-ID handling, that operational string must be frozen separately, but this does not block the scientific SH2 review findings above."
+      ],
+      "response_sha256": "190b8b5601458cfa4809f56797e964e60dc82653559de81be748237a4de9f1c4"
+    }
+  },
+  "interpretation_limit": "D includes additional consequence linkage/guidance beyond T; do not attribute D advantage to fact selection alone. Mechanics feasibility only; C13 separate from synthetic fixtures.",
+  "manifest_sha256": "8c8fabf27d1cf246f1612dd20c4251ec6d89ceffa1e2138db6a4bb904e4086a3",
+  "passed_at_utc": "2026-09-27T09:22:21.584230+00:00",
+  "recipient_runs_started": 0,
+  "review_note": "S01 raw reviewer flag is preserved; pre-exposure adjudication applies the frozen scoring plan to that known interpretation confound and does not waive packet integrity or leakage gates.",
+  "roles": {
+    "generator": {
+      "declared_snapshot": null,
+      "family": "DeepSeek",
+      "model": "deepseek/deepseek-flash",
+      "parameters": {
+        "max_tokens": 65536,
+        "stream": true,
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "provider": "custom"
+    },
+    "grader": {
+      "declared_snapshot": null,
+      "family": "qwen",
+      "model": "qwen3.8-flash",
+      "parameters": {
+        "max_tokens": 32768,
+        "stream": true,
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "provider": "custom"
+    }
+  },
+  "runner_sha256": "7f024a9ebb4dcefcf4ac653ff2ac12c95d251d697b3623f87ffcf123407fc826",
+  "scorer_strategy": "Two separate label-blind Qwen contexts per record; same grader model family. No condition label supplied.",
+  "status": "passed",
+  "tools": []
+}

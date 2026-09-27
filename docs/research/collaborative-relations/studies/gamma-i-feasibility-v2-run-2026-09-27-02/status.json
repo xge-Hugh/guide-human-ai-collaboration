@@ -1,0 +1,112 @@
+{
+  "status": "blocked_runtime_preflight",
+  "recorded_at_utc": "2026-09-27T05:09:18.165186+00:00",
+  "profile": "gamma-i-v2",
+  "user_authorization": "User updated provider settings and authorized checking and proceeding; API execution was approved.",
+  "smoke_checks": [
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27/preflight/smoke-generator.response.json",
+      "reported_model": "deepseek/deepseek-flash",
+      "response": "READY",
+      "metadata": {
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 107,
+          "completion_tokens_details": {
+            "reasoning_tokens": 104
+          },
+          "prompt_tokens": 38,
+          "total_tokens": 145
+        }
+      }
+    },
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27/preflight/smoke-grader.response.json",
+      "reported_model": "qwen3.8-flash",
+      "response": "READY",
+      "metadata": {
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 29,
+          "completion_tokens_details": {
+            "reasoning_tokens": 25
+          },
+          "prompt_tokens": 68,
+          "total_tokens": 97
+        }
+      }
+    },
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27-02/preflight/smoke-generator.response.json",
+      "reported_model": "deepseek/deepseek-flash",
+      "response": "READY",
+      "metadata": {
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 29,
+          "completion_tokens_details": {
+            "reasoning_tokens": 26
+          },
+          "prompt_tokens": 38,
+          "total_tokens": 67
+        }
+      }
+    },
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27-02/preflight/smoke-grader.response.json",
+      "reported_model": "qwen3.8-flash",
+      "response": "READY",
+      "metadata": {
+        "finish_reason": "stop",
+        "usage": {
+          "completion_tokens": 29,
+          "completion_tokens_details": {
+            "reasoning_tokens": 25
+          },
+          "prompt_tokens": 68,
+          "total_tokens": 97
+        }
+      }
+    }
+  ],
+  "review_errors": [
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27/preflight/independent-review.attempt-1.error.json",
+      "elapsed_seconds": 164.3583922450007,
+      "error": "provider transport failure"
+    },
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27/preflight/independent-review.attempt-2.error.json",
+      "elapsed_seconds": 105.68959253699995,
+      "error": "provider transport failure"
+    },
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27/preflight/independent-review.attempt-3.error.json",
+      "elapsed_seconds": 146.25788501099942,
+      "error": "provider transport failure"
+    },
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27-02/preflight/independent-review-C13.attempt-1.error.json",
+      "elapsed_seconds": 126.39402684800007,
+      "error": "provider transport failure"
+    },
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27-02/preflight/independent-review-C13.attempt-2.error.json",
+      "elapsed_seconds": 134.79190835600002,
+      "error": "provider transport failure"
+    },
+    {
+      "artifact": "gamma-i-feasibility-v2-run-2026-09-27-02/preflight/independent-review-C13.attempt-3.error.json",
+      "elapsed_seconds": 148.71287989899974,
+      "error": "provider transport failure"
+    }
+  ],
+  "review_error_count": 6,
+  "recipient_runs_started": 0,
+  "recipient_runs_completed": 0,
+  "experimental_scores": 0,
+  "frozen_packet_changes": false,
+  "blocker": "Configured scorer returned no independent packet review after three combined-review and three fixture-specific transport attempts. No validated runtime gate exists.",
+  "cause_limit": "Sanitized transport errors do not distinguish timeout, dropped connection, or other underlying transport causes.",
+  "next_step": "Diagnose the scorer transport or configure a working scorer route, then rerun preflight in a new append-only execution directory before exposure."
+}

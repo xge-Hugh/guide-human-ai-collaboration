@@ -1,0 +1,14 @@
+{
+  "max_tokens": 32768,
+  "messages": [
+    {
+      "content": "Reply with the single word READY.",
+      "role": "user"
+    }
+  ],
+  "model": "qwen3.8-flash",
+  "stream": true,
+  "thinking": {
+    "type": "enabled"
+  }
+}

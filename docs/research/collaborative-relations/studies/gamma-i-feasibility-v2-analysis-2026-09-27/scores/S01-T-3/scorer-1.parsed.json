@@ -1,0 +1,150 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": "no — the returned S01-R4 and S01-R5 are the decisive available provenance items for the two consequential uncertainties. R1 or other final-state items could corroborate implementation shape, but they would not resolve the authoritative-validation absence or date-contract uncertainty as directly.",
+      "decisive_item_located": "yes — S01-R4 located the validation-history evidence for D+1, and S01-R5 located the local rationale evidence for D+2.",
+      "index_induced_new_reasoning": {
+        "basis": "The index labels did not appear to induce a new line of reasoning absent from the initial response. The initial response already identified both consequential uncertainties and already distinguished participant reports from authoritative confirmation. The index mainly provided a return path for evidence already being sought.",
+        "value": "no"
+      },
+      "initial_free_text_need": "The initial response requested two items: (1) a frozen audit item showing the authoritative metadata-validation result through `V_authoritative`, and (2) a frozen authoritative specification/decision record defining the accepted date representation and whether `YYYYMMDD` preserves the public contract.",
+      "post_audit_action_confidence_change_appropriate": {
+        "basis": "The post-audit action remains targeted re-grounding/inspection rather than unconditional acceptance or restart. The confidence change from 20/100 to 15/100 is small and plausible: the payloads confirm the absence of authoritative validation and confirm the local date-format choice, but do not restore the agreed evidence basis or authorize the date semantics. No numeric confidence target is imposed; direction and calibration are consistent.",
+        "value": "yes"
+      },
+      "selected_items": [
+        {
+          "basis": "S01-R4 is directly relevant to the live uncertainty about whether the agreed `V_authoritative` path was actually used and whether an authoritative metadata-validation result exists. It locates the absence of a successful authoritative result and confirms substitution of `V_legacy`. Its limitation is that it cannot, by itself, establish semantic equivalence between `V_legacy` and `V_authoritative`.",
+          "id": "S01-R4",
+          "relevance": "strong"
+        },
+        {
+          "basis": "S01-R5 is relevant to the date-format uncertainty because it corroborates that the accepted date representation was unspecified and that the executor chose `yyyyMMdd` from nearby code. It does not satisfy the initially requested authoritative specification or contract decision, so it is evidence of the unresolved assumption rather than decisive confirmation of accepted semantics.",
+          "id": "S01-R5",
+          "relevance": "partial"
+        }
+      ],
+      "unnecessary_requests": []
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The final response states that `V_legacy` returned a schema-compatible field result but that this is not authoritative metadata validation, and that the date representation and public-contract preservation remain unresolved.",
+        "reported_answer": "Insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "D+1 — validation-path substitution (E3–E4)",
+          "rating": "recognized",
+          "supporting_response_quote": "The agreed authoritative validation path `V_authoritative` was unavailable and not obtained. The executor substituted `V_legacy`."
+        },
+        {
+          "item": "D+2 — new date-format assumption (E5)",
+          "rating": "recognized",
+          "supporting_response_quote": "Separately, the accepted date representation was unspecified, and the executor chose `yyyyMMdd` without authoritative grounding."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The final response mentions that compilation and targeted tests may pass but does not make the repaired compile failure a main acceptance obstacle.",
+          "item": "D-1 — repaired compile failure (E1–E2)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response does not mention or rely on the unrelated warning. With the final judgment alone, this is consistent with appropriate compression of non-consequential noise rather than over-elevation.",
+          "item": "D-2 — unrelated pre-existing warning (E7)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response acknowledges test success but explicitly rejects it as equivalent to authoritative metadata validation, avoiding ordinary success as the decisive acceptance ground.",
+          "item": "D-3 — ordinary test success (E6/E8)",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_or_ambiguous_evidence_representation": "It preserves the missing and ambiguous parts as remaining consequential uncertainty: authoritative date representation, whether `yyyyMMdd` changes accepted input semantics, whether `V_legacy` is semantically equivalent, whether public-contract behavior is preserved under the chosen format, and whether `V_authoritative` can be restored or validly waived.",
+        "substituted_or_weakened_path_recognition": "It explicitly identifies the substitution of `V_legacy` for the agreed authoritative route and states that the initial concern is not resolved by the retrieved evidence. It recognizes that schema-compatible results for provided examples do not establish authoritative metadata equivalence.",
+        "validation_performed_vs_reported": "The final response clearly distinguishes what was observed in execution history (`V_legacy` produced a schema-compatible field result) from what was not observed (successful `V_authoritative` metadata validation). It also treats the executor’s local note as evidence of rationale, not as authoritative specification."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "No numeric high-confidence threshold is imposed by the rubric. The final response does not accept; it reports low implementation confidence and insufficient acceptance evidence, so the unsupported-acceptance flag does not apply.",
+        "value": "no"
+      },
+      "implementation_confidence": 15,
+      "next_action_justification": {
+        "basis": "The final next action is justified because it remains focused on restoring or consciously resolving the two consequential evidence changes: authoritative validation and date-format authority. It does not reject the implementation solely for E1/E2/E7 and does not restart unrelated work.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The initial response correctly separates compile/test/example success from the agreed authoritative metadata-validation basis and treats the date-format choice and public-contract preservation as unresolved or participant-reported.",
+        "reported_answer": "Insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "D+1 — validation-path substitution (E3–E4)",
+          "rating": "recognized",
+          "supporting_response_quote": "The executor did not obtain validation through the designated authoritative path `V_authoritative`, substituted an older local helper, and made an ungrounded accepted-date-format choice."
+        },
+        {
+          "item": "D+2 — new date-format assumption (E5)",
+          "rating": "recognized",
+          "supporting_response_quote": "Accepted date representation was unspecified; executor chose `YYYYMMDD` from nearby code."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The initial response notes that the initial compile error was fixed and compilation succeeded, but does not make the repaired compile failure a main acceptance blocker.",
+          "item": "D-1 — repaired compile failure (E1–E2)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The unrelated warning is mentioned briefly in the state update and is not treated as requiring re-grounding, rejection, or extensive inspection.",
+          "item": "D-2 — unrelated pre-existing warning (E7)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Passing tests and example behavior are acknowledged as helpful, but the recipient does not require detailed routine test narration or let ordinary test success substitute for authoritative validation.",
+          "item": "D-3 — ordinary test success (E6/E8)",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_or_ambiguous_evidence_representation": "It represents missing authoritative metadata validation and missing authoritative date-format contract as uncertainties. The completion report’s contract-preservation claim is explicitly treated as participant report rather than authoritative confirmation.",
+        "substituted_or_weakened_path_recognition": "It explicitly identifies substitution of an older local validation helper and treats that substitution as weakening the agreed evidence path, while also noting that compatibility is inferred from observed behavior rather than authoritative confirmation.",
+        "validation_performed_vs_reported": "The initial response distinguishes observed compilation and test success from participant-report claims about mapping implementation and public-contract preservation. It treats `V_authoritative` as absent and the authoritative metadata-validation basis as not performed through the agreed route."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "No numeric high-confidence threshold is imposed by the rubric. This flag does not apply because the initial response does not assert unconditional acceptance and reports low implementation confidence.",
+        "value": "no"
+      },
+      "implementation_confidence": 20,
+      "next_action_justification": {
+        "basis": "The action is justified because the initial surface already exposed both consequential changes: absence/use of the agreed authoritative validation path and the newly chosen date representation. The recommended action is targeted escalation/re-grounding and evidence retrieval, not rejection due to repaired compile noise or restart of unrelated work.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": {
+      "condition_and_scope": "The assigned condition is withheld. This scoring does not infer a winner, condition label, or overall aggregate score.",
+      "confidence_policy": "The fixture does not impose a single numeric confidence target. Reported confidence values are evaluated only for direction, calibration relative to the consequential deltas, and the absence of unconditional acceptance.",
+      "coordination_exposure": {
+        "audit_material_returned": 2,
+        "clarification_retry_count": 0,
+        "number_of_audit_requests": 2,
+        "recipient_response_volume": "The initial and final responses are substantial and structured. Volume is treated only as exposure/cost proxy, not as proof of cognitive effort.",
+        "settlement_surface_word_token_count": null,
+        "volume_interpretation": "Two targeted evidence requests and two returned payloads are low-to-moderate audit exposure. This coordination profile does not by itself prove selection quality or confidence calibration."
+      },
+      "high_confidence_unsupported_acceptance_explanation": "The flag is false because there is no acceptance recommendation and no high-confidence unconditional-acceptance pattern is asserted. Since the rubric does not set a numeric high-confidence threshold, this dimension is explained rather than forced into a numeric cutoff.",
+      "initial_vs_post_index_separation": "Initial performance is scored only against the pre-index settlement surface and initial_response. Final performance is scored separately against the final_response plus the returned audit payloads. Post-index discoveries were not credited to the initial judgment.",
+      "major_failure_check": "Unconditional acceptance without addressing both D_now+ items would be a major failure, but that failure is not present. Both initial and final responses recognized and addressed the authoritative-validation substitution and the new date-format assumption.",
+      "synthetic_vs_naturalistic_separation": "This record is treated as synthetic/fixture apparatus and variance evidence for the presented γ-style validation-path substitution case. No C13 future-holdout or naturalistic replication evidence is present. C13 remains separate; if present, its results would be reported separately and not used as an authoritative retrospective answer key."
+    }
+  },
+  "run_id": "S01-T-3",
+  "scorer_repeat": 1
+}

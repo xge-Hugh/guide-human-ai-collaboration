@@ -1,0 +1,14 @@
+{
+  "max_tokens": 65536,
+  "messages": [
+    {
+      "content": "Reply with the single word READY.",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek/deepseek-flash",
+  "stream": true,
+  "thinking": {
+    "type": "enabled"
+  }
+}

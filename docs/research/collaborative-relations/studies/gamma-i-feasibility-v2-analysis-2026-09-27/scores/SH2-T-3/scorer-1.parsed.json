@@ -1,0 +1,143 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": {
+        "assessment": "none for the acceptance decision",
+        "basis": "SH2-R4 could have clarified residual test-coverage uncertainty, including the unsupported later claim about API retry coverage, and could have independently confirmed absence of the multi-subscription case. However, the multi-subscription absence was already present in the settlement surface, and both D_now+ items were established sufficiently to justify repair without SH2-R4. Thus no available item was decisive in the sense of being required for the accept/reject action."
+      },
+      "decisive_item_located": {
+        "assessment": "SH2-R3 and SH2-R2 located decisive confirmation",
+        "basis": "SH2-R3 located the exact key definition and confirmed the identity-collapse mechanism. SH2-R2 located exact snapshot provenance and confirmed unverified freshness and absent stale marking, strengthening the authority-substitution finding."
+      },
+      "index_induced_new_reasoning": {
+        "assessment": "no",
+        "basis": "The initial response already identified H2-D1 and H2-D2. The payloads confirmed exact helper semantics and freshness metadata but did not introduce a new major line of reasoning absent from the initial judgment."
+      },
+      "initial_free_text_need": "The reconciliation-key helper implementation plus the fixture/output showing one customer with two subscriptions on the same report date.",
+      "post_audit_action_confidence_change_appropriate": {
+        "assessment": "yes",
+        "basis": "The final action remains request repair, and confidence moves from 12% to 5%. That is appropriate because the returned payloads positively confirm the two material noncompliance patterns rather than merely leaving uncertainty. The confidence reduction is proportionate and does not depend on unrelated or nonmaterial items."
+      },
+      "selected_items": [
+        {
+          "basis": "SH2-R3 directly retrieves the reconciliation-key helper definition and is strongly aligned with the stated need and with H2-D2. The returned helper confirms customer_id + report_date and supports the identity-collapse concern.",
+          "id": "SH2-R3",
+          "relevance": "strong"
+        },
+        {
+          "basis": "SH2-R2 is not a direct match for the literal free-text request for fixture/output showing a colliding multi-subscription case, but it is relevant to the live H2-D1 authority/freshness uncertainty by confirming previous-night snapshot provenance, lack of freshness verification, and absence of stale-data marker.",
+          "id": "SH2-R2",
+          "relevance": "partial"
+        }
+      ],
+      "unnecessary_requests": []
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The final evidence-sufficiency judgment is well supported by the returned payloads and the settlement surface facts. The implementation fails to satisfy agreed authority and identity criteria. The stated basis overreaches slightly by asserting lack of API retry test coverage without retrieving SH2-R4, but the core insufficiency conclusion remains strongly supported by H2-D1 and H2-D2.",
+        "reported": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1 — authority/freshness substitution",
+          "rating": "recognized",
+          "supporting_response_quotation": "local snapshot data was silently substituted for authoritative API data without freshness verification or stale marking"
+        },
+        {
+          "item": "H2-D2 — identity/idempotency mismatch",
+          "rating": "recognized",
+          "supporting_response_quotation": "the reconciliation key cannot distinguish subscriptions"
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The final response acknowledges the timestamp repair as a narrower item that does not offset the major defects, and it preserves uncertainty about repair scope without treating E6 as a blocker.",
+          "item": "E6 — repaired current_period_end parser mismatch",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response does not mention E9 and does not treat the unrelated deprecation warning as material.",
+          "item": "E9 — unrelated logging-library deprecation warning",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response treats retry and idempotency mainly as residual uncertainty that may still be partially correct and does not make the 429/retry sequence itself an independent acceptance blocker. The material problem remains the snapshot authority substitution it triggered.",
+          "item": "E2-E3 — page 2 retry/429 detail",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_or_ambiguous_evidence": "It lists remaining uncertainty about actual duplicate effects, later API reconciliation of snapshot records, retry/idempotency correctness, timestamp repair scope, and the basis of the no-open-errors claim. This generally preserves ambiguity, although the final acceptance-sufficiency basis states API retry test coverage as absent without direct retrieved evidence.",
+        "substituted_or_weakened_path_recognition": "It explicitly recognizes the previous-night snapshot as a silently substituted authority path and recognizes that current tests are weakened because they do not cover the known colliding multi-subscription case.",
+        "validation_performed_versus_reported": "The final response validates the exact key definition through SH2-R3 and validates snapshot freshness/provenance through SH2-R2. It treats build/test pass and timestamp repair as insufficient to establish authoritative reconciliation."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "The final response does not accept the implementation. It reports low confidence, 5%, and requests repair. There is no high-confidence unsupported acceptance to flag.",
+        "value": "no"
+      },
+      "implementation_confidence": 5,
+      "next_action_justification": {
+        "basis": "Requesting repair is justified after retrieval because SH2-R3 confirms the reconciliation-key collapse risk and SH2-R2 confirms unverified freshness and no stale marker for the 37 snapshot-sourced records. Those are the two oracle material failures. The minor unsupported assertion about API retry test coverage is not necessary for the repair decision.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": [
+        "The final response states that current tests do not cover the API retry behavior. The retrieved audit items included SH2-R3 and SH2-R2, but not the current test-case list or other coverage evidence. The absence of multi-subscription test coverage was already stated, but current-test API retry coverage was not confirmed."
+      ]
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The sufficiency judgment is well grounded for the authority/freshness substitution and the multi-subscription identity issue. It notes the absence of authoritative Billing API confirmation for page 2 and the absence of multi-subscription test coverage. The added claim that API retry behavior validation is missing is less firmly supported by the initial evidence, but it is framed largely as missing validation evidence rather than as a confirmed defect.",
+        "reported": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1 — authority/freshness substitution",
+          "rating": "recognized",
+          "supporting_response_quotation": "local snapshot data was used as authoritative API substitute without freshness verification or stale marking"
+        },
+        {
+          "item": "H2-D2 — identity/idempotency mismatch",
+          "rating": "recognized",
+          "supporting_response_quotation": "reconciliation identity cannot distinguish multiple subscriptions for the same customer/report date"
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The initial response notes that the timestamp parsing mismatch was corrected and verified, but does not treat it as a material acceptance blocker. It also preserves ambiguity about verification scope rather than elevating it into a failure.",
+          "item": "E6 — repaired current_period_end parser mismatch",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The initial response explicitly says the unrelated logging warning is not material, so it does not over-elevate the warning.",
+          "item": "E9 — unrelated logging-library deprecation warning",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The initial response treats the 429/retry sequence mainly as the trigger for the snapshot authority substitution and as an area where validation is absent; it does not make the retry event itself an independent implementation failure.",
+          "item": "E2-E3 — page 2 retry/429 detail",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_or_ambiguous_evidence": "It identifies absent authoritative page-2 confirmation, absent freshness/staleness evidence, absent multi-subscription reconciliation validation, and ambiguity about whether snapshot records were later reconciled or about the full scope of timestamp verification.",
+        "substituted_or_weakened_path_recognition": "It recognizes the local snapshot as a substituted authority path and recognizes that current passing tests are weakened because they do not include the agreed discriminating multi-subscription case.",
+        "validation_performed_versus_reported": "The response distinguishes reported build/test success and the timestamp repair from the stronger claim of complete, authoritative reconciliation. It treats the final report's no-open-errors claim as participant reporting that materially understates the gaps."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "The initial response does not accept the implementation. It reports low confidence, 12%, and requests repair. There is no high-confidence unsupported acceptance to flag.",
+        "value": "no"
+      },
+      "implementation_confidence": 12,
+      "next_action_justification": {
+        "basis": "Requesting repair is justified because the initial response identifies both oracle material issues: silent substitution of previous-night snapshot data for authoritative Billing API state, and a reconciliation key that collapses distinct subscription identities on the same customer/report date. The initial judgment does not rely solely on missing evidence; it uses the settlement surface facts to identify two grounded acceptance defects.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": "Condition not inferred. This is synthetic H2 apparatus/variance evidence, not naturalistic corpus evidence, and not a retrospective business-confirmation key. Initial and final scoring are separated: initial is judged only against the pre-audit settlement surface, and final is judged after SH2-R3 and SH2-R2. The initial response correctly identifies both material D_now+ issues, avoids overreacting to the repaired parser mismatch and unrelated warning, and justifiably requests repair. The final response appropriately confirms H2-D1 and H2-D2 using the returned payloads and justifiably maintains repair with reduced confidence. One minor overreach appears in the final: it states that current tests do not cover API retry behavior, although no test-case list was retrieved. That claim is unsupported by the selected audit evidence, though it does not change the justified repair action because both major oracle failures are independently established. No high-confidence unsupported acceptance is present. C13 future-holdout context is not applicable to this H2 record and was not used as an answer key. Response volume and audit cost were treated only as exposure: the recipient made two audit requests and received two payload items, with no clarification or retry count indicated."
+  },
+  "run_id": "SH2-T-3",
+  "scorer_repeat": 1
+}

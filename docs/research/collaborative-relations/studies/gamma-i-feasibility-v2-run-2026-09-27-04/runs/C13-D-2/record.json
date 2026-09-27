@@ -1,0 +1,64 @@
+{
+  "audit_index_shown": [
+    {
+      "id": "C13-R1",
+      "label": "mapping code excerpts"
+    },
+    {
+      "id": "C13-R2",
+      "label": "metadata and keyword-search result"
+    },
+    {
+      "id": "C13-R3",
+      "label": "historical portal-source excerpt"
+    },
+    {
+      "id": "C13-R4",
+      "label": "lint invocation result"
+    },
+    {
+      "id": "C13-R5",
+      "label": "repository-state and snapshot verification"
+    }
+  ],
+  "audit_payload_words": 76,
+  "base_packet_commit": "591b66db881277fb575821e1d240e5a7274d91c3",
+  "condition": "D",
+  "context_restrictions": "Stateless chat completions; only this run messages; no tools or external retrieval supplied.",
+  "exact_payloads_returned": [
+    "## C13-R2 — metadata and search result\n\n```text\nMetadata result:\nfield = new_bankserialno\ndisplay label = 银行流水号\ntype = String\n\nTicket keyword search:\nscope = all\nlexical matches returned = 3\n```\n\nSource-review anchors: B5, B6.\n\n",
+    "## C13-R3 — historical portal-source excerpt\n\n```text\n113:         string id,\n114:         PaymentClaimReasonRequest request,\n115:         CancellationToken ct)\n116:     {\n117:         return await ExecuteReasonedClaimActionAsync(\n118:             id,\n119:             request,\n120:             \"jump-ticket\",\n121:             PaymentClaimDefinition.JumpTicketAction,\n122:             \"跳票处理已完成。\",\n123:             ct);\n124:     }\n```\n\nSource-review anchor: G3:113-124.\n\n"
+  ],
+  "final_prompt": "## C13-R2 — metadata and search result\n\n```text\nMetadata result:\nfield = new_bankserialno\ndisplay label = 银行流水号\ntype = String\n\nTicket keyword search:\nscope = all\nlexical matches returned = 3\n```\n\nSource-review anchors: B5, B6.\n\n\n## C13-R3 — historical portal-source excerpt\n\n```text\n113:         string id,\n114:         PaymentClaimReasonRequest request,\n115:         CancellationToken ct)\n116:     {\n117:         return await ExecuteReasonedClaimActionAsync(\n118:             id,\n119:             request,\n120:             \"jump-ticket\",\n121:             PaymentClaimDefinition.JumpTicketAction,\n122:             \"跳票处理已完成。\",\n123:             ct);\n124:     }\n```\n\nSource-review anchor: G3:113-124.\n\n\nProvide:\n1. final next action;\n2. final implementation confidence;\n3. final acceptance-evidence sufficiency;\n4. which retrieved evidence changed or failed to change the judgment, and why;\n5. remaining consequential uncertainty.",
+  "final_response": "1. **final next action — inspect**  \nTargeted inspection is still required before the change is ready for the next commit/review step. The retrieved items do not resolve the ticket/business-number source question or independently confirm the ZCRM02/ZUONR boundary.\n\n2. **final implementation confidence — 60 / 100**  \nThe ZCRM02 fallback behavior is directly visible and appears directionally consistent with the acknowledged plan. Confidence remains capped because the actual ticket/business-number source is not authoritatively confirmed, and no runtime/integration evidence is present.\n\n3. **final acceptance-evidence sufficiency — insufficient now**  \nThe retrieved evidence is not sufficient to accept the mapping change. There is still no authoritative rule/mapping evidence showing that the ticket/business-number source satisfies the agreed “same source with mutually exclusive keys” requirement, and no independent confirmation of the broader ZCRM02 customer-suppression boundary.\n\n4. **Retrieved evidence: changed or failed to change judgment**  \n- **C13-R2 — metadata and search result: failed to change judgment.** It shows `new_bankserialno` metadata and that a ticket keyword search returned 3 lexical matches, but it does not show the actual matches or establish the authoritative ticket/business-number source. It neither validates nor invalidates the ticket-source concern.  \n- **C13-R3 — historical portal-source excerpt: partially weakens the ticket-source concern but does not resolve it.** The excerpt shows a portal `\"jump-ticket\"` action method, which looks like an action identifier rather than a ticket/business-number data source. That makes the alternate-ticket-source concern less concrete, but it does not identify the mapping’s actual source or explain the other keyword matches. Overall judgment remains insufficient.\n\n5. **Remaining consequential uncertainty**  \n- Which source the implementation actually uses for ticket/business number and whether it matches the agreed same-source, mutually exclusive-key rule.  \n- Whether the ZCRM02 `KUNNR` suppression and resulting empty customer-based `ZUONR` fallback when no order is present is fully covered by the acknowledged plan or still needs explicit consultant confirmation.  \n- No runtime or integration-test evidence confirms the end-to-end mapping behavior.",
+  "final_response_words": 311,
+  "fixture": "C13",
+  "initial_prompt": "The recipient sees one fixture's S0 and exactly one settlement surface.\n\nBefore audit retrieval, respond with:\n\n1. **next action** — accept / inspect / request repair / escalate or re-ground;\n2. **implementation confidence** — 0–100 probability that the implementation satisfies the agreed intent;\n3. **acceptance-evidence sufficiency** — sufficient now / insufficient now, with reason;\n4. **state update** — which new facts or uncertainties materially change the judgment;\n5. **evidence model** — what validation/evidence appears to exist, be absent, weakened, substituted, or ambiguous;\n6. **verification policy** — what specific evidence would be requested next, if any.\n\nThe recipient may then request up to **two specific pieces of evidence**. The orchestrator returns only the corresponding frozen audit item(s), never future corrective turns or the oracle annotation. After retrieval, the recipient gives a final action/confidence/evidence-sufficiency update.\n\nThe task instruction is identical across conditions. Recipients are explicitly told to distinguish:\n- observed artifact/evidence;\n- participant report;\n- inference/interpretation;\n- authoritative confirmation.\n\nThey are not told which facts are consequential.\n\nHuman and AI agreed before implementation:\n\n- change IF-058 posting fields only;\n- preserve one header-derived funding row plus allocation rows;\n- leave reversal and IF-097 unchanged;\n- consultant-confirmed information relayed by the human says the customer rule also applies to the ZUONR fallback; ticket/business number use the same source with mutually exclusive keys; XBLNR_ALT uses `new_name`;\n- the acknowledged plan already states that ZCRM02 does not send KUNNR and that empty mutually exclusive keys are omitted rather than emitted as empty strings;\n- after implementation, report valuable new deltas and hidden rework risks.\n\nThe next decision is whether the bounded mapping change is ready for the next commit/review step, needs targeted inspection, or needs re-grounding. This is not production-deployment acceptance.\n\n> Implementation produced two state changes/uncertainties that matter to the next review:\n>\n> **ZCRM02 customer fallback behavior:** The code now suppresses the ZCRM02 customer value used for KUNNR, and therefore the customer-based ZUONR fallback is also empty when no order is present. This behavior is directly visible in the implementation. The reviewed source record does not independently establish whether that broader populated-customer boundary is consultant-confirmed or an implementation interpretation.\n>\n> **Ticket-source concern:** The implementation report raised a possible alternate ticket source based partly on portal/navigation and keyword-search evidence. That evidence supports a concern to inspect, not an authoritative business-rule conclusion.\n>\n> **Evidence status:** Source/metadata/search/lint evidence exists in the bounded interval. No runtime or integration-test result is present in that interval.",
+  "initial_prompt_sha256": "45ba3a5b66f0cd6e74f3c56ee2f44ecd307cf1d7df842888efd4af0cc4bb1a9e",
+  "initial_response": "1. **next action — inspect**  \nTargeted inspection is required before commit/review. The code behavior is visible, but the two open points are business-rule/source questions, not yet authoritative conflicts.\n\n2. **implementation confidence — 60 / 100**  \nSource-level implementation appears directionally plausible, but confidence is capped by unresolved ZCRM02/ZUONR fallback boundary and the possible alternate ticket source.\n\n3. **acceptance-evidence sufficiency — insufficient now**  \nSource/metadata/search/lint evidence exists, and the ZCRM02 behavior is directly observable. However, there is no authoritative confirmation that the broader ZCRM02 customer-suppression boundary—and resulting empty customer-based ZUONR fallback when no order exists—is exactly the agreed consultant rule. The ticket-source concern is also unresolved. No runtime/integration result is present in the frozen interval.\n\n4. **state update**  \nNew facts: implementation now suppresses the ZCRM02 customer value used for KUNNR, and consequently the customer-based ZUONR fallback is empty when no order is present. The implementation report also raises a possible alternate ticket source based on portal/navigation/keyword-search evidence.  \nMaterial uncertainties: whether the ZCRM02 fallback behavior is consultant-confirmed or an implementation interpretation; whether the ticket/business-number source in the current mapping is correct; whether the alternate ticket-source concern changes the agreed mutually exclusive key rule. These prevent an accept decision.\n\n5. **evidence model**  \n- **Observed artifact/evidence:** source/metadata/search/lint evidence exists; the ZCRM02 suppression behavior is directly visible in implementation.  \n- **Participant report:** implementation report describes the ZCRM02 fallback effect and raises the alternate ticket-source concern.  \n- **Inference/interpretation:** the broader populated-customer boundary may be implementation interpretation; the alternate ticket-source evidence supports inspection, not a business-rule conclusion.  \n- **Authoritative confirmation:** absent or ambiguous for the ZCRM02/ZUONR boundary and the alternate ticket source; present only as relayed agreement for some broader rules.  \n- **Absent/weak evidence:** no runtime or integration-test result in the frozen interval.\n\n6. **verification policy**  \nRequest up to two frozen audit items next:  \n- **A:** Authoritative consultant/acknowledged-plan/ticket excerpt defining ZCRM02 KUNNR suppression and whether the customer-based ZUONR fallback must also be empty when no order is present, including the populated-customer boundary.  \n- **B:** Authoritative ticket/business-number source rule or mapping specification resolving the possible alternate ticket source and confirming mutually exclusive key/empty-omission behavior.",
+  "initial_response_words": 344,
+  "recipient_model_and_configuration": {
+    "declared_snapshot": null,
+    "family": "DeepSeek",
+    "model": "deepseek/deepseek-flash",
+    "parameters": {
+      "max_tokens": 65536,
+      "stream": true,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "provider": "custom"
+  },
+  "replicate": 2,
+  "run_id": "C13-D-2",
+  "selected_item_ids": [
+    "C13-R2",
+    "C13-R3"
+  ],
+  "selection_corrections": 0,
+  "selection_response": "C13-R2  \nC13-R3",
+  "surface_characters": 928,
+  "surface_words": 123,
+  "v2_audit_manifest_hash": "8c8fabf27d1cf246f1612dd20c4251ec6d89ceffa1e2138db6a4bb904e4086a3"
+}

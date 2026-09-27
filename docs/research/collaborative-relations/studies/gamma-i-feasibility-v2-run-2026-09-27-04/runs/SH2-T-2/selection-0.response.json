@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 10.749689419000788,
+  "messages_sha256": "9c057e61b72ebd5218c87db15324d73a61771b4ba678b14f322e3fbe9e1fd292",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 1932,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1830
+      },
+      "prompt_tokens": 1266,
+      "total_tokens": 3198
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Selected: **SH2-R2, SH2-R3**\n\nRationale:\n- **SH2-R2** directly addresses the most severe authority/fallback concern: whether the 37 snapshot-sourced records had any freshness validation, provenance, or stale marking.\n- **SH2-R3** directly addresses the reconciliation-identity concern: whether the helper can distinguish subscriptions and billing periods, or only `customer_id + report_date`.\n\nThese are the two highest-leverage evidence items for the identified defects."
+}

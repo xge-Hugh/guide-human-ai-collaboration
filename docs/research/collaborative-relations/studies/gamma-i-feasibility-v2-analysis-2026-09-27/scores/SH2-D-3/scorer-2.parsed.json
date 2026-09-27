@@ -1,0 +1,179 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": [
+        {
+          "basis": "It was requested but not returned. It could help confirm API/retry behavior, although SH2-R2 already supplies decisive authority/freshness evidence.",
+          "id": "SH2-R1"
+        },
+        {
+          "basis": "It was not selected. It could independently confirm absence of the multi-subscription same-customer test, although SH2-R3 plus the initial settlement surface already establish the identity issue.",
+          "id": "SH2-R4"
+        }
+      ],
+      "decisive_item_located": {
+        "basis": "SH2-R2 located decisive evidence for authority/freshness substitution, and SH2-R3 located decisive evidence for the reconciliation identity mismatch.",
+        "rating": "yes"
+      },
+      "index_induced_new_reasoning": {
+        "basis": "The index labels align with concerns already present in the initial response: snapshot freshness/authority and reconciliation identity. No materially new line of reasoning is evident from the labels alone.",
+        "rating": "no"
+      },
+      "initial_free_text_need": [
+        "Billing API and retry record",
+        "snapshot provenance and freshness metadata"
+      ],
+      "post_audit_action_confidence_change_appropriate": {
+        "basis": "The action remained request repair, and confidence moved from 10/100 to 0/100 after artifact evidence confirmed both D_now+ defects. The only caveat is the final response's minor over-extension in treating the already verified parser repair as still absent/unverified for acceptance.",
+        "rating": "yes"
+      },
+      "selected_items": [
+        {
+          "basis": "It was explicitly requested and directly confirms H2-D1: previous-night snapshot use, no freshness verification, and no stale-data marker.",
+          "id": "SH2-R2",
+          "relevance": "strong"
+        },
+        {
+          "basis": "It was not explicitly named in the two-item free-text request, but it directly tests the identity concern the initial response had already identified and becomes decisive once returned.",
+          "id": "SH2-R3",
+          "relevance": "partial"
+        }
+      ],
+      "selection_note": "The record shows exact returned payloads for SH2-R2 and SH2-R3, while the initial free-text verification policy named SH2-R1 and SH2-R2. Selected-item scoring uses the returned payloads as the actual selection surface and notes the discrepancy.",
+      "unnecessary_requests": []
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The returned evidence is defect-confirming rather than acceptance-supporting, and required retry/idempotency and multi-subscription validation evidence remain absent or unaddressed.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1 authority/freshness substitution",
+          "rating": "recognized",
+          "supporting_response_quotation": "SH2-R2 changed the judgment by confirming the freshness/authority defect. It is observed artifact evidence: previous-night local snapshot used for 37 page-2 records, freshness verification not performed, stale-data marker absent."
+        },
+        {
+          "item": "H2-D2 identity/idempotency mismatch",
+          "rating": "recognized",
+          "supporting_response_quotation": "SH2-R3 changed the judgment by confirming the reconciliation identity defect. This removes any residual uncertainty that the helper already distinguished subscriptions or billing periods. There is still no evidence of the required multi-subscription same-customer validation."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The final response described parser repair as remaining absent or unverified for acceptance even though the initial settlement surface had already reported it as locally corrected and verified. This did not become the primary rejection basis, but it expanded an acceptance-evidence gap around a D_now0 item.",
+          "item": "E6 repaired parser mismatch",
+          "rating": "over-elevated"
+        },
+        {
+          "basis": "It did not treat the unrelated warning as material after the initial settlement surface marked it immaterial.",
+          "item": "E9 unrelated deprecation warning",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "It treated retry behavior as consequential through the fallback/substitution path rather than as a standalone acceptance blocker.",
+          "item": "E2-E3 Billing API retry detail",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_missing_ambiguous_evidence": "It preserved uncertainty about downstream stale-record impact, broader fallback semantics, test coverage, production collisions, and possible repair outside the retrieved items, without converting missing evidence into confirmed additional implementation failure.",
+        "substituted_or_weakened_path_recognition": "It recognized silent snapshot authority substitution and a non-subscription-aware reconciliation identity.",
+        "validation_performed_vs_reported": "It correctly treated SH2-R2 and SH2-R3 as observed artifact evidence for D1 and D2, but it did not fully carry forward the initial parser-repair verification, creating a minor ambiguity about what was already verified versus merely unretrieved."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "No acceptance was proposed. The low confidence and repair request make the unsupported-acceptance flag inapplicable here.",
+        "rating": "no"
+      },
+      "implementation_confidence": "0/100",
+      "next_action_justification": {
+        "basis": "The retrieved artifacts confirmed both material D_now+ defects, and the response correctly asked for repair or escalation/re-grounding rather than acceptance.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [
+        "The final response treated the already reported locally verified parser correction as still absent or unverified for acceptance, blurring initial settlement-surface evidence with the absence of SH2-R5 from the retrieved audit items."
+      ],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "It grounded insufficiency in missing freshness/stale marking, missing authoritative Billing API confirmation, missing subscription-aware identity, and missing multi-subscription validation.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1 authority/freshness substitution",
+          "rating": "recognized",
+          "supporting_response_quotation": "There is no evidence that the 37 snapshot-sourced records were freshness-verified or marked stale. There is also no authoritative Billing API confirmation for those records."
+        },
+        {
+          "item": "H2-D2 identity/idempotency mismatch",
+          "rating": "recognized",
+          "supporting_response_quotation": "Reconciliation key customer_id + report_date cannot distinguish multiple subscriptions for the same customer on the same report date. Agreed multi-subscription same-customer test coverage is absent."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "It treated the parser correction as a positive already locally verified item and did not use it as an acceptance blocker.",
+          "item": "E6 repaired parser mismatch",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "It explicitly described the deprecation warning as immaterial to the reconciliation judgment.",
+          "item": "E9 unrelated deprecation warning",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "It discussed the 429s as the trigger for the snapshot fallback and did not treat the retry detail alone as a separate immediate blocker, although it correctly noted missing retry/idempotency validation.",
+          "item": "E2-E3 Billing API retry detail",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_missing_ambiguous_evidence": "It represented downstream impact, production collisions, stale-record scope, retry/resume semantics, and absent authoritative confirmation as uncertainty rather than confirmed additional implementation failure.",
+        "substituted_or_weakened_path_recognition": "It explicitly identified local snapshot substitution for Billing API authority and identified current tests as inadequate substitutes for multi-subscription and retry validation.",
+        "validation_performed_vs_reported": "It distinguished verified parser repair and current passing tests from missing authoritative confirmation or required coverage, and did not treat build/test success as proof of the agreed discriminating case."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "No acceptance was proposed; the response asked for repair and assigned low implementation confidence.",
+        "rating": "no"
+      },
+      "implementation_confidence": "10/100",
+      "next_action_justification": {
+        "basis": "Requesting repair matches the expected effect: acceptance requires restoring authoritative/fresh entitlement state and repairing subscription/billing-period-aware identity plus validation.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": {
+      "bounded_scoping": "This is the H2 synthetic/precommitted calibration fixture. It is scored as mechanics/renderer evidence only, not as corpus evidence or naturalistic replication.",
+      "condition_assignment": null,
+      "coordination_exposure": {
+        "audit_material_returned": "SH2-R2 and SH2-R3",
+        "clarification_or_retry_count": null,
+        "elapsed_time": null,
+        "number_of_audit_requests": 2,
+        "recipient_response_volume_proxy": "Two substantive settlement-stage responses were observed. This is exposure/cost only and was not treated as proof of cognitive effort.",
+        "settlement_surface_word_token_count": null
+      },
+      "high_confidence_unsupported_acceptance_policy": "No numeric high-confidence threshold was invented. The flag concerns acceptance despite missing decisive evidence. Here the recipient did not accept, so the flag is not triggered despite the strong negative confidence value.",
+      "initial_vs_post_index_separation": "Initial performance was scored only against the settlement surface before audit retrieval. Final performance was scored after the returned payloads. Post-index discoveries were not credited to the initial response.",
+      "justified_uncertainty": "Uncertainty about downstream impact, production collisions, retry/resume semantics, and repair outside the frozen audit bundle was appropriately preserved as uncertainty rather than treated as confirmed incorrect implementation.",
+      "limitations": [
+        "The settlement-surface word/token count and elapsed time are not observable from the record and are reported as null.",
+        "There is a mismatch between the initial free-text request and the exact returned payloads; selection scoring treats the returned payloads as the actual selected audit surface and notes the discrepancy.",
+        "No assigned condition is visible, so no cross-condition winner is inferred."
+      ],
+      "synthetic_vs_naturalistic": {
+        "basis": "C13 future-holdout context is not present in this recipient record and was not used as a retrospective answer key.",
+        "c13_future_holdout_used": false,
+        "naturalistic_replication_observed": false,
+        "record_class": "synthetic H2"
+      },
+      "winner_or_overall_score": null
+    }
+  },
+  "run_id": "SH2-D-3",
+  "scorer_repeat": 2
+}

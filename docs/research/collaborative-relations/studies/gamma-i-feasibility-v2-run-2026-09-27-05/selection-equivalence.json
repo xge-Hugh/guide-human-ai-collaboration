@@ -1,0 +1,335 @@
+{
+  "affected_intended_selection": [
+    "C13-R1",
+    "C13-R5"
+  ],
+  "affected_run": "C13-F-3",
+  "results": [
+    {
+      "corrected_ids": [
+        "C13-R1",
+        "C13-R3"
+      ],
+      "original_saved_ids": [
+        "C13-R1",
+        "C13-R3"
+      ],
+      "run_id": "C13-D-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "C13-R2",
+        "C13-R3"
+      ],
+      "original_saved_ids": [
+        "C13-R2",
+        "C13-R3"
+      ],
+      "run_id": "C13-D-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "C13-R1",
+        "C13-R3"
+      ],
+      "original_saved_ids": [
+        "C13-R1",
+        "C13-R3"
+      ],
+      "run_id": "C13-D-3",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "C13-R1",
+        "C13-R5"
+      ],
+      "original_saved_ids": [
+        "C13-R1",
+        "C13-R5"
+      ],
+      "run_id": "C13-F-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "C13-R1",
+        "C13-R5"
+      ],
+      "original_saved_ids": [
+        "C13-R1",
+        "C13-R5"
+      ],
+      "run_id": "C13-F-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "C13-R1",
+        "C13-R5"
+      ],
+      "original_saved_ids": [
+        "C13-R1",
+        "C13-R2"
+      ],
+      "run_id": "C13-F-3",
+      "was_affected": true
+    },
+    {
+      "corrected_ids": [
+        "C13-R1",
+        "C13-R3"
+      ],
+      "original_saved_ids": [
+        "C13-R1",
+        "C13-R3"
+      ],
+      "run_id": "C13-T-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "C13-R1",
+        "C13-R4"
+      ],
+      "original_saved_ids": [
+        "C13-R1",
+        "C13-R4"
+      ],
+      "run_id": "C13-T-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "C13-R1",
+        "C13-R4"
+      ],
+      "original_saved_ids": [
+        "C13-R1",
+        "C13-R4"
+      ],
+      "run_id": "C13-T-3",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "original_saved_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "run_id": "S01-D-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "original_saved_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "run_id": "S01-D-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R1",
+        "S01-R4"
+      ],
+      "original_saved_ids": [
+        "S01-R1",
+        "S01-R4"
+      ],
+      "run_id": "S01-D-3",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "original_saved_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "run_id": "S01-F-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "original_saved_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "run_id": "S01-F-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "original_saved_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "run_id": "S01-F-3",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "original_saved_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "run_id": "S01-T-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "original_saved_ids": [
+        "S01-R4",
+        "S01-R1"
+      ],
+      "run_id": "S01-T-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "S01-R4",
+        "S01-R5"
+      ],
+      "original_saved_ids": [
+        "S01-R4",
+        "S01-R5"
+      ],
+      "run_id": "S01-T-3",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R2",
+        "SH2-R3"
+      ],
+      "original_saved_ids": [
+        "SH2-R2",
+        "SH2-R3"
+      ],
+      "run_id": "SH2-D-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R2",
+        "SH2-R3"
+      ],
+      "original_saved_ids": [
+        "SH2-R2",
+        "SH2-R3"
+      ],
+      "run_id": "SH2-D-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R2",
+        "SH2-R3"
+      ],
+      "original_saved_ids": [
+        "SH2-R2",
+        "SH2-R3"
+      ],
+      "run_id": "SH2-D-3",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R1",
+        "SH2-R4"
+      ],
+      "original_saved_ids": [
+        "SH2-R1",
+        "SH2-R4"
+      ],
+      "run_id": "SH2-F-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R1",
+        "SH2-R3"
+      ],
+      "original_saved_ids": [
+        "SH2-R1",
+        "SH2-R3"
+      ],
+      "run_id": "SH2-F-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R1",
+        "SH2-R3"
+      ],
+      "original_saved_ids": [
+        "SH2-R1",
+        "SH2-R3"
+      ],
+      "run_id": "SH2-F-3",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R1",
+        "SH2-R3"
+      ],
+      "original_saved_ids": [
+        "SH2-R1",
+        "SH2-R3"
+      ],
+      "run_id": "SH2-T-1",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R2",
+        "SH2-R3"
+      ],
+      "original_saved_ids": [
+        "SH2-R2",
+        "SH2-R3"
+      ],
+      "run_id": "SH2-T-2",
+      "was_affected": false
+    },
+    {
+      "corrected_ids": [
+        "SH2-R3",
+        "SH2-R2"
+      ],
+      "original_saved_ids": [
+        "SH2-R3",
+        "SH2-R2"
+      ],
+      "run_id": "SH2-T-3",
+      "was_affected": false
+    }
+  ],
+  "source_attempt": "gamma-i-feasibility-v2-run-2026-09-27-04",
+  "valid_records_unchanged": 26
+}

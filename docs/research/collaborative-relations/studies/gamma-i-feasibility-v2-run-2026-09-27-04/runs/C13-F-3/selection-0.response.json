@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 6.124356465000346,
+  "messages_sha256": "440a879b321ad532fc7e11f2198dd4fb2ca377f92b52849ddcb203e2d4bb0ce0",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 786,
+      "completion_tokens_details": {
+        "reasoning_tokens": 606
+      },
+      "prompt_tokens": 1171,
+      "total_tokens": 1957
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select:\n\n- **C13-R1** — mapping code excerpts\n- **C13-R5** — repository-state and snapshot verification\n\nRationale: **C13-R1** directly addresses the core uncertainty: whether the implemented IF-058 posting-field mapping matches the agreed semantics, including ZUONR fallback, mutually exclusive ticket/business keys, empty-key omission, `XBLNR_ALT` using `new_name`, and preservation of the header-derived funding row plus allocation rows. **C13-R5** is the best available item for confirming scope integrity and that reversal and IF-097 were not changed.\n\nI would not prioritize C13-R2, C13-R4, or C13-R3 at this point: metadata/search and lint are already reported and are weak substitutes for behavioral mapping evidence, while the historical portal-source excerpt is contextual rather than direct implementation verification."
+}

@@ -1,0 +1,1462 @@
+{
+  "study": "gamma-I-feasibility-v2-2026-09-27",
+  "summary_scope": "Descriptive dimension-wise counts only; no overall winner score, treatment effect estimate, or confidence mean across heterogeneous scales.",
+  "recipient_runs": 27,
+  "scorer_judgments": 54,
+  "scorer_quality_issues": [
+    {
+      "run_id": "C13-D-1",
+      "scorer": 1,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1"
+      ]
+    },
+    {
+      "run_id": "C13-D-1",
+      "scorer": 1,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1"
+      ]
+    },
+    {
+      "run_id": "C13-D-1",
+      "scorer": 2,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 — future-holdout provenance retraction, reviewer context only and not a retrospective answer key"
+      ]
+    },
+    {
+      "run_id": "C13-D-1",
+      "scorer": 2,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 — future-holdout provenance retraction, reviewer context only and not a retrospective answer key"
+      ]
+    },
+    {
+      "run_id": "C13-D-2",
+      "scorer": 2,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 — future holdout: human questioning of ticket risk and later retraction/calibration that the force-empty boundary is implementation inference"
+      ]
+    },
+    {
+      "run_id": "C13-D-2",
+      "scorer": 2,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 — future holdout: human questioning of ticket risk and later retraction/calibration that the force-empty boundary is implementation inference"
+      ]
+    },
+    {
+      "run_id": "C13-D-3",
+      "scorer": 1,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1"
+      ]
+    },
+    {
+      "run_id": "C13-D-3",
+      "scorer": 1,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1"
+      ]
+    },
+    {
+      "run_id": "C13-D-3",
+      "scorer": 2,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1"
+      ]
+    },
+    {
+      "run_id": "C13-D-3",
+      "scorer": 2,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1"
+      ]
+    },
+    {
+      "run_id": "C13-F-1",
+      "scorer": 2,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 (future_holdout retraction; reviewer-only and not a retrospective answer key)"
+      ]
+    },
+    {
+      "run_id": "C13-F-1",
+      "scorer": 2,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 (future_holdout retraction; reviewer-only and not a retrospective answer key)"
+      ]
+    },
+    {
+      "run_id": "C13-F-2",
+      "scorer": 1,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 — future holdout withdrawal/re-ground (reviewer-only)"
+      ]
+    },
+    {
+      "run_id": "C13-F-2",
+      "scorer": 1,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 — future holdout withdrawal/re-ground (reviewer-only)"
+      ]
+    },
+    {
+      "run_id": "C13-F-2",
+      "scorer": 2,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "E4 field metadata and lexical search as non-authoritative evidence",
+        "E6 lint completion as insufficient evidence for runtime or integration validation"
+      ]
+    },
+    {
+      "run_id": "C13-F-2",
+      "scorer": 2,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "E4 field metadata and lexical search as non-authoritative evidence",
+        "E6 lint completion as insufficient evidence for runtime or integration validation"
+      ]
+    },
+    {
+      "run_id": "C13-F-3",
+      "scorer": 1,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1: future holdout retraction of navigation interpretation"
+      ]
+    },
+    {
+      "run_id": "C13-F-3",
+      "scorer": 1,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1: future holdout retraction of navigation interpretation"
+      ]
+    },
+    {
+      "run_id": "C13-F-3",
+      "scorer": 2,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 (future holdout: retraction of portal interpretation and implementation-inference provenance)"
+      ]
+    },
+    {
+      "run_id": "C13-F-3",
+      "scorer": 2,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 (future holdout: retraction of portal interpretation and implementation-inference provenance)"
+      ]
+    },
+    {
+      "run_id": "C13-T-2",
+      "scorer": 1,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 - future holdout retraction/provenance check (unavailable before audit index; recorded as missed, not scored as an initial failure)"
+      ]
+    },
+    {
+      "run_id": "C13-T-2",
+      "scorer": 1,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1 - future holdout retraction/provenance check (unavailable to recipient; recorded as missed, not scored as a post-index failure)"
+      ]
+    },
+    {
+      "run_id": "C13-T-2",
+      "scorer": 2,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "E4 ambiguous oracle item — metadata/ticket-search evidence boundary",
+        "E6 ambiguous oracle item — lint invocation evidence boundary"
+      ]
+    },
+    {
+      "run_id": "C13-T-2",
+      "scorer": 2,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "E4 ambiguous oracle item — metadata/ticket-search evidence boundary",
+        "E6 ambiguous oracle item — lint invocation evidence boundary"
+      ]
+    },
+    {
+      "run_id": "C13-T-3",
+      "scorer": 1,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1"
+      ]
+    },
+    {
+      "run_id": "C13-T-3",
+      "scorer": 1,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "F1"
+      ]
+    },
+    {
+      "run_id": "C13-T-3",
+      "scorer": 2,
+      "phase": "initial",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "E4 — bank-serial field metadata versus broader ticket lexical matches",
+        "E6 — lint invocation completed with empty result object",
+        "F1 — future holdout: retraction/clarification of ticket-source interpretation"
+      ]
+    },
+    {
+      "run_id": "C13-T-3",
+      "scorer": 2,
+      "phase": "final",
+      "issue": "extra/nonrequired d_now_plus items",
+      "items": [
+        "E4 — bank-serial field metadata versus broader ticket lexical matches",
+        "E6 — lint invocation completed with empty result object",
+        "F1 — future holdout: retraction/clarification of ticket-source interpretation"
+      ]
+    }
+  ],
+  "scorer_agreement": {
+    "d_now_plus": {
+      "initial": {
+        "same": 50,
+        "compared": 54
+      },
+      "final": {
+        "same": 51,
+        "compared": 54
+      }
+    },
+    "action": {
+      "initial": {
+        "same": 25,
+        "compared": 27
+      },
+      "final": {
+        "same": 26,
+        "compared": 27
+      }
+    }
+  },
+  "scorer_disagreements": [
+    {
+      "run_id": "C13-D-1",
+      "phase": "final",
+      "dimension": "next_action_justification",
+      "ratings": [
+        "justified",
+        "partly justified"
+      ]
+    },
+    {
+      "run_id": "C13-F-1",
+      "phase": "initial",
+      "dimension": "E2",
+      "ratings": [
+        "recognized",
+        "partially recognized"
+      ]
+    },
+    {
+      "run_id": "C13-F-1",
+      "phase": "initial",
+      "dimension": "next_action_justification",
+      "ratings": [
+        "partly justified",
+        "justified"
+      ]
+    },
+    {
+      "run_id": "C13-F-2",
+      "phase": "initial",
+      "dimension": "E5",
+      "ratings": [
+        "partially recognized",
+        "missed"
+      ]
+    },
+    {
+      "run_id": "C13-T-2",
+      "phase": "initial",
+      "dimension": "E5",
+      "ratings": [
+        "partially recognized",
+        "recognized"
+      ]
+    },
+    {
+      "run_id": "S01-F-1",
+      "phase": "initial",
+      "dimension": "D+2",
+      "ratings": [
+        "partially recognized",
+        "missed"
+      ]
+    },
+    {
+      "run_id": "SH2-D-2",
+      "phase": "final",
+      "dimension": "H2-D2",
+      "ratings": [
+        "partially recognized",
+        "recognized"
+      ]
+    },
+    {
+      "run_id": "SH2-F-2",
+      "phase": "final",
+      "dimension": "H2-D2",
+      "ratings": [
+        "partially recognized",
+        "recognized"
+      ]
+    },
+    {
+      "run_id": "SH2-F-3",
+      "phase": "final",
+      "dimension": "H2-D2",
+      "ratings": [
+        "partially recognized",
+        "recognized"
+      ]
+    },
+    {
+      "run_id": "SH2-T-1",
+      "phase": "initial",
+      "dimension": "next_action_justification",
+      "ratings": [
+        "justified",
+        "partly justified"
+      ]
+    }
+  ],
+  "cells": [
+    {
+      "fixture": "C13",
+      "condition": "F",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 58,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 318.6666666666667,
+      "final_response_words_mean": 352.6666666666667,
+      "audit_payload_words_mean": 224,
+      "selected_item_ids": {
+        "C13-R1": 3,
+        "C13-R5": 3
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "E2": {
+              "recognized": 1,
+              "partially recognized": 5
+            },
+            "E5": {
+              "partially recognized": 5,
+              "missed": 1
+            }
+          },
+          "action_justification": {
+            "partly justified": 1,
+            "justified": 5
+          },
+          "implementation_confidence_reported_values": [
+            60,
+            60,
+            55,
+            55,
+            60,
+            60
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 3,
+            "null": 3
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "0": 6
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "E2": {
+              "partially recognized": 4,
+              "recognized": 2
+            },
+            "E5": {
+              "partially recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            70,
+            70,
+            65,
+            65,
+            75,
+            75
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 3,
+            "null": 3
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "0": 4,
+            "1": 2
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 5,
+            "1": 1
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "partial": 5,
+          "weak": 3,
+          "strong": 4
+        },
+        "decisive_item_located": {
+          "partial": 3,
+          "partial: c13-r1 located material mapping evidence, but not the full decisive diff, runtime validation, ticket-source provenance, or lint-status evidence.": 1,
+          "yes": 2
+        },
+        "index_induced_new_reasoning": {
+          "yes": 4,
+          "no": 2
+        },
+        "unnecessary_request_count": {
+          "1": 5,
+          "0": 1
+        }
+      }
+    },
+    {
+      "fixture": "C13",
+      "condition": "T",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 160,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 386,
+      "final_response_words_mean": 343.6666666666667,
+      "audit_payload_words_mean": 184.33333333333334,
+      "selected_item_ids": {
+        "C13-R1": 3,
+        "C13-R3": 1,
+        "C13-R4": 2
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "E2": {
+              "recognized": 6
+            },
+            "E5": {
+              "recognized": 5,
+              "partially recognized": 1
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            "58 / 100",
+            58,
+            45,
+            45,
+            68,
+            68
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 4,
+            "null": 2
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "1": 1,
+            "0": 5
+          },
+          "unsupported_assertion_counts": {
+            "1": 2,
+            "0": 4
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 3,
+            "1": 3
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "E2": {
+              "recognized": 2,
+              "partially recognized": 4
+            },
+            "E5": {
+              "recognized": 4,
+              "partially recognized": 2
+            }
+          },
+          "action_justification": {
+            "justified": 4,
+            "partly justified": 2
+          },
+          "implementation_confidence_reported_values": [
+            "60 / 100",
+            60,
+            70,
+            70,
+            76,
+            76
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 4,
+            "null": 2
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "0": 3,
+            "1": 3
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 3,
+            "1": 3
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "strong": 5,
+          "partial": 5,
+          "weak": 2
+        },
+        "decisive_item_located": {
+          "partial": 2,
+          "yes": 2,
+          "partially yes": 1,
+          "yes/partial": 1
+        },
+        "index_induced_new_reasoning": {
+          "no": 6
+        },
+        "unnecessary_request_count": {
+          "0": 2,
+          "null": 1,
+          "1": 3
+        }
+      }
+    },
+    {
+      "fixture": "C13",
+      "condition": "D",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 123,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 360.3333333333333,
+      "final_response_words_mean": 326,
+      "audit_payload_words_mean": 158,
+      "selected_item_ids": {
+        "C13-R1": 2,
+        "C13-R3": 3,
+        "C13-R2": 1
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "E2": {
+              "recognized": 6
+            },
+            "E5": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            65,
+            65,
+            60,
+            60,
+            55,
+            "55/100"
+          ],
+          "acceptance_evidence_sufficiency": {
+            "null": 3,
+            "insufficient now": 2,
+            "insufficient now; basis: source, metadata, search, lint, and code observation are present, but authoritative business-rule confirmation and runtime/integration evidence are absent.": 1
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 5,
+            "no; basis: the reported action is inspect, not accept; confidence is moderate; no unsupported acceptance is asserted.": 1
+          },
+          "provenance_mistake_counts": {
+            "0": 6
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "1": 1,
+            "0": 5
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "E2": {
+              "partially recognized": 2,
+              "recognized": 4
+            },
+            "E5": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 5,
+            "partly justified": 1
+          },
+          "implementation_confidence_reported_values": [
+            75,
+            75,
+            60,
+            60,
+            65,
+            "65/100"
+          ],
+          "acceptance_evidence_sufficiency": {
+            "null": 3,
+            "insufficient now": 2,
+            "insufficient now; basis: c13-r1 confirms implemented zcrm02 omission behavior but does not establish full if-058 intent, ticket-source mapping, xblnr_alt new_name use, preservation of header/funding/allocation structure, unchanged reversal/if-097, or runtime/integration correctness.": 1
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 5,
+            "no; basis: the reported action is inspect, acceptance evidence is insufficient, and no high-confidence threshold is imposed or crossed. the response does not convert retrieved code excerpts into production or integration validation.": 1
+          },
+          "provenance_mistake_counts": {
+            "1": 2,
+            "0": 4
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "1": 1,
+            "0": 5
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "strong": 2,
+          "partial": 7,
+          "weak": 3
+        },
+        "decisive_item_located": {
+          "no": 3,
+          "yes": 1,
+          "partial": 1,
+          "partial; c13-r1 located decisive evidence for the implemented zcrm02 code behavior, but no selected item located decisive ticket-source/business-rule confirmation or runtime/integration evidence.": 1
+        },
+        "index_induced_new_reasoning": {
+          "no": 4,
+          "unclear": 1,
+          "no; basis: the initial response already identified the zcrm02 provenance boundary, the ticket-source concern, and missing runtime/integration evidence before the index appeared. later mentions of unverified mapping fields are scope limitations of retrieved evidence, not reasoning newly induced by the labels.": 1
+        },
+        "unnecessary_request_count": {
+          "0": 4,
+          "1": 2
+        }
+      }
+    },
+    {
+      "fixture": "S01",
+      "condition": "F",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 38,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 309.3333333333333,
+      "final_response_words_mean": 313.3333333333333,
+      "audit_payload_words_mean": 98,
+      "selected_item_ids": {
+        "S01-R4": 3,
+        "S01-R1": 3
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "D+1": {
+              "partially recognized": 6
+            },
+            "D+2": {
+              "partially recognized": 5,
+              "missed": 1
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            "50/100",
+            50,
+            {
+              "note": "Reported as provisional uncertainty. The rubric imposes no numeric confidence target, so this is not scored as a required calibration point.",
+              "numeric_value": 60,
+              "reported_value": "60/100 provisional"
+            },
+            "60/100 provisional",
+            "60/100",
+            "60/100"
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 4,
+            "insufficient now — reported compilation and targeted tests, plus a participant report of contract preservation, do not establish authoritative v_authoritative validation or that accepted input semantics were unchanged.": 1,
+            "null": 1
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 5,
+            "no — the initial response does not accept the implementation and reports mid-level confidence rather than high confidence in unconditional acceptance.": 1
+          },
+          "provenance_mistake_counts": {
+            "0": 6
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "D+1": {
+              "recognized": 6
+            },
+            "D+2": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            "0/100",
+            0,
+            {
+              "note": "The direction is appropriate after discovering both consequential deltas. The magnitude is not required by the fixture and is not treated as a calibrated numeric target.",
+              "numeric_value": 5,
+              "reported_value": "5/100"
+            },
+            "5/100",
+            "0/100",
+            "0/100"
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 2,
+            "insufficient now — there is no successful v_authoritative metadata-validation result, and v_legacy plus passing tests do not establish authoritative validation or that the date-format assumption was authorized.": 1,
+            "null": 1,
+            "insufficient now for acceptance; sufficient now to establish non-conformance/re-ground need": 2
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 5,
+            "no — the final response does not accept the implementation and assigns low rather than high confidence. the observed overreach concerns certainty in rejection or public-contract violation, not unsupported acceptance.": 1
+          },
+          "provenance_mistake_counts": {
+            "0": 6
+          },
+          "unsupported_assertion_counts": {
+            "0": 3,
+            "1": 3
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "strong": 12
+        },
+        "decisive_item_located": {
+          "yes": 5,
+          "yes — s01-r4 located decisive evidence for the authoritative-validation substitution, and s01-r1 located decisive evidence for the newly introduced strict date-parsing assumption.": 1
+        },
+        "index_induced_new_reasoning": {
+          "no": 5,
+          "no — the selected labels, validation tool history and final implementation diff, correspond to initial requests for validation-path evidence and diff-based contract/change inspection. the date-format specificity appears to arise from returned payload content rather than from an index-only new line of reasoning.": 1
+        },
+        "unnecessary_request_count": {
+          "0": 6
+        }
+      }
+    },
+    {
+      "fixture": "S01",
+      "condition": "T",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 140,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 329.6666666666667,
+      "final_response_words_mean": 302.3333333333333,
+      "audit_payload_words_mean": 96.66666666666667,
+      "selected_item_ids": {
+        "S01-R4": 3,
+        "S01-R1": 2,
+        "S01-R5": 1
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "D+1": {
+              "recognized": 6
+            },
+            "D+2": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            20,
+            20,
+            15,
+            "15 / 100",
+            20,
+            20
+          ],
+          "acceptance_evidence_sufficiency": {
+            "null": 2,
+            "insufficient now": 4
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 5,
+            "null": 1
+          },
+          "provenance_mistake_counts": {
+            "0": 5,
+            "1": 1
+          },
+          "unsupported_assertion_counts": {
+            "0": 4,
+            "1": 2
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "D+1": {
+              "recognized": 6
+            },
+            "D+2": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            5,
+            5,
+            5,
+            "5 / 100",
+            15,
+            15
+          ],
+          "acceptance_evidence_sufficiency": {
+            "null": 2,
+            "insufficient now": 4
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 5,
+            "null": 1
+          },
+          "provenance_mistake_counts": {
+            "0": 6
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "strong": 9,
+          "partial": 3
+        },
+        "decisive_item_located": {
+          "yes, partially: `s01-r4` located decisive evidence for validation-path substitution and `s01-r1` located decisive artifact evidence for the date-format substitution/helper change, but neither located authoritative contract confirmation or helper-equivalence evidence.": 1,
+          "yes": 3,
+          "true": 1,
+          "yes — s01-r4 located the validation-history evidence for d+1, and s01-r5 located the local rationale evidence for d+2.": 1
+        },
+        "index_induced_new_reasoning": {
+          "no": 6
+        },
+        "unnecessary_request_count": {
+          "0": 4,
+          "null": 2
+        }
+      }
+    },
+    {
+      "fixture": "S01",
+      "condition": "D",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 85,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 330,
+      "final_response_words_mean": 321.6666666666667,
+      "audit_payload_words_mean": 98,
+      "selected_item_ids": {
+        "S01-R4": 3,
+        "S01-R1": 3
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "D+1": {
+              "recognized": 6
+            },
+            "D+2": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            "12 / 100",
+            12,
+            "20/100",
+            20,
+            20,
+            "20/100"
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 5,
+            "null": 1
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "1": 5,
+            "0": 1
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "D+1": {
+              "recognized": 6
+            },
+            "D+2": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            "5 / 100",
+            5,
+            "5/100",
+            5,
+            5,
+            "5/100"
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 5,
+            "null": 1
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "0": 5,
+            "1": 1
+          },
+          "unsupported_assertion_counts": {
+            "0": 4,
+            "1": 2
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "strong": 8,
+          "partial": 4
+        },
+        "decisive_item_located": {
+          "yes": 4,
+          "yes for d+1; partial for d+2": 1,
+          "partial": 1
+        },
+        "index_induced_new_reasoning": {
+          "no": 6
+        },
+        "unnecessary_request_count": {
+          "0": 4,
+          "null": 2
+        }
+      }
+    },
+    {
+      "fixture": "SH2",
+      "condition": "F",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 37,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 308.6666666666667,
+      "final_response_words_mean": 338.6666666666667,
+      "audit_payload_words_mean": 74,
+      "selected_item_ids": {
+        "SH2-R1": 3,
+        "SH2-R4": 1,
+        "SH2-R3": 2
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "H2-D1": {
+              "partially recognized": 6
+            },
+            "H2-D2": {
+              "partially recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            40,
+            40,
+            45,
+            45,
+            20,
+            20
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 3,
+            "null": 3
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 5,
+            "null": 1
+          },
+          "provenance_mistake_counts": {
+            "0": 5,
+            "1": 1
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "H2-D1": {
+              "recognized": 6
+            },
+            "H2-D2": {
+              "partially recognized": 4,
+              "recognized": 2
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            5,
+            5,
+            2,
+            2,
+            5,
+            5
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now for acceptance": 1,
+            "null": 3,
+            "sufficient now to reject/escalate; insufficient now to accept": 1,
+            "insufficient now for acceptance; sufficient now to require repair": 1
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 5,
+            "null": 1
+          },
+          "provenance_mistake_counts": {
+            "0": 6
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "strong": 8,
+          "partial": 4
+        },
+        "decisive_item_located": {
+          "partial - sh2-r1 located the decisive authority/freshness substitution, and sh2-r4 located the decisive missing multi-subscription test; sh2-r3 was not located, so the specific reconciliation-key incompatibility remained undiagnosed.": 1,
+          "yes": 4,
+          "null": 1
+        },
+        "index_induced_new_reasoning": {
+          "no - the selected items corresponded to uncertainties already present in the initial response; the new specifics came from returned payloads, especially the 37 previous-night snapshot records and the explicit absence of a two-subscription same-customer test.": 1,
+          "no": 4,
+          "unclear": 1
+        },
+        "unnecessary_request_count": {
+          "0": 5,
+          "null": 1
+        }
+      }
+    },
+    {
+      "fixture": "SH2",
+      "condition": "T",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 168,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 352,
+      "final_response_words_mean": 322.3333333333333,
+      "audit_payload_words_mean": 59.333333333333336,
+      "selected_item_ids": {
+        "SH2-R1": 1,
+        "SH2-R3": 3,
+        "SH2-R2": 2
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "H2-D1": {
+              "recognized": 6
+            },
+            "H2-D2": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 5,
+            "partly justified": 1
+          },
+          "implementation_confidence_reported_values": [
+            5,
+            5,
+            5,
+            5,
+            12,
+            12
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 5,
+            "null": 1
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "0": 6
+          },
+          "unsupported_assertion_counts": {
+            "0": 4,
+            "1": 2
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "H2-D1": {
+              "recognized": 6
+            },
+            "H2-D2": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            3,
+            3,
+            3,
+            3,
+            5,
+            5
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 5,
+            "null": 1
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "0": 6
+          },
+          "unsupported_assertion_counts": {
+            "1": 5,
+            "0": 1
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 6
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "strong": 8,
+          "partial": 4
+        },
+        "decisive_item_located": {
+          "yes": 4,
+          "partly yes": 1,
+          "sh2-r3 and sh2-r2 located decisive confirmation": 1
+        },
+        "index_induced_new_reasoning": {
+          "no": 6
+        },
+        "unnecessary_request_count": {
+          "0": 6
+        }
+      }
+    },
+    {
+      "fixture": "SH2",
+      "condition": "D",
+      "recipient_runs": 3,
+      "scorer_judgments": 6,
+      "surface_words": 102,
+      "audit_item_count": {
+        "2": 3
+      },
+      "initial_response_words_mean": 365,
+      "final_response_words_mean": 288.3333333333333,
+      "audit_payload_words_mean": 59,
+      "selected_item_ids": {
+        "SH2-R2": 3,
+        "SH2-R3": 3
+      },
+      "phases": {
+        "initial": {
+          "d_now_plus_ratings": {
+            "H2-D1": {
+              "recognized": 6
+            },
+            "H2-D2": {
+              "recognized": 6
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            {
+              "numeric": 5,
+              "reported": "5 / 100"
+            },
+            5,
+            10,
+            10,
+            10,
+            "10/100"
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 6
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "0": 5,
+            "1": 1
+          },
+          "unsupported_assertion_counts": {
+            "0": 4,
+            "1": 2
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 5,
+            "1": 1
+          }
+        },
+        "final": {
+          "d_now_plus_ratings": {
+            "H2-D1": {
+              "recognized": 6
+            },
+            "H2-D2": {
+              "recognized": 5,
+              "partially recognized": 1
+            }
+          },
+          "action_justification": {
+            "justified": 6
+          },
+          "implementation_confidence_reported_values": [
+            {
+              "numeric": 2,
+              "reported": "2 / 100"
+            },
+            2,
+            5,
+            5,
+            0,
+            "0/100"
+          ],
+          "acceptance_evidence_sufficiency": {
+            "insufficient now": 6
+          },
+          "high_confidence_unsupported_acceptance": {
+            "no": 6
+          },
+          "provenance_mistake_counts": {
+            "0": 3,
+            "2": 1,
+            "1": 2
+          },
+          "unsupported_assertion_counts": {
+            "0": 6
+          },
+          "d_now_zero_over_elevated_count": {
+            "0": 4,
+            "1": 2
+          }
+        }
+      },
+      "audit_selection": {
+        "selected_item_relevance": {
+          "strong": 9,
+          "partial": 3
+        },
+        "decisive_item_located": {
+          "yes": 5,
+          "partial": 1
+        },
+        "index_induced_new_reasoning": {
+          "no": 5,
+          "unclear": 1
+        },
+        "unnecessary_request_count": {
+          "0": 6
+        }
+      }
+    }
+  ]
+}

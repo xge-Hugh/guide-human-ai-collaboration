@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 8.767992453999796,
+  "messages_sha256": "1109a20d4ea8b5531bce95eb70581fb093c4fa6c10bc6956f23242d76108ffc1",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 1692,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1604
+      },
+      "prompt_tokens": 1178,
+      "total_tokens": 2870
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Request the following two frozen evidence items:\n\n- **SH2-R1** — Billing API and retry record  \n- **SH2-R4** — current test-case list  \n\nRationale: **SH2-R1** directly addresses API retry behavior and billing API authority versus local snapshot substitution. **SH2-R4** directly addresses whether validation covers the required multi-subscription same-customer case and API retry scenario."
+}

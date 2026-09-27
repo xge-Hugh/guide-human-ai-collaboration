@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 11.928862698000557,
+  "messages_sha256": "97287b38d5534014f4dc9e48186e2e82e4279ab3d0cf89765ce991e225ca9686",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 2126,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2067
+      },
+      "prompt_tokens": 1097,
+      "total_tokens": 3223
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select:\n- **SH2-R1** — Billing API and retry record\n- **SH2-R3** — reconciliation-key helper definition\n\nThese best address the two central unknowns: authoritative Billing API/retry behavior, and whether reconciliation identity distinguishes subscriptions and billing periods."
+}

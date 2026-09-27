@@ -1,0 +1,142 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": {
+        "answer": "yes",
+        "basis": "SH2-R4, the current test-case list, was available and would have more directly confirmed whether the agreed multi-subscription same-customer case was absent from current tests. SH2-R2 snapshot provenance/freshness metadata could also have supported freshness, but was less decisive given SH2-R1.",
+        "item": "SH2-R4"
+      },
+      "decisive_item_located": {
+        "answer": "yes",
+        "basis": "SH2-R1 and SH2-R3 together located decisive artifacts for the two D_now+ issues: authority/freshness substitution and identity/idempotency mismatch."
+      },
+      "index_induced_new_reasoning": {
+        "answer": "no",
+        "basis": "The initial response already identified silent local-snapshot authority and multi-subscription/billing-period identity as material uncertainties; the index labels helped operationalize those existing needs rather than inducing a wholly new line of reasoning."
+      },
+      "initial_free_text_need": "Before selection, the recipient stated that the next evidence should show: (1) a multi-subscription same-customer fixture revealing per-subscription and billing-period identity with reconciliation based on authoritative Billing API state, and (2) API retry behavior showing idempotent retry/resume, no duplicate entitlement changes, and local snapshots not used as silent authority.",
+      "post_audit_action_confidence_change_appropriate": {
+        "answer": "yes",
+        "basis": "After retrieval, the action moved from inspect to request repair and confidence fell to 5/100 because the returned items showed stale snapshot fallback as authority and a reconciliation key that collapses multiple subscriptions."
+      },
+      "selected_items": [
+        {
+          "basis": "Directly addresses the stated API retry and silent local-snapshot authority need; the retrieved Billing API/retry record shows retry failure followed by previous-night snapshot use and thereby discriminates the live authority-substitution uncertainty.",
+          "id": "SH2-R1",
+          "relevance": "strong"
+        },
+        {
+          "basis": "Directly informs the subscription/billing-period identity uncertainty, but it is not exactly the requested multi-subscription fixture/test-case behavior; it nevertheless proved decisive by revealing the customer_id + report_date key design.",
+          "id": "SH2-R3",
+          "relevance": "partial"
+        }
+      ],
+      "unnecessary_requests": []
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The final response correctly distinguishes missing evidence from affirmative defect evidence: R1 and R3 establish noncompliance with authority and identity requirements, while some downstream effects and test coverage remain uncertain.",
+        "reported_answer": "insufficient now for acceptance; sufficient now to require repair"
+      },
+      "d_now0": [
+        {
+          "basis": "The final response does not react to a parser mismatch; this is appropriate because the returned decisive evidence concerned authority substitution and identity collapse, and any repaired parser issue is not an open acceptance blocker.",
+          "item": "E6 — repaired parser mismatch",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response does not mention or elevate an unrelated warning; this is appropriate because warning provenance was not selected and the decisive noncompliance is independent of it.",
+          "item": "E9 — unrelated logging-library deprecation warning",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response mentions retry attempts as weak positive signal but treats the retry record mainly as evidence of the authority substitution path, not as sufficient proof of implementation correctness.",
+          "item": "E2-E3 — retry detail only consequential through authority substitution",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "d_now_plus": [
+        {
+          "item": "H2-D1 — authority/freshness substitution",
+          "rating": "recognized",
+          "supporting_response_quotation": "SH2-R1 changed the judgment. It shows page 2 retries ended in three HTTP 429s, and reconciliation then continued using 37 records from the previous-night local snapshot. That is not retry/resume support; it is using stale local snapshot data as a fallback authority after the Billing API failed."
+        },
+        {
+          "item": "H2-D2 — identity/idempotency mismatch",
+          "rating": "recognized",
+          "supporting_response_quotation": "SH2-R3 changed the judgment. ReconciliationKey(row) = customer_id + : + report_date does not distinguish subscriptions. A customer with multiple subscriptions on the same report_date would collide or be incorrectly grouped."
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_ambiguous_evidence": "Represents remaining uncertainty appropriately: whether snapshot records directly drive entitlement writes, downstream idempotency, exact semantics of report_date, and whether tests include the multi-subscription case are acknowledged as not fully shown, without converting missing test evidence into confirmed false implementation beyond the decisive identity-key violation.",
+        "substituted_or_weakened_path_recognition": "Recognizes substituted/weakened evidence paths by identifying the previous-night local snapshot as stale fallback authority and the helper key as a design path incompatible with multi-subscription identity.",
+        "validation_performed_versus_reported": "The final response uses retrieved artifacts as validation: R1 shows retry failure followed by snapshot use, and R3 shows the key formula. It does not treat build/test pass or participant reports as sufficient validation of the agreed properties."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "No acceptance is claimed; confidence is very low and the final action is request repair, so there is no high-confidence unsupported acceptance to flag."
+      },
+      "implementation_confidence": 5,
+      "next_action_justification": {
+        "answer": "justified",
+        "basis": "The retrieved artifacts demonstrate two decisive D_now+ defects: silent stale-snapshot authority substitution and an identity key that cannot distinguish multiple subscriptions on the same report date. Requesting repair is proportionate."
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The initial response correctly states that the evidence does not establish authoritative Billing API use, multi-subscription same-customer handling, subscription/billing-period identity, idempotency under retry, or required validation cases.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now0": [
+        {
+          "basis": "The initial response does not react to a parser mismatch; this is appropriate because the initial settlement surface did not present a repaired parser issue as an open blocker.",
+          "item": "E6 — repaired parser mismatch",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The initial response does not mention or elevate an unrelated warning; this is appropriate because the warning was not part of the available pre-audit settlement evidence.",
+          "item": "E9 — unrelated logging-library deprecation warning",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The initial response treats the reported retry handling as participant claim/substitute evidence and asks for API retry behavior plus no silent snapshot authority, rather than overvaluing retry detail.",
+          "item": "E2-E3 — retry detail only consequential through authority substitution",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "d_now_plus": [
+        {
+          "item": "H2-D1 — authority/freshness substitution",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "whether local snapshots are ever used as silent authority; local snapshots not used as silent authority"
+        },
+        {
+          "item": "H2-D2 — identity/idempotency mismatch",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "whether tests cover multi-subscription same-customer; whether the settlement surface distinguishes subscriptions and billing periods"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_ambiguous_evidence": "Represents missing and ambiguous evidence as uncertainty, listing absent code/diff/test names/API traces/retry logs and ambiguous settlement surface identity and snapshot authority without declaring confirmed implementation failure.",
+        "substituted_or_weakened_path_recognition": "Recognizes weakened/substituted evidence paths: generic unit-test pass as weakened evidence, retry report as substitute for retry evidence, and possible local-snapshot authority substitution as ambiguous rather than settled.",
+        "validation_performed_versus_reported": "Distinguishes participant reports from validation: implementation ready, retry working, build/test pass, and no open runtime error are treated as reports, not authoritative confirmation of the agreed reconciliation properties."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "The initial response does not accept the implementation, assigns low confidence, and explains that acceptance evidence is insufficient; no unsupported high-confidence acceptance occurs."
+      },
+      "implementation_confidence": 20,
+      "next_action_justification": {
+        "answer": "justified",
+        "basis": "With only participant-reported readiness and no authoritative artifact, inspect and request targeted evidence before deciding is proportionate to the live uncertainties about authority substitution, identity, and validation coverage."
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": "Scored solely against the H2 fixture oracle with initial and final separated. No overall winner, no collapsed score, and no numeric high-confidence threshold was invented. Initial judgments were not credited with post-audit discoveries; missing pre-audit facts were treated as uncertainty. Response volume and elapsed time were not used as proof of cognitive effort. Missing evidence was not turned into confirmed incorrect implementation. C13 future-holdout guidance was not used as an answer key for this H2 record."
+  },
+  "run_id": "SH2-F-3",
+  "scorer_repeat": 2
+}
