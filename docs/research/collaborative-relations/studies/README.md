@@ -47,6 +47,8 @@ Completed source review: [SR-1–SR-3 ledgers and decisions](gamma-source-review
 
 γ-I mechanics package: [`gamma-i-feasibility-2026-09-27/`](gamma-i-feasibility-2026-09-27/README.md) — frozen 27-run AI-recipient feasibility matrix using one source-reviewed corpus fixture plus two synthetic/precommitted fixtures. Synthetic results are not counted as naturalistic replications.
 
+γ-I executable v2 audit repair: [`gamma-i-feasibility-v2-2026-09-27/`](gamma-i-feasibility-v2-2026-09-27/README.md) — keeps PR #41 settlement surfaces/rubrics unchanged, adds exact audit payloads and recipient-selected deterministic evidence access after v1 preflight stopped at 0/27 runs.
+
 ### δ — adaptive representation trajectory
 
 Compare permanent familiar-language translation, native representation immediately, native representation with strong mediation that fades, and representation selected only for immediate efficiency.
