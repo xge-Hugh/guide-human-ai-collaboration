@@ -1,0 +1,64 @@
+{
+  "study": "gamma-I-feasibility-v2-2026-09-27",
+  "status": "candidate_frozen_for_preflight",
+  "predecessor": {
+    "pr": 41,
+    "merge_commit": "5175264a2d01df42b9ae78c94c85103a7c2bdb62",
+    "packet_commit": "591b66db881277fb575821e1d240e5a7274d91c3",
+    "recipient_runs_started_before_v2": 0
+  },
+  "unchanged_v1_inputs": [
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/packets.md",
+      "git_blob_sha": "240aaed0c159bdf020bcf912b474e9c00377c1e5"
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/scoring.md",
+      "git_blob_sha": "25ff54d4fe949f074bea4745530f5b2ce7c47b7e"
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/fixture-h2-subscription-reconciliation.md",
+      "git_blob_sha": "b19042fe9006899b3e8b5d5f9b1d2278827e9f67"
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-fixtures/fixture-01-validation-path-substitution.md",
+      "git_blob_sha": "70215ba40329f9b1cfa4b4b6b43dd096da1491bc"
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-source-review-2026-09-27/sr-1.md",
+      "git_blob_sha": "b59e64dc94bdb0d8073b1cac6b4e264ae86842e3"
+    }
+  ],
+  "v2_audit_layer": [
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-v2-2026-09-27/README.md",
+      "git_blob_sha": "fe446e6ad0174c676e88529453dd15f9ab04ad84"
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-v2-2026-09-27/audit-payloads.md",
+      "git_blob_sha": "f4a2b18ebc6fb670a9ad3273bc23c9ba495e4acb"
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-v2-2026-09-27/audit-index.json",
+      "git_blob_sha": "007d27594f65245d19441f4792ff041c09015189"
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-v2-2026-09-27/run-spec.md",
+      "git_blob_sha": "4879b1d55ce8bed0b438cfce0ecb49f579d1a493"
+    }
+  ],
+  "run_matrix": {
+    "fixtures": ["C13", "S01", "SH2"],
+    "conditions": ["final-state-only", "full-trace", "selective-delta"],
+    "independent_ai_recipient_runs_per_cell": 3,
+    "total_runs": 27
+  },
+  "audit_protocol": {
+    "index_revealed": "after_initial_response_persisted",
+    "selection_actor": "recipient",
+    "max_items": 2,
+    "runtime_semantic_routing": false,
+    "payload_transformation_at_runtime": false
+  },
+  "freeze_rule": "Any change to unchanged_v1_inputs or v2_audit_layer after first recipient exposure creates a new packet version. Do not pool across versions without explicit reconciliation."
+}

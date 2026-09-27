@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "reveal_timing": "after_initial_response_only",
+  "selection_rule": "recipient_selects_zero_to_two_item_ids; orchestrator_does_not_semantically_route_free_text",
+  "invalid_selection_response": "Invalid audit item ID for this fixture. Select up to two IDs from the provided index.",
+  "fixtures": {
+    "C13": [
+      {"id":"C13-R1","label":"mapping code excerpts"},
+      {"id":"C13-R2","label":"metadata and keyword-search result"},
+      {"id":"C13-R3","label":"historical portal-source excerpt"},
+      {"id":"C13-R4","label":"lint invocation result"},
+      {"id":"C13-R5","label":"repository-state and snapshot verification"}
+    ],
+    "S01": [
+      {"id":"S01-R1","label":"final implementation diff"},
+      {"id":"S01-R2","label":"compile log"},
+      {"id":"S01-R3","label":"targeted test log"},
+      {"id":"S01-R4","label":"validation tool history"},
+      {"id":"S01-R5","label":"executor local note"},
+      {"id":"S01-R6","label":"final implementation report"}
+    ],
+    "SH2": [
+      {"id":"SH2-R1","label":"Billing API and retry record"},
+      {"id":"SH2-R2","label":"snapshot provenance and freshness metadata"},
+      {"id":"SH2-R3","label":"reconciliation-key helper definition"},
+      {"id":"SH2-R4","label":"current test-case list"},
+      {"id":"SH2-R5","label":"timestamp parser repair and verification"},
+      {"id":"SH2-R6","label":"build and test result"},
+      {"id":"SH2-R7","label":"warning provenance"}
+    ]
+  }
+}
