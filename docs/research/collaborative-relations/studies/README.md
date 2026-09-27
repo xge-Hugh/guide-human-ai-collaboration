@@ -45,6 +45,8 @@ Source-review gate: [`gamma-source-review-gate-2026-09-27.md`](gamma-source-revi
 
 Completed source review: [SR-1–SR-3 ledgers and decisions](gamma-source-review-2026-09-27/README.md) — one include, two defer; the three-fixture replay gate is not yet met.
 
+γ-I mechanics package: [`gamma-i-feasibility-2026-09-27/`](gamma-i-feasibility-2026-09-27/README.md) — frozen 27-run AI-recipient feasibility matrix using one source-reviewed corpus fixture plus two synthetic/precommitted fixtures. Synthetic results are not counted as naturalistic replications.
+
 ### δ — adaptive representation trajectory
 
 Compare permanent familiar-language translation, native representation immediately, native representation with strong mediation that fades, and representation selected only for immediate efficiency.
