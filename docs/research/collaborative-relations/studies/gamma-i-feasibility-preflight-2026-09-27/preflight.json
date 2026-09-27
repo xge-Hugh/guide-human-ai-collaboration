@@ -1,0 +1,65 @@
+{
+  "study": "gamma-I-feasibility-2026-09-27",
+  "status": "blocked_before_recipient_exposure",
+  "checked_at_utc": "2026-09-27T04:03:46.686940+00:00",
+  "pr": 41,
+  "merge_commit": "5175264a2d01df42b9ae78c94c85103a7c2bdb62",
+  "packet_commit": "591b66db881277fb575821e1d240e5a7274d91c3",
+  "freeze_manifest_sha256": "321e506ac2bfa949117913790a521dbf1e6d20fcbb4852ef3e067caa6f60da62",
+  "files": [
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/README.md",
+      "git_blob_sha": "bde6d05f31712644adac305a9c663a1dd01e98a5",
+      "actual_git_blob_sha": "bde6d05f31712644adac305a9c663a1dd01e98a5",
+      "sha256": "1fd5b5705e769913312ea0c00f17bf53dd44fe3e9d224a3a4ccf8d238e4edccd",
+      "matches_manifest": true,
+      "matches_merge": true
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/packets.md",
+      "git_blob_sha": "240aaed0c159bdf020bcf912b474e9c00377c1e5",
+      "actual_git_blob_sha": "240aaed0c159bdf020bcf912b474e9c00377c1e5",
+      "sha256": "e92e3abd77a801535822e6a6606b4216eb5898e7a9f9456c29f90e641535bbad",
+      "matches_manifest": true,
+      "matches_merge": true
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/scoring.md",
+      "git_blob_sha": "25ff54d4fe949f074bea4745530f5b2ce7c47b7e",
+      "actual_git_blob_sha": "25ff54d4fe949f074bea4745530f5b2ce7c47b7e",
+      "sha256": "f7e85acbb013eab635026bd7b9d997cc34d18078c5d073f9d4550e473a6497ec",
+      "matches_manifest": true,
+      "matches_merge": true
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/fixture-h2-subscription-reconciliation.md",
+      "git_blob_sha": "b19042fe9006899b3e8b5d5f9b1d2278827e9f67",
+      "actual_git_blob_sha": "b19042fe9006899b3e8b5d5f9b1d2278827e9f67",
+      "sha256": "683ad9e5df15958a2500c17e4df4c141f7e6614aac9f2419cb8a322bfba7bad3",
+      "matches_manifest": true,
+      "matches_merge": true
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-fixtures/fixture-01-validation-path-substitution.md",
+      "git_blob_sha": "70215ba40329f9b1cfa4b4b6b43dd096da1491bc",
+      "actual_git_blob_sha": "70215ba40329f9b1cfa4b4b6b43dd096da1491bc",
+      "sha256": "45a165d963832290f1f95834a7c17fa74cbd4b359fe7331bf9c05e67cadf7370",
+      "matches_manifest": true,
+      "matches_merge": true
+    },
+    {
+      "path": "docs/research/collaborative-relations/studies/gamma-source-review-2026-09-27/sr-1.md",
+      "git_blob_sha": "b59e64dc94bdb0d8073b1cac6b4e264ae86842e3",
+      "actual_git_blob_sha": "b59e64dc94bdb0d8073b1cac6b4e264ae86842e3",
+      "sha256": "eacd9f534798527aab76d93fe7c1267dd2e9caf06263b2b56e353567998cf7f2",
+      "matches_manifest": true,
+      "matches_merge": true
+    }
+  ],
+  "planned_runs": 27,
+  "started_runs": 0,
+  "completed_runs": 0,
+  "blocker": "Frozen synthetic audit bundles enumerate artifacts but do not supply returnable artifact payloads or an explicit frozen event-to-audit rendering rule. Inventing payloads or replacing them with event summaries would alter the evidence boundary.",
+  "treatment_or_oracle_or_scoring_changes": false,
+  "results_or_claim_updates": false
+}

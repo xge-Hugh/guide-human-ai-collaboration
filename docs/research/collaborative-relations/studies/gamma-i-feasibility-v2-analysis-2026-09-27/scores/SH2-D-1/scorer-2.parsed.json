@@ -1,0 +1,165 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": {
+        "answer": "yes",
+        "basis": "SH2-R4 would directly confirm whether current tests omit the agreed multi-subscription case, and SH2-R1 could clarify retry/429 behavior and whether the snapshot path was used for resume versus authority. Neither was selected.",
+        "items": [
+          "SH2-R4",
+          "SH2-R1"
+        ]
+      },
+      "decisive_item_located": {
+        "answer": "yes",
+        "basis": "SH2-R2 and SH2-R3 located decisive evidence for the two core blockers, though the test-coverage component was not independently located by retrieval."
+      },
+      "index_induced_new_reasoning": {
+        "answer": "unclear",
+        "basis": "Most post-retrieval reasoning maps to the initial authority/freshness and identity concerns. The added page-scope question, such as whether stale fallback affected other pages or paths, appears plausible from the SH2-R2 payload detail rather than a wholly new index-induced line, but it is not fully present in the initial response."
+      },
+      "initial_free_text_need": "Confirm whether the snapshot fallback silently substituted for authoritative Billing API state and whether the reused reconciliation key, together with test/validation coverage, can distinguish subscriptions and billing periods; secondarily verify API retry and idempotency behavior.",
+      "post_audit_action_confidence_change_appropriate": {
+        "answer": "yes",
+        "basis": "The action remained repair/request-not-accept, and confidence moved from 5 to 2 after confirming the two core violations through retrieved evidence. This is consistent with strengthened rejection rather than unsupported acceptance."
+      },
+      "selected_items": [
+        {
+          "basis": "Directly addresses the authority/freshness substitution concern by exposing snapshot origin, records used, freshness verification status, and stale-data marker absence.",
+          "id": "SH2-R2",
+          "relevance": "strong"
+        },
+        {
+          "basis": "Directly addresses the reconciliation-identity concern by exposing the key fields and demonstrating the absence of subscription and billing-period identity.",
+          "id": "SH2-R3",
+          "relevance": "strong"
+        }
+      ],
+      "unnecessary_requests": "none; both returned items are directly relevant to the stated core verification need."
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The retrieved evidence is sufficient to reject because it confirms unverified stale snapshot use and an identity key without subscription or billing-period components; acceptance would require repair and revalidation, including the discriminating multi-subscription case.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "recognized",
+          "supporting_response_quotation": "SH2-R2 confirmed the authority/freshness violation: previous-night local snapshot used for 37 page-2 records, freshness verification not performed, stale-data marker absent."
+        },
+        {
+          "item": "H2-D2",
+          "rating": "recognized",
+          "supporting_response_quotation": "SH2-R3 confirmed the reconciliation-identity violation: customer_id + ':' + report_date lacks subscription identity and billing-period boundaries."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The parser repair is treated as non-decisive and does not offset the two core violations.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The deprecation warning is treated as non-decisive and unrelated to the reconciliation acceptance judgment.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Retry and 429 behavior are kept as post-repair validation uncertainty rather than asserted as an independent confirmed failure beyond the authority substitution it triggered.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_or_ambiguous_evidence": "Preserves unresolved questions about downstream stale-record impact, out-of-band disclosure/logging, post-repair retry/idempotency behavior, actual test-suite coverage, whether billing-period boundaries are represented elsewhere, and whether the fallback affects only page 2.",
+        "substituted_or_weakened_path_recognition": "Recognizes that previous-night snapshot data substituted for authoritative Billing API state and that the reused key weakens or omits the required subscription/billing-period identity dimension.",
+        "validation_performed_versus_reported": "SH2-R2 validates snapshot provenance, lack of freshness verification, and absence of stale marking. SH2-R3 validates the reconciliation key shape. The response does not treat unrequested build/test, parser, or warning evidence as decisive."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "The final response does not accept the implementation and reports very low confidence. No high-confidence threshold is inferred or imposed."
+      },
+      "implementation_confidence": 2,
+      "next_action_justification": {
+        "basis": "Repair/re-grounding is justified because retrieved SH2-R2 and SH2-R3 confirm the authority/freshness and identity design violations, while test coverage and retry behavior remain unresolved validation requirements.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The response states that the described deltas contradict agreed intent and that the required multi-subscription validation is absent, so acceptance cannot be supported at that point.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "recognized",
+          "supporting_response_quotation": "local snapshot data is being used as authority without freshness verification or stale disclosure"
+        },
+        {
+          "item": "H2-D2",
+          "rating": "recognized",
+          "supporting_response_quotation": "reconciliation identity cannot distinguish multiple subscriptions for the same customer on the same report date"
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The parser repair is noted but not treated as curing the authority or identity blockers.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The deprecation warning is mentioned only as not curing the core acceptance issues.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Persistent 429s are recognized as the fallback trigger, but retry behavior is treated as a validation/uncertainty item rather than an independent acceptance blocker.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_or_ambiguous_evidence": "Preserves uncertainty about stale-record impact, out-of-band logging or disclosure, fixture/test coverage, and API retry/idempotency behavior.",
+        "substituted_or_weakened_path_recognition": "Explicitly recognizes that a previous-night local snapshot substitutes for Billing API authority and that report_date substitutes for subscription and billing-period identity.",
+        "validation_performed_versus_reported": "Reports that the parser mismatch was locally corrected and verified, current tests were reported as passing, and the agreed multi-subscription case is absent from those tests. It does not treat reported test success as coverage of the discriminating case."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "No acceptance was claimed, and the reported confidence was low. No numeric high-confidence threshold is imposed; the flag is simply not triggered."
+      },
+      "implementation_confidence": 5,
+      "next_action_justification": {
+        "basis": "Requesting repair is grounded in the two core reported violations: silent snapshot authority substitution and identity collapse risk. The repaired parser and unrelated warning are not elevated into blockers.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": {
+      "c13_future_holdouts": {
+        "answer": "not_applicable",
+        "basis": "No C13 future-holdout material is present in the recipient record or oracle bundle. Future holdouts, if present, would be reviewer context only and not a retrospective answer key or authoritative business confirmation."
+      },
+      "coordination_exposure": {
+        "audit_material_returned": 2,
+        "basis": "Response volume and timing are exposure/cost proxies only and are not treated as proof of cognitive effort.",
+        "clarification_retry_count": null,
+        "elapsed_time": null,
+        "number_of_audit_requests": 2,
+        "recipient_response_volume": "moderate qualitative; exact token count not observed",
+        "settlement_surface_word_token_count": null
+      },
+      "initial_settlement_performance": "Strong on the required core discrimination: identified authority/freshness substitution and identity collapse, and did not overreact to the repaired parser mismatch or unrelated warning.",
+      "missing_evidence_handling": "The final response did not convert missing SH2-R4 evidence into a confirmed test absence; it kept that as consequential uncertainty, which is appropriate under the no-missing-evidence-as-fact constraint.",
+      "post_index_selection_behavior": "Selected the two most direct decisive artifacts for the core blockers, SH2-R2 and SH2-R3, but did not select SH2-R4, which would independently confirm test coverage for the agreed discriminating case.",
+      "post_payload_final_performance": "Final response maintained justified rejection, lowered confidence after confirmation, and preserved uncertainty about test coverage, retry/idempotency, downstream impact, and logging/fallback scope.",
+      "scoring_boundary": "No winner, overall score, or assigned condition is inferred. Initial settlement performance and post-audit performance are reported separately.",
+      "synthetic_versus_naturalistic": "This is an H2 synthetic calibration fixture for gamma-I feasibility mechanics; it is not naturalistic replication."
+    }
+  },
+  "run_id": "SH2-D-1",
+  "scorer_repeat": 2
+}

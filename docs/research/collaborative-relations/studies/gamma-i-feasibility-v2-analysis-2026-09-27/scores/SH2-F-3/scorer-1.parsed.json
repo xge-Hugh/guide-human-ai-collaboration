@@ -1,0 +1,177 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": [
+        {
+          "basis": "The current test-case list could have confirmed whether the agreed multi-subscription same-customer case was absent from validation. It was available but not selected.",
+          "id": "SH2-R4"
+        },
+        {
+          "basis": "Snapshot provenance and freshness metadata could have strengthened the authority/freshness evidence path. It was available but not selected, though SH2-R1 already provided a decisive substitution signal.",
+          "id": "SH2-R2"
+        }
+      ],
+      "decisive_item_located": {
+        "basis": "SH2-R1 located the authority-substitution issue for H2-D1, and SH2-R3 located the key-design incompatibility for the main H2-D2 defect. SH2-R4 was not located, leaving the test-coverage component partially unresolved.",
+        "located": [
+          "SH2-R1",
+          "SH2-R3"
+        ]
+      },
+      "index_induced_new_reasoning": {
+        "basis": "The initial response already flagged subscription/billing-period identity and local-snapshot silent authority as live uncertainties. However, selecting SH2-R3 instead of a test-case or fixture item may reflect the index labels steering the analysis toward key-definition inference rather than validation coverage.",
+        "status": "unclear"
+      },
+      "initial_free_text_need": "1. A frozen audit item for a multi-subscription same-customer fixture showing per-subscription and billing-period identity, with reconciliation based on authoritative Billing API state. 2. A frozen audit item for API retry behavior showing idempotent retry/resume, no duplicate entitlement changes, and local snapshots not used as silent authority.",
+      "post_audit_action_confidence_change_appropriate": {
+        "basis": "The action moved from inspect to request repair and confidence decreased from 20 to 5 after retrieved evidence directly showed stale-snapshot authority substitution and an identity key that cannot distinguish subscriptions. The numeric magnitude is not required by the rubric, but the direction and decision are consistent with the returned evidence.",
+        "status": "yes"
+      },
+      "selected_items": [
+        {
+          "basis": "Directly addresses the stated need for API retry behavior and whether local snapshots were silently used as authority. The returned record can discriminate the live uncertainty around fallback use of prior-night data.",
+          "id": "SH2-R1",
+          "relevance": "strong"
+        },
+        {
+          "basis": "Addresses the identity concern through the key-design mechanism, but it is not the stated multi-subscription fixture or current test-case list. It helps discriminate the possible identity mismatch but does not establish whether the test suite covers the agreed discriminating case.",
+          "id": "SH2-R3",
+          "relevance": "partial"
+        }
+      ],
+      "unnecessary_requests": []
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The final response distinguishes acceptance insufficiency from decision sufficiency: the evidence demonstrates defects sufficient to require repair, though not all downstream or test-coverage questions are fully resolved.",
+        "reported": "insufficient now for acceptance; sufficient now to require repair"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "recognized",
+          "supporting_response_quotation": "SH2-R1 changed the judgment. It shows page 2 retries ended in three HTTP 429s, and reconciliation then continued using 37 records from the previous-night local snapshot. That is not retry/resume support; it is using stale local snapshot data as a fallback authority after the Billing API failed."
+        },
+        {
+          "item": "H2-D2",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "customer_id + report_date does not distinguish subscriptions. A customer with multiple subscriptions on the same report_date would collide or be incorrectly grouped. Whether the current tests include a multi-subscription same-customer case and API retry behavior. Those tests were not retrieved, but SH2-R3 already indicates the multi-subscription case would fail unless additional keying occurs elsewhere."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The repaired parser mismatch is not mentioned as a final blocker and is not over-elevated.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The unrelated deprecation warning is not treated as consequential to acceptance or repair.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The retry detail is used primarily as context for the snapshot-substitution defect, not as an independent acceptance blocker. The response does not overreact to the HTTP 429 sequence itself.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_or_ambiguous_evidence": "Preserves ambiguity around downstream entitlement writes, report_date semantics, idempotency across fallback, test coverage, and keying elsewhere rather than asserting unverified defects as confirmed facts.",
+        "substituted_or_weakened_path_recognition": "Recognizes the previous-night snapshot as stale substituted authority and the customer_id plus report_date key as a weakened or incompatible identity path.",
+        "validation_performed_vs_reported": "Uses retrieved SH2-R1 and SH2-R3 as observed artifact evidence and treats build/test pass or retry reports as insufficient to overcome the identified defects."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "The final action is request repair, not acceptance, and acceptance evidence is explicitly judged insufficient now. Therefore no high-confidence unsupported acceptance flag applies.",
+        "status": "no"
+      },
+      "implementation_confidence": 5,
+      "next_action_justification": {
+        "basis": "Request repair is justified because retrieved evidence directly showed noncompliance with authoritative-source and reconciliation-identity requirements, and acceptance was correctly rejected while remaining uncertainty was preserved.",
+        "status": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The initial response states that current evidence does not establish authoritative Billing API use, multi-subscription handling, subscription/billing-period identity, idempotency under retry, or the required validation cases.",
+        "reported": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "whether local snapshots are ever used as silent authority; local snapshots not used as silent authority"
+        },
+        {
+          "item": "H2-D2",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "whether tests cover multi-subscription same-customer and API retry; whether the settlement surface distinguishes subscriptions and billing periods"
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The repaired parser mismatch is not present in the initial settlement surface and is not over-emphasized in the initial response.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The unrelated deprecation warning is not mentioned and is not treated as consequential to acceptance.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The initial response treats reported retry behavior as weak or substituted evidence and requests validation for retry and idempotency, but it does not turn the retry detail itself into an independent acceptance blocker.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_or_ambiguous_evidence": "Represents missing or ambiguous evidence as uncertainties rather than defects: test coverage, authoritative API use, subscription/billing-period identity, idempotency, and snapshot authority.",
+        "substituted_or_weakened_path_recognition": "Identifies generic unit-test pass as weakened evidence, retry report as substituting for retry evidence, and no open runtime error as not equivalent to correctness.",
+        "validation_performed_vs_reported": "Distinguishes participant reports such as retry working, build passing, and no open runtime error from authoritative validation of the agreed reconciliation properties."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "No acceptance is claimed at the initial stage. The action is inspect, acceptance evidence is judged insufficient, and the reported confidence is low rather than high-confidence unsupported acceptance.",
+        "status": "no"
+      },
+      "implementation_confidence": 20,
+      "next_action_justification": {
+        "basis": "Inspect is proportionate to the initial settlement surface, which reports completion and test success but does not authoritatively validate the agreed high-risk authority, identity, idempotency, and multi-subscription cases.",
+        "status": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": {
+      "C13": {
+        "basis": "C13 future-holdout context is separate from this SH2 record and cannot be mixed into scoring.",
+        "status": "not_applicable_or_not_observed_in_this_record"
+      },
+      "assigned_condition": "Withheld by instruction; no condition inference, winner, or overall composite score is assigned.",
+      "coordination_exposure": {
+        "audit_material_returned_word_count_approx": 120,
+        "caveat": "Counts are approximate. Response volume and time are exposure or cost proxies only, not proof of cognitive effort.",
+        "clarification_retry_count": 0,
+        "number_of_audit_requests": 2,
+        "recipient_response_volume_final_words_approx": 290,
+        "recipient_response_volume_initial_words_approx": 250,
+        "settlement_surface_token_count": null,
+        "settlement_surface_word_count_approx": 30
+      },
+      "initial_vs_post_index_separation": {
+        "initial_settlement_performance": "Justified uncertainty and proportionate inspect. It anticipated the live authority and identity issues without asserting defects that were unavailable pre-index.",
+        "post_index_selection_behavior": "Strongly targeted SH2-R1 for the API/retry and snapshot authority need. SH2-R3 was relevant but partial because the stated need was a fixture or test-case check, not the helper definition.",
+        "post_payload_final_performance": "Decisive D1 recognition and main D2 key-defect recognition. Test-coverage component of D2 remained partially unresolved because SH2-R4 was not selected."
+      },
+      "judgment_caveats": [
+        "Initial uncertainty about snapshot substitution and identity was judged as partially recognized rather than missed because those facts were unavailable pre-index.",
+        "Final D2 was judged partially recognized because the key defect was located, but the current-test coverage component was not located.",
+        "No high-confidence unsupported acceptance flag was triggered because neither initial nor final stage claimed acceptance on insufficient evidence."
+      ],
+      "synthetic_vs_naturalistic_separation": "This is a synthetic/precommitted H2 calibration fixture used for mechanics and renderer feasibility. It is apparatus or variance evidence, not naturalistic replication."
+    }
+  },
+  "run_id": "SH2-F-3",
+  "scorer_repeat": 1
+}

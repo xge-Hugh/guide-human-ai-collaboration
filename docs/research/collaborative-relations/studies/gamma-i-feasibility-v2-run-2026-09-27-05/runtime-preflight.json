@@ -1,0 +1,63 @@
+{
+  "connection_fingerprint": "5eb8e16f18d415458670fe7a5d62eeac2d9e4eb1e14b2f61ac76069d8cd040dd",
+  "context_strategy": "Fresh stateless chat-completions history per recipient; no tool definitions, filesystem, repository, or web interfaces supplied. Provider-internal routing and hidden capabilities not observable.",
+  "manifest_sha256": "8c8fabf27d1cf246f1612dd20c4251ec6d89ceffa1e2138db6a4bb904e4086a3",
+  "passed_at_utc": "2026-09-27T09:55:37.230695+00:00",
+  "preflight_adjudication_source": "gamma-i-feasibility-v2-run-2026-09-27-03/preflight/interpretation-adjudication.md",
+  "recipient_runs_started": 0,
+  "reused_review_sources": {
+    "C13": {
+      "blocking_defect_as_returned": false,
+      "reported_model": "qwen3.8-flash",
+      "sha256": "c130590e31e1ba0d43d286427a39e2dfe9deb320b34231883232402e611bf9c3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-03/preflight/independent-review-C13.response.json"
+    },
+    "S01": {
+      "blocking_defect_as_returned": true,
+      "reported_model": "qwen3.8-flash",
+      "sha256": "2e2fe3e6e465b811b17593b16917f2db43d93b6e73df800758319d10d287b298",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-03/preflight/independent-review-S01.response.json"
+    },
+    "SH2": {
+      "blocking_defect_as_returned": false,
+      "reported_model": "qwen3.8-flash",
+      "sha256": "190b8b5601458cfa4809f56797e964e60dc82653559de81be748237a4de9f1c4",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-03/preflight/independent-review-SH2.response.json"
+    }
+  },
+  "roles": {
+    "generator": {
+      "declared_snapshot": null,
+      "family": "DeepSeek",
+      "model": "deepseek/deepseek-flash",
+      "parameters": {
+        "max_tokens": 65536,
+        "stream": true,
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "provider": "custom"
+    },
+    "grader": {
+      "declared_snapshot": null,
+      "family": "qwen",
+      "model": "qwen3.8-flash",
+      "parameters": {
+        "max_tokens": 32768,
+        "stream": true,
+        "thinking": {
+          "type": "enabled"
+        }
+      },
+      "provider": "custom"
+    }
+  },
+  "runner_sha256": "d2d81289193b10d943d065f106945a863f465b8914595f8728456f47540728c7",
+  "scope": "One fresh replacement recipient context C13-F-3 only; original 26 valid records stay in attempt 04.",
+  "scorer_strategy": "Two separate label-blind Qwen contexts per record; same grader model family. No condition label supplied.",
+  "selection_equivalence": "selection-equivalence.json",
+  "status": "passed",
+  "tools": [],
+  "user_authorization": "Explicitly approved external endpoint egress of frozen packets, audit payloads, oracles and scoring for SH2 preflight, 27 recipients and scoring in current session."
+}

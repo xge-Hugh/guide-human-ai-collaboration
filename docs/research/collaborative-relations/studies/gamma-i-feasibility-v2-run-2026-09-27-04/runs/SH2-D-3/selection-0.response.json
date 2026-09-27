@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 7.481438112999967,
+  "messages_sha256": "ea7ab61bdaaf6bc4598ba7b35c761f8200fcdd4f16e5f080e1340f8841ba1a72",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 1331,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1258
+      },
+      "prompt_tokens": 1327,
+      "total_tokens": 2658
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select:\n\n- **SH2-R2** — snapshot provenance and freshness metadata\n- **SH2-R3** — reconciliation-key helper definition\n\nThese two best address the two material deltas: whether the 37 snapshot-sourced records were freshness-verified/stale-labeled, and whether the reconciliation key can distinguish multiple subscriptions for the same customer/report date."
+}

@@ -1,0 +1,157 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": {
+        "basis": "No unselected item was required to change the final action after the initial response had already recognized both consequential deltas. R5, executor local note, could have reinforced the provenance of the date-format choice, but the initial surface already recorded that choice and R1 showed its implementation effect.",
+        "status": "no_material_requirement"
+      },
+      "decisive_item_located": {
+        "basis": "R4 located the authoritative-validation substitution/absence evidence, and R1 located the date-format and validator code-change evidence.",
+        "status": "yes"
+      },
+      "index_induced_new_reasoning": {
+        "basis": "The audit index labels correspond to verification needs already stated before retrieval. The returned diff introduced the specific parser name `ParseContractDate`, which sharpened the contract-narrowing inference, but the broader reasoning line — validation-path substitution plus date-format assumption — was present in the initial response.",
+        "status": "no"
+      },
+      "initial_free_text_need": "The initial response requested (a) a frozen `V_authoritative` metadata-validation artifact/result, including validation outcome and accepted input metadata/date representation, and (b) a frozen authoritative contract/specification or approval confirming the accepted date representation and whether reuse of the local helper was permitted/equivalent to `V_authoritative`.",
+      "post_audit_action_confidence_change_appropriate": {
+        "basis": "After retrieval neither uncertainty was resolved; action remained non-acceptance/re-grounding and confidence decreased. This matches the oracle's expected direction without imposing a numeric confidence target.",
+        "status": "appropriate"
+      },
+      "selected_items": [
+        {
+          "basis": "Directly addresses whether `V_authoritative` was used or bypassed, whether the authoritative route was unavailable, and whether any successful authoritative metadata result exists in the execution record. It is not the requested authoritative artifact, but it discriminates the live validation-path uncertainty.",
+          "id": "S01-R4",
+          "relevance": "strong"
+        },
+        {
+          "basis": "Directly addresses whether code actually substituted `V_authoritative` with `V_legacy`, whether date parsing was narrowed to `yyyyMMdd`, and whether a public-contract risk was introduced. It does not provide authoritative contract confirmation, but it is decisive for locating the implementation effect.",
+          "id": "S01-R1",
+          "relevance": "strong"
+        }
+      ],
+      "unnecessary_requests": []
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The final response identifies missing successful authoritative metadata validation, missing helper-equivalence evidence, missing authoritative date-format confirmation, and unresolved public-contract risk.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "D+1 — validation-path substitution (E3–E4)",
+          "rating": "recognized",
+          "supporting_response_quotation": "the authoritative validation route was not used ... `V_authoritative` was requested but unavailable, `V_legacy` was used instead, and no authoritative metadata result exists ... There is no successful authoritative metadata-validation result"
+        },
+        {
+          "item": "D+2 — new date-format assumption (E5)",
+          "rating": "recognized",
+          "supporting_response_quotation": "the diff shows `ParseContractDate` was replaced with a hardcoded `yyyyMMdd` parse ... no authoritative confirmation of the accepted date representation ... Whether `yyyyMMdd` is the accepted date representation under the contract"
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The final response notes that compilation/tests may have passed, but the repaired compile failure is not presented as the acceptance blocker.",
+          "item": "D-1 — repaired compile failure (E1–E2)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The unrelated warning is not used in the final judgment or listed among remaining consequential uncertainties.",
+          "item": "D-2 — unrelated pre-existing warning (E7)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Passing tests are acknowledged as runtime evidence but are not treated as authoritative validation. The final response instead questions whether the tests cover the missing evidence paths.",
+          "item": "D-3 — ordinary test success (E6/E8)",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_ambiguous_evidence": "Missing helper equivalence, missing authoritative date confirmation, missing proof that tests cover relevant contract variants, and public-contract risk are all retained as uncertainty rather than converted into confirmed incorrect behavior.",
+        "substituted_weakened_path_recognition": "It explicitly identifies the validation path as substituted, with `V_legacy` replacing `V_authoritative`, and identifies the date parser change as a weakened/unresolved contract assumption.",
+        "validation_performed_vs_reported": "The final response treats retrieved R4 and R1 as inspection evidence, not as authoritative validation. It correctly says neither item resolved the key acceptance uncertainties and does not treat the executor report as authoritative confirmation."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "Final acceptance confidence is explicitly low and acceptance evidence is insufficient. No high-confidence threshold was invented; the flag is negative because no acceptance was issued.",
+        "flag": "no"
+      },
+      "implementation_confidence": 5,
+      "next_action_justification": {
+        "basis": "The final action remains re-ground/escalate rather than accept, because neither authoritative validation nor date-format contract confirmation was supplied. It also does not turn missing evidence into confirmed implementation malfunction; it treats the artifact as unaccepted pending targeted validation or waiver.",
+        "status": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The response distinguishes compilation/test/report evidence from authoritative metadata validation, helper equivalence, and contract confirmation, and identifies the missing evidence needed for acceptance.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "D+1 — validation-path substitution (E3–E4)",
+          "rating": "recognized",
+          "supporting_response_quotation": "The executor replaced the designated authoritative route with an older local helper ... No `V_authoritative` result exists ... older local helper substituted for designated authoritative validation"
+        },
+        {
+          "item": "D+2 — new date-format assumption (E5)",
+          "rating": "recognized",
+          "supporting_response_quotation": "resolved an unspecified accepted date representation by choosing `YYYYMMDD`. That is an assumption about accepted input semantics, so the agreed policy requires re-grounding rather than acceptance."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The initial response notes that the compile failure was fixed and treats that as giving some runtime confidence; it does not make the repaired failure a rejection or re-grounding blocker.",
+          "item": "D-1 — repaired compile failure (E1–E2)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The warning is called unrelated and is framed as immaterial unless clean test output is required; it is not treated as consequential evidence against the implementation.",
+          "item": "D-2 — unrelated pre-existing warning (E7)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The initial response acknowledges reported unit-test and example success but explicitly separates it from authoritative metadata validation and does not require narration of every passing assertion.",
+          "item": "D-3 — ordinary test success (E6/E8)",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "representation_of_missing_ambiguous_evidence": "It represents helper equivalence, date-format authority, and public-contract preservation as missing or ambiguous, and treats the unrelated warning as ambiguous immateriality rather than a confirmed consequential issue.",
+        "substituted_weakened_path_recognition": "It recognizes `V_legacy` as a substituted validation path for `V_authoritative` and notes that tests/examples were weaker substitutes for metadata validation.",
+        "validation_performed_vs_reported": "The initial response identifies compile/test/example outcomes as reported or participant-level evidence and notes absence of raw artifacts and authoritative validation. No authoritative validation was shown to have been performed."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "No unconditional acceptance was made; implementation confidence was low and acceptance evidence was explicitly insufficient. No high-confidence threshold was invented for this flag.",
+        "flag": "no"
+      },
+      "implementation_confidence": 20,
+      "next_action_justification": {
+        "basis": "The initial settlement surface already exposed both consequential deltas, and S0 required re-grounding when implementation encountered an assumption changing accepted input semantics. Escalation/re-grounding was more calibrated than acceptance or unrelated restart.",
+        "status": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": [
+        "The initial response says 'No `V_authoritative` result exists' and 'authoritative metadata-validation requirement is unmet'; this is acceptable as 'none known from the presented evidence', but is slightly stronger than the initial wording 'No authoritative metadata result was obtained through the designated route'."
+      ]
+    },
+    "notes": {
+      "audit_selection": "The selected items were directly relevant to the initially stated uncertainties: R4 for authoritative validation-path substitution and R1 for the implementation-level date-format and validator change.",
+      "c13_future_holdouts": "No C13 future holdouts or retrospective business confirmation are present in this record. If such material existed, it would be reviewer context only and not treated as an answer key.",
+      "coordination_exposure": {
+        "audit_material_returned": "Two payloads: R4 validation tool history and R1 final diff.",
+        "basis": "Volume and elapsed time are treated only as exposure/cost proxies and were not used as proof of cognitive effort.",
+        "clarification_or_retry_count": "none observed",
+        "elapsed_time": null,
+        "number_of_audit_requests": 2,
+        "settlement_surface_word_token_count": null
+      },
+      "oracle_alignment": "Both D+ items were recognized initially and finally. The repaired compile failure, unrelated warning, and ordinary test success were not treated as consequential acceptance blockers.",
+      "phase_separation": "Initial settlement performance was assessed only against the pre-audit response text and did not credit post-index discoveries. Post-audit final performance was assessed separately against R4 and R1. No winner or overall score is assigned.",
+      "synthetic_vs_naturalistic": "This record uses synthetic fixture audit payloads. They are apparatus/variance evidence for scoring the settlement and audit surfaces, not naturalistic business confirmation."
+    }
+  },
+  "run_id": "S01-T-1",
+  "scorer_repeat": 2
+}

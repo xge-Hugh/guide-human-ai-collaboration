@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 4.20101089399941,
+  "messages_sha256": "f6eb9a72d4232636f3b44d47eebf5dd490c98bd8c1a7d845865b1ef50fd9aaa8",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 526,
+      "completion_tokens_details": {
+        "reasoning_tokens": 463
+      },
+      "prompt_tokens": 1194,
+      "total_tokens": 1720
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Selected evidence items: **C13-R1** and **C13-R5**.\n\n- **C13-R1** — directly addresses the unresolved semantic mapping behavior in IF-058.\n- **C13-R5** — addresses scope/snapshot verification, including whether reversal and IF-097 remain unchanged."
+}

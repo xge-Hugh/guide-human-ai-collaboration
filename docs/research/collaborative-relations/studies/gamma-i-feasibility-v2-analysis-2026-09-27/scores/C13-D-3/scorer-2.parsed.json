@@ -1,0 +1,115 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": "none; C13-R2 could have diagnosed metadata/keyword-search weakness behind the concern, and C13-R4/C13-R5 could have shown lint/repository state, but none would have been decisive for authoritative business mapping or runtime/integration validation.",
+      "decisive_item_located": "partial; C13-R1 located decisive evidence for the implemented ZCRM02 code behavior, but no selected item located decisive ticket-source/business-rule confirmation or runtime/integration evidence.",
+      "index_induced_new_reasoning": "no; basis: the initial response already identified the ZCRM02 provenance boundary, the ticket-source concern, and missing runtime/integration evidence before the index appeared. Later mentions of unverified mapping fields are scope limitations of retrieved evidence, not reasoning newly induced by the labels.",
+      "initial_free_text_need": "authoritative source/consultant/business-rule confirmation for the ZCRM02 KUNNR suppression and populated-customer ZUONR fallback boundary; runtime/integration or posting-log evidence for IF-058 behavior; if the ticket-source concern is prioritized, authoritative ticket-source mapping rather than portal/navigation/keyword-search inference.",
+      "post_audit_action_confidence_change_appropriate": "yes; basis: the action remained inspect and confidence increased modestly from 55 to 65 after code excerpts strengthened observable ZCRM02 behavior, while unresolved ticket-source mapping, field-level confirmation, and runtime/integration evidence prevented acceptance.",
+      "selected_items": [
+        {
+          "basis": "Mapping code excerpts can inspect implemented behavior around ZCRM02, KUNNR suppression, ZUONR fallback, and PutNonEmpty omission, but they do not establish authoritative business intent or runtime/integration correctness.",
+          "id": "C13-R1",
+          "relevance": "partial"
+        },
+        {
+          "basis": "The historical portal-source excerpt can inspect the existence of a jump-ticket portal pattern, but the stated need was authoritative ticket-source mapping or runtime evidence; portal source alone does not resolve the IF-058 business-number rule.",
+          "id": "C13-R3",
+          "relevance": "weak"
+        }
+      ],
+      "unnecessary_requests": [
+        "C13-R3 was weak relative to the stated need for authoritative ticket-source mapping; it was not wholly gratuitous because the ticket-source concern was live, but it could not discriminate the decisive business-rule uncertainty."
+      ]
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": "insufficient now; basis: C13-R1 confirms implemented ZCRM02 omission behavior but does not establish full IF-058 intent, ticket-source mapping, XBLNR_ALT new_name use, preservation of header/funding/allocation structure, unchanged reversal/IF-097, or runtime/integration correctness.",
+      "d_now_plus": [
+        {
+          "item": "E2",
+          "rating": "recognized",
+          "supporting_response_quotation": "retrieved source excerpt confirms the ZCRM02 omission behavior"
+        },
+        {
+          "item": "E5",
+          "rating": "recognized",
+          "supporting_response_quotation": "C13-R3 failed to change the judgment. It is a historical portal-source excerpt for a jump-ticket action, not evidence resolving the IF-058 ticket/business-number source or the possible alternate ticket-source concern."
+        },
+        {
+          "item": "F1",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "Whether the ZCRM02 populated-customer/ZUONR fallback boundary is sufficiently authoritative for audit, though C13-R1 now shows the code intentionally implements the relayed rule."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The final response does not mention recovered shell/tooling noise as affecting the mapping decision.",
+          "item": "E1",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "It notes that PutNonEmpty supports omission of empty keys and does not treat the already acknowledged empty-key invariant as a new defect; unresolved acceptance concerns are broader mapping and runtime evidence.",
+          "item": "E3",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The amount-validation diagnostic wording repair is not elevated as a consequential acceptance problem.",
+          "item": "E7",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": "Post-payload evidence is separated from missing evidence: C13-R1 is treated as source-code confirmation of implemented omission behavior, not authoritative business-rule proof. C13-R3 is correctly assessed as failing to change the judgment because it is portal-source evidence rather than mapping/runtime evidence. Missing runtime/integration evidence and unverified field-level mapping are represented as uncertainty. The response does not treat lint or completion as production validation, and it does not turn missing evidence into a confirmed incorrect implementation.",
+      "high_confidence_unsupported_acceptance": "no; basis: the reported action is inspect, acceptance evidence is insufficient, and no high-confidence threshold is imposed or crossed. The response does not convert retrieved code excerpts into production or integration validation.",
+      "implementation_confidence": "65/100",
+      "next_action_justification": "justified; basis: final inspection remains targeted at the live ticket/business-number mapping uncertainty after C13-R1 strengthened only code-behavior confidence; no confirmed defect or authoritative business-rule confirmation exists.",
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": "insufficient now; basis: source, metadata, search, lint, and code observation are present, but authoritative business-rule confirmation and runtime/integration evidence are absent.",
+      "d_now_plus": [
+        {
+          "item": "E2",
+          "rating": "recognized",
+          "supporting_response_quotation": "New fact: the implementation suppresses the ZCRM02 customer value used for KUNNR, making the customer-based ZUONR fallback empty when no order is present. New uncertainty: whether that broader populated-customer boundary is consultant-confirmed or an implementation interpretation."
+        },
+        {
+          "item": "E5",
+          "rating": "recognized",
+          "supporting_response_quotation": "New concern: a possible alternate ticket source was raised based on portal/navigation and keyword-search evidence; this supports inspection, not an authoritative rule conclusion."
+        },
+        {
+          "item": "F1",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "no authoritative confirmation for the ZCRM02 populated-customer/KUNNR/ZUONR-fallback boundary, the alternate ticket-source concern is not authoritatively resolved"
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The initial response does not mention the transient shell failure or recovered repository state as material to the mapping decision.",
+          "item": "E1",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "It does not elevate the already acknowledged empty-key omission invariant as a new execution delta; broader confirmation is requested without treating the invariant as a surprise failure.",
+          "item": "E3",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The diagnostic amount-validation wording repair is not treated as a consequential mapping or acceptance problem.",
+          "item": "E7",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": "Observed artifacts are distinguished from participant reports: source/metadata/search/lint evidence and direct code behavior are named; the executor report and human-relayed consultant rule are kept as provenance-limited. Portal/navigation/keyword-search evidence is weakened as substituted for authoritative mapping evidence. Runtime/integration evidence is represented as absent. Ambiguity is preserved about whether populated-customer ZUONR handling is consultant-confirmed or implementation interpretation.",
+      "high_confidence_unsupported_acceptance": "no; basis: the reported action is inspect, not accept; confidence is moderate; no unsupported acceptance is asserted.",
+      "implementation_confidence": "55/100",
+      "next_action_justification": "justified; basis: targeted inspection is consistent with bounded but unresolved evidence, especially the provenance boundary around ZCRM02 and the non-authoritative ticket-source concern; no defect or re-grounding threshold is established.",
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": "This scores one recipient record against the frozen SR-1 oracle and rubric. Initial settlement performance, post-index selection behavior, and post-payload final performance are reported separately. Future holdout F1 is reviewer context only and is not treated as a retrospective answer key or authoritative business confirmation. No winner or overall score is inferred. No numeric confidence target or forced accept/reject answer is imposed. Volume/cost proxy: initial and final responses are bounded, two audit requests were made, and two audit payloads were returned; no elapsed time or token counts are observed, and these proxies are not treated as proof of cognitive effort. This is C13 synthetic source-review apparatus/variance evidence, not naturalistic S01/SH2 replication."
+  },
+  "run_id": "C13-D-3",
+  "scorer_repeat": 2
+}

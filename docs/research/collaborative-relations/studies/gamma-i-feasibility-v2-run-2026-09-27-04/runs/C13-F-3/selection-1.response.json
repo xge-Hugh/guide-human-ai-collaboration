@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 10.43198651199964,
+  "messages_sha256": "c9f906c29447acc4fb3a9d403ae3a0ea7d65257b0a4d09131c3f04d45d4be531",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 2156,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2059
+      },
+      "prompt_tokens": 1372,
+      "total_tokens": 3528
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select:\n\n- **C13-R1** — mapping code excerpts\n- **C13-R2** — metadata and keyword-search result\n\nRationale: **C13-R1** directly verifies the implemented IF-058 posting-field mapping and scope-specific logic. **C13-R2** is the next best available item to corroborate the reported metadata/search checks and help detect out-of-scope references, given that repository-state/snapshot verification appears unavailable for this fixture."
+}

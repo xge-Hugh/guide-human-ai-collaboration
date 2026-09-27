@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 4.088243246999809,
+  "messages_sha256": "5c91a31e296b044e43fadf1be3bd88d5f0af46e3cfd71d4f6663cb97a3b119d3",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 507,
+      "completion_tokens_details": {
+        "reasoning_tokens": 406
+      },
+      "prompt_tokens": 1084,
+      "total_tokens": 1591
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select:\n\n- **S01-R4** — validation tool history  \n- **S01-R1** — final implementation diff\n\nRationale: `S01-R4` directly addresses whether the designated authoritative path `V_authoritative` was actually invoked and passed. `S01-R1` best addresses whether the public contract was preserved and whether unrelated behavior changed. Compile/test logs are less decisive because they do not establish authoritative metadata validation, and reports/notes are weaker self-report evidence."
+}

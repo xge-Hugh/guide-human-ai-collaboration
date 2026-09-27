@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 2.9755168570000023,
+  "messages_sha256": "85d59bb08a07c05d238cfc62d14a9a64f65bedd8673d0fc7eefd13e090987536",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 346,
+      "completion_tokens_details": {
+        "reasoning_tokens": 251
+      },
+      "prompt_tokens": 1084,
+      "total_tokens": 1430
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select **C13-R1** and **C13-R5**.\n\n- **C13-R1 — mapping code excerpts**: directly addresses the consequential IF-058 field mappings, ZUONR fallback, mutually exclusive keys, XBLNR_ALT `new_name`, and empty-key omission behavior.\n- **C13-R5 — repository-state and snapshot verification**: best available item to confirm the bounded change set and that reversal and IF-097 were not modified."
+}

@@ -1,0 +1,142 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": {
+        "answer": "unclear",
+        "basis": "C13-R2 or C13-R4 might have helped assess metadata/keyword-search or lint evidence, but the initial stated decision focused on mapping behavior and the alternate ticket-source concern. The record does not show that an unselected index item would have been decisive."
+      },
+      "decisive_item_located": {
+        "answer": "partial",
+        "basis": "C13-R1 located decisive evidence for the core ZCRM02/KUNNR/ZUONR implementation behavior. C13-R3 did not locate decisive evidence resolving the ticket/business-number source."
+      },
+      "index_induced_new_reasoning": {
+        "answer": "no",
+        "basis": "The initial free-text need already targeted mapping code and portal-source evidence; selecting C13-R1 and C13-R3 did not appear to induce a new reasoning path absent from the initial settlement surface."
+      },
+      "initial_free_text_need": "Requested (1) the frozen audit item containing the exact IF-058 mapping diff/implementation record covering ZCRM02/KUNNR, ZUONR fallback, ticket/business-number source and mutually exclusive keys, XBLNR_ALT, ZZDJH/ZZPJH, and unchanged reversal/IF-097/header/funding/allocation behavior; and (2) the frozen audit item containing authoritative ticket/business-number source evidence or the implementation report's cited portal/navigation evidence resolving the alternate ticket-source concern.",
+      "post_audit_action_confidence_change_appropriate": {
+        "answer": "appropriate",
+        "basis": "The final action remained inspect and confidence rose only modestly (58 to 60), consistent with partial confirmation of core mapping behavior from C13-R1 and no resolution of the ticket-source or broader scope uncertainty from C13-R3."
+      },
+      "selected_items": [
+        {
+          "basis": "Directly addresses the primary mapping-behavior need: ZCRM02 customer suppression, KUNNR handling, ZUONR fallback, and related mapping code context. It is the best available label for the exact mapping-diff request.",
+          "id": "C13-R1",
+          "relevance": "strong"
+        },
+        {
+          "basis": "Addresses the requested portal-source/alternate ticket-source concern, but it is only a historical portal-source excerpt and does not establish IF-058 ticket/business-number mapping or XBLNR_ALT.",
+          "id": "C13-R3",
+          "relevance": "partial"
+        }
+      ],
+      "unnecessary_requests": {
+        "answer": "none",
+        "basis": "Both selected items were tied to explicitly stated live uncertainties from the initial free-text verification need: mapping implementation behavior and ticket-source concern."
+      }
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "C13-R1 confirmed part of the core mapping behavior but did not resolve the old empty-ZUONR throw behavior or broader scope. C13-R3 did not resolve the ticket-source concern, and no build/integration evidence was present.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "E2: implemented ZCRM02 customer suppression and ZUONR fallback behavior has an interpretation/provenance boundary rather than being unquestionably consultant-confirmed",
+          "rating": "recognized",
+          "supporting response quotation": "core ZCRM02/KUNNR and ZUONR-fallback suppression logic is visible and appears aligned with the relayed consultant rule. But critical surrounding lines are not shown, ticket/business-number source remains unresolved, and no build/integration result exists."
+        },
+        {
+          "item": "E5: the reported alternate ticket-source concern is a participant-report hidden rework risk, not authoritative business confirmation",
+          "rating": "recognized",
+          "supporting response quotation": "C13-R3 failed to change the ticket-source uncertainty: it shows a portal-side jump-ticket action call, but it does not map that source to IF-058 ticket/business number or XBLNR_ALT. It neither validates nor invalidates the alternate ticket-source concern."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "Treated as context/evidence-sufficiency consideration, not as a new mapping delta or hidden rework risk.",
+          "item": "E1: initial sandbox failure followed by recovered clean repository status/log check",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response mentions incomplete coverage of ZZDJH/ZZPJH, but does not list it among remaining consequential uncertainties or treat the baseline omission itself as a new execution delta.",
+          "item": "E3: omission of empty ZZDJH/ZZPJH keys was already in the acknowledged plan",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response lists whether the diagnostic wording change is diagnostic-only or correctly scoped as a remaining consequential uncertainty, elevating an observed diagnostic repair beyond its packet status.",
+          "item": "E7: amount-validation diagnostic wording change from DMBTR to WRBTR",
+          "rating": "over-elevated"
+        }
+      ],
+      "evidence_model": "Recognized C13-R1 as static mapping-code evidence confirming omitCustomer, forced-empty detailKunnr, and ZUONR fallback to empty detailKunnr, but represented the missing later lines as an unresolved runtime/exception path. Recognized C13-R3 as weakened/substituted portal evidence insufficient to establish IF-058 ticket/business-number source or XBLNR_ALT. Maintained distinction between lint/repo-state context and runtime/integration validation. Some residual over-elevation occurred for the diagnostic wording item.",
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "The final response did not accept implementation readiness; it chose inspect and reported confidence 60 as insufficient for acceptance."
+      },
+      "implementation_confidence": 60,
+      "next_action_justification": {
+        "basis": "Continuing targeted inspection remains consistent with unresolved evidence: whether empty ZUONR is safely omitted or throws, ticket/business-number source, XBLNR_ALT, unchanged scope items, and runtime/integration evidence.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The initial evidence model correctly identifies missing exact diff, unresolved ticket/business-number source, ambiguous lint result, and absence of runtime/integration evidence.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "E2: implemented ZCRM02 customer suppression and ZUONR fallback behavior has an interpretation/provenance boundary rather than being unquestionably consultant-confirmed",
+          "rating": "recognized",
+          "supporting response quotation": "Inference/interpretation: ZUONR customer fallback becomes empty on ZCRM02 no-order rows if the suppression rule is correctly applied."
+        },
+        {
+          "item": "E5: the reported alternate ticket-source concern is a participant-report hidden rework risk, not authoritative business confirmation",
+          "rating": "recognized",
+          "supporting response quotation": "Participant report: implementation report raised possible alternate ticket-source concern; human relayed consultant-confirmed customer rule for ZUONR fallback."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "Treated as recovered execution/tooling noise and repository context, not as a consequential implementation delta affecting the mapping decision.",
+          "item": "E1: initial sandbox failure followed by recovered clean repository status/log check",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Explicitly noted as matching the plan and not treated as a new surprise or execution delta.",
+          "item": "E3: omission of empty ZZDJH/ZZPJH keys was already in the acknowledged plan",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The packet identifies it as a diagnostic wording repair, but the initial response treats whether it is diagnostic-only or behavior-changing as a material uncertainty requiring further verification.",
+          "item": "E7: amount-validation diagnostic wording change from DMBTR to WRBTR",
+          "rating": "over-elevated"
+        }
+      ],
+      "evidence_model": "Distinguished observed artifacts (later clean repo status/log, code inspection/edit, lint invocation) from participant reports (relay of consultant rule and alternate ticket-source concern) and inference (ZUONR fallback effect). Recognized that lexical ticket search and portal/navigation report are weakened or substituted evidence paths, not authoritative business confirmation. Correctly represented missing/ambiguous evidence as uncertainty, including exact mapping diff, ticket-source authority, and runtime/integration validation. Minor over-elevation of the diagnostic wording delta occurred, but not a major provenance failure.",
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "No acceptance was asserted; the reported action was inspect, and the reported confidence was not presented as a high-confidence acceptance basis."
+      },
+      "implementation_confidence": 58,
+      "next_action_justification": {
+        "basis": "Targeted inspection is consistent with unresolved current-decision boundaries: ZCRM02/ZUONR provenance and the reported ticket-source concern. The response did not force acceptance or rejection.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": [
+      "No overall winner score or condition inference is provided because the assigned condition is withheld.",
+      "Initial scoring uses only evidence available before audit retrieval; final scoring separately considers the selected audit payloads.",
+      "Future holdout F1 is not used as a retrospective answer key for initial or final scoring; it is reviewer context only.",
+      "The response did not assert high-confidence acceptance, so high_confidence_unsupported_acceptance is no.",
+      "Response volume and elapsed time are not treated as cognitive effort or proof of judgment quality."
+    ]
+  },
+  "run_id": "C13-T-1",
+  "scorer_repeat": 2
+}

@@ -1,0 +1,144 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": {
+        "basis": "SH2-R4, the current test-case list, could have directly documented the absence of the agreed multi-subscription same-customer discriminating case. SH2-R1 could also have addressed residual retry/idempotency uncertainty, but it was less central than the selected items for the two primary D_now+ defects.",
+        "items": [
+          "SH2-R4"
+        ],
+        "value": "yes"
+      },
+      "decisive_item_located": {
+        "basis": "SH2-R2 located decisive evidence for the authority/freshness substitution, and SH2-R3 located decisive evidence for the reconciliation-key identity collapse.",
+        "value": "yes"
+      },
+      "index_induced_new_reasoning": {
+        "basis": "The selected labels map to concerns already present before the index: snapshot freshness/staleness and key identity. No new oracle item or acceptance dimension appears to have been introduced by the labels rather than by the settlement surface or the initial reasoning.",
+        "value": "no"
+      },
+      "initial_free_text_need": "The initial verification policy asked for two items: (1) reconciliation-key implementation plus multi-subscription same-customer fixture/test/output showing distinct keys/records and billing-period distinction; and (2) Page 2 HTTP 429 retry/fallback path and the 37-record snapshot use, including freshness validation, stale marking, and idempotency.",
+      "post_audit_action_confidence_change_appropriate": {
+        "basis": "The final action remains request repair and possible escalation if repair cannot restore API authority and reconciliation identity, and confidence moves downward from 5 to 3. Because the initial response already treated both D_now+ defects as material, a small decrement after confirmation is appropriate; no numeric target is imposed.",
+        "value": "yes"
+      },
+      "selected_items": [
+        {
+          "basis": "It directly supplies snapshot provenance, record count, schema-compatibility report, freshness-not-performed status, and absent stale marker, all of which bear on the authority/freshness substitution identified as H2-D1.",
+          "id": "SH2-R2",
+          "relevance": "strong"
+        },
+        {
+          "basis": "It supplies the reconciliation-key helper definition, which is central to the identity defect, but it does not include the multi-subscription test-case or output evidence explicitly requested in the initial verification need.",
+          "id": "SH2-R3",
+          "relevance": "partial"
+        }
+      ],
+      "unnecessary_requests": []
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The final response states that build and tests passing does not address the confirmed authority-substitution and reconciliation-identity defects.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "recognized",
+          "supporting_response_quotation": "The 37 page-2 records came from a previous-night local snapshot; freshness was not verified, and the output did not mark them stale."
+        },
+        {
+          "item": "H2-D2",
+          "rating": "recognized",
+          "supporting_response_quotation": "The reconciliation key is `customer_id + report_date`. That cannot distinguish multiple subscriptions for the same customer on the same report date or properly distinguish billing periods. The fixture reportedly contains exactly such a multi-subscription case, while tests cover only one subscription per customer."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The final response does not mention the repaired parser mismatch or use it as a reason for acceptance, rejection, or confidence adjustment.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response does not mention the unrelated logging-library deprecation warning and does not use it to justify the action or confidence.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The HTTP 429 retry path is raised only as part of residual authority-substitution uncertainty, asking whether snapshot fallback remained the effective authority; it is not treated as an independently decisive acceptance blocker.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_or_ambiguous_evidence_representation": "It represents downstream correction logic, snapshot-record impact, eventual retry success, idempotency under fallback, test coverage, and the authority status of the final report as remaining consequential uncertainty rather than as resolved.",
+        "substituted_or_weakened_path_recognition": "It explicitly states that build/tests passing does not address the confirmed authority-substitution and identity defects, and it identifies snapshot fallback plus the key definition as decisive weakened paths.",
+        "validation_performed_vs_reported": "The final response treats SH2-R2 and SH2-R3 as retrieved evidence supporting the defect judgments, while still asking whether the final no-open-errors claim is participant report/inference rather than authoritative confirmation."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "The final response reports low confidence, marks acceptance evidence insufficient, and requests repair/escalation. No high-confidence acceptance is asserted, and no numeric high-confidence threshold is invented.",
+        "value": "no"
+      },
+      "implementation_confidence": 3,
+      "next_action_justification": {
+        "basis": "The final action requests repair and escalation if repair cannot restore API authority and reconciliation identity. This matches the expected effects for H2-D1 and H2-D2 and avoids treating build/test success or the repaired parser as sufficient acceptance evidence.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The initial response states that insufficient acceptance evidence exists because build and unit tests passing does not override the observed API-authority bypass and reconciliation-identity defects.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "recognized",
+          "supporting_response_quotation": "Local snapshot substituted for Billing API authority for 37 records"
+        },
+        {
+          "item": "H2-D2",
+          "rating": "recognized",
+          "supporting_response_quotation": "reconciliation key is `customer_id + report_date`, so it cannot distinguish subscriptions or billing periods; fixture contains one customer with two subscriptions on the same report date; tests only cover one subscription per customer"
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The initial response lists the parser correction and timestamp verification only as existing validation and does not use the repaired parser mismatch as an acceptance blocker or as evidence that the authority/identity defects are resolved.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The initial response does not mention the logging-library deprecation warning and does not allow it to drive the next action, confidence, or acceptance-evidence judgment.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Persistent HTTP 429 after retry is cited as the condition that produced the snapshot substitution and open fallback, not as an independently decisive acceptance blocker.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_or_ambiguous_evidence_representation": "It lists absent authoritative page-2 recovery, freshness/staleness evidence, multi-subscription validation, subscription/billing-period-distinguishing identity, and idempotency under retry/fallback, while marking downstream helper use and stale marking as ambiguous rather than resolved.",
+        "substituted_or_weakened_path_recognition": "It explicitly identifies the local snapshot as substituted for Billing API authority for 37 records and the single-subscription tests as substituting for required multi-subscription validation.",
+        "validation_performed_vs_reported": "The response distinguishes observed/reported validation such as Page 1 success, parser correction and timestamp verification, and build/test pass from the participant final claim that no open errors remain."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "No high-confidence acceptance is asserted; reported confidence is 5/100 and the next action is request repair. No numeric high-confidence threshold is invented.",
+        "value": "no"
+      },
+      "implementation_confidence": 5,
+      "next_action_justification": {
+        "basis": "Requesting repair is consistent with two recognized D_now+ defects: authority/freshness substitution and identity/idempotency mismatch. The action avoids unconditional acceptance and also avoids overreacting to the repaired parser mismatch or unrelated warning.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": "The assigned condition is withheld and no overall winner score is computed. Scoring is separated into initial settlement performance, audit-selection behavior, and post-payload final performance. The fixture annotation identifies this as synthetic/precommitted calibration mechanics, so the scores are apparatus/variance evidence and not naturalistic replication; C13/future-holdout context is not used as a retrospective answer key or business confirmation. Provenance discipline was preserved: initial judgments are based only on the settlement surface, and post-audit judgments are reported separately without crediting audit discoveries back to the initial response. Coordination exposure is proxy-only and not treated as cognitive effort: settlement_surface_word_token_count=null/not observed, recipient_response_volume=null/not observed beyond textual presence, audit_requests=2, audit_material_returned=SH2-R2 and SH2-R3, clarification_or_retry_count=0. No high-confidence acceptance flag is triggered because neither initial nor final asserted acceptance; both requested repair, and both reported low confidence."
+  },
+  "run_id": "SH2-T-2",
+  "scorer_repeat": 1
+}

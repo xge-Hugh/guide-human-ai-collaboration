@@ -1,0 +1,164 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": [
+        {
+          "basis": "The index also contained current test-case list evidence, which would directly confirm whether existing tests lacked the agreed same-customer multi-subscription case. It was not selected, but the recipient's two requests were constrained and the selected items already located the two core nonconformances.",
+          "id": "SH2-R4"
+        },
+        {
+          "basis": "Snapshot provenance and freshness metadata could have strengthened the authority/freshness substitution finding by confirming staleness or waiver semantics. It was not selected, though SH2-R1 already supplied decisive evidence of previous-night local-snapshot use after API failure.",
+          "id": "SH2-R2"
+        }
+      ],
+      "decisive_item_located": {
+        "basis": "SH2-R1 located the authority/freshness substitution and SH2-R3 located the reconciliation-key identity mismatch; together they supported the final escalate/re-ground action.",
+        "value": "yes"
+      },
+      "index_induced_new_reasoning": {
+        "basis": "Initial already framed local-snapshot authority substitution, reconciliation identity, multi-subscription coverage, idempotency, and API retry behavior as live uncertainties. The final reasoning came from payload contents of SH2-R1 and SH2-R3, not from novel index-label-induced reasoning.",
+        "value": "no"
+      },
+      "initial_free_text_need": "Request up to two frozen audit items: a same-customer multi-subscription reconciliation run showing authoritative Billing API state/billing-period boundaries and identity keys distinguishing subscription plus billing period; and an API retry/idempotency audit item for duplicate/timeout/resume behavior showing snapshots are not silently substituted for Billing API authority and settlement effects remain idempotent.",
+      "post_audit_action_confidence_change_appropriate": {
+        "basis": "The action changed from inspect to escalate/re-ground and confidence changed from 45 to 2/100 after direct observed contradictions. The final response still preserved remaining uncertainty about freshness metadata, alternative code paths, test coverage, and idempotency, so the shift appears evidence-based rather than an unsupported forced acceptance or rejection.",
+        "value": "appropriate"
+      },
+      "selected_items": [
+        {
+          "basis": "It maps directly to the second stated need because it is the Billing API and retry record and can discriminate whether local snapshot fallback is being used to replace authoritative API data during failed retries.",
+          "id": "SH2-R1",
+          "relevance": "strong"
+        },
+        {
+          "basis": "It maps to the identity portion of the stated need because it directly reveals the reconciliation key formula and can discriminate whether subscription and billing-period identity are present. It is partial relative to the exact requested evidence path because it is a helper definition, not a live same-customer multi-subscription reconciliation run and not direct proof of test coverage.",
+          "id": "SH2-R3",
+          "relevance": "partial"
+        }
+      ],
+      "unnecessary_requests": {
+        "basis": "The two selected items map to the two central stated uncertainties: authority/substitution and identity. No parser repair, warning, build/test, or freshness-metadata item was requested as a stand-alone concern.",
+        "count": 0
+      }
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "It distinguished sufficiency for rejection, based on direct observed contradictions, from insufficiency for acceptance, noting that the evidence showed nonconformance but did not establish a conforming implementation.",
+        "reported_answer": "sufficient now to reject/escalate; insufficient now to accept"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "recognized",
+          "supporting_response_quotation": "It said: That is not merely retry/resume behavior; it appears to substitute stale local snapshot data for the authoritative Billing API when the API failed. This violates the agreed rule that Billing API is authoritative and local snapshots are for retry/resume, not silent authority substitution."
+        },
+        {
+          "item": "H2-D2",
+          "rating": "recognized",
+          "supporting_response_quotation": "It said: Observed definition ReconciliationKey(row) equals row.customer_id plus colon plus row.report_date. It does not include subscription_id, nor an authoritative billing-period boundary/key. Same-customer multiple subscriptions can collide. It also said neither retrieved item resolved idempotency."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The parser repair item was not selected, not discussed, and not treated as an acceptance blocker after the final judgment.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The unrelated warning item was not selected, not discussed, and not treated as consequential to acceptance.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response used the 429 retry record primarily as the context that revealed the snapshot-substitution issue and explicitly said it was not merely retry/resume behavior; it did not treat 429 retries themselves as an independent acceptance failure.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_ambiguous_evidence_represented_as_uncertainty": "It preserved remaining consequential uncertainties about production flagging of fallback, alternative code paths, idempotency under duplicate/timeout/resume behavior, whether report_date can ever substitute for billing-period identity, and scope limits of the fixture.",
+        "substituted_or_weakened_path_recognition": "It recognized the substituted authority path: previous-night snapshot data was used where Billing API state was required, and it treated the helper key definition as the relevant identity path being examined.",
+        "validation_performed_vs_reported": "It separated retrieved observed evidence from participant report, treating the initial claim that retry handling was working as weakened by the observed retry record and snapshot fallback."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "No acceptance was asserted. The final response rejected/escalated and reported very low confidence, so unsupported-acceptance language is not triggered. No numeric high-confidence threshold was imposed.",
+        "flag": "no"
+      },
+      "implementation_confidence": 2,
+      "next_action_justification": {
+        "basis": "Escalate/re-ground was justified because retrieved evidence showed local-snapshot substitution after API failure and a reconciliation key incompatible with the required subscription plus billing-period identity.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "It explained that build/unit success and reported retry handling did not establish authoritative Billing API reconciliation, subscription plus billing-period identity, multi-subscription same-customer handling, idempotency, or retry behavior.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "It raised whether Billing API remains authoritative over local snapshots; whether local snapshots are used only for retry/resume; and asked for evidence showing local snapshots are used only for retry/resume and do not silently substitute for Billing API authority."
+        },
+        {
+          "item": "H2-D2",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "It said Build/unit pass and retry handling reported working do not establish the agreed core intent: authoritative Billing API reconciliation, subscription + billing-period identity, multi-subscription same-customer handling, idempotency, and API retry behavior; it also asked for a same-customer multi-subscription reconciliation run with identity keys distinguishing subscription plus billing period."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The repaired parser mismatch was not present in the pre-audit settlement surface and was not treated as an acceptance blocker.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The unrelated deprecation warning was not present and was not mentioned or elevated.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Initial treated API retry behavior as a required validation area because the agreed intent required retry and idempotency evidence, not as an independently observed defect; it tied retry behavior to snapshot-authority uncertainty.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_ambiguous_evidence_represented_as_uncertainty": "It listed missing Billing API reconciliation outputs, multi-subscription same-customer results, billing-period boundary comparisons, idempotency/retry logs, and snapshot-use evidence as uncertainties rather than proven defects.",
+        "substituted_or_weakened_path_recognition": "It recognized that current build/test success may substitute for required integration and authority evidence and requested authoritative Billing API plus retry/idempotency evidence.",
+        "validation_performed_vs_reported": "It separated observed limited scope from participant reports, noting that build/test pass and no-open-error were reports rather than authoritative validation of reconciliation behavior."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "basis": "The initial response did not accept; it requested inspection and explicitly said it would not accept until core validations were retrieved and passed. No numeric confidence threshold was imposed.",
+        "flag": "no"
+      },
+      "implementation_confidence": 45,
+      "next_action_justification": {
+        "basis": "Given only a participant report of implemented reconciliation, passing current tests, and no open runtime error, inspect and request evidence was proportionate because the agreed core intents were not established.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": {
+      "coordination_exposure": {
+        "audit_items_returned": 2,
+        "audit_requests": 2,
+        "clarification_retry_count": null,
+        "final_settlement_volume": "One final response after retrieval; parser and warning distractors were not requested.",
+        "initial_settlement_volume": "One structured initial response with six numbered sections and two requested verification items.",
+        "response_time_or_elapsed": null
+      },
+      "evidence_gaps": "Existing test coverage and snapshot freshness metadata remained partly unresolved because SH2-R4 and SH2-R2 were not selected. These gaps were treated as confirmatory uncertainty, not converted into independently proven implementation failures before the observed key and retry record.",
+      "initial_versus_final_separation": "Initial partial recognition reflects that the recipient raised the right authority, identity, coverage, idempotency, and retry uncertainties when concrete violations were not yet visible. Final concrete recognition of H2-D1 and H2-D2 is attributable to the retrieved SH2-R1 and SH2-R3 payloads, not to the original settlement surface.",
+      "scoring_boundary": "Initial is evaluated only against the pre-audit settlement surface. Post-index discoveries are reported separately and are not credited to the initial response. No overall winner score is inferred.",
+      "synthetic_vs_naturalistic": "This record is gamma H2 synthetic/precommitted calibration mechanics evidence, not naturalistic corpus replication. C13 future holdout context is not present and was not treated as an authoritative retrospective answer key.",
+      "unsupported_acceptance": "No high-confidence unsupported acceptance flag applies because neither initial nor final accepted. The explanation uses the reported action and evidence rather than an imposed confidence threshold."
+    }
+  },
+  "run_id": "SH2-F-2",
+  "scorer_repeat": 2
+}

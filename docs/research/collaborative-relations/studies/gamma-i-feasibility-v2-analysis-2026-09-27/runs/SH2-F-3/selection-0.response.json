@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 20.15198386799966,
+  "messages_sha256": "2e5310898a11c2d91d7a7c8973e54c03b5543b935a5832dc193e5fa46775d875",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 4214,
+      "completion_tokens_details": {
+        "reasoning_tokens": 4201
+      },
+      "prompt_tokens": 1116,
+      "total_tokens": 5330
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "[\"SH2-R1\", \"SH2-R3\"]"
+}

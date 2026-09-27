@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 14.632521434999944,
+  "messages_sha256": "ad25f6309630cbcc01dddb7a6c016530c61cd295af1582371051b090cfd2e1df",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 2721,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2617
+      },
+      "prompt_tokens": 1475,
+      "total_tokens": 4196
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select:\n\n- **C13-R1** — mapping code excerpts  \n- **C13-R4** — lint invocation result  \n\nRationale: C13-R1 directly addresses the core need to verify the bounded IF-058 mapping, ZUONR fallback, mutually exclusive key handling, ticket/business source, and XBLNR_ALT behavior. C13-R4 addresses the previously weak “empty result object” lint evidence and helps determine whether the implementation is ready for the next commit/review step."
+}

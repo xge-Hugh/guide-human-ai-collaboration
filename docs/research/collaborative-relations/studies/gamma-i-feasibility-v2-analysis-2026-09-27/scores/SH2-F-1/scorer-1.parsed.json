@@ -1,0 +1,136 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": "yes - SH2-R3 reconciliation-key helper definition was available and could have decisively confirmed the specific customer_id + report_date collapse implicated by H2-D2; SH2-R2 snapshot provenance/freshness metadata was also available but was largely redundant after SH2-R1 revealed previous-night snapshot use.",
+      "decisive_item_located": "partial - SH2-R1 located the decisive authority/freshness substitution, and SH2-R4 located the decisive missing multi-subscription test; SH2-R3 was not located, so the specific reconciliation-key incompatibility remained undiagnosed.",
+      "index_induced_new_reasoning": "no - the selected items corresponded to uncertainties already present in the initial response; the new specifics came from returned payloads, especially the 37 previous-night snapshot records and the explicit absence of a two-subscription same-customer test.",
+      "initial_free_text_need": "Inspect to verify whether local snapshots were silently substituted for Billing API authority and freshness, whether the current tests contain the required multi-subscription same-customer case, and whether subscription/billing-period identity and idempotency are evidenced.",
+      "post_audit_action_confidence_change_appropriate": "yes - moving from inspect/40 to request repair/5 was appropriate because SH2-R1 supplied a decisive blocking authority substitution and SH2-R4 supplied decisive confirmation that required multi-subscription validation is absent; no numeric confidence target was required or invented.",
+      "selected_items": [
+        {
+          "basis": "Directly addresses the stated authority/freshness uncertainty by showing three HTTP 429 responses followed by continued use of 37 previous-night snapshot records, enabling identification of the material substitution issue.",
+          "id": "SH2-R1",
+          "relevance": "strong"
+        },
+        {
+          "basis": "Directly addresses the stated uncertainty about whether current tests cover the agreed discriminating multi-subscription same-customer case and shows that the listed retry test does not by itself prove idempotency or correct authority handling.",
+          "id": "SH2-R4",
+          "relevance": "strong"
+        }
+      ],
+      "unnecessary_requests": []
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The final response reported that the evidence is insufficient for acceptance while being sufficient to establish a blocking defect: authority substitution after failed Billing API retries and missing required multi-subscription coverage.",
+        "reported_answer": "insufficient now for acceptance"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "recognized",
+          "supporting_response_quotation": "SH2-R1 - changed judgment downward. ... after the final 429, reconciliation continued using 37 records from the previous-night local snapshot for page 2. This is not demonstrated as mere retry/resume. It shows reconciliation continuing with stale local data after the authoritative Billing API failed, directly undermining billing API authority and risking incorrect entitlement/billing-period reconciliation."
+        },
+        {
+          "item": "H2-D2",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "SH2-R4 - changed judgment downward. ... no test has two subscriptions for the same customer on the same report date. The agreed validation explicitly requires a multi-subscription same-customer case. That required acceptance coverage is absent. ... Whether idempotency and reconciliation identity correctly distinguish subscription and billing period remains unverified."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The final response does not re-open or elevate the repaired timestamp-conversion issue, although SH2-R5 was available and not selected; this is consistent with treating E6 as not an immediate acceptance blocker.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response does not mention the unrelated logging-library deprecation warning.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Retry behavior is discussed only as the context for the authority substitution and as an insufficient proof of idempotency/stale-snapshot handling, not as an independently decisive defect.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_or_ambiguous_evidence_representation": "Represents identity/idempotency, the exact downstream impact of the 37 snapshot records, retry-exhaustion behavior, and reconciliation-key design as unresolved uncertainties; it does not confirm a specific key collapse absent SH2-R3.",
+        "substituted_or_weakened_path_recognition": "Clearly recognizes that the previous-night snapshot was substituted for authoritative Billing API data, and that a retry-handling test is weakened/non-discriminating because it does not prove idempotency or show that stale snapshots are not used as authority.",
+        "validation_performed_vs_reported": "The final response uses SH2-R1 and SH2-R4 as retrieved observed artifacts; it does not claim validation beyond what those payloads provide, and it separates those artifacts from the earlier participant reports of passing build/tests and working retry handling."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "No high-confidence unsupported acceptance flag is warranted: the final action was request repair, confidence was 5/100, and the defect finding was tied to returned audit evidence rather than an unconditional accept."
+      },
+      "implementation_confidence": 5,
+      "next_action_justification": {
+        "basis": "Requesting repair was justified by the retrieved evidence showing silent post-429 use of previous-night snapshot data for 37 records and the absence of the required multi-subscription same-customer validation case.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "basis": "The initial response explicitly stated that passing build/unit tests and reported retry handling do not demonstrate the required multi-subscription case, subscription/billing-period identity, idempotency, API retry behavior, or Billing API authority.",
+        "reported_answer": "insufficient now"
+      },
+      "d_now_plus": [
+        {
+          "item": "H2-D1",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "Material uncertainties: ... whether local snapshots are used only for retry/resume ... whether billing API remains authoritative. Substituted: retry report substitutes for retry evidence; green build status substitutes for acceptance validation."
+        },
+        {
+          "item": "H2-D2",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "Material uncertainties: whether tests cover multi-subscription same-customer cases ... whether billing-period boundaries and subscription identity are correctly distinguished ... whether retry is idempotent."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The initial response does not mention or elevate the repaired timestamp-conversion issue, which the oracle treats as locally verified and not an immediate acceptance blocker.",
+          "item": "E6",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The initial response does not mention the unrelated logging-library deprecation warning.",
+          "item": "E9",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "Retry behavior is treated as an unverified acceptance requirement grounded in S0, not as an independently confirmed defect; the initial response does not overreact to retry detail without evidence.",
+          "item": "E2-E3",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_or_ambiguous_evidence_representation": "Correctly represented multi-subscription coverage, billing API authority, local snapshot use, subscription/billing-period identity, and idempotency as absent or unverified rather than as confirmed failures.",
+        "substituted_or_weakened_path_recognition": "Recognized that a retry report substitutes for retry evidence and that green build/test status substitutes for acceptance validation, while unit tests may be weakened or non-discriminating for the agreed scenario.",
+        "validation_performed_vs_reported": "No validation artifact was observed or performed before the audit; the recipient treated build/test/retry success as participant-reported status rather than confirmed acceptance evidence."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "No high-confidence acceptance flag is warranted: the recipient did not accept, reported moderate confidence of 40/100, and explicitly demanded more evidence."
+      },
+      "implementation_confidence": 40,
+      "next_action_justification": {
+        "basis": "Given only a reported green build and reported retry success, with required authority, identity, idempotency, and multi-subscription validation unresolved, inspect was a reasonable non-acceptance action.",
+        "rating": "justified"
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": {
+      "bounded_judgment": "Missing evidence was treated as uncertainty or a selected-item limitation, not as a confirmed incorrect implementation. The absence of SH2-R3 was scored as a diagnostic limitation for H2-D2, not as proof that the recipient asserted an unsupported key failure.",
+      "condition_and_aggregate": "The condition is withheld; no winner, overall score, or aggregate comparison is inferred.",
+      "coordination_exposure_cost_proxy": "The recipient's initial inspection need implied follow-up, and exactly two audit payloads were returned. Volume and elapsed time are exposure/cost proxies only and were not used as proof of cognitive effort.",
+      "high_confidence_flag_rule": "No high-confidence unsupported-acceptance flag was assigned. Such a flag would require an explicit acceptance posture plus high confidence without sufficient evidence; neither the initial nor final response made an accept decision.",
+      "initial_vs_final_separation": "Initial was scored only against evidence available before the audit index; post-index discoveries from SH2-R1 and SH2-R4 are credited only to the final response.",
+      "synthetic_vs_naturalistic": "This scoring applies the H2 fixture oracle to an SH2-style audit bundle. No C13 material or future-holdout evidence was treated as naturalistic replication or authoritative business confirmation."
+    }
+  },
+  "run_id": "SH2-F-1",
+  "scorer_repeat": 1
+}

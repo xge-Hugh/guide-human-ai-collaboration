@@ -1,0 +1,95 @@
+{
+  "audit_payload_hashes": {
+    "C13-R1": "a6c6a7c2790a37ba24a04ce79eb74c2f2c9db7f3bd3b185b5b03a2796896fabc",
+    "C13-R2": "e913c9fd4725f1a1215a774483d57b62120c1c499e78cc3502fdb8c44d4e08b1",
+    "C13-R3": "fe1195ad287aa67e815b237468de5386dabb7aa2a40ff98e396759e3b6cff5a0",
+    "C13-R4": "7537a5035f47a2ed91a5247bef8a7bae15a9b62df7183fee467516417306f4a2",
+    "C13-R5": "439f3c0d93c884beca1de858fca81ebc627f38776afd9b4a249fb519f3e5dfc5",
+    "S01-R1": "4d445f1ecd90060dbcc6fa95ae78466da09f962b35a7fadb20efd5a13edf483c",
+    "S01-R2": "9776adabd60b7224bf85517015b3adaa645d1d25bfe7eb1d6293cf2d893faf10",
+    "S01-R3": "80ee6c2c05d71694ec3d861efc0282ad97f159c45fda048929586bed6bef8a36",
+    "S01-R4": "063c0d7b8a0fa338b31c2a70e1fa450ae12a5d973cb09c287058d1df7c929e63",
+    "S01-R5": "61ecb17e8fa33575350b941059fa902baf9bd5231ff8ed1af01cad361f896114",
+    "S01-R6": "2a0d9bd5544de34508608522b6b7a9203684e2d37b3a5cfcc4241b2c0cfdc1ef",
+    "SH2-R1": "a7a54824e46f7da7575971290d418f37d814c7127251c0c5e61edea7d272d00c",
+    "SH2-R2": "66ebe538c50b51c5d72960a5a9edc4980655f16a98222300bd69e2b2f111f39c",
+    "SH2-R3": "b33781e571c39eb719d8c234c5d9556bc565fc11a9d9b44558960d5f6dfb81c4",
+    "SH2-R4": "8e089c691a07a47e23454f644f336b73d8474e9ff4aa583efc0dc73205b67a01",
+    "SH2-R5": "535a2565ea7a93642e15d6229385f613b90a186bfdb21d86c653d334aa76f78a",
+    "SH2-R6": "206a8e039f8422bcf8f1c24704e6f03b49a23bda7d00f878e901d288b2227392",
+    "SH2-R7": "6569f0491b9c289db4651170d9d5836fc51f4c0e8b2816d62952ceb7ec0d1cfb"
+  },
+  "frozen_files": [
+    {
+      "git_blob_sha": "240aaed0c159bdf020bcf912b474e9c00377c1e5",
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/packets.md",
+      "sha256": "e92e3abd77a801535822e6a6606b4216eb5898e7a9f9456c29f90e641535bbad",
+      "verified": true
+    },
+    {
+      "git_blob_sha": "25ff54d4fe949f074bea4745530f5b2ce7c47b7e",
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/scoring.md",
+      "sha256": "f7e85acbb013eab635026bd7b9d997cc34d18078c5d073f9d4550e473a6497ec",
+      "verified": true
+    },
+    {
+      "git_blob_sha": "b19042fe9006899b3e8b5d5f9b1d2278827e9f67",
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-2026-09-27/fixture-h2-subscription-reconciliation.md",
+      "sha256": "683ad9e5df15958a2500c17e4df4c141f7e6614aac9f2419cb8a322bfba7bad3",
+      "verified": true
+    },
+    {
+      "git_blob_sha": "70215ba40329f9b1cfa4b4b6b43dd096da1491bc",
+      "path": "docs/research/collaborative-relations/studies/gamma-fixtures/fixture-01-validation-path-substitution.md",
+      "sha256": "45a165d963832290f1f95834a7c17fa74cbd4b359fe7331bf9c05e67cadf7370",
+      "verified": true
+    },
+    {
+      "git_blob_sha": "b59e64dc94bdb0d8073b1cac6b4e264ae86842e3",
+      "path": "docs/research/collaborative-relations/studies/gamma-source-review-2026-09-27/sr-1.md",
+      "sha256": "eacd9f534798527aab76d93fe7c1267dd2e9caf06263b2b56e353567998cf7f2",
+      "verified": true
+    },
+    {
+      "git_blob_sha": "fe446e6ad0174c676e88529453dd15f9ab04ad84",
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-v2-2026-09-27/README.md",
+      "sha256": "b41a519d5813be8949026b4cb1a00497ca0af9341c24e8ac46642a8c63d3ccdc",
+      "verified": true
+    },
+    {
+      "git_blob_sha": "f4a2b18ebc6fb670a9ad3273bc23c9ba495e4acb",
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-v2-2026-09-27/audit-payloads.md",
+      "sha256": "f7a59575b70787e37f96b2eb45901899ecdfecb38ad426776dba4b4bab436710",
+      "verified": true
+    },
+    {
+      "git_blob_sha": "007d27594f65245d19441f4792ff041c09015189",
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-v2-2026-09-27/audit-index.json",
+      "sha256": "bed4150d8b0e78b04f2e3c135e7a720e341675ba71014f5ad81ec8d121c6642f",
+      "verified": true
+    },
+    {
+      "git_blob_sha": "4879b1d55ce8bed0b438cfce0ecb49f579d1a493",
+      "path": "docs/research/collaborative-relations/studies/gamma-i-feasibility-v2-2026-09-27/run-spec.md",
+      "sha256": "a9e2b40e648cd7d1bd14e7806a9b763ad5ab97db00c10fe385296abea7152cc6",
+      "verified": true
+    }
+  ],
+  "initial_packet_count": 9,
+  "initial_prompt_hashes": {
+    "C13-D": "45ba3a5b66f0cd6e74f3c56ee2f44ecd307cf1d7df842888efd4af0cc4bb1a9e",
+    "C13-F": "73bcdb72012114a9351e6d1632fc2833a38fe6376e8a8c1d1d2225b5476a5e21",
+    "C13-T": "94ffcc12161eb7c83bfa98751d066b1b8d2a6e2405908d024d19b7344a101e0d",
+    "S01-D": "a639d8223cd17a284a4a26e7dda471b32ebcb0cee730e6ae8713d32fa9bf35ee",
+    "S01-F": "313896c8de1a46d6ecc22621860198ba380a1e5a709ac16e15057867e37a70ca",
+    "S01-T": "58f36f2aa771f6efe04f45a48fc91e1447d282056b812b4b4f1304331755be85",
+    "SH2-D": "6bce810706d202c97d51d540be1a0981b5f3275a3f950ba061108bff4bd761ac",
+    "SH2-F": "018166d386c8892cd3021a924a3706161f2224a46f72acacfd5bfd08c2aa3461",
+    "SH2-T": "a305c19edc418d62b634a128abf78b8b3e39d62fafea89978f29ec37a6f5ab28"
+  },
+  "payload_count": 18,
+  "recipient_runs_started": 0,
+  "runner_sha256": "d2d81289193b10d943d065f106945a863f465b8914595f8728456f47540728c7",
+  "runtime_gate": "pending",
+  "v2_manifest_sha256": "8c8fabf27d1cf246f1612dd20c4251ec6d89ceffa1e2138db6a4bb904e4086a3"
+}

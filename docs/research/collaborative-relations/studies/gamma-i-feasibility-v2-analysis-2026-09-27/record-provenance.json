@@ -1,0 +1,957 @@
+{
+  "analysis_set": "27 valid fresh recipient contexts: 26 from attempt 04 and 1 C13-F-3 replacement from attempt 05",
+  "assembled_at_utc": "2026-09-27T09:57:57.890920+00:00",
+  "copy_integrity": "Every copied file byte-matched its preserved source at assembly.",
+  "equivalence_evidence": "gamma-i-feasibility-v2-run-2026-09-27-05/selection-equivalence.json",
+  "excluded_reason": "False invalid-ID feedback in audit stage; raw record kept in original source and not scored.",
+  "excluded_source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-F-3",
+  "model_connection_fingerprint": "5eb8e16f18d415458670fe7a5d62eeac2d9e4eb1e14b2f61ac76069d8cd040dd",
+  "origins": [
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "7244525e9542404fb3c34fed494e9f74fe3374083b53bdd4872c4a4068dd0656"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "5f386fe20d6a61a0c88208d07b2d59e0ee1941aa051b9e8d2945c5aa10ffb8ce"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "47e218c488e06b2790619f67ca608ffd125fe32104422192d7bec866a8c99d95"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "59e916c7fa357625247e954d2e6615d6d78a0ef1401c7b1fe83b70bc50491045"
+        },
+        {
+          "name": "record.json",
+          "sha256": "f622f97f92d677390bc04cd9392c9104e36f3afd9a8e8c9b10db6028891a6c6f"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "e8f61801835dd199ac9b5223eb5e8274e4252d86b6e12788f7eddf5c135ed032"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "382ade6bbc74eab61acdbfa7c07fbb169272b252f926ac0c634bd94f7134cc11"
+        }
+      ],
+      "run_id": "C13-F-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-F-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "a6ecd07b6e3958cd7ebc275305469004535a0e00b82fc0442d352a9c82232cf3"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "1574be61acbcdf4ab9f90135bad022f07ed8c1a1500be5a05b716f14a63a14db"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "47e218c488e06b2790619f67ca608ffd125fe32104422192d7bec866a8c99d95"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "fb7b149f29c7c50b4c717ddf4fe8b836894b694881c5bab83d845b3dc0ae477e"
+        },
+        {
+          "name": "record.json",
+          "sha256": "3a685437e5e27ea940bb5792b77497ca17f092bf25972669c146d918d7b7bede"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "32775673a90fded63f584812d6707d482e6c61fd994a3c33e6d7af1735963f4c"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "9245b0131dab3d4bfce53f7de3502027db9f928b4cc6588fbba82bbe6dd7fc13"
+        }
+      ],
+      "run_id": "C13-F-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-F-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "8c0203681f3fd759567c8a01b6fce12650a1f174001f55def567f92b5799472a"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "e428117ba1f52c5d00768430d09c6df4d94508094a643cd43b47d82235681699"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "47e218c488e06b2790619f67ca608ffd125fe32104422192d7bec866a8c99d95"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "0f4ce97479ac624f27cab85396f072b24137ff6f152a45373dc57c308c9e5075"
+        },
+        {
+          "name": "record.json",
+          "sha256": "d6c6473a688909785eab67c48bb9fe1b7cc9787afa2a33bac7ce9e819df8df98"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "35a89145ca4900f76ff70f28ff100bc687dc4b9dfd07a1af92fac75e2a56be04"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "8418dfa776eca0a661258ab10ef73be2d4202ade97d20af0ea0d3b31da15ee6e"
+        }
+      ],
+      "run_id": "C13-F-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-05/runs/C13-F-3",
+      "source_runner_sha256": "d2d81289193b10d943d065f106945a863f465b8914595f8728456f47540728c7"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "90ae52b4a4d2fa05c9e755ebe0af19ddcc0a1644b6cd44326ab991f293bc5ff4"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "434bb94183b0663252d64c2ff16c99d017fbf476c1a30f2daddceee25ccf7877"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "e4ffbab461b08c0c8b55f98e859775496a60c0d919e79c76d00979bcdf074187"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "79e796f0772915116499264701a5ddc8c5c9f078ce620aa459b59a3fbc813f56"
+        },
+        {
+          "name": "record.json",
+          "sha256": "cc61c887a2ced542453c4e0d2a1c32ea49a74586c6e488cdb45ee67fb0afd830"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "a7bff5e6f8663a0b66d058a4c52d3151e3873d2691c99c17a16ea75ec686c21b"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "a47a656f18a7ca35a4cba87c059efb4ab576edf48ca42fb2dbf778754b165ebb"
+        }
+      ],
+      "run_id": "C13-T-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-T-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "2e761714e0e80718ca72a2fa074d226e08eefa52d9d504d9ad61f01acdfc059c"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "0bb396d2ef263c7cd6826d8be95623b90ff03981caa4ac171a301973eb9ad698"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "e4ffbab461b08c0c8b55f98e859775496a60c0d919e79c76d00979bcdf074187"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "b8878a6a5bd84889f44ce9196716a8e5f8eb7afc55c5facc4b6ffcc098d55bbf"
+        },
+        {
+          "name": "record.json",
+          "sha256": "92ecbf7fd77779cfdce9f151a884d2f4729b289851273ad791775cb04c6aeae7"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "1307710d0fd53f43029472fb5268ea2e7cbb69c55e4275a96ff43e27ca729316"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "54e2284749d0e1d815f67c07cf20b12b58c116b409bf569dd51f6b59f09c764d"
+        }
+      ],
+      "run_id": "C13-T-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-T-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "5120beb3233f1fd54cd0fcb56a503e562e3870c4a71f0dbca976cbffcbbaccda"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "367813186686a73fc368a642ab39dd889240531d9a2f7ab0125031887208b02c"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "e4ffbab461b08c0c8b55f98e859775496a60c0d919e79c76d00979bcdf074187"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "616fb84ac80478fc1039ce34ae97e624a36e88f46c1ccce49aab0b4a26258091"
+        },
+        {
+          "name": "record.json",
+          "sha256": "3f24671785a9c5f6748adfa29e64742ef4c0cf809d252cd0cef101260cc47b21"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "e65877063e0920c819346be7e82ece0c3157426ab0f658646dccd3b012dfa444"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "9d253c7d7aee6c3e1747a9e0404a77bedef65d50175e09113a0647a472758f35"
+        }
+      ],
+      "run_id": "C13-T-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-T-3",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "25d8c7f854e122c3111e3b61244df6c21025d06e507cf30101ca307cbb82846e"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "485a1597a298d8d0461f0e34d2d1ea31fd08b3918b68dd50be2c9f84a85c95d1"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "de69b4ad26d9e5dfce36dc148893ea99a99ec9dea1677a9a635771db3d6115b3"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "55674adb5db0220822481c3baee0a20ec388627d1b0a3abef3a146158d449d3e"
+        },
+        {
+          "name": "record.json",
+          "sha256": "b417f301fdd2af9dfb04e887d162310e785d6c1e60e47f488ea384dca358e824"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "9036fc718c5d6ef4c5560198a6bb5574aa7875caffcea73d840a0acb78e46637"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "597f416221158eb2df3157effb3ae4079caa089215f6ad0ce179a90ef0647e67"
+        }
+      ],
+      "run_id": "C13-D-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-D-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "7eefc460501a1242b3028fa2ce7a7bab6fa5a21163e1bb27d4e8943217a82c4f"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "b5d3953e5c8a46ac2419c27a5ed30b8155b77a391f7da166225c67974b5c2d43"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "de69b4ad26d9e5dfce36dc148893ea99a99ec9dea1677a9a635771db3d6115b3"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "fcbce0dd1bc558eb95eb8849ae2860f8f67a7e37fb614e568e3a7b6f1149b2b9"
+        },
+        {
+          "name": "record.json",
+          "sha256": "0527a881bb7af56b0c981e3db32f1e5c995b04e338cb5ed887761d669a2ae769"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "16e4a3391dd7d2a9c2bb21626ee4cacf91ac5a3e78503de23a8cd40a715c843c"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "7a9ab7ffaf383347fb558863dd2151f745935e2bf1935461faea4ec25e36c938"
+        }
+      ],
+      "run_id": "C13-D-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-D-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "3d45f156506be81ad5728f84a31e9c1362e18a7073d1514aad9d608b97e1e064"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "80072734a119c7d9dbaf7d62f3c5784024c4d25fb2bc93ebc9bc60a7e5f7605e"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "de69b4ad26d9e5dfce36dc148893ea99a99ec9dea1677a9a635771db3d6115b3"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "911173360cdc8d5728c0628748217c44793b1fff076774721c09e78b81ccf025"
+        },
+        {
+          "name": "record.json",
+          "sha256": "360f812e9afeeb9d6d744aa9b5a5ba96a6dcf064076d676d6d08c9061a857ce2"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "a708d43b2b34d1682e93a286fe62a2914b81d2d1352139b4161f9bec90a4b098"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "fc2bd6f3e54bef49e56a19cbde3815ac298728058603299a29af9b02fe776c62"
+        }
+      ],
+      "run_id": "C13-D-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/C13-D-3",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "eb9997204cbd90a26e69660b886e558737aa0e6f10f8405702598eecf2af3a42"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "c3d52cc2dfeb0a25635a3a521ed59a3b7071a163498beb6a24a772f35e4872bb"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "22a81ce847665195091c88cd57728357dd69d2a500fac7330263b000c46e8b1e"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "646f9b114f7566e9ec25a35ff7f9d3eee078330a65a8770806c3539a14c6bbe7"
+        },
+        {
+          "name": "record.json",
+          "sha256": "585bd1a41c88e066fd46871f2f655cf05209627e485578c285ec02f6f66bc10e"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "944cf64599d701916c26380cc1b7938dc33d44f2cad17cb600edc99cd23660ba"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "cccc90ba32380b6b308620b91d149baf69ad17637f2079280fe35e77185fa88c"
+        }
+      ],
+      "run_id": "S01-F-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-F-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "f8ce62cd9bd0d5e8ad203d0c07db831ebabe90b9abe0a45100614c457de2acd7"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "44f415ee064016a8b7bd7184e9f97d49a93d2253aef6708dded84cf4944fc7cd"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "22a81ce847665195091c88cd57728357dd69d2a500fac7330263b000c46e8b1e"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "418cd817ecc4558fd5df833cb377fe69089352e69c3b41aff7e910a8ee1b3921"
+        },
+        {
+          "name": "record.json",
+          "sha256": "cdd59cc343a75d0a033a6fa4c8464c213c24d556231a52d04441ebf68a80d8e6"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "bd0ff5b7055bee9f1e467a90797a633add6b6381e8c1d85fb12f525b4d91252b"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "32ace0f03554c2c153bb7e75778974411c94b104bca3f96a52f1450219f691bc"
+        }
+      ],
+      "run_id": "S01-F-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-F-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "5c469bd0f680ac8be0a2d22313fc517df6700911f7a6a7a330346daca1b92bfc"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "419d1a2f1e287f780193e04423c6e18574687e8c58b853a41415c87c7504bb36"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "22a81ce847665195091c88cd57728357dd69d2a500fac7330263b000c46e8b1e"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "775de44b7e7e104177b9a661260b05307405a8714adcd98bad73b87824c28331"
+        },
+        {
+          "name": "record.json",
+          "sha256": "bd500ea1fcf477f714ec857802d2988ca8e03838b10424937b6c3714f1b5ffad"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "9cc670c06162d19b7a2c553722999e52a82ea1ee7ce8c96934ed319b7534bce0"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "b6c94047f8816a58a55c48cd06a9f7bfaa9385820b4f95cd86a42cfcac1f56c4"
+        }
+      ],
+      "run_id": "S01-F-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-F-3",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "271ed33c7203970e0547109998aefa5e4e8f2cd15f4c843552fad0825af0d26e"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "66a031968f85d3e481870492bdc1095e4bea075811ee45798935f07230400a55"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "6c6516202f74a66a5dfbc609cfc63167fb9ac3fa94011f4a65d4fdf67a0578a3"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "1fbe05cf32cdc34abece8f8100da3ff0069af796aa4d9563b7ad30072e559719"
+        },
+        {
+          "name": "record.json",
+          "sha256": "a2894c211e96a2225305e3deefd2f05f1dc5bbe45c2bad5eca92405495051862"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "002911f35de144fecee005d27f8523060bad887f623458c634b31b107a62025f"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "d5c3faa7072c6b4e614471038188d6138bb7c2e9b791465a4c1876eaf8371f10"
+        }
+      ],
+      "run_id": "S01-T-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-T-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "0f1d8975661737209d9114e962c1ddd7d2c4b133eeda96b2ce9bb95ba1f8b5a2"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "85a050c72d9fb19d65e8531bf8b4aa3864b9808464b580bbe43c7de26613271d"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "6c6516202f74a66a5dfbc609cfc63167fb9ac3fa94011f4a65d4fdf67a0578a3"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "c1764daa9e7e3c4097cf5a27b6a70ebf0d4687f9bf9431ccd3b8568db93cec8f"
+        },
+        {
+          "name": "record.json",
+          "sha256": "4eee7a43c03571bc8fcf9822443ac468da5cf412339d441419f89d2865e22b7e"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "79db4bb852a2449fa0b512ab60d4f9f4ede03a4c4e02cfb4646921ac0c9b3a97"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "4cc68aee5d86aaf288ed1ba04a04e0b235718c86101bc92fdc2c19ba65dad52c"
+        }
+      ],
+      "run_id": "S01-T-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-T-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "8ba7fc7df1e519d8c81eb473f62eb82542b14ed60ace41f3f406a63e63897b6b"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "b0ebba8dc4e46edd4c53cc5c1c6940793b9911ce9056e0eaf53194c4d1dab8cf"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "6c6516202f74a66a5dfbc609cfc63167fb9ac3fa94011f4a65d4fdf67a0578a3"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "5c202537d0e8d56cd0e34cfe17db1b8a2d035174507efa64b47c1b3b946f71ee"
+        },
+        {
+          "name": "record.json",
+          "sha256": "7031aafd6f7eeac5b8cedab8d88102d7886cda83faecc3c9238a8b608acb626e"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "1359759957224bc77d4c02b5368e512fee4005c0d1600c57468c66b4ce28f5bf"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "d9d4a3e6f27d4f426d1cb2f54699acd2766cc668f68562706039211be1bf397b"
+        }
+      ],
+      "run_id": "S01-T-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-T-3",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "99555e5ebb39ee7d54e18a7952fea5c69cbe20d4209af96f0643f78843c2a41f"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "b5a35882b0120431771ef0829a410b510f8a8dfa91eef9eb7a7b3b054e439530"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "3a12826e080be16f46e6e7b6a5a0c3103e27da796c8ca7289953227319e50f90"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "0bb97dd9f7d0d6e83502980304644b63357a4198066067ade4d4415f3cf3bf8e"
+        },
+        {
+          "name": "record.json",
+          "sha256": "6ee8a024ca6d6f35396352088f517914f8e1669d0cedfd2767f005a6210db39e"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "c807962e31865baf49834c062d77bcb9c01d9de6ea9f3f22fd780efc74c9d1b8"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "988bf85951e2a1fef3d153f38435430f31d0a8daa3862ed740373ade953e40fb"
+        }
+      ],
+      "run_id": "S01-D-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-D-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "7c16aac8636cf1178b655a8cc4e95b2b93986bae4026e0cda656aeaf98c665f0"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "b13fc5e530416208d6aefbe2583af191ca91e060c039211dcc66d8b8145d073c"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "3a12826e080be16f46e6e7b6a5a0c3103e27da796c8ca7289953227319e50f90"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "06e473d458b9663e20267b4da74eed3331782fe6f91e8d7e3a4843db776cf479"
+        },
+        {
+          "name": "record.json",
+          "sha256": "4e74eaf1955923d91742f600ca5d699571894cde56ab8bd1aea342867229cd8a"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "25d5040625e49d6f3b886d45285a1a1ecd2af78bf399f6cc5c5b0abba697412d"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "82020e50500868fd203111fa419bb8f34414488895af38b8e2f8a92ce4554aa3"
+        }
+      ],
+      "run_id": "S01-D-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-D-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "73bfc5fe098b1f9993261f6b0511fd4fa17852b4d2a32299b095143325c608b2"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "56b010286fef41efc018ad1d0098c3641407891d63c52a554f1a97656d63675f"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "3a12826e080be16f46e6e7b6a5a0c3103e27da796c8ca7289953227319e50f90"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "4406081b5ba5b41299a29a2f21b9721f1e420a923f5d21b8e574c7e7c9dc7709"
+        },
+        {
+          "name": "record.json",
+          "sha256": "c9b295fbb95160e41a5e740fbdf66359b121bde26c2803f71cc999295a4c34f0"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "9a1d5a1490a26d5a3f477b2154093cf190d8572570522c2ad144c3f6dabe699f"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "6d6bb266508fc851585adcd56bf92948343280ead16478439e4f00747e0046a3"
+        }
+      ],
+      "run_id": "S01-D-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/S01-D-3",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "5e8813b599c6be1e101bf1e3f1f50ee82eeb77e40f3f5fa102bb7ed4340375bb"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "045b0a198ae9aac67d30b56cb022cedf60e7e095ad415b30426821609262f210"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "e3f7fa41b144c931b0c22a7ac8f073db17692bad5b175f5758c27805a3fa3fd7"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "fec1bdfebd00735b590b190d2023d5df06473204a52a53d6741938d4684a6933"
+        },
+        {
+          "name": "record.json",
+          "sha256": "3e1079099648c161fcd54564372fe50cda4133cef791f8eda4ed0acf26c42c74"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "7d70d828e11d370c3684dfcc575c4c57f13ed1d4f882eb79e3d352be3bd50c02"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "39673351d38a8f74d58a2fb181d5e00957e24bf23105718bac9057a15e48cbbe"
+        }
+      ],
+      "run_id": "SH2-F-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-F-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "f1694e4788cdad6d24d712a350492499f41a28a2becc216c1f458a014d63532b"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "33b278d5e4b27496602b6d7599669d38a9e22503578a5093922742c825cb5df5"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "e3f7fa41b144c931b0c22a7ac8f073db17692bad5b175f5758c27805a3fa3fd7"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "54578b42bb3de2effc0bfb65021e32f0da811f08908554d3083e7b6993111ed5"
+        },
+        {
+          "name": "record.json",
+          "sha256": "742c42b369ec90bb2bb0932ba71d7379b68b1c17ba62087ef289fcb0eba44ed2"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "33f2c61d9f6bfbf67446fce65b602d34665f8febb40de5afca7fb80c9c215ba5"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "dc93c4e4ad414bdfbed8f242a785f9cf4d3d67a11c32cc408f81c27aae59e490"
+        }
+      ],
+      "run_id": "SH2-F-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-F-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "f371150f18a9ae0f119815beed33eb5dca702c50e0625067f7411fc4053f2b19"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "fc87690c301469fed34acc5422f9ceefd586e5d8116b1044644bbf29f6047983"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "e3f7fa41b144c931b0c22a7ac8f073db17692bad5b175f5758c27805a3fa3fd7"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "cbfd90ded678d10bf59ec4c65a8ce024bf29e86d7b21f92ab165179e252b10a2"
+        },
+        {
+          "name": "record.json",
+          "sha256": "b857cf84c15ed00ee01a343d2fe225b5e49f351836d177b8e18537bfcbd87d4e"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "02ef3312e80d0cad9a25a3ec84b37d4fdc43ed4338d5bf9c995c2daf21b068bd"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "a1ce65260788d05da5d2cd4f80c30f18985f2e725826ddd8e43a08ee4989efd5"
+        }
+      ],
+      "run_id": "SH2-F-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-F-3",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "927ee8e61932fa37a3752595a3de1b39dc5dc55010d57a87a5acedcfd1c3044f"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "8f9285a835b1446c872e837098a7c3657a64eafb81711c0163697bc71f14522c"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "21ecdf41a1b208c7679431a9cc2eca1057022d66c0f6a28c1966095dec47a25e"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "74ce46da4211b196ac3491e8be714651d5608b504c9313fcd869b98d3aeb7468"
+        },
+        {
+          "name": "record.json",
+          "sha256": "16829fee8ba5a2f9b22e9e17c4eb05482aac996f07524592055f02b1fc8f3c5a"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "bbc1b09c6e7a46cef338fe34729daab1b82f569ea5ed85fe3c8b31b7138a4c52"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "d45c02f0276189e188288cca078d80d12ccb3ba86955fd3f2e4b67533f9ce8d6"
+        }
+      ],
+      "run_id": "SH2-T-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-T-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "7e976c33fbac7589538ecacb3336799a1b245dc1566402a0302ea05272312437"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "b0bc19af331197669f43a88748620dc8198eb5999448dbe1a0328771b80b53e2"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "21ecdf41a1b208c7679431a9cc2eca1057022d66c0f6a28c1966095dec47a25e"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "45db2508ad54de4032cf485a15ce43beded47a4782ceea4424c81c4a12ff3637"
+        },
+        {
+          "name": "record.json",
+          "sha256": "b2a234470e1973d973b89458e40a0619f874e169240db55709cb9e577641ef81"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "fd55371f2526d42e926e7e9e894c79e1e8bc3aea7f13c737d03c8e413c5ac814"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "acd41e9f6a62fab1a31a65c5d2bed75e67bba43420205dea4cc230434ef0b7d1"
+        }
+      ],
+      "run_id": "SH2-T-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-T-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "3265d2d28fbcef1eb2b93ee137b3a6bc6a2547df6e441b363fd13fb8a8ac40df"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "d6a25f9c68d35c7be032d141af5ddf02ad034cb5d5c3288b77bdc4b19b2f3612"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "21ecdf41a1b208c7679431a9cc2eca1057022d66c0f6a28c1966095dec47a25e"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "f3b4b0b030331f95ff2be61e5c34efc0aa78577e5e9c1f1e3fe9a28e9b842699"
+        },
+        {
+          "name": "record.json",
+          "sha256": "c29197a6edaef3d40c13b43c682ae1d76aeee9c2555bddafdb995b4c3d682e9a"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "7121fba48091b68c9092b1577ca7cdcdc28e0b23c3c5d182265af5d7ffa9e7cf"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "887d6cbcfd509d944fd418a322e6024376b362034f25e1d17b7fa6184e918567"
+        }
+      ],
+      "run_id": "SH2-T-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-T-3",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "eb8bae990374e07f9178765b0de09d0d707c45de785c774f1fd47ca113476671"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "89fa9a7b17636105a589376824f3bfb28a40fa2dacae8717382c5f47f8d1e558"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "3bd009a43d1675af83b97558256f6feae42f13747001bb435f1954c20d53fdfe"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "70d55851be4947ad4fa2343311710bf4e00ee29ee567701abb1cf6183b81ee03"
+        },
+        {
+          "name": "record.json",
+          "sha256": "4e86c0fbc60b2135aff0028f0c121c88230402e9d4eb530057bd5b846c1245a0"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "eb22a10a79fc6dd3d8df248a0114426dda085c3c8d37cd9829a92e24174cce87"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "d6c00aa9cf5e97771a50550c053d9cc6cb7e64e42fbce4fa6e3c2bf095f57267"
+        }
+      ],
+      "run_id": "SH2-D-1",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-D-1",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "34268494af7be691458f24d0b796ad91f64253d7c6d4ad87ab779efde60cfb80"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "2971f8788c99998588969c032912114c802df4548ec22e44099ba26980e440a1"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "3bd009a43d1675af83b97558256f6feae42f13747001bb435f1954c20d53fdfe"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "dad620e14468500052677793379edc56bfc5a2b8afd716e19e11a99406c1fe22"
+        },
+        {
+          "name": "record.json",
+          "sha256": "0d894bf9df25fd2a2a8140207630676098d3357dbf357a5f961fd48978d090c6"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "b5389d030e20d43720c14518a99e9ef4e635cf4d12393c6cf728c8668be274a0"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "024c564f16c1c73d40e41cef411c866ba87de8ca535ed16e4e7bd745cdbe2ed6"
+        }
+      ],
+      "run_id": "SH2-D-2",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-D-2",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    },
+    {
+      "files": [
+        {
+          "name": "final.request.json",
+          "sha256": "99500e41ad4dcf81c9483f922d71fc371796111ed7c0dc4a3bf8d4526af505a6"
+        },
+        {
+          "name": "final.response.json",
+          "sha256": "dd6b6db67106916a4334289ca483c7c78774518f18f6f8b684fffd37b730e823"
+        },
+        {
+          "name": "initial.request.json",
+          "sha256": "3bd009a43d1675af83b97558256f6feae42f13747001bb435f1954c20d53fdfe"
+        },
+        {
+          "name": "initial.response.json",
+          "sha256": "963be01006a6561366ea646b0066e87f239536c560afdbd020b2e9d732251649"
+        },
+        {
+          "name": "record.json",
+          "sha256": "447527fdd0dd8f571a40d1d4ef4f6b367e266aba33f91e1d25dbef7addcc8665"
+        },
+        {
+          "name": "selection-0.request.json",
+          "sha256": "71b2a6a3243cee9c3d7bd9874b5bb9e5af516bbf7c4e3d4748ac160957d05f64"
+        },
+        {
+          "name": "selection-0.response.json",
+          "sha256": "c3e1f7d70405e32596e9d3c3ae9806b0ff9d15caec548052c793b065306e82d9"
+        }
+      ],
+      "run_id": "SH2-D-3",
+      "source": "gamma-i-feasibility-v2-run-2026-09-27-04/runs/SH2-D-3",
+      "source_runner_sha256": "e3a9171059c0b9c699942d2a24c09e7efbcfa6d07173e473ed30c2d5992cc3fa"
+    }
+  ],
+  "packet_manifest_sha256": "8c8fabf27d1cf246f1612dd20c4251ec6d89ceffa1e2138db6a4bb904e4086a3"
+}

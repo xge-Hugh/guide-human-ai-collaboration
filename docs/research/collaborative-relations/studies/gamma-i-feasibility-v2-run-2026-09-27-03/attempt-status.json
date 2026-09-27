@@ -1,0 +1,23 @@
+{
+  "status": "invalid_operational_attempt_excluded",
+  "recorded_at_utc": "2026-09-27T09:25:56.439948+00:00",
+  "packet_version": "gamma-I-feasibility-v2-2026-09-27",
+  "recipient_contexts_exposed": 2,
+  "completed_records": 1,
+  "usable_records": 0,
+  "scores": 0,
+  "first_run_id": "C13-F-1",
+  "first_initial_response_persisted": true,
+  "first_selection_response_sha256": "804c4fc90bb95ad0408eb9bdf7bf31f701dac60a785832bbdf5416ed8dda9aee",
+  "first_literal_selected_ids": [
+    "C13-R1",
+    "C13-R5"
+  ],
+  "first_selection_corrections": 1,
+  "defect": "Operational parser treated repeated literal mentions of the two selected IDs in the rationale as more than two selections and incorrectly sent the frozen invalid-ID response. The recipient then selected zero items under a false premise.",
+  "second_run_id": "C13-T-1",
+  "second_stage": "Initial response and selection response persisted; final request sent but final response interrupted before persistence.",
+  "exclusion_basis": "Objective audit-protocol violation and incomplete record, identified before any scoring or treatment comparison. No performance-based exclusion.",
+  "frozen_packet_oracle_scoring_changes": false,
+  "continuation": "Fresh isolated 27-run attempt with corrected ID parser; do not pool this attempt with it."
+}

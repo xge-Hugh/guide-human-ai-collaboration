@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 19.347097398999722,
+  "messages_sha256": "826dd5ae8f56a30b6b8a9e5b3fbacc9c76ec32e92841068e09332c7ce7c495ed",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 3808,
+      "completion_tokens_details": {
+        "reasoning_tokens": 3706
+      },
+      "prompt_tokens": 1358,
+      "total_tokens": 5166
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Selected evidence items: **C13-R1** and **C13-R3**.\n\n- **C13-R1 (mapping code excerpts)** — needed to inspect the exact ZCRM02 branch, KUNNR suppression, ZUONR fallback, ticket-source field handling, and mutually exclusive key behavior.\n- **C13-R3 (historical portal-source excerpt)** — needed to evaluate the possible alternate ticket source raised by the implementation report, since that concern came partly from portal/navigation evidence."
+}

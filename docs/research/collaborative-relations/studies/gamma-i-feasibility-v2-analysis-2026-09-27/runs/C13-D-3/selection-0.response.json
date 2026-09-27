@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 10.504204202000437,
+  "messages_sha256": "010520255d01a8e65bd0b89cae215c4493734b8774d89a242719accc1baf1620",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 1642,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1542
+      },
+      "prompt_tokens": 1457,
+      "total_tokens": 3099
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Selected evidence:\n\n- **C13-R1** — mapping code excerpts  \n  To inspect the actual IF-058 mapping conditions around ZCRM02 KUNNR suppression, ZUONR fallback behavior, ticket/business mutually exclusive keys, and `XBLNR_ALT` use.\n\n- **C13-R3** — historical portal-source excerpt  \n  To evaluate the possible alternate ticket-source concern against a historical portal source artifact rather than relying on portal/navigation or keyword-search inference."
+}

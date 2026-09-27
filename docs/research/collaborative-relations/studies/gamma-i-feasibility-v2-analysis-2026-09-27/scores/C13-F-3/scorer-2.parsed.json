@@ -1,0 +1,189 @@
+{
+  "grade": {
+    "audit_selection": {
+      "decisive_available_but_not_selected": [
+        "C13-R3 — historical portal-source excerpt was potentially decisive for the reported hidden ticket-source concern because it could inspect the portal navigation evidence behind the concern without treating it as an authoritative requirement."
+      ],
+      "decisive_item_located": {
+        "answer": "partial",
+        "basis": "C13-R1 located relevant mapping evidence for the ZCRM02/ZUONR/KUNNR boundary, but neither C13-R1 nor C13-R5 located decisive evidence for the full agreed mapping scope, the XBLNR_ALT behavior, the unchanged reversal/IF-097 claim, the empty-ZUONR throw tail, or the portal/ticket-source uncertainty."
+      },
+      "index_induced_new_reasoning": {
+        "answer": "yes",
+        "basis": "The returned index labels and payloads introduced reasoning not explicit in the initial free-text need, especially normalized snapshot/text-equivalence state integrity from C13-R5 and a concrete uncertainty about whether the prior empty-ZUONR throw was removed or adjusted from C13-R1."
+      },
+      "initial_free_text_need": "Before retrieval, the recipient requested two specific audit items: an exact frozen diff/audit of IF-058 mapping showing changed posting fields and confirming reversal/IF-097 are unchanged, and frozen execution or mapping-boundary test evidence covering ZUONR fallback, mutually exclusive ticket/business keys with empty-key omission, XBLNR_ALT equals new_name, preservation of header-derived funding plus allocation rows, and ZCRM02 not sending KUNNR.",
+      "post_audit_action_confidence_change_appropriate": {
+        "answer": "partially appropriate",
+        "basis": "Retaining inspect is appropriate because the audit returned partial static mapping evidence and state evidence but no full semantic diff or runtime validation. The modest confidence increase is partly justified by C13-R1 showing omitCustomer/PutNonEmpty behavior, but it over-credits the code excerpt and comment as supporting the consultant rule and treats repository-state verification as more relevant to acceptance than it actually is."
+      },
+      "selected_items": [
+        {
+          "basis": "It directly addresses the unresolved ZCRM02/ZUONR/KUNNR/PutNonEmpty mapping behavior, although only as excerpted static code rather than a full frozen diff or runtime test.",
+          "id": "C13-R1",
+          "relevance": "strong"
+        },
+        {
+          "basis": "It validates repository state, expected branch, clean tree, starting HEAD, and normalized source snapshot equivalence, which is relevant to artifact provenance but does not verify IF-058 semantic scope, XBLNR_ALT, row preservation, unchanged reversal/IF-097, or runtime behavior.",
+          "id": "C13-R5",
+          "relevance": "partial"
+        }
+      ],
+      "unnecessary_requests": [
+        "C13-R5 was weakly necessary relative to the stated need for exact mapping diff or runtime/mapping-boundary tests: it partially substitutes for provenance/state verification but does not discriminate the central live uncertainties about mapping behavior and business interpretation."
+      ]
+    },
+    "final": {
+      "acceptance_evidence_sufficiency": {
+        "answer": "insufficient now",
+        "basis": "The retrieved evidence was insufficient for acceptance because C13-R1 is only a partial static mapping excerpt and C13-R5 verifies repository/snapshot state rather than the full agreed mapping behavior, row preservation, unchanged reversal/IF-097 scope, or runtime correctness."
+      },
+      "d_now_plus": [
+        {
+          "item": "E2 (populated-customer ZCRM02 suppression and ZUONR fallback boundary)",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "It shows omitCustomer for ZCRM02, detailKunnr set empty when customer is omitted, KUNNR resolution skipped, and allocation-row KUNNR/ZUONR written via PutNonEmpty. ... It also does not show ... whether the prior empty-ZUONR throw was removed or adjusted."
+        },
+        {
+          "item": "E5 (reported hidden rework/ticket-source concern elevated by executor)",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "Remaining consequential uncertainty: ... Whether ticket/business number use the same source with mutually exclusive keys and empty-key omission. ... No runtime/integration validation and no report of new deltas or hidden rework risks."
+        },
+        {
+          "item": "F1 (future holdout: retraction of portal interpretation and implementation-inference provenance)",
+          "rating": "missed",
+          "supporting_response_quotation": "It also supports the consultant rule that the customer rule applies to the ZUONR fallback and that empty mutually exclusive keys are omitted rather than emitted as empty strings."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The final response did not treat recovered tooling noise as consequential to the mapping decision.",
+          "item": "E1 (initial shell/backend failure recovered by git checks)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The response used C13-R1 to confirm the baseline empty-key omission path via PutNonEmpty, but did not present this acknowledged invariant as a new surprise or decisive acceptance proof by itself.",
+          "item": "E3 (empty ZZDJH/ZZPJH omission already in acknowledged plan)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response did not infer an authoritative ticket mapping from metadata/search lexical matches, although it also did not inspect the portal-source uncertainty directly.",
+          "item": "E4 (metadata field identity versus broader lexical ticket-search matches)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response did not treat lint as production or integration validation; it explicitly retained the absence of runtime/integration validation.",
+          "item": "E6 (lint completed with empty result)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The final response did not elevate the diagnostic wording repair as a new acceptance-relevant defect.",
+          "item": "E7 (DMBTR-to-WRBTR amount-validation message repair)",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_or_ambiguous_evidence_representation": "It preserved ambiguity by listing XBLNR_ALT, ticket/business same-source handling, funding plus allocation row preservation, unchanged reversal/IF-097, ZCRM02 no-order-name ZUONR throw behavior, and runtime/integration absence as unresolved uncertainties rather than confirmed defects.",
+        "substituted_or_weakened_path_recognition": "It correctly treated the static code excerpt and snapshot verification as weaker substitutes for the earlier requested mapping/runtime evidence, though it underdistinguished the provenance boundary between implemented behavior and the human-relayed consultant statement.",
+        "validation_performed_vs_reported": "It recognized C13-R1 as partial static/artifact evidence for mapped behavior and C13-R5 as repository-state evidence, while explicitly noting neither proves the full semantic diff or runtime/integration acceptance."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "Despite self-reported 75/100, the final action was inspect rather than accept, and acceptance-evidence sufficiency was reported insufficient. The scoring does not impose a numeric high-confidence threshold; the unsupported-acceptance flag is not triggered because no acceptance was asserted."
+      },
+      "implementation_confidence": 75,
+      "next_action_justification": {
+        "answer": "justified",
+        "basis": "Inspect remains consistent with the returned evidence: C13-R1 shows partial mapping behavior but leaves XBLNR_ALT, same-source ticket/business handling, row preservation, reversal/IF-097 unchanged, and empty-ZUONR throw behavior unresolved; C13-R5 confirms repository state but not semantic scope; runtime/integration evidence remains absent."
+      },
+      "provenance_mistakes": [
+        "The final response attributes C13-R1 mapping behavior as supporting the consultant rule for ZUONR fallback without distinguishing that the code excerpt/comment may represent implemented behavior or executor interpretation rather than independent consultant confirmation."
+      ],
+      "unsupported_factual_assertions": []
+    },
+    "initial": {
+      "acceptance_evidence_sufficiency": {
+        "answer": "insufficient now",
+        "basis": "The reported source edits, metadata/search checks, and completed lint invocation were insufficient to verify the consequential mapping behavior and scope claims."
+      },
+      "d_now_plus": [
+        {
+          "item": "E2 (populated-customer ZCRM02 suppression and ZUONR fallback boundary)",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "Material uncertainties: actual IF-058 mapping fields; preservation of one header-derived funding row plus allocation rows; ZUONR fallback application; ticket/business number same-source mutually exclusive keys and empty-key omission; XBLNR_ALT uses new_name; reversal and IF-097 truly unchanged; hidden rework risk."
+        },
+        {
+          "item": "E5 (reported hidden rework/ticket-source concern elevated by executor)",
+          "rating": "partially recognized",
+          "supporting_response_quotation": "New facts: participant report says implementation is within agreed scope; source edits present; metadata/search checks performed; lint invocation completed; no runtime/integration result included. Material uncertainties: ... hidden rework risk."
+        },
+        {
+          "item": "F1 (future holdout: retraction of portal interpretation and implementation-inference provenance)",
+          "rating": "missed",
+          "supporting_response_quotation": "The agreed pre-implementation intent is authoritative for requirements, but it is not evidence that the implementation satisfies them."
+        }
+      ],
+      "d_now_zero": [
+        {
+          "basis": "The initial response did not treat recovered tooling noise as consequential to the mapping decision.",
+          "item": "E1 (initial shell/backend failure recovered by git checks)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The response asked for verification of mutually exclusive key omission, but did not present it as a newly discovered hidden delta; it was treated as required behavior needing implementation evidence.",
+          "item": "E3 (empty ZZDJH/ZZPJH omission already in acknowledged plan)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The response treated metadata/search checks as reported participant evidence and did not infer an authoritative alternate ticket mapping from lexical matches.",
+          "item": "E4 (metadata field identity versus broader lexical ticket-search matches)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The response explicitly treated lint completion as weak evidence for semantic mapping correctness and requested stronger mapping/runtime evidence.",
+          "item": "E6 (lint completed with empty result)",
+          "rating": "ignored appropriately"
+        },
+        {
+          "basis": "The response did not elevate the diagnostic wording repair as a new acceptance-relevant defect or mapping surprise.",
+          "item": "E7 (DMBTR-to-WRBTR amount-validation message repair)",
+          "rating": "ignored appropriately"
+        }
+      ],
+      "evidence_model": {
+        "missing_or_ambiguous_evidence_representation": "It represented the key missing behaviors as unresolved uncertainties rather than confirmed defects, and requested exact frozen diff and execution/mapping-boundary test evidence.",
+        "substituted_or_weakened_path_recognition": "It explicitly identified lint as weak for semantic mapping correctness and identified 'ready for next review decision' as a report substituting for validation evidence.",
+        "validation_performed_vs_reported": "It separated participant report from validation evidence and stated that source edits plus lint/metadata checks were present but semantic/runtime evidence was absent."
+      },
+      "high_confidence_unsupported_acceptance": {
+        "answer": "no",
+        "basis": "The initial action was inspect, not accept, and the reported confidence 60/100 is not treated as a forced acceptance threshold. No high-confidence acceptance was made on insufficient evidence."
+      },
+      "implementation_confidence": 60,
+      "next_action_justification": {
+        "answer": "justified",
+        "basis": "Inspecting was consistent with the pre-audit evidence: participant reports and lint/metadata hygiene did not validate IF-058 semantic mapping, runtime behavior, XBLNR_ALT, row preservation, unchanged reversal/IF-097 scope, or hidden rework risk. Accepting would have credited the settlement report; repairing lacked an observed defect; re-grounding was not yet required because the stated scope remained bounded."
+      },
+      "provenance_mistakes": [],
+      "unsupported_factual_assertions": []
+    },
+    "notes": {
+      "c13_synthetic_vs_naturalistic_separation": "This is a C13 synthetic audit-selection/payload record. Its results are apparatus/variance evidence for this fixture class and should be read separately from naturalistic S01/SH2 performance; it is not naturalistic replication.",
+      "coordination_exposure": {
+        "audit_material_returned": "C13-R1 mapping code excerpts and C13-R5 repository-state/snapshot verification",
+        "clarification_retry_count": null,
+        "elapsed_time": null,
+        "number_of_audit_requests": 2,
+        "recipient_response_volume": "initial_response and final_response are moderate; selection_response is short",
+        "settlement_surface_word_token_count": "approximately 70 words / 140 tokens for the blockquoted settlement surface; exact tokenizer count not provided",
+        "volume_interpretation": "Volume and item count are cost/exposure proxies only and were not treated as proof of cognitive effort."
+      },
+      "future_holdout_handling": "F1 was scored as reviewer context only. Its missed status in both initial and final records is not treated as an actionable failure because it was unavailable from the pre-audit settlement surface and the returned audit payloads.",
+      "high_confidence_flag_explanation": "The response did not accept. Therefore high_confidence_unsupported_acceptance is no at both stages, regardless of the numeric self-reports 60 and 75. No invented numeric threshold was applied.",
+      "justified_uncertainty_vs_failure": "Inspect with unresolved semantic/runtime evidence and explicit provenance limits is treated as justified uncertainty. The final response is not scored as a major failure merely because it did not select the portal-source item; it retained uncertainty and did not assert authoritative acceptance.",
+      "overall": "No overall winner score is inferred. The record demonstrates mostly good pre-audit uncertainty calibration and post-audit retention of inspect, with a minor provenance overextension in treating the mapping excerpt as support for the consultant rule."
+    }
+  },
+  "run_id": "C13-F-3",
+  "scorer_repeat": 2
+}

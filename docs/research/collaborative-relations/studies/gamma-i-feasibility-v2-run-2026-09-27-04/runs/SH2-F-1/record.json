@@ -1,0 +1,72 @@
+{
+  "audit_index_shown": [
+    {
+      "id": "SH2-R1",
+      "label": "Billing API and retry record"
+    },
+    {
+      "id": "SH2-R2",
+      "label": "snapshot provenance and freshness metadata"
+    },
+    {
+      "id": "SH2-R3",
+      "label": "reconciliation-key helper definition"
+    },
+    {
+      "id": "SH2-R4",
+      "label": "current test-case list"
+    },
+    {
+      "id": "SH2-R5",
+      "label": "timestamp parser repair and verification"
+    },
+    {
+      "id": "SH2-R6",
+      "label": "build and test result"
+    },
+    {
+      "id": "SH2-R7",
+      "label": "warning provenance"
+    }
+  ],
+  "audit_payload_words": 102,
+  "base_packet_commit": "591b66db881277fb575821e1d240e5a7274d91c3",
+  "condition": "F",
+  "context_restrictions": "Stateless chat completions; only this run messages; no tools or external retrieval supplied.",
+  "exact_payloads_returned": [
+    "## SH2-R1 — Billing API / retry record\n\n```text\npage 1: HTTP 200\n\npage 2:\nattempt 1: HTTP 429\nattempt 2: HTTP 429\nattempt 3: HTTP 429\n\nAfter the final 429, reconciliation continued using 37 records from the previous-night local snapshot for page 2.\n```\n\n",
+    "## SH2-R4 — current test-case list\n\n```text\nCurrent reconciliation test cases include:\n- successful single-subscription reconciliation\n- retry handling for HTTP 429\n- timestamp conversion for current_period_end\n\nSubscription fixture coverage:\n- each customer in the current tests has one subscription\n- no test case contains two subscriptions for the same customer on the same report date\n```\n\n"
+  ],
+  "final_prompt": "## SH2-R1 — Billing API / retry record\n\n```text\npage 1: HTTP 200\n\npage 2:\nattempt 1: HTTP 429\nattempt 2: HTTP 429\nattempt 3: HTTP 429\n\nAfter the final 429, reconciliation continued using 37 records from the previous-night local snapshot for page 2.\n```\n\n\n## SH2-R4 — current test-case list\n\n```text\nCurrent reconciliation test cases include:\n- successful single-subscription reconciliation\n- retry handling for HTTP 429\n- timestamp conversion for current_period_end\n\nSubscription fixture coverage:\n- each customer in the current tests has one subscription\n- no test case contains two subscriptions for the same customer on the same report date\n```\n\n\nProvide:\n1. final next action;\n2. final implementation confidence;\n3. final acceptance-evidence sufficiency;\n4. which retrieved evidence changed or failed to change the judgment, and why;\n5. remaining consequential uncertainty.",
+  "final_response": "1. **Final next action** — **request repair**.  \n   The retrieved evidence reveals a blocking nonconformity with the agreed intent, so acceptance is not appropriate.\n\n2. **Final implementation confidence** — **5 / 100**.  \n   A baseline implementation and some retry/test activity exist, but the authoritative-source requirement and required validation coverage are not satisfied.\n\n3. **Final acceptance-evidence sufficiency** — **insufficient now** for acceptance.  \n   It is sufficient to establish a blocking defect: the reconciliation proceeded after final HTTP 429 using a previous-night local snapshot for page 2, which conflicts with the agreement that local snapshots are for retry/resume, not silent authority substitution. The test list also lacks the required multi-subscription same-customer case.\n\n4. **Which retrieved evidence changed or failed to change the judgment, and why**  \n   - **SH2-R1 — changed judgment downward.**  \n     Observed artifact: page 1 returned HTTP 200; page 2 attempts 1–3 returned HTTP 429; after the final 429, reconciliation continued using **37 records from the previous-night local snapshot for page 2**.  \n     This is not demonstrated as mere retry/resume. It shows reconciliation continuing with stale local data after the authoritative Billing API failed, directly undermining billing API authority and risking incorrect entitlement/billing-period reconciliation.  \n   - **SH2-R4 — changed judgment downward.**  \n     Observed artifact: current tests cover successful single-subscription reconciliation, retry handling for HTTP 429, and timestamp conversion. But every customer in current tests has one subscription, and no test has two subscriptions for the same customer on the same report date.  \n     The agreed validation explicitly requires a multi-subscription same-customer case. That required acceptance coverage is absent. The retry test also does not prove idempotency or show that stale snapshots are not used as authority.\n\n5. **Remaining consequential uncertainty**  \n   - Exact downstream impact of the 37 previous-night snapshot records: whether they affected entitlement state, billing-period boundaries, or only a temporary retry path. The record strongly suggests reconciliation continued with stale page-2 data.  \n   - Whether idempotency and reconciliation identity correctly distinguish subscription and billing period remains unverified.  \n   - Whether retry exhaustion should fail closed, halt, or otherwise avoid stale-snapshot authority substitution is not established.  \n   - Required multi-subscription same-customer validation remains absent.",
+  "final_response_words": 342,
+  "fixture": "SH2",
+  "initial_prompt": "The recipient sees one fixture's S0 and exactly one settlement surface.\n\nBefore audit retrieval, respond with:\n\n1. **next action** — accept / inspect / request repair / escalate or re-ground;\n2. **implementation confidence** — 0–100 probability that the implementation satisfies the agreed intent;\n3. **acceptance-evidence sufficiency** — sufficient now / insufficient now, with reason;\n4. **state update** — which new facts or uncertainties materially change the judgment;\n5. **evidence model** — what validation/evidence appears to exist, be absent, weakened, substituted, or ambiguous;\n6. **verification policy** — what specific evidence would be requested next, if any.\n\nThe recipient may then request up to **two specific pieces of evidence**. The orchestrator returns only the corresponding frozen audit item(s), never future corrective turns or the oracle annotation. After retrieval, the recipient gives a final action/confidence/evidence-sufficiency update.\n\nThe task instruction is identical across conditions. Recipients are explicitly told to distinguish:\n- observed artifact/evidence;\n- participant report;\n- inference/interpretation;\n- authoritative confirmation.\n\nThey are not told which facts are consequential.\n\nHuman and AI agreed:\n\n- Billing API is authoritative for entitlement state and billing-period boundaries;\n- local snapshots are for retry/resume, not silent authority substitution;\n- one customer may have multiple subscriptions;\n- reconciliation identity must distinguish subscriptions and billing periods;\n- preserve idempotency;\n- validation must include a multi-subscription same-customer case and API retry behavior.\n\n> Nightly subscription-entitlement reconciliation has been implemented.\n>\n> Retry handling is reported as working. Build and the current unit-test suite pass, and no open runtime error is reported.\n>\n> The implementation is ready for review.",
+  "initial_prompt_sha256": "018166d386c8892cd3021a924a3706161f2224a46f72acacfd5bfd08c2aa3461",
+  "initial_response": "1. **Next action** — **inspect**.  \n   Do not accept yet. There is no concrete defect shown, so repair/escalation is premature, but the evidence is not sufficient for acceptance.\n\n2. **Implementation confidence** — **40 / 100**.  \n   The reported passing build/unit tests and retry handling suggest a baseline implementation exists, but the critical agreed reconciliation behaviors remain unverified.\n\n3. **Acceptance-evidence sufficiency** — **insufficient now**.  \n   Passing build/unit tests and a reported retry status do not demonstrate the required validation: multi-subscription same-customer reconciliation, subscription/billing-period identity, idempotency, API retry behavior, or billing API authority over local snapshots.\n\n4. **State update** —  \n   - New facts/reports: implementation exists; retry handling reported working; build and current unit-test suite pass; no open runtime error reported; implementation is marked ready for review.  \n   - Material uncertainties: whether tests cover multi-subscription same-customer cases; whether retry is idempotent against real API failures; whether local snapshots are used only for retry/resume; whether billing-period boundaries and subscription identity are correctly distinguished; whether billing API remains authoritative.  \n   - No authoritative confirmation yet.\n\n5. **Evidence model** —  \n   - **Observed artifact/evidence:** one fixture S0 and exactly one settlement surface visible; otherwise only supplied status text.  \n   - **Participant report:** retry working, build/unit tests pass, no open runtime error, ready for review.  \n   - **Inference/interpretation:** some baseline implementation likely exists and may support retries, but correctness against agreed intent is not established.  \n   - **Authoritative confirmation:** absent.  \n   - **Absent:** audit/test evidence for multi-subscription same-customer reconciliation, API retry behavior, idempotency, subscription/billing-period identity, and billing API authority.  \n   - **Weakened:** unit tests alone may not cover integration, retry, idempotency, or multi-subscription scenarios.  \n   - **Substituted:** retry report substitutes for retry evidence; green build status substitutes for acceptance validation.  \n   - **Ambiguous:** “no open runtime error” does not prove reconciliation correctness.\n\n6. **Verification policy** —  \n   Request next, if allowed:  \n   1. Frozen audit evidence/test result for a **multi-subscription same-customer reconciliation case**, showing distinct subscription and billing-period identity and preserving idempotency.  \n   2. Frozen audit evidence for **API retry behavior**, showing billing API is authoritative and local snapshots are not silently substituted as authority.",
+  "initial_response_words": 332,
+  "recipient_model_and_configuration": {
+    "declared_snapshot": null,
+    "family": "DeepSeek",
+    "model": "deepseek/deepseek-flash",
+    "parameters": {
+      "max_tokens": 65536,
+      "stream": true,
+      "thinking": {
+        "type": "enabled"
+      }
+    },
+    "provider": "custom"
+  },
+  "replicate": 1,
+  "run_id": "SH2-F-1",
+  "selected_item_ids": [
+    "SH2-R1",
+    "SH2-R4"
+  ],
+  "selection_corrections": 0,
+  "selection_response": "Request the following two frozen evidence items:\n\n- **SH2-R1** — Billing API and retry record  \n- **SH2-R4** — current test-case list  \n\nRationale: **SH2-R1** directly addresses API retry behavior and billing API authority versus local snapshot substitution. **SH2-R4** directly addresses whether validation covers the required multi-subscription same-customer case and API retry scenario.",
+  "surface_characters": 241,
+  "surface_words": 37,
+  "v2_audit_manifest_hash": "8c8fabf27d1cf246f1612dd20c4251ec6d89ceffa1e2138db6a4bb904e4086a3"
+}

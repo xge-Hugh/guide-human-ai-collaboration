@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 4.194478974000049,
+  "messages_sha256": "dad75717efdae40c550f90c03073b21985fdadff0a72a21e8c45082a61462583",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 560,
+      "completion_tokens_details": {
+        "reasoning_tokens": 441
+      },
+      "prompt_tokens": 1596,
+      "total_tokens": 2156
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "Select:\n\n- **C13-R1** — mapping code excerpts  \n- **C13-R3** — historical portal-source excerpt  \n\nRationale: **C13-R1** is needed to verify the actual IF-058 mapping behavior, including ZCRM02/KUNNR suppression, ZUONR fallback, ticket/business-number keys, XBLNR_ALT, and whether reversal/IF-097/funding/allocation rows were left unchanged. **C13-R3** is needed to address the unresolved alternate ticket-source concern and the source for ticket/business number handling."
+}

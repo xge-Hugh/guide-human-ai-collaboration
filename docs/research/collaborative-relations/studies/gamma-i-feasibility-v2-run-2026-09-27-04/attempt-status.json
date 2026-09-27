@@ -1,0 +1,16 @@
+{
+  "status": "one_audit_selection_protocol_violation",
+  "recorded_at_utc": "2026-09-27T09:55:02.953276+00:00",
+  "packet_version": "gamma-I-feasibility-v2-2026-09-27",
+  "recipient_contexts_exposed": 27,
+  "complete_records": 27,
+  "usable_records": 26,
+  "invalid_run_id": "C13-F-3",
+  "invalid_record_sha256": "b332532ee3fdfa22b1336cb874e99e416ab68b733652bcf14ee12603238f464b",
+  "invalid_reason": "Recipient explicitly selected C13-R1 and C13-R5, then discussed C13-R2/R4/R3 as not prioritized after a Rationale heading. The runner counted all five literal IDs and falsely returned the invalid-selection response. The final response is contaminated.",
+  "scores": 0,
+  "exclusion_basis": "Operational protocol violation found before scoring or treatment comparison; not based on recipient performance.",
+  "validated_equivalence": "Corrected exact-ID parser yields identical selections for the other 26 saved original selection responses and the intended two selected IDs for the affected response.",
+  "frozen_packet_oracle_scoring_changes": false,
+  "continuation": "Collect one fresh C13-F-3 replacement context; keep affected raw record excluded; reconcile 26 valid originals and one replacement with explicit provenance before scoring."
+}

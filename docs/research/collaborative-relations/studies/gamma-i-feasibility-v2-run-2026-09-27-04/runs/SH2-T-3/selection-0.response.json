@@ -1,0 +1,19 @@
+{
+  "attempt": 1,
+  "elapsed_seconds": 8.7092862720001,
+  "messages_sha256": "5f759632530da851f5187de0d2237b4adcea1db1786ea76de0950882f1bccd0c",
+  "metadata": {
+    "finish_reason": "stop",
+    "stream_done": true,
+    "usage": {
+      "completion_tokens": 1414,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1342
+      },
+      "prompt_tokens": 1407,
+      "total_tokens": 2821
+    }
+  },
+  "reported_model": "deepseek/deepseek-flash",
+  "text": "SH2-R3, SH2-R2\n\n- **SH2-R3** to verify whether the reconciliation key can distinguish multiple subscriptions for the same customer/report date.\n- **SH2-R2** to verify whether the 37 snapshot-sourced records were freshness-checked and marked stale, or whether the local snapshot was silently substituted as authority."
+}
