@@ -55,6 +55,8 @@ Methodological reorientation: [`../post-delegation-human-robustness-2026-09-29.m
 
 Human-human mechanism synthesis: [`human-human-handoff-mechanisms-2026-09-29.md`](human-human-handoff-mechanisms-2026-09-29.md) extracts candidate mechanisms from code review, clinical/safety-critical handoff, transactive memory, and cognitive apprenticeship, with explicit H-AI transfer boundaries.
 
+Focused field check: [`contrastive-rationale-field-check-2026-09-29.md`](contrastive-rationale-field-check-2026-09-29.md) tests one candidate—contrastive rationale as experiential compensation—against existing project observations and recommends low-cost prospective field observation rather than another controlled replay.
+
 ### δ — adaptive representation trajectory
 
 Compare permanent familiar-language translation, native representation immediately, native representation with strong mediation that fades, and representation selected only for immediate efficiency.
