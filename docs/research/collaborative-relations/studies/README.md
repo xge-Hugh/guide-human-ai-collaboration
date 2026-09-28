@@ -49,6 +49,14 @@ Completed source review: [SR-1–SR-3 ledgers and decisions](gamma-source-review
 
 γ-I executable v2 audit repair: [`gamma-i-feasibility-v2-2026-09-27/`](gamma-i-feasibility-v2-2026-09-27/README.md) — keeps PR #41 settlement surfaces/rubrics unchanged, adds exact audit payloads and recipient-selected deterministic evidence access after v1 preflight stopped at 0/27 runs.
 
+Completed γ-I v2 mechanics-feasibility analysis: [`gamma-i-feasibility-v2-analysis-2026-09-27/`](gamma-i-feasibility-v2-analysis-2026-09-27/README.md) — 27 valid AI-recipient runs and 54 scorer judgments established executable mechanics, but selective-delta packets confounded fact selection with consequence linkage/guidance and the scorer mishandled a C13 future holdout. Treat this as apparatus/AI-side evidence, not human cognition evidence or an A3/A3a update.
+
+Methodological reorientation: [`../post-delegation-human-robustness-2026-09-29.md`](../post-delegation-human-robustness-2026-09-29.md) reframes the human-centered question around invariant assurance, state settlement, and experiential compensation. The next evidence route is literature-first and corpus-grounded rather than another AI-as-human replay.
+
+Human-human mechanism synthesis: [`human-human-handoff-mechanisms-2026-09-29.md`](human-human-handoff-mechanisms-2026-09-29.md) extracts candidate mechanisms from code review, clinical/safety-critical handoff, transactive memory, and cognitive apprenticeship, with explicit H-AI transfer boundaries.
+
+Focused field check: [`contrastive-rationale-field-check-2026-09-29.md`](contrastive-rationale-field-check-2026-09-29.md) tests one candidate—contrastive rationale as experiential compensation—against existing project observations and recommends low-cost prospective field observation rather than another controlled replay.
+
 ### δ — adaptive representation trajectory
 
 Compare permanent familiar-language translation, native representation immediately, native representation with strong mediation that fades, and representation selected only for immediate efficiency.

@@ -11,7 +11,8 @@ It began as an inquiry into human–AI collaborative asymmetry and expanded afte
 
 - [`model.md`](model.md) — candidate relational architecture and conceptual boundaries. It explicitly separates the **participant-comparison axis** (asymmetry / symmetry / similarity) from the **joint dependence/correlation axis**.
 - [`claim-ledger.md`](claim-ledger.md) — falsifiable empirical/design claims and their weakening conditions; keeps normative boundary N1 separate.
-- [`studies/README.md`](studies/README.md) — α–ζ candidate study map and claim targets; γ bidirectional state settlement is the current first empirical candidate.
+- [`studies/README.md`](studies/README.md) — α–ζ candidate study map and claim targets; γ remains an important state-settlement line but its AI-recipient feasibility results are now bounded as apparatus/AI-side evidence rather than human cognition evidence.
+- [`post-delegation-human-robustness-2026-09-29.md`](post-delegation-human-robustness-2026-09-29.md) — candidate direction separating invariant assurance, state settlement, and experiential compensation after delegated AI execution, with a literature-first and human-centered evidence strategy.
 - [`studies/cognitive-placement-bridge-2026-09-15.md`](studies/cognitive-placement-bridge-2026-09-15.md) — cross-program synthesis connecting human capability formation and AI runtime capability through cognitive proximity/placement while preserving different learning and persistence mechanisms.
 
 ## Evidence and authority boundary
@@ -41,6 +42,11 @@ reasoning/recognition dependency
 cognitive placement bridge
         ↓
 controlled discrimination through α–ζ studies
+        ↓
+γ feasibility exposes human-proxy / target-validity limit
+        ↓
+post-delegation human robustness:
+assurance + state settlement + experiential compensation
 ```
 
 This is a lineage, not a claim that every later construct supersedes the earlier ones.
